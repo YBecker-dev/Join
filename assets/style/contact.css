@@ -1,0 +1,26 @@
+
+.contact-headline {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 100px;
+    margin-left: 120px;
+}
+
+h2 {
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.separating-line {
+    width: 2px;
+    height: 4rem;
+    background-color: #29abe2;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.team {
+    color: #404447;
+}
