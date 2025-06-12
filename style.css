@@ -1,0 +1,142 @@
+.main-header-content {
+    display: flex;
+    justify-content: end;
+}
+
+.main-header {
+    position: relative;
+    width: 100%;
+}
+
+.main-header img {
+    width: 100px;
+    height: 120px;
+    position: absolute;
+    top: 80px;
+    left: 77px;
+    z-index: 10;
+}
+
+.main-header-logo {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background-color: #F6F7F8 !important;
+    transition: opacity 1s cubic-bezier(0.77, 0, 0.175, 1);
+    pointer-events: none;
+}
+
+.main-header-logo.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#start-logo {
+    width: 100px;
+    height: 120px;
+    position: absolute;
+    top: 80px;
+    left: 77px;
+    z-index: 10;
+    transition: all 1s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+#start-logo.logo-zoom,
+#start-logo.preload {
+    width: 350px;
+    height: 420px;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+}
+
+.Signup {
+    display: flex;
+    align-items: center;
+    gap: 2.25rem;
+    position: absolute;
+    top: 67px;
+    right: 96px;
+    font-size: 1.25rem;
+    z-index: 1;
+}
+
+.login-underline {
+    width: 160px;
+    height: 4px;
+    background: #2AABE2;
+    border-radius: 2px;
+    margin-bottom: 32px;
+}
+
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    min-height: 100vh;
+}
+
+.login-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 5px 15px;
+    position: relative;
+}
+
+.input-group {
+    position: relative;
+    width: 100%;
+    margin-bottom: 2rem;
+    padding: 0 6rem;
+}
+
+.input-group input {
+    position: relative;
+    width: 450px;
+    padding: 16px 44px 16px 16px;
+    border: 1px solid #D1D1D1;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.input-icon {
+    position: absolute;
+    right: 113px;
+    top: 16px;
+}
+
+.login-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.5rem 0 2.5rem 0px;
+}
+
+.login-footer {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 1rem 0;
+    bottom: 36px;
+}
+
+.login-footer a {
+    display: inline-block;
+    min-width: 120px;
+}
+
+.guest-btn {
+    background-color: white;
+    color: rgb(41, 54, 71);
+    border: 1px solid rgb(41, 54, 71);
+}

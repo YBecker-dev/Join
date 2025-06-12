@@ -1,0 +1,21 @@
+.guest-btn {
+    background-color: white;
+    color: rgb(41, 54, 71);
+    border: 1px solid rgb(41, 54, 71);
+}
+
+button {
+    background-color: rgb(41, 54, 71);
+    color: white;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    font-size: 1.25rem;
+    border: none;
+    cursor: pointer;
+
+}
+
+button:hover {
+    background-color: #2AABE2;
+}

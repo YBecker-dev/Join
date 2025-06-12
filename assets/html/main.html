@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style/main.css" />
+    <link rel="stylesheet" href="../style/standart.css" />
+    <title>Leaderbord</title>
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="sidebar-links-section">
+        <div class="sidebar-logo">
+          <img src="../img/Logo/Logo_white.png" alt="Logo" />
+        </div>
+        <a class="sidebar-links" href="#" onclick="loadContent('summary.html')">
+          <img src="../img/icons/summary.svg" alt="" />Summary</a>
+        <a class="sidebar-links" href="#" onclick="loadContent('add-task.html')">
+          <img src="../img/icons/add-task.svg" alt="" />Add Task</a>
+        <a class="sidebar-links" href="#" onclick="loadContent('board.html')">
+          <img src="../img/icons/board.svg" alt="" />Board</a>
+        <a class="sidebar-links" href="#" onclick="loadContent('contacts.html')">
+          <img src="../img/icons/contacts.svg" alt="" />Contacts</a>
+      </div>
+      <div class="sidebar-legal-stuff">
+        <a href="./assets/html/privacy-policy.html">Prvacy Police</a>
+        <a href="./assets/html/legal-notice.html">Legal Notice</a>
+      </div>
+    </div>
+
+    <main id="main-content">
+      <!-- Hier wird der Seiteninhalt dynamisch geladen -->
+    </main>
+
+    <script src="../script/summary.js"></script>
+  </body>
+</html>

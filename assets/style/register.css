@@ -1,0 +1,104 @@
+.go-to-start {
+    position: absolute;
+    top: 73px;
+    left: 58px;
+    cursor: pointer;
+}
+
+.signup-header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.input-privacy-policy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #BEBEBE;
+    padding: 16px;
+}
+
+#privacy {
+    color: #2AABE2;
+}
+
+.checkboxItem {
+    display: inline-flex;
+    align-items: center;
+    column-gap: 16px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.checkbox {
+    appearance: none;
+    position: relative;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #000000;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.checkbox:checked::after {
+    content: "";
+    position: absolute;
+    top: -3px;
+    left: 0;
+    width: 19px;
+    height: 5px;
+    border-bottom: 3px solid #06b6d4;
+    border-left: 3px solid #06b6d4;
+    transform: rotate(-45deg);
+}
+
+.success-register-section {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.success-register {
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: rgb(41, 54, 71);
+    color: white;
+    padding: 2rem;
+    border-radius: 25px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 5px 15px;
+    font-size: 1.5rem;
+    animation: fadeInUp 0.5s ease-in forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 100vh);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.input-error {
+    border: 2px solid #e74c3c !important;
+}
+
+.checkbox.input-error {
+    outline: 2px solid #e74c3c;
+    border-color: #e74c3c !important;
+}
+
+.warning {
+    color: #e74c3c;
+    font-size: 0.75rem;
+    position: absolute;
+    top: 56px;
+}

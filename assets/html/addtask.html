@@ -1,0 +1,41 @@
+<div class="add-task">
+  <h2>Add Task</h2>
+
+  <form>
+    <label for="title">Title*</label>
+    <input type="text" id="title" name="title" placeholder="Enter a title" required>
+
+    <label for="description">Description</label>
+    <textarea id="description" name="description" placeholder="Enter a Description"></textarea>
+
+    <label for="due-date">Due date*</label>
+    <input type="date" id="due-date" name="due-date" required>
+
+    <!-- Priority Buttons -->
+    <div class="priority">
+      <button type="button">Urgent</button>
+      <button type="button" class="active">Medium</button>
+      <button type="button">Low</button>
+    </div>
+
+    <!-- Assignments -->
+    <label for="assigned">Assigned to</label>
+    <select id="assigned" name="assigned">
+      <option>Select contacts to assign</option>
+    </select>
+
+    <label for="category">Category*</label>
+    <select id="category" name="category" required>
+      <option>Select task category</option>
+    </select>
+
+    <!-- Subtasks -->
+    <label for="subtask">Subtasks</label>
+    <input type="text" id="subtask" placeholder="Add new subtask">
+    <button type="button">+</button>
+
+    <!-- Action Buttons -->
+    <button type="reset">Clear</button>
+    <button type="submit">Create Task</button>
+  </form>
+</div>
