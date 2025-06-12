@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Core Sans A', sans-serif;
+    font-family: 'Inter';
 }
 
 body {
@@ -13,19 +13,14 @@ body {
 
 @font-face {
     font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    font-family: 'Core Sans A', sans-serif;
-    src: url("../fonts/CoreSansA65Bold.otf")format("otf");
+    src: url('../fonts/inter-v19-latin-regular.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
-@font-face {
-    font-display: swap;
-    font-style: normal;
-    font-weight: 400;
-    font-family: 'Core Sans A', sans-serif;
-    src: url("../fonts/CoreSansA45Regular.otf")format("otf");
-}
 
 h1 {
     font-size: 4rem;
@@ -42,12 +37,6 @@ a {
 a:hover {
     color: #2AABE2;
     font-weight: bold;
-}
-
-input::placeholder {
-    color: #BEBEBE;
-    opacity: 1;
-    font-size: 1.25rem;
 }
 
 .d-none {
