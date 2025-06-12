@@ -4,23 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../style/main.css" />
+    <link rel="stylesheet" href="../style/add_task.css" />
     <link rel="stylesheet" href="../style/standart.css" />
+    <link rel="stylesheet" href="../../style.css">
     <title>Leaderbord</title>
   </head>
   <body>
+
+    <header>
+      <div class="header-content">
+        <p >Kanban Project Management Tool</p>
+        <div class="header-user">
+          <img src="../img/icon/header_user_interface/help.png" alt="help">
+          <p class="user">SM</p>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content" class="main-content">
+    </main>
+
     <div class="sidebar">
       <div class="sidebar-links-section">
         <div class="sidebar-logo">
           <img src="../img/Logo/Logo_white.png" alt="Logo" />
         </div>
         <a class="sidebar-links" href="#" onclick="loadContent('summary.html')">
-          <img src="../img/icons/summary.svg" alt="" />Summary</a>
-        <a class="sidebar-links" href="#" onclick="loadContent('add-task.html')">
-          <img src="../img/icons/add-task.svg" alt="" />Add Task</a>
+          <img src="../img/icon/tasks_icon/summary.png" alt="" />Summary</a>
+        <a class="sidebar-links" href="#" onclick="loadContent('add_task.html')">
+          <img src="../img/icon/tasks_icon/add_task.png" alt="" />Add Task</a>
         <a class="sidebar-links" href="#" onclick="loadContent('board.html')">
-          <img src="../img/icons/board.svg" alt="" />Board</a>
+          <img src="../img/icon/tasks_icon/board.png" alt="" />Board</a>
         <a class="sidebar-links" href="#" onclick="loadContent('contacts.html')">
-          <img src="../img/icons/contacts.svg" alt="" />Contacts</a>
+          <img src="../img/icon/tasks_icon/contacts.png" alt="" />Contacts</a>
       </div>
       <div class="sidebar-legal-stuff">
         <a href="./assets/html/privacy-policy.html">Prvacy Police</a>
@@ -28,10 +44,6 @@
       </div>
     </div>
 
-    <main id="main-content">
-      <!-- Hier wird der Seiteninhalt dynamisch geladen -->
-    </main>
-
-    <script src="../script/summary.js"></script>
+    <script src="../script/main.js"></script>
   </body>
 </html>

@@ -22,10 +22,6 @@
 
 header {
     position: fixed;
-    display: flex;
-    height: 96px;
-    width: 100%;
-    z-index: 1;
 }
 
 .sidebar-legal-stuff {
@@ -53,4 +49,12 @@ header {
 .sidebar-links img {
     width: 24px;
     height: 24px;
+}
+
+.main-content {
+    position: fixed;
+    top: 96px;
+    left: 232px;
+    right: 0;
+    bottom: 0;
 }

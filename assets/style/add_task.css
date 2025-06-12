@@ -1,0 +1,140 @@
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: white;
+    position: fixed;
+    height: 96px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 5px 15px;
+}
+
+.header-content>p {
+    font-size: 1.25rem;
+    color: #293647;
+    font-weight: 500;
+    padding: 0 0 0 340px;
+}
+
+.header-user {
+    display: flex;
+    align-items: center;
+    padding-right: 3rem;
+    gap: 1rem;
+    font-size: 1.25rem;
+
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 3px solid black;
+    font-size: 1.25rem;
+    background: white;
+    color: #2aabe2;
+}
+
+
+.contentspace-html {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.contentspace-html>h1 {
+    position: absolute;
+    top: 110px;
+    left: 6rem;
+    font-size: 60px;
+    padding: 0;
+}
+
+.title_description_date {
+    display: flex;
+    position: absolute;
+    left: 6rem;
+    top: 231px;
+}
+
+.title_description_date form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.title_description_date .input-group {
+    padding: 0 0 16px 0;
+    margin: 0;
+}
+
+.title_description_date .input-group input {
+    width: 440px;
+    padding: 11px;
+    font-size: 1.25rem;
+}
+
+.add-task {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.add-task span {
+    font-size: 1.25rem;
+    text-align: start;
+}
+
+textarea {
+    width: 440px;
+    font-size: 1.25rem;
+    height: 120px;
+    border-radius: 8px;
+    border: 1px solid #D1D1D1;
+    resize: none;
+    padding: 16px;
+}
+
+.add-task .input-icon {
+    position: absolute;
+    right: 4px;
+    bottom: 16px;
+    top: unset;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+.add-task .date-icon {
+    position: absolute;
+    right: 16px;
+    bottom: 29px;
+}
+
+.dividing-strips {
+    position: absolute;
+    border: 1px solid #D1D1D1;
+    height: 424px;
+    left: 584px;
+    top: 231px;
+}
+
+.title_description_date .date {
+    padding: 0 0 14px 0;
+}
+
+.task-attribute {
+    display: flex;
+    position: absolute;
+    left: 632px;
+    top: 231px;
+}
+
+.task-attribute .input-group {
+    padding: 0;
+    margin: 0;
+}

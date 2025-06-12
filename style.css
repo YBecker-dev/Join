@@ -141,8 +141,10 @@
     border: 1px solid rgb(41, 54, 71);
 }
 
-input::placeholder {
+input::placeholder,
+textarea::placeholder{
     color: #BEBEBE;
     opacity: 1;
     font-size: 1.25rem;
 }
+
