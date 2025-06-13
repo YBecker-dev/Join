@@ -24,7 +24,9 @@
             <h1>Sign up</h1>
             <div class="login-underline"></div>
           </div>
-          <form id="register-form">
+
+
+          <form id="register-form" onsubmit="return successRegister(event)">
             <div class="input-group">
               <input id="name" type="text" placeholder="Name" required minlength="3" />
               <span class="input-icon">
@@ -62,9 +64,11 @@
               </label>
             </div>
             <div class="login-buttons">
-              <button onclick="successRegister()" id="signup-btn">Sign up</button>
+              <button id="signup-btn">Sign up</button>
             </div>
           </form>
+
+
         </div>
         <div class="login-footer">
           <a href="./assets/html/privacy-policy.html">Prvacy Police</a>

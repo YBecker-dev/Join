@@ -27,7 +27,7 @@ async function checkUser(event){
   let mail = document.getElementById('email');
   let password = document.getElementById('password');
   try{
-    let response = await fetch(BASE_URL+".json")
+    let response = await fetch(BASE_URL+"/login"+".json")
     if(response.ok){
       //console.log(response)
       const userDataObject = await response.json();
@@ -39,11 +39,11 @@ async function checkUser(event){
           //console.log(userObjekt);
           //console.log(userID)
           if(mail.value == userObjekt.mail && password.value == userObjekt.password){
-            console.log('User gefunden')
+            //console.log('User gefunden')
             window.location.href = "assets/html/summary.html";
             resetForm();
           }else{
-            console.log('User nicht gefunden oder Eingaben falsch');
+            //console.log('User nicht gefunden oder Eingaben falsch');
             document.getElementById('login-failed').classList.remove('d-none');
             resetForm();
           }
@@ -57,5 +57,3 @@ async function checkUser(event){
   
 
 }
-
-let resetForm = () => document.getElementById("login-form").reset()
