@@ -22,7 +22,6 @@
     padding-right: 3rem;
     gap: 1rem;
     font-size: 1.25rem;
-
 }
 
 .user {
@@ -37,7 +36,6 @@
     background: white;
     color: #2aabe2;
 }
-
 
 .contentspace-html {
     width: 100%;
@@ -128,13 +126,168 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .task-attribute {
-    display: flex;
     position: absolute;
     left: 632px;
     top: 231px;
+    text-align: start;
+}
+
+.task-attribute form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
 
 .task-attribute .input-group {
     padding: 0;
     margin: 0;
+}
+
+.task-attribute .input-group input {
+    width: 440px;
+    padding: 11px;
+    font-size: 1.25rem;
+}
+
+.task-attribute span {
+    font-size: 1.25rem;
+}
+
+.add-task-button {
+    display: flex;
+    justify-content: space-between;
+}
+
+.priority button {
+    color: black;
+    background-color: white;
+    font-weight: 400;
+}
+
+.add-task select {
+    width: 440px;
+    padding: 10px;
+    font-size: 1.25rem;
+    border-radius: 8px;
+    border: 1px solid #D1D1D1;
+}
+
+label {
+    font-size: 1.25rem;
+}
+
+.add-task-button {
+    display: flex;
+    width: 136px;
+    height: 56px;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+    padding: 0;
+}
+
+.priority-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.priority {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.priority form {
+    gap: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+.urgent {
+    background-color: #FF3E00 !important;
+    color: white !important;
+}
+
+.urgent img,
+.medium img,
+.low img {
+    filter: brightness(0) invert(1);
+}
+
+.medium {
+    background-color: #FFA800 !important;
+    color: white !important;
+}
+
+.low {
+    background-color: #7AE229 !important;
+    color: white !important;
+}
+
+#custom-dropdown-selected {
+    width: 440px;
+    padding: 10px;
+    font-size: 1.25rem;
+    border-radius: 8px;
+    border: 1px solid #D1D1D1;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+.custom-dropdown-options {
+    width: 440px;
+    padding: 10px;
+    font-size: 1.25rem;
+    border-radius: 8px;
+    border: 1px solid #D1D1D1;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+#custom-dropdown-selected {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+}
+
+#custom-dropdown-options {
+    border-top: none;
+}
+
+#custom-dropdown-options.hidden {
+    display: none;
+}
+
+#custom-dropdown-options div {
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#custom-dropdown-options div:hover {
+    background: #f0f0f0;
+}
+
+.subtasks-icon {
+    position: absolute;
+    right: 11px;
+    bottom: 8px;
+    cursor: pointer;
+}
+
+.create-button {
+
+}
+
+.clear-button {
+    background-color: white;
+    color: rgb(41, 54, 71);
+    border: 1px solid rgb(41, 54, 71);
+}
+
+.create-clear-buttons {
+    display: flex;
+    justify-content: end
 }

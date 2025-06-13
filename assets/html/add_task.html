@@ -1,37 +1,76 @@
-<div class="contentspace-html">
-  <h1>Add Task</h1>
+<body>
+  <div class="contentspace-html">
+    <h1>Add Task</h1>
 
-  <div class="title_description_date">
-    <form>
-      <div class="input-group add-task">
-        <span>Title *</span>
-        <input type="text" placeholder="Enter a Title" required />
-        <span class="input-icon"></span>
+    <div class="title_description_date">
+      <form>
+        <div class="input-group add-task">
+          <span>Title *</span>
+          <input type="text" placeholder="Enter a Title" required />
+          <span class="input-icon"></span>
+        </div>
+        <div class="input-group add-task">
+          <span>Description *</span>
+          <textarea placeholder="Enter a Description" required></textarea>
+          <span class="input-icon">
+            <img src="../img/icon/add_task_icon/textarea.png" alt="" />
+          </span>
+        </div>
+        <div class="input-group add-task date">
+          <span>Due Date *</span>
+          <input type="date" required />
+          <span class="date-icon">
+            <img src="../img/icon/add_task_icon/event.png" alt="" />
+          </span>
+        </div>
+      </form>
+    </div>
+    <div class="dividing-strips"></div>
+    <div class="task-attribute">
+      <div class="priority">
+        <div>
+          <span>Priority</span>
+        </div>
+        <div class="priority-buttons">
+          <button class="add-task-button" id="urgent" onclick="togglePriority('urgent')">
+            Urgent <img src="../img/icon/add_task_icon/buttons/urgent.png" alt="" />
+          </button>
+          <button class="add-task-button" id="medium" onclick="togglePriority('medium')">
+            Medium <img src="../img/icon/add_task_icon/buttons/medium.png" alt="" />
+          </button>
+          <button class="add-task-button" id="low" onclick="togglePriority('low')">
+            Low <img src="../img/icon/add_task_icon/buttons/low.png" alt="" />
+          </button>
+        </div>
       </div>
-      <div class="input-group add-task">
-        <span>Description *</span>
-        <textarea placeholder="Enter a Description" required></textarea>
-        <span class="input-icon">
-          <img src="../img/icon/add_task_icon/textarea.png" alt="" />
-        </span>
+      <form>
+        <div class="add-task">
+          <label for="assigned-to">Assigned to</label>
+          <select id="assigned-to" name="assigned-to" required onclick="loadContacts()"></select>
+        </div>
+        <div class="add-task">
+          <label for="category">Category *</label>
+          <div id="custom-dropdown-container">
+            <div id="custom-dropdown-selected" onclick="toggleCustomDropdown()">
+              <p>Select a task category</p>
+              <img src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png" alt="" />
+            </div>
+            <div id="custom-dropdown-options" class="hidden custom-dropdown-options">
+              <div onclick="selectCustomOption(this)">Technical Task</div>
+              <div onclick="selectCustomOption(this)">User Story</div>
+            </div>
+          </div>
+        </div>
+        <div class="input-group add-task">
+          <span>Subtasks</span>
+          <input type="text" placeholder="Add new subtask" required />
+          <span class="subtasks-icon"> <img src="../img/icon/add_task_icon/plus.png" alt="" /></span>
+        </div>
+      </form>
+      <div class="create-clear-buttons">
+        <button class="clear-button">Clear</button>
+        <button class="create-button">Create Task</button>
       </div>
-      <div class="input-group add-task date">
-        <span>Due Date *</span>
-        <input type="date" required />
-        <span class="date-icon">
-          <img src="../img/icon/add_task_icon/event.png" alt="" />
-        </span>
-      </div>
-    </form>
+    </div>
   </div>
-  <div class="dividing-strips"></div>
-  <div class="task-attribute">
-    <form>
-      <div class="input-group add-task">
-        <span>Title *</span>
-        <input type="text" placeholder="Enter a Title" required />
-        <span class="input-icon"></span>
-      </div>
-    </form>
-  </div>
-</div>
+</body>

@@ -1,11 +1,16 @@
-
 function loadContent(page) {
   fetch(page)
-    .then(response => {
-      if (!response.ok) throw new Error("Fehler beim Laden!");
-      return response.text();
-    })
-    .then(html => {
+    .then((response) => response.text())
+    .then((html) => {
       document.getElementById('main-content').innerHTML = html;
-    })
-    };
+
+      if (page === 'add_task.html') {
+        initAddTask();
+      } else if (page === 'contacts.html') {
+      } else if (page === 'board.html') {
+      } else if (page === 'summary.html') {
+      } else if (page === 'privacy-policy.html') {
+      } else if (page === 'legal-notice.html') {
+      }
+    });
+}
