@@ -8,6 +8,17 @@
     margin-left: 120px;
 }
 
+.btn {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.newCantact {
+    height: 28px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
 h2 {
     font-size: 60px;
     font-weight: bold;
