@@ -35,3 +35,15 @@ h2 {
 .team {
     color: #404447;
 }
+.initial {
+    width: 80px;
+    height: 80px;
+    border-radius: 5rem;
+    background-color: orange;
+}
+
+.person {
+    margin-top: 40px;
+    padding: 20px;
+    display: flex;
+}
