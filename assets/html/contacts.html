@@ -17,25 +17,77 @@
             <div class="headder-logo"></div>
         </div>
     </nav>
-    <main>
-        <div id="contact-content">
-            <div class="contact-names">
-                <button class="btn">Add new contact<img class="newCantact" src="../img/icon/new-contact.png" alt="new Contact"></button>
-
-                <div class="person">
-                    <div class="initial">${givenName.firsLetter} ${surname.firsLetter}</div>
-                    <h3>${givenName} ${surname}</h3>
-                    <span>e-mail ${mail}</span>
+    <main class="myMain">
+        <section>
+            <div class="sidebar">
+                <div class="sidebar-links-section">
+                    <div class="sidebar-logo">
+                    <img src="../img/Logo/Logo_white.png" alt="Logo" />
+                    </div>
+                    <a class="sidebar-links" href="#" onclick="loadContent('summary.html')">
+                    <img src="../img/icons/summary.svg" alt="" />Summary</a>
+                    <a class="sidebar-links" href="#" onclick="loadContent('add-task.html')">
+                    <img src="../img/icons/add-task.svg" alt="" />Add Task</a>
+                    <a class="sidebar-links" href="#" onclick="loadContent('board.html')">
+                    <img src="../img/icons/board.svg" alt="" />Board</a>
+                    <a class="sidebar-links" href="#" onclick="loadContent('contacts.html')">
+                    <img src="../img/icons/contacts.svg" alt="" />Contacts</a>
                 </div>
-            </div>
-        </div>
+                <div class="sidebar-legal-stuff">
+                    <a href="./assets/html/privacy-policy.html">Prvacy Police</a>
+                    <a href="./assets/html/legal-notice.html">Legal Notice</a>
+                </div>
+                </div>
+        </section>
 
-        <div class="contact-headline">
-            <h2>contacts</h2> 
-            <div class="separating-line"></div> 
-            <span class="team">Better with a team</span>
-        </div>
+        <section class="contactList">
+            <button onclick="openAddNewContactOverlay()" id="newContact">
+                <div class="btn">
+                    <p>Add new contact</p>
+                    <img class="newContact" src="../img/icon/new-contact.png" alt="new Contact">
+                </div> 
+            </button>
+
+            <div id="contactContent">
+
+                <div onclick="openContactOverlay()" class="person">
+                    <p class="initial">GS</p>
+                    <div>
+                        <h4>GivenName Surname</h4>
+                        <p><a class="mail" href="mailto:">${mail}</a></p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="details">
+            <div class="contact-headline">
+                <h2>contacts</h2> 
+                <div class="separating-line"></div> 
+                <span class="team">Better with a team</span>
+            </div>
+        </section>
+
+        <!-- <section class="contactOverlay">
+            <div id="contactOverlay">
+
+                    <p class="initial">GS</p>
+                    <div>
+                        <h3>GivenName Surname</h3>
+                        <p>Contact Information</p>
+                        <p>Email</p><p><a class="mail" href="mailto:">${mail}</a></p>
+                    </div>
+                </div>
+
+            </div>
+        </section> -->
+        
+        
+
+        
     </main>
+    <script src="../script/templates.js"></script>
     
 </body>
 </html>

@@ -1,22 +1,26 @@
 
-.contact-headline {
+.myMain {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    margin-top: 100px;
-    margin-left: 120px;
+}
+
+.contactList {
+    max-width: 420px;
+}
+
+button {
+    margin-top: 1rem;
 }
 
 .btn {
-    padding-left: 16px;
-    padding-right: 16px;
+    display: flex;
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 
-.newCantact {
+.newContact {
     height: 28px;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 h2 {
@@ -35,15 +39,49 @@ h2 {
 .team {
     color: #404447;
 }
-.initial {
-    width: 80px;
-    height: 80px;
-    border-radius: 5rem;
-    background-color: orange;
-}
 
 .person {
+    margin-left: 2rem;
+    margin-right: 2rem;
     margin-top: 40px;
     padding: 20px;
     display: flex;
+    border-radius: 0.5rem;
+    align-items: center;
+}
+
+.person:hover {
+    background-color: #293647;
+}
+
+.person
+
+.initial {
+    margin-right: 4rem;
+    width: 5rem;
+    height: 3.5rem;
+    align-content: center;
+    border-radius: 6rem;
+    background-color: orange;
+    color: white;
+    font-size: 2rem;
+}
+
+.mail {
+    color: #29abe2;
+    text-align: start;
+}
+
+.details {
+    width: 100%;
+    background-color: #ced0d2;
+}
+
+.contact-headline {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 100px;
+    margin-left: 120px;
 }
