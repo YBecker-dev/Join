@@ -11,16 +11,25 @@ const pw2Icon = document.getElementById('password-confirm-icon');
 
 // EventListner password-Icon-change
 passwordInput.addEventListener('input', function(){
-    let inpuValue = this.value.trim();
-    if(inpuValue === ""){
+    let inputValue = this.value.trim();
+    if(inputValue === ""){
       pw1Icon.src ="../img/icon/lock.png"
       pw1Icon.classList.remove('eye-icon');
-      
     }else{
       pw1Icon.classList.add('eye-icon');
-      pw1Icon.src ="../img/icon/hidden.png"
-      
+      pw1Icon.src ="../img/icon/hidden.png" 
     }    
+  })
+
+  passwordConfirmInput.addEventListener('input', function(){
+    let inputValue = this.value.trim();
+    if(inputValue === ""){
+      pw2Icon.src ="../img/icon/lock.png"
+      pw2Icon.classList.remove('eye-icon');
+    }else{
+      pw2Icon.classList.add('eye-icon');
+      pw2Icon.src ="../img/icon/hidden.png"
+    }
   })
 
   pw1Icon.addEventListener('click',function(){
@@ -32,7 +41,6 @@ passwordInput.addEventListener('input', function(){
         pw1Icon.src="../img/icon/hidden.png";
         passwordInput.type = "password";
       }  
-      
     }  
   })
 
@@ -45,22 +53,12 @@ passwordInput.addEventListener('input', function(){
         pw2Icon.src="../img/icon/hidden.png";
         passwordConfirmInput.type = "password";
       }  
-      
     }  
   })
  
 
 
-  passwordConfirmInput.addEventListener('input', function(){
-    let inpuValue = this.value.trim();
-    if(inpuValue === ""){
-      pw2Icon.src ="../img/icon/lock.png"
-      pw2Icon.classList.remove('eye-icon');
-    }else{
-      pw2Icon.classList.add('eye-icon');
-      pw2Icon.src ="../img/icon/hidden.png"
-    }
-  })
+ 
 
 
 function init() {

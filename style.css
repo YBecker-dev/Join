@@ -148,3 +148,10 @@ textarea::placeholder{
     font-size: 1.25rem;
 }
 
+.eye-icon{
+    width: 16px;
+    height: 22px;
+}
+.eye-icon:hover{
+    cursor: pointer;
+}
