@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../style/buttons.css">
     <title>Contact</title>
 </head>
-<body>
+<body onload="init()">
     <nav>
         <p>Kanban Poject Management Tool</p>
         <div>
@@ -49,15 +49,6 @@
             </button>
 
             <div id="contactContent">
-
-                <div onclick="openContactOverlay()" class="person">
-                    <p class="initial">GS</p>
-                    <div>
-                        <h4>GivenName Surname</h4>
-                        <p><a class="mail" href="mailto:">${mail}</a></p>
-                    </div>
-                </div>
-
             </div>
         </section>
 
@@ -67,27 +58,39 @@
                 <div class="separating-line"></div> 
                 <span class="team">Better with a team</span>
             </div>
-        </section>
 
-        <!-- <section class="contactOverlay">
-            <div id="contactOverlay">
+            <div id="contactContentOverlay">
 
-                    <p class="initial">GS</p>
-                    <div>
-                        <h3>GivenName Surname</h3>
-                        <p>Contact Information</p>
-                        <p>Email</p><p><a class="mail" href="mailto:">${mail}</a></p>
+                <div class="contactOverlay">
+                    <div class="myNames">
+                        <p class="initialOverlay">GS</p>
+                        <div>
+                            <h3>GivenName Surname</h3>
+                            <div class="contactIcons">
+                                <div onclick="openContactOverlay()">
+                                    <img class="editIcon" src="../img/icon/edit.png" alt="pencil">
+                                    <span>edit</span>
+                                </div>
+                                <div onclick="deleteContact()">
+                                    <img class="editIcon" src="../img/icon/trash.png" alt="wastebasket">
+                                    <span>delete</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <p>Contact Information</p>
+                    <p><strong>Email</strong></p>
+                    <p><a class="mail" href="mailto:">${mail}</a></p>
+                    <p><strong>Phone</strong></p>
+                    <p><a class="phone" href="tel:">phonenumber</a></p>
                 </div>
 
             </div>
-        </section> -->
-        
-        
+        </section>
 
-        
     </main>
     <script src="../script/templates.js"></script>
+    <script src="../script/contacts.js"></script>
     
 </body>
 </html>

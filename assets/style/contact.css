@@ -38,6 +38,7 @@ h2 {
 
 .team {
     color: #404447;
+    font-size: 24px;
 }
 
 .person {
@@ -46,6 +47,7 @@ h2 {
     margin-top: 40px;
     padding: 20px;
     display: flex;
+    justify-content: flex-start;
     border-radius: 0.5rem;
     align-items: center;
 }
@@ -53,8 +55,6 @@ h2 {
 .person:hover {
     background-color: #293647;
 }
-
-.person
 
 .initial {
     margin-right: 4rem;
@@ -84,4 +84,32 @@ h2 {
     align-items: center;
     margin-top: 100px;
     margin-left: 120px;
+}
+
+.initialOverlay {
+    margin-right: 4rem;
+    width: 6rem;
+    height: 6rem;
+    align-content: center;
+    border-radius: 6rem;
+    background-color: orange;
+    color: white;
+    font-size: 4rem; 
+}
+
+.myNames {
+    display: flex;
+    justify-content: center;
+}
+
+.contactIcons{
+    display: flex;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.editIcon {
+    height: 1rem;
+    padding-left: 1.5rem;
+    
 }
