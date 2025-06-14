@@ -6,6 +6,63 @@ let emailInput = document.getElementById('email');
 let passwordInput = document.getElementById('password');
 let passwordConfirmInput = document.getElementById('password-confirm');
 
+const pw1Icon = document.getElementById('password-icon');
+const pw2Icon = document.getElementById('password-confirm-icon');
+
+// EventListner password-Icon-change
+passwordInput.addEventListener('input', function(){
+    let inpuValue = this.value.trim();
+    if(inpuValue === ""){
+      pw1Icon.src ="../img/icon/lock.png"
+      pw1Icon.classList.remove('eye-icon');
+      
+    }else{
+      pw1Icon.classList.add('eye-icon');
+      pw1Icon.src ="../img/icon/hidden.png"
+      
+    }    
+  })
+
+  pw1Icon.addEventListener('click',function(){
+    if(pw1Icon.classList.contains('eye-icon')){
+      if(passwordInput.type == "password"){
+        pw1Icon.src ="../img/icon/show.png";
+        passwordInput.type= "text";//Fleg
+      }else{
+        pw1Icon.src="../img/icon/hidden.png";
+        passwordInput.type = "password";
+      }  
+      
+    }  
+  })
+
+  pw2Icon.addEventListener('click',function(){
+    if(pw2Icon.classList.contains('eye-icon')){
+      if(passwordConfirmInput.type == "password"){
+        pw2Icon.src ="../img/icon/show.png";
+        passwordConfirmInput.type= "text";//Fleg
+      }else{
+        pw2Icon.src="../img/icon/hidden.png";
+        passwordConfirmInput.type = "password";
+      }  
+      
+    }  
+  })
+ 
+
+
+  passwordConfirmInput.addEventListener('input', function(){
+    let inpuValue = this.value.trim();
+    if(inpuValue === ""){
+      pw2Icon.src ="../img/icon/lock.png"
+      pw2Icon.classList.remove('eye-icon');
+    }else{
+      pw2Icon.classList.add('eye-icon');
+      pw2Icon.src ="../img/icon/hidden.png"
+    }
+  })
+
+
 function init() {
  // handleFormSubmit();
 }
@@ -19,7 +76,7 @@ function init() {
 
 function successRegister(event) {
   
-  if (allFieldsFilledCorrect()) {
+  if (allFieldsFilledCorrect(event)) {
     console.log('hier fetchen ? ')
     checkUserOnRegistration(event);
     //
@@ -96,7 +153,8 @@ function showSuccessMessage() {
   }, 1500);
 }
 
-function allFieldsFilledCorrect() {
+function allFieldsFilledCorrect(event) {
+  event.preventDefault();
   return (
     nameInput.value.length >= 3 &&
     /^[A-Za-zÄÖÜäöüß\s\-]+$/.test(nameInput.value) &&
@@ -177,3 +235,16 @@ function checkCheckbox() {
     checkbox.classList.remove('input-error');
   }
 }
+
+
+  
+  
+ 
+
+
+//function togglePasswordVisibility(){
+//  let pw1 = document.getElementById('password-icon');
+//  let pw2 = document.getElementById('password-confirm-icon');
+//  
+//
+//}
