@@ -3,7 +3,8 @@
 }
 
 .contactList {
-    max-width: 420px;
+    width: 420px;
+    height: 50%;
     background-color: #ffffff;
 }
 
@@ -67,6 +68,7 @@ h4 {
 }
 
 .details {
+    
     width: 100%;
     background-color: #f6f7f8;
 }
