@@ -1,27 +1,27 @@
-let myContacts = [
-   {
-   "givenName": "Gabi",
-   "surname": "Schuster",
-   "mail": "gabischuster@gmail.com",
-   "phone": "+49123456789"
-   },
-   {
-    "givenName": "Holger",
-   "surname": "Arnold",
-   "mail": "holgerarnold@gmail.com",
-   "phone": "+49123455690"
-   },
-     {
-    "givenName": "Michaela",
-   "surname": "Klein",
-   "mail": "michaelaklein@gmail.com",
-   "phone": "+49123455681"
-   },  
+let myContacts = [  
+    {
+        "givenName": "Gabi",
+        "surname": "Schuster",
+        "mail": "gabischuster@gmail.com",
+        "phone": "+49123456789"
+    },
+    {
+        "givenName": "Holger",
+        "surname": "Arnold",
+        "mail": "holgerarnold@gmail.com",
+        "phone": "+49123455690"
+    },
+    {
+        "givenName": "Michaela",
+        "surname": "Klein",
+        "mail": "michaelaklein@gmail.com",
+        "phone": "+49123455681"
+    },  
 ];
 
 function init() {
     renderContacts();
-    renderContactsOverlay();
+    openContactOverlayContactsOverlay();
 }
 
 function renderContacts() {
@@ -37,5 +37,5 @@ function getInitials(first, last) {
 }
 
 function openContactOverlay() {
-    
+
 }
