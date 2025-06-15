@@ -9,6 +9,7 @@ function loadContent(page) {
       } else if (page === 'contacts.html') {
       } else if (page === 'board.html') {
       } else if (page === 'summary.html') {
+        initSummary();
       } else if (page === 'privacy-policy.html') {
       } else if (page === 'legal-notice.html') {
       }
