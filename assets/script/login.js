@@ -26,8 +26,6 @@ passwordValue.addEventListener('click', function(){
   }
 })
 
-
-
 function init() {
   const logo = document.getElementById('start-logo');
   const headerLogo = document.querySelector('.main-header-logo');
@@ -71,7 +69,7 @@ async function checkUser(event){
         }
         if(findUser === true){
             console.log('User gefunden')
-            window.location.href = "assets/html/summary.html";
+            window.location.href = "assets/html/main.html";
             resetForm();
           }else{
             console.log('User nicht gefunden oder Eingaben falsch');

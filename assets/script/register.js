@@ -54,23 +54,9 @@ passwordInput.addEventListener('input', function(){
         passwordConfirmInput.type = "password";
       }  
     }  
-  })
+})
  
-
-
- 
-
-
-function init() {
- // handleFormSubmit();
-}
-
-//function handleFormSubmit() {
-//  const form = document.getElementById('register-form');
-//  if (form) {
-//    form.addEventListener('submit', formSubmit);
-//  }
-//}
+function init() {}
 
 function successRegister(event) {
   
@@ -163,8 +149,6 @@ function allFieldsFilledCorrect(event) {
   );
 }
 
-
-
 function formSubmit(event) {
   event.preventDefault();
   if (allFieldsFilledCorrect()) {
@@ -233,16 +217,3 @@ function checkCheckbox() {
     checkbox.classList.remove('input-error');
   }
 }
-
-
-  
-  
- 
-
-
-//function togglePasswordVisibility(){
-//  let pw1 = document.getElementById('password-icon');
-//  let pw2 = document.getElementById('password-confirm-icon');
-//  
-//
-//}
