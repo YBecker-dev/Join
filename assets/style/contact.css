@@ -1,10 +1,10 @@
-
 .myMain {
     display: flex;
 }
 
 .contactList {
     max-width: 420px;
+    background-color: #ffffff;
 }
 
 button {
@@ -13,14 +13,71 @@ button {
 
 .btn {
     display: flex;
-    margin-left: 1rem;
-    margin-right: 1rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
 
 .newContact {
     height: 28px;
     padding-left: 1rem;
     padding-right: 1rem;
+}
+
+.person {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: #f6f7f8;
+    display: flex;
+    justify-content: start;
+    border-radius: 0.5rem;
+    align-items: center;
+}
+
+.person:hover {
+    background-color: #293647;
+    color: #ffffff;
+}
+
+.person:target {
+    background-color: #293647;
+    color: #ffffff;
+}
+
+.initial {
+    margin-right: 4rem;
+    width: 5rem;
+    height: 3.5rem;
+    align-content: center;
+    border-radius: 6rem;
+    background-color: orange;
+    color: white;
+    font-size: 2rem;
+}
+
+h4 {
+    text-align: start;
+}
+
+.mail {
+    color: #29abe2;
+    text-align: start;
+}
+
+.details {
+    width: 100%;
+    background-color: #f6f7f8;
+}
+
+.contact-headline {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 100px;
+    margin-left: 120px;
 }
 
 h2 {
@@ -41,53 +98,20 @@ h2 {
     font-size: 24px;
 }
 
-.person {
-    margin-left: 2rem;
-    margin-right: 2rem;
-    margin-top: 40px;
-    padding: 20px;
+.contactOverlay {
+    position: absolute;
+    margin-top: 80px;
+    margin-left: 100px;
+}
+
+.contactInformations {
     display: flex;
-    justify-content: flex-start;
-    border-radius: 0.5rem;
+    justify-content: center;
     align-items: center;
-}
-
-.person:hover {
-    background-color: #293647;
-}
-
-.initial {
-    margin-right: 4rem;
-    width: 5rem;
-    height: 3.5rem;
-    align-content: center;
-    border-radius: 6rem;
-    background-color: orange;
-    color: white;
-    font-size: 2rem;
-}
-
-.mail {
-    color: #29abe2;
-    text-align: start;
-}
-
-.details {
-    width: 100%;
-    background-color: #ced0d2;
-}
-
-.contact-headline {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    margin-top: 100px;
-    margin-left: 120px;
 }
 
 .initialOverlay {
-    margin-right: 4rem;
+    margin-right: 2rem;
     width: 6rem;
     height: 6rem;
     align-content: center;
@@ -97,13 +121,12 @@ h2 {
     font-size: 4rem; 
 }
 
-.myNames {
-    display: flex;
-    justify-content: center;
+.nanesDetail {
+    font-size: 2.5rem;
 }
-
 .contactIcons{
     display: flex;
+    align-items: start;
     margin-left: 2rem;
     margin-right: 2rem;
 }
@@ -111,5 +134,20 @@ h2 {
 .editIcon {
     height: 1rem;
     padding-left: 1.5rem;
-    
+}
+
+.editText {
+    color: #404447;
+}
+
+.infoBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-top: 3rem;
+}
+
+h4 {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
 }
