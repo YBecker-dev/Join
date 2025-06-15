@@ -20,11 +20,11 @@ let myContacts = [
 ];
 
 function init() {
-    renderContacts();
+    renderMyContacts();
     openContactOverlayContactsOverlay();
 }
 
-function renderContacts() {
+function renderMyContacts() {
     let myContactsContentRef = document.getElementById('contactContent');
 
     for (let i = 0; i < myContacts.length; i++) {
