@@ -226,7 +226,8 @@ label {
     color: white !important;
 }
 
-#custom-dropdown-selected {
+#category-dropdown-selected,
+#assigned-to-dropdown-selected {
     width: 440px;
     padding: 10px;
     font-size: 1.25rem;
@@ -236,7 +237,8 @@ label {
     box-sizing: border-box;
 }
 
-.custom-dropdown-options {
+.custom-dropdown-options,
+#assigned-to-options {
     width: 440px;
     padding: 10px;
     font-size: 1.25rem;
@@ -244,29 +246,29 @@ label {
     border: 1px solid #D1D1D1;
     background: #fff;
     box-sizing: border-box;
+    overflow: auto;
+    max-height: 300px;
 }
 
-#custom-dropdown-selected {
+#category-dropdown-selected,
+#assigned-to-dropdown-selected {
     cursor: pointer;
     display: flex;
     justify-content: space-between;
 }
 
-#custom-dropdown-options {
+#custom-dropdown-options,
+#assigned-to-dropdown-options {
     border-top: none;
 }
 
-#custom-dropdown-options.hidden {
+#category-dropdown-options.hidden,
+#assigned-to-dropdown-options.hidden {
     display: none;
 }
 
-#custom-dropdown-options div {
-    padding: 10px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-#custom-dropdown-options div:hover {
+#category-dropdown-options div:hover,
+#assigned-to-dropdown-options div:hover {
     background: #f0f0f0;
 }
 
@@ -277,9 +279,7 @@ label {
     cursor: pointer;
 }
 
-.create-button {
-
-}
+.create-button {}
 
 .clear-button {
     background-color: white;
@@ -289,5 +289,49 @@ label {
 
 .create-clear-buttons {
     display: flex;
-    justify-content: end
+    justify-content: end;
+    position: relative;
+    top: 135px;
+    gap: 16px;
+}
+
+.user-dropdown {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.user-name-dropdown {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 3px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-name-dropdown span {
+    font-size: 12px;
+}
+
+.assigned-contacts {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-task input[type="text"] {
+    width: 440px;
+    font-size: 1.25rem;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.required {
+    text-align: start;
+    position: relative;
+    top: 100px;
 }
