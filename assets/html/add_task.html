@@ -23,7 +23,11 @@
             <img src="../img/icon/add_task_icon/event.png" alt="" />
           </span>
         </div>
+        <div class="required">
+          <p>* This field is required</p>
+        </div>
       </form>
+
     </div>
     <div class="dividing-strips"></div>
     <div class="task-attribute">
@@ -45,19 +49,39 @@
       </div>
       <form>
         <div class="add-task">
-          <label for="assigned-to">Assigned to</label>
-          <select id="assigned-to" name="assigned-to" required onclick="loadContacts()"></select>
+          <label>Assigned to</label>
+          <div id="assigned-to-dropdown">
+            <div id="assigned-to-dropdown-selected" onclick="assignedToDropdown()">
+              <input type="text" placeholder="Select a contact"/>
+              <img src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png" alt="" />
+            </div>
+            <div id="assigned-to-dropdown-options" class="hidden custom-dropdown-options">
+              <div class="assigned-contacts" id="contacts">
+                <div  class="user-dropdown">
+                  <div class="user-name-dropdown">
+                    <span>BB</span>
+                  </div>
+                  <div>
+                    <p>test</p>
+                  </div>
+                </div>
+                <div>
+                  <input type="checkbox" class="checkbox">
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="add-task">
-          <label for="category">Category *</label>
-          <div id="custom-dropdown-container">
-            <div id="custom-dropdown-selected" onclick="toggleCustomDropdown()">
+          <label>Category *</label>
+          <div id="category-dropdown">
+            <div id="category-dropdown-selected" onclick="toggleCustomDropdown()">
               <p>Select a task category</p>
               <img src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png" alt="" />
             </div>
-            <div id="custom-dropdown-options" class="hidden custom-dropdown-options">
-              <div onclick="selectCustomOption(this)">Technical Task</div>
-              <div onclick="selectCustomOption(this)">User Story</div>
+            <div id="category-dropdown-options" class="hidden custom-dropdown-options">
+              <div onclick="selectCustomOption(this)"><span>Technical Task</p></div>
+              <div onclick="selectCustomOption(this)"><p>User Story</p></div>
             </div>
           </div>
         </div>

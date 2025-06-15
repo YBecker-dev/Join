@@ -22,24 +22,35 @@ function togglePriority(priority) {
   }
 }
 
-//test
-function loadContacts(contact) {
-  if (!Array.isArray(contact)) return;
-  const select = document.getElementById('assigned-to');
-  select.innerHTML = '<option value="">Select contacts to assign</option>';
-  for (let i = 0; i < contact.length; i++) {
-    const option = document.createElement('option');
-    option.value = contact[i].phonenumber;
-    option.textContent = contact[i].name + ' (' + contact[i].phonenumber + ')';
-    select.appendChild(option);
-  }
+function toggleCustomDropdown() {
+  document.getElementById('category-dropdown-options').classList.toggle('hidden');
 }
 
-function toggleCustomDropdown() {
-  document.getElementById('custom-dropdown-options').classList.toggle('hidden');
+function assignedToDropdown() {
+  let contactsRef = document.getElementById('assigned-to-dropdown-options');
+  contactsRef.classList.toggle('hidden');
+  html = '';
+  for (let i = 0; i < contacts.length; i++) {
+    html += `
+      <div class="assigned-contacts" id="contacts">
+        <div  class="user-dropdown">
+          <div class="user-name-dropdown">
+            <span>${contacts[i].initials}</span>
+          </div>
+          <div>
+            <p>${contacts[i].name}</p>
+          </div>
+        </div>
+        <div>
+          <input type="checkbox" class="checkbox" oneclick="">
+        </div>
+      </div>
+    `;
+  }
+  contactsRef.innerHTML = html;
 }
 
 function selectCustomOption(element) {
-  document.getElementById('custom-dropdown-selected').textContent = element.textContent;
-  document.getElementById('custom-dropdown-options').classList.add('hidden');
+  document.getElementById('category-dropdown-selected').textContent = element.textContent;
+  document.getElementById('category-dropdown-options').classList.add('hidden');
 }
