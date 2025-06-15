@@ -1,11 +1,11 @@
 function getNoteTemplateContact(index) {
-    let contact = myContacts[index];
+    let contacts = myContacts[index];
     
     return `<div onclick="openContactOverlay()" class="person">
-                <p class="initial">${getInitials(contact.givenName, contact.surname)}</p>
+                <p class="initial">${getInitials(contacts.givenName, contacts.surname)}</p>
                 <div>
-                    <h4>${contact.givenName} ${contact.surname}</h4>
-                    <p><a class="mail">${contact.mail}</a></p>
+                    <h4>${contacts.givenName} ${contacts.surname}</h4>
+                    <p><a class="mail">${contacts.mail}</a></p>
                 </div>
             </div>`;
 }
@@ -14,9 +14,9 @@ function getNoteTemplateContactOverlay() {
 
     return `    <div class="contactOverlay">
                     <div class="contactInformations">
-                        <p class="initialOverlay">${getInitials(contact.givenName, contact.surname)}</p>
+                        <p class="initialOverlay">${getInitials(contacts.givenName, contacts.surname)}</p>
                         <div>
-                            <p class="nanesDetail">${contact.givenName} ${contact.surname}</p>
+                            <p class="nanesDetail">${contacts.givenName} ${contacts.surname}</p>
                             <div class="contactIcons">
                                 <div onclick="openContactOverlay()">
                                     <img class="editIcon" src="../img/icon/edit.png" alt="pencil">
@@ -32,9 +32,9 @@ function getNoteTemplateContactOverlay() {
                     <div class="infoBlock">
                         <p>Contact Information</p>
                         <h4>Email</h4>
-                        <a class="mail" href="mailto:">${contact.mail}</a>
+                        <a class="mail" href="mailto:">${contacts.mail}</a>
                         <h4>Phone</h4>
-                        <a class="phone" href="tel:">${contact.phone}</a>
+                        <a class="phone" href="tel:">${contacts.phone}</a>
                     </div>
                 </div> `
 }
