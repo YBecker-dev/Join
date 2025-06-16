@@ -289,8 +289,10 @@ input[type="text"] {
 .subtasks-icon {
     position: absolute;
     right: 11px;
-    bottom: 8px;
+    bottom: 12px;
     cursor: pointer;
+    display: flex;
+    gap: 4px;
 }
 
 .create-button,
@@ -397,6 +399,29 @@ input[type="text"] {
 .input-warning {
     color: red;
     font-size: 12px !important;
-    
-    
+}
+
+.required-star {
+    color: #e74c3c;
+}
+
+.subtask-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.subtask-item img {
+    cursor: pointer;
+}
+
+#submit-subtask {
+    filter: brightness(0) saturate(100%) invert(17%) sepia(15%) saturate(1112%) hue-rotate(176deg) brightness(95%) contrast(90%);
+
+}
+
+.subtask-wrapper {
+    border-left: solid 1px #A8A8A8;
 }

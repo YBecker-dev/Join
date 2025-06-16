@@ -6,7 +6,9 @@
     </div>
     <form id="add-task-form" onsubmit="return validateAddTaskForm();" onkeydown="return preventEnterSubmit(event);">
       <div class="create-clear-buttons">
-        <button class="clear-button">Clear <img src="../img/icon/add_task_icon/buttons/clear_all.png" /></button>
+        <button type="button" class="clear-button" onclick="clearFormInputs()">
+          Clear <img src="../img/icon/add_task_icon/buttons/clear_all.png" />
+        </button>
         <button type="submit" class="create-button">
           Create Task <img src="../img/icon/add_task_icon/buttons/create_task.png" />
         </button>
@@ -14,10 +16,11 @@
       <div class="title_description_date">
         <div class="container1">
           <div class="input-group add-task">
-            <span>Title *</span>
+            <span>Title <span class="required-star">*</span></span>
             <input
               type="text"
-              name="add-task-input1" onclick="closeError('add-task-input1','add-task-input1-warning')"
+              name="add-task-input1"
+              onclick="closeError('add-task-input1','add-task-input1-warning')"
               placeholder="Enter a Title"
             />
             <span class="input-icon"></span>
@@ -31,7 +34,7 @@
             </span>
           </div>
           <div class="input-group add-task date">
-            <span>Due Date *</span>
+            <span>Due Date <span class="required-star">*</span></span>
             <input
               type="date"
               name="add-task-input2"
@@ -87,7 +90,7 @@
             </div>
           </div>
           <div class="add-task">
-            <label>Category *</label>
+            <span>Category <span class="required-star">*</span></span>
             <div id="category-dropdown">
               <div
                 id="category-dropdown-selected"
@@ -100,14 +103,10 @@
                   alt=""
                 />
               </div>
-              <div id="category-dropdown-options" class="hidden custom-dropdown-options">
-                <list onclick="selectCustomOption(this)">
-                  <p>Technical Task</p>
-                </list>
-                <list onclick="selectCustomOption(this)">
-                  <p>User Story</p>
-                </list>
-              </div>
+              <ul id="category-dropdown-options" class="hidden custom-dropdown-options">
+                <p onclick="selectCustomOption(this)">Technical Task</p>
+                <p onclick="selectCustomOption(this)">User Story</p>
+              </ul>
             </div>
             <span id="category-dropdown-warning" class="input-warning d-none">This field is required</span>
           </div>
@@ -115,12 +114,14 @@
             <span>Subtasks</span>
             <input
               id="add-task-input4"
-              onkeydown="pushSubtaskInput(event)"
+              oninput="onSubtaskInputChange()"
+              onkeydown="onSubtaskInputKeydown(event)"
               name="add-task-input4"
               type="text"
-              placeholder="Add new subtask">
-            <span class="subtasks-icon">
-              <img onclick="pushSubtaskInput(event)" src="../img/icon/add_task_icon/plus.png" alt="" />
+              placeholder="Add new subtask"
+            />
+            <span class="subtasks-icon" id="subtasks-icon">
+              <img src="../img/icon/add_task_icon/plus.png" alt="Add" onclick="pushSubtaskInput(event)" />
             </span>
           </div>
           <div id="subtasks-container" class="subtasks-container"></div>
@@ -129,3 +130,27 @@
     </form>
   </div>
 </body>
+
+<div>
+  <li class="subtask-item">
+    <input
+      type="text"
+      class="edit-subtask-input"
+      value="${input.value.trim()}"
+      onkeydown="saveSubtaskEdit(event, this)"
+    />
+    <div>
+      <img src="../img/icon/add_task_icon/subtasks/submit.png" onclick="editSubtask(this)" />
+      <img src="../img/icon/add_task_icon/subtasks/delete.png" onclick="deleteSubtask(this)" />
+    </div>
+  </li>
+</div>
+
+
+
+<input type="text" class="edit-subtask-input" value="${input.value.trim()}" onkeydown="saveSubtaskEdit(event, this)">
+
+<div onkeydown="saveSubtaskEdit(event, this)">
+  <p>${input.value.trim()}</p>
+</div>
+

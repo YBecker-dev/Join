@@ -80,7 +80,7 @@ function selectCustomOption(element) {
   let p = categoryDropdown.querySelector('p');
   p.textContent = element.textContent;
   let dropdownOptions = document.getElementById('category-dropdown-options');
-  dropdownOptions.classList.add('hidden');w
+  dropdownOptions.classList.add('hidden');
 }
 
 function addFormValidation(formId) {
@@ -132,11 +132,19 @@ function toggleArrowRotation(arrowId) {
 }
 
 function validateAddTaskForm() {
-  let send = true;
-  checkTitle();
-  checkDate();
-  checkCategory();
-  return send;
+  let valid = true;
+  if (!checkTitle()) valid = false;
+  if (!checkDate()) valid = false;
+  if (!checkCategory()) valid = false;
+
+  if (valid) {
+    loadContent('board.html');
+    console.log('Form submitted successfully');
+    return false;
+  } else {
+    console.log('Form validation failed');
+  }
+  return false;
 }
 
 function checkTitle() {
@@ -145,7 +153,9 @@ function checkTitle() {
   if (!input1.value.trim()) {
     input1.classList.add('input-error');
     input1Warning.classList.remove('d-none');
+    return false;
   }
+  return true;
 }
 
 function checkDate() {
@@ -154,7 +164,9 @@ function checkDate() {
   if (!input2.value.trim()) {
     input2.classList.add('input-error');
     input2Warning.classList.remove('d-none');
+    return false;
   }
+  return true;
 }
 
 function checkCategory() {
@@ -164,7 +176,9 @@ function checkCategory() {
   if (categoryText === 'Select a task category' || categoryText === '') {
     category.classList.add('input-error');
     categoryWarning.classList.remove('d-none');
+    return false;
   }
+  return true;
 }
 
 function closeAssignedToDropdown() {
@@ -186,16 +200,25 @@ function closeError(inputId, warningId) {
 
 function pushSubtaskInput(event) {
   let input = document.getElementById('add-task-input4');
-  let container = document.getElementById('subtasks-container');
+  let li = document.getElementById('subtasks-container');
   if (!event.key || event.key === 'Enter') {
     if (event.key === 'Enter') event.preventDefault();
-    if (input.value.trim()) {
-      let div = document.createElement('div');
-      div.className = 'subtask-item';
-      div.textContent = input.value.trim();
-      container.appendChild(div);
-      input.value = '';
-    }
+    if (input.value.trim())
+      li.innerHTML += `
+        <div>
+          <li class="subtask-item">
+            <div onkeydown="saveSubtaskEdit(event, this)" function="editSubtask(this)">
+              <p>${input.value.trim()}</p>
+            </div>
+            <div>
+              <img src="../img/icon/add_task_icon/subtasks/edit.png" onclick="editSubtask(this)" />
+              <img src="../img/icon/add_task_icon/subtasks/delete.png" onclick="deleteSubtask(this)" />
+            </div>
+          </li>
+        </div>
+      `;
+    input.value = '';
+    showPlusIcon();
   }
 }
 
@@ -203,5 +226,87 @@ function preventEnterSubmit(event) {
   if (event.key === 'Enter') {
     event.preventDefault();
     return false;
+  }
+}
+
+function clearFormInputs() {
+  ResetInputTexts();
+  ResetWarningMessages();
+  ResetCategory();
+  clearSubtaskInput();
+}
+
+function clearSubtaskInput() {
+  let input = document.getElementById('add-task-input4');
+  input.value = '';
+  showPlusIcon(); // Falls du das Plus-Icon wieder anzeigen möchtest
+}
+
+function showPlusIcon() {
+  let iconSpan = document.getElementById('subtasks-icon');
+  iconSpan.innerHTML = `
+    <img src="../img/icon/add_task_icon/plus.png" alt="Add" onclick="pushSubtaskInput(event)">
+  `;
+}
+
+function ResetInputTexts() {
+  let form = document.getElementById('add-task-form');
+  form.reset();
+  let errors = document.getElementsByClassName('input-error');
+  while (errors.length) {
+    errors[0].classList.remove('input-error');
+  }
+}
+
+function ResetWarningMessages() {
+  let warnings = document.getElementsByClassName('input-warning');
+  for (let i = 0; i < warnings.length; i++) {
+    warnings[i].classList.add('d-none');
+  }
+}
+
+function ResetCategory() {
+  let cat = document.getElementById('category-dropdown-selected');
+  if (cat) cat.querySelector('p').textContent = 'Select a task category';
+}
+
+function editSubtask(element) {
+  let listItem = element.closest('.subtask-item');
+  let span = listItem.querySelector('span');
+  if (!span) return;
+  let oldText = span.textContent.trim();
+  span.outerHTML = `
+    <input type="text" class="edit-subtask-input" value="${oldText}" 
+      onkeydown="saveSubtaskEdit(event, this)">
+  `;
+}
+
+function showSaveCancelIcons() {
+  let iconSpan = document.getElementById('subtasks-icon');
+  iconSpan.innerHTML = `
+    <img src="../img/icon/add_task_icon/subtasks/clear.png" onclick="clearSubtaskInput()">
+    <div class="subtask-wrapper"></div>
+    <img id="submit-subtask" src="../img/icon/add_task_icon/subtasks/check.png" onclick="pushSubtaskInput(event)">
+  `;
+}
+
+function deleteSubtask(element) {
+  let subtaskItem = element.closest('.subtask-item');
+  subtaskItem.remove();
+}
+
+function onSubtaskInputChange() {
+  let input = document.getElementById('add-task-input4');
+  if (input.value.trim()) {
+    showSaveCancelIcons();
+  } else {
+    showPlusIcon();
+  }
+}
+
+function onSubtaskInputKeydown(event) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    pushSubtaskInput(event);
   }
 }
