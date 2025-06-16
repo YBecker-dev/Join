@@ -1,100 +1,87 @@
 <body>
   <div class="contentspace-html">
     <h1>Add Task</h1>
-
-    <div class="title_description_date">
-      <form>
-        <div class="input-group add-task">
-          <span>Title *</span>
-          <input type="text" placeholder="Enter a Title" required />
-          <span class="input-icon"></span>
-        </div>
-        <div class="input-group add-task">
-          <span>Description *</span>
-          <textarea placeholder="Enter a Description" required></textarea>
-          <span class="input-icon">
-            <img src="../img/icon/add_task_icon/textarea.png" alt="" />
-          </span>
-        </div>
-        <div class="input-group add-task date">
-          <span>Due Date *</span>
-          <input type="date" required />
-          <span class="date-icon">
-            <img src="../img/icon/add_task_icon/event.png" alt="" />
-          </span>
-        </div>
-        <div class="required">
-          <p>* This field is required</p>
-        </div>
-      </form>
-
+    <div class="required">
+      <p>* This field is required</p>
     </div>
-    <div class="dividing-strips"></div>
-    <div class="task-attribute">
-      <div class="priority">
-        <div>
-          <span>Priority</span>
+    <form id="add-task-form">
+              <div class="create-clear-buttons">
+          <button class="clear-button">Clear <img src="../img/icon/add_task_icon/buttons/clear_all.png"></button>
+          <button class="create-button">Create Task <img src="../img/icon/add_task_icon/buttons/create_task.png"></button>
         </div>
-        <div class="priority-buttons">
-          <button class="add-task-button" id="urgent" onclick="togglePriority('urgent')">
-            Urgent <img src="../img/icon/add_task_icon/buttons/urgent.png" alt="" />
-          </button>
-          <button class="add-task-button" id="medium" onclick="togglePriority('medium')">
-            Medium <img src="../img/icon/add_task_icon/buttons/medium.png" alt="" />
-          </button>
-          <button class="add-task-button" id="low" onclick="togglePriority('low')">
-            Low <img src="../img/icon/add_task_icon/buttons/low.png" alt="" />
-          </button>
+      <div class="title_description_date">
+        <div class="container1">
+          <div class="input-group add-task">
+            <span>Title *</span>
+            <input type="text" name="add-task-input1" placeholder="Enter a Title" required />
+            <span class="input-icon"></span>
+          </div>
+          <div class="input-group add-task">
+            <span>Description *</span>
+            <textarea name="add-task-textarea" placeholder="Enter a Description" required></textarea>
+            <span class="input-icon">
+              <img src="../img/icon/add_task_icon/textarea.png" alt="" />
+            </span>
+          </div>
+          <div class="input-group add-task date">
+            <span>Due Date *</span>
+            <input type="date" name="add-task-input2" required />
+            <span class="date-icon">
+              <img src="../img/icon/add_task_icon/event.png" alt="" />
+            </span>
+          </div>
         </div>
       </div>
-      <form>
-        <div class="add-task">
-          <label>Assigned to</label>
-          <div id="assigned-to-dropdown">
-            <div id="assigned-to-dropdown-selected" onclick="assignedToDropdown()">
-              <input type="text" placeholder="Select a contact"/>
-              <img src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png" alt="" />
-            </div>
-            <div id="assigned-to-dropdown-options" class="hidden custom-dropdown-options">
-              <div class="assigned-contacts" id="contacts">
-                <div  class="user-dropdown">
-                  <div class="user-name-dropdown">
-                    <span>BB</span>
-                  </div>
-                  <div>
-                    <p>test</p>
-                  </div>
-                </div>
-                <div>
-                  <input type="checkbox" class="checkbox">
-                </div>
+      <div class="dividing-strips"></div>
+      <div class="task-attribute">
+        <div class="priority">
+          <div>
+            <span>Priority</span>
+          </div>
+          <div class="priority-buttons">
+            <button type="button" class="add-task-button" id="urgent" onclick="togglePriority('urgent')">
+              Urgent <img src="../img/icon/add_task_icon/buttons/urgent.png" alt="" />
+            </button>
+            <button type="button" class="add-task-button" id="medium" onclick="togglePriority('medium')">
+              Medium <img src="../img/icon/add_task_icon/buttons/medium.png" alt="" />
+            </button>
+            <button type="button" class="add-task-button" id="low" onclick="togglePriority('low')">
+              Low <img src="../img/icon/add_task_icon/buttons/low.png" alt="" />
+            </button>
+          </div>
+        </div>
+        <div class="container2">
+          <div class="add-task">
+            <label>Assigned to</label>
+            <div id="assigned-to-dropdown">
+              <div id="assigned-to-dropdown-selected" onclick="assignedToDropdown()">
+                <input name="add-task-input3" type="text" placeholder="Select a contact"/>
+                <img src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png" alt="" />
+              </div>
+              <div id="assigned-to-dropdown-options" class="hidden custom-dropdown-options">
               </div>
             </div>
           </div>
-        </div>
-        <div class="add-task">
-          <label>Category *</label>
-          <div id="category-dropdown">
-            <div id="category-dropdown-selected" onclick="toggleCustomDropdown()">
-              <p>Select a task category</p>
-              <img src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png" alt="" />
-            </div>
-            <div id="category-dropdown-options" class="hidden custom-dropdown-options">
-              <div onclick="selectCustomOption(this)"><span>Technical Task</p></div>
-              <div onclick="selectCustomOption(this)"><p>User Story</p></div>
+          <div class="add-task">
+            <label>Category *</label>
+            <div id="category-dropdown">
+              <div id="category-dropdown-selected" onclick="toggleCustomDropdown()">
+                <p>Select a task category</p>
+                <img src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png" alt="" />
+              </div>
+              <div id="category-dropdown-options" class="hidden custom-dropdown-options">
+                <div onclick="selectCustomOption(this)"><span>Technical Task</p></div>
+                <div onclick="selectCustomOption(this)"><p>User Story</p></div>
+              </div>
             </div>
           </div>
+          <div class="input-group add-task">
+            <span>Subtasks</span>
+            <input name="add-task-input4" type="text" placeholder="Add new subtask" required />
+            <span class="subtasks-icon"> <img src="../img/icon/add_task_icon/plus.png" alt="" /></span>
+          </div>
         </div>
-        <div class="input-group add-task">
-          <span>Subtasks</span>
-          <input type="text" placeholder="Add new subtask" required />
-          <span class="subtasks-icon"> <img src="../img/icon/add_task_icon/plus.png" alt="" /></span>
-        </div>
-      </form>
-      <div class="create-clear-buttons">
-        <button class="clear-button">Clear</button>
-        <button class="create-button">Create Task</button>
       </div>
-    </div>
+    </form>
   </div>
 </body>

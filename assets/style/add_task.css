@@ -49,6 +49,7 @@
     left: 6rem;
     font-size: 60px;
     padding: 0;
+    font-weight: 700;
 }
 
 .title_description_date {
@@ -58,7 +59,7 @@
     top: 231px;
 }
 
-.title_description_date form {
+.title_description_date .container1 {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -71,7 +72,7 @@
 
 .title_description_date .input-group input {
     width: 440px;
-    padding: 11px;
+    padding: 12px 21px;
     font-size: 1.25rem;
 }
 
@@ -93,7 +94,7 @@ textarea {
     border-radius: 8px;
     border: 1px solid #D1D1D1;
     resize: none;
-    padding: 16px;
+    padding: 18px 16px;
 }
 
 .add-task .input-icon {
@@ -122,7 +123,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .title_description_date .date {
-    padding: 0 0 14px 0;
+    padding: 0px 0 12px 0;
 }
 
 .task-attribute {
@@ -132,7 +133,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     text-align: start;
 }
 
-.task-attribute form {
+.task-attribute .container2 {
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -145,7 +146,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .task-attribute .input-group input {
     width: 440px;
-    padding: 11px;
+    padding: 12px 16px;
     font-size: 1.25rem;
 }
 
@@ -193,6 +194,10 @@ label {
     margin-bottom: 24px;
 }
 
+.priority-buttons button {
+    margin: 0;
+}
+
 .priority {
     display: flex;
     flex-direction: column;
@@ -226,21 +231,32 @@ label {
     color: white !important;
 }
 
+input[type="text"] {
+    padding: 12px 0px 12px 16px;
+}
+
 #category-dropdown-selected,
 #assigned-to-dropdown-selected {
     width: 440px;
-    padding: 10px;
     font-size: 1.25rem;
     border-radius: 8px;
     border: 1px solid #D1D1D1;
     background: #fff;
     box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    height: 48px;
+}
+
+#category-dropdown-selected {
+    padding: 12px 16px;
 }
 
 .custom-dropdown-options,
 #assigned-to-options {
     width: 440px;
-    padding: 10px;
+    padding: 12px 16px;
     font-size: 1.25rem;
     border-radius: 8px;
     border: 1px solid #D1D1D1;
@@ -248,13 +264,6 @@ label {
     box-sizing: border-box;
     overflow: auto;
     max-height: 300px;
-}
-
-#category-dropdown-selected,
-#assigned-to-dropdown-selected {
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
 }
 
 #custom-dropdown-options,
@@ -272,6 +281,11 @@ label {
     background: #f0f0f0;
 }
 
+#assigned-to-dropdown-selected img {
+    object-fit: scale-down;
+    padding: 12px 16px 12px 0;
+}
+
 .subtasks-icon {
     position: absolute;
     right: 11px;
@@ -279,20 +293,30 @@ label {
     cursor: pointer;
 }
 
-.create-button {}
+.create-button,
+.clear-button {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+}
 
 .clear-button {
     background-color: white;
     color: rgb(41, 54, 71);
+    font-weight: normal;
     border: 1px solid rgb(41, 54, 71);
 }
+
 
 .create-clear-buttons {
     display: flex;
     justify-content: end;
-    position: relative;
-    top: 135px;
+    position: absolute;
     gap: 16px;
+    left: 763px;
+    top: 793px;
 }
 
 .user-dropdown {
@@ -325,13 +349,23 @@ label {
     width: 440px;
     font-size: 1.25rem;
     border-radius: 8px;
-    border: none;
     outline: none;
     cursor: pointer;
+    height: 48px;
+}
+
+.add-task input[name="add-task-input3"] {
+    border: none;
+    height: unset;
+}
+
+.title_description_date .input-group input[type="date"] {
+    padding: 12px 16px;
+    height: 48px;
 }
 
 .required {
-    text-align: start;
-    position: relative;
-    top: 100px;
+    position: absolute;
+    top: 830px;
+    left: 6rem;
 }

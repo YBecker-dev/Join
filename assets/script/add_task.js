@@ -1,5 +1,4 @@
 function initAddTask() {
-  loadContacts(contact);
 }
 
 function togglePriority(priority) {
@@ -53,4 +52,23 @@ function assignedToDropdown() {
 function selectCustomOption(element) {
   document.getElementById('category-dropdown-selected').textContent = element.textContent;
   document.getElementById('category-dropdown-options').classList.add('hidden');
+}
+
+
+function addFormValidation(formId) {
+  let form = document.getElementById(formId);
+  if (!form) return;
+  form.addEventListener('submit', function(event) {
+    let inputs = this.querySelectorAll('input, textarea');
+    let allFilled = true;
+    inputs.forEach(function(input) {
+      if (!input.value.trim()) {
+        allFilled = false;
+      }
+    });
+    if (!allFilled) {
+      event.preventDefault();
+      alert('Bitte alle Felder ausfüllen!');
+    }
+  });
 }

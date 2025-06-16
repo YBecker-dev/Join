@@ -6,6 +6,7 @@ function loadContent(page) {
 
       if (page === 'add_task.html') {
         initAddTask();
+        addFormValidation('add-task-form')
       } else if (page === 'contacts.html') {
       } else if (page === 'board.html') {
       } else if (page === 'summary_user.html') {
