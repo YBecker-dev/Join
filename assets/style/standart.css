@@ -39,6 +39,16 @@ a:hover {
     font-weight: bold;
 }
 
-.d-none {
+.d-none,
+.hidden {
     display: none;
+}
+
+.input-error {
+    border: 2px solid #e74c3c !important;
+}
+
+.checkbox.input-error {
+    outline: 2px solid #e74c3c;
+    border-color: #e74c3c !important;
 }

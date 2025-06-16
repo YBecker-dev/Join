@@ -87,10 +87,6 @@
     }
 }
 
-.input-error {
-    border: 2px solid #e74c3c !important;
-}
-
 .checkbox.input-error {
     outline: 2px solid #e74c3c;
     border-color: #e74c3c !important;
@@ -103,11 +99,12 @@
     top: 56px;
 }
 
-.eye-icon{
+.eye-icon {
     width: 16px;
     height: 22px;
 
 }
-.eye-icon:hover{
+
+.eye-icon:hover {
     cursor: pointer;
 }

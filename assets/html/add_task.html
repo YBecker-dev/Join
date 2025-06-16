@@ -1,34 +1,46 @@
-<body>
+<body onclick="">
   <div class="contentspace-html">
     <h1>Add Task</h1>
     <div class="required">
       <p>* This field is required</p>
     </div>
-    <form id="add-task-form">
-              <div class="create-clear-buttons">
-          <button class="clear-button">Clear <img src="../img/icon/add_task_icon/buttons/clear_all.png"></button>
-          <button class="create-button">Create Task <img src="../img/icon/add_task_icon/buttons/create_task.png"></button>
-        </div>
+    <form id="add-task-form" onsubmit="return validateAddTaskForm();" onkeydown="return preventEnterSubmit(event);">
+      <div class="create-clear-buttons">
+        <button class="clear-button">Clear <img src="../img/icon/add_task_icon/buttons/clear_all.png" /></button>
+        <button type="submit" class="create-button">
+          Create Task <img src="../img/icon/add_task_icon/buttons/create_task.png" />
+        </button>
+      </div>
       <div class="title_description_date">
         <div class="container1">
           <div class="input-group add-task">
             <span>Title *</span>
-            <input type="text" name="add-task-input1" placeholder="Enter a Title" required />
+            <input
+              type="text"
+              name="add-task-input1" onclick="closeError('add-task-input1','add-task-input1-warning')"
+              placeholder="Enter a Title"
+            />
             <span class="input-icon"></span>
+            <span id="add-task-input1-warning" class="input-warning d-none">This field is required</span>
           </div>
           <div class="input-group add-task">
-            <span>Description *</span>
-            <textarea name="add-task-textarea" placeholder="Enter a Description" required></textarea>
+            <span>Description</span>
+            <textarea name="add-task-textarea" placeholder="Enter a Description"></textarea>
             <span class="input-icon">
               <img src="../img/icon/add_task_icon/textarea.png" alt="" />
             </span>
           </div>
           <div class="input-group add-task date">
             <span>Due Date *</span>
-            <input type="date" name="add-task-input2" required />
+            <input
+              type="date"
+              name="add-task-input2"
+              onclick="closeError('add-task-input2','add-task-input2-warning')"
+            />
             <span class="date-icon">
               <img src="../img/icon/add_task_icon/event.png" alt="" />
             </span>
+            <span id="add-task-input2-warning" class="input-warning d-none">This field is required</span>
           </div>
         </div>
       </div>
@@ -53,33 +65,65 @@
         <div class="container2">
           <div class="add-task">
             <label>Assigned to</label>
-            <div id="assigned-to-dropdown">
-              <div id="assigned-to-dropdown-selected" onclick="assignedToDropdown()">
-                <input name="add-task-input3" type="text" placeholder="Select a contact"/>
-                <img src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png" alt="" />
+            <div id="assigned-to-dropdown" onclick="eventBubbling(event)">
+              <div id="assigned-to-dropdown-selected" onclick="assignedToDropdown();">
+                <input
+                  name="add-task-input3"
+                  type="text"
+                  placeholder="Select a contact"
+                  oninput="assignedToDropdown(this.value)"
+                  onclick="assignedToDropdown(this.value)"
+                />
+                <div class="assigned-arrow">
+                  <img
+                    id="assigned-to-arrow"
+                    src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png"
+                    alt=""
+                  />
+                </div>
               </div>
-              <div id="assigned-to-dropdown-options" class="hidden custom-dropdown-options">
-              </div>
+              <div id="assigned-to-dropdown-options" class="hidden custom-dropdown-options"></div>
+              <div class="show-contacts-add-task d-none" id="show-contacts-add-task"></div>
             </div>
           </div>
           <div class="add-task">
             <label>Category *</label>
             <div id="category-dropdown">
-              <div id="category-dropdown-selected" onclick="toggleCustomDropdown()">
+              <div
+                id="category-dropdown-selected"
+                onclick="toggleCustomDropdown(); closeError('category-dropdown-selected','category-dropdown-warning')"
+              >
                 <p>Select a task category</p>
-                <img src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png" alt="" />
+                <img
+                  id="category-selected-arrow"
+                  src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png"
+                  alt=""
+                />
               </div>
               <div id="category-dropdown-options" class="hidden custom-dropdown-options">
-                <div onclick="selectCustomOption(this)"><span>Technical Task</p></div>
-                <div onclick="selectCustomOption(this)"><p>User Story</p></div>
+                <list onclick="selectCustomOption(this)">
+                  <p>Technical Task</p>
+                </list>
+                <list onclick="selectCustomOption(this)">
+                  <p>User Story</p>
+                </list>
               </div>
             </div>
+            <span id="category-dropdown-warning" class="input-warning d-none">This field is required</span>
           </div>
           <div class="input-group add-task">
             <span>Subtasks</span>
-            <input name="add-task-input4" type="text" placeholder="Add new subtask" required />
-            <span class="subtasks-icon"> <img src="../img/icon/add_task_icon/plus.png" alt="" /></span>
+            <input
+              id="add-task-input4"
+              onkeydown="pushSubtaskInput(event)"
+              name="add-task-input4"
+              type="text"
+              placeholder="Add new subtask">
+            <span class="subtasks-icon">
+              <img onclick="pushSubtaskInput(event)" src="../img/icon/add_task_icon/plus.png" alt="" />
+            </span>
           </div>
+          <div id="subtasks-container" class="subtasks-container"></div>
         </div>
       </div>
     </form>

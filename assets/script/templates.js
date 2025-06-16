@@ -1,7 +1,7 @@
 function getNoteTemplateContact(index) {
-    let contacts = myContacts[index];
-    
-    return `<div onclick="openContactOverlay()" class="person">
+  let contacts = myContacts[index];
+
+  return `<div onclick="openContactOverlay()" class="person">
                 <p class="initial">${getInitials(contacts.givenName, contacts.surname)}</p>
                 <div>
                     <h4>${contacts.givenName} ${contacts.surname}</h4>
@@ -11,8 +11,7 @@ function getNoteTemplateContact(index) {
 }
 
 function getNoteTemplateContactOverlay() {
-
-    return `    <div class="contactOverlay">
+  return `    <div class="contactOverlay">
                     <div class="contactInformations">
                         <p class="initialOverlay">${getInitials(contacts.givenName, contacts.surname)}</p>
                         <div>
@@ -36,5 +35,7 @@ function getNoteTemplateContactOverlay() {
                         <h4>Phone</h4>
                         <a class="phone" href="tel:">${contacts.phone}</a>
                     </div>
-                </div> `
+                </div> `;
 }
+
+//test
