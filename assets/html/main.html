@@ -8,11 +8,21 @@
     <link rel="stylesheet" href="../style/standart.css" />
     <link rel="stylesheet" href="../../style.css" />
     <link rel="stylesheet" href="../style/buttons.css" />
-    <link rel="stylesheet" href="../style/contact.css" />
-    <link rel="stylesheet" href="../style/summary_user.css" />
+    <link rel="stylesheet" href="../style/contact.css">
+    <link rel="stylesheet" href="../style/summary_user.css">
+    <link rel="stylesheet" href="../style/board.css"><!--find Overlay here-->
     <title>Leaderbord</title>
   </head>
   <body onload="loadContent('add_task.html');">
+
+
+    <div class="overlay d-none" id="overlay" onclick="toggleOverlay()">
+      <div class="overlay-content-flex">
+        <div class="overlay-content-render" id="overlay-content-loader"></div>
+      </div>
+    </div>
+    
+    
     <header>
       <div class="header-content">
         <p>Kanban Project Management Tool</p>
@@ -53,5 +63,6 @@
     <script src="../script/main.js"></script>
     <script src="../script/add_task.js"></script>
     <script src="../script/contacts.js"></script>
+    <script src="../script/board.js"></script>
   </body>
 </html>
