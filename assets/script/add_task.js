@@ -12,6 +12,32 @@ let contacts = [
 
 function initAddTask() {
   setPriority('medium');
+  addFormValidation('add-task-form');
+  document.addEventListener('click', closeDropdown);
+}
+
+function closeDropdown() {
+  let contactsRef = document.getElementById('assigned-to-dropdown-options');
+  let assignedArrow = document.getElementById('assigned-to-arrow');
+  let categoryRef = document.getElementById('category-dropdown-options');
+  let categoryArrow = document.getElementById('category-selected-arrow');
+  contactsRef.classList.add('hidden');
+  categoryRef.classList.add('hidden');
+  assignedArrow.style.transform = 'rotate(0deg)';
+  categoryArrow.style.transform = 'rotate(0deg)';
+  clearAssignedTo();
+}
+
+function toggleDropdown(dropdownId, arrowId) {
+  let dropdown = document.getElementById(dropdownId);
+  let isOpen = !dropdown.classList.contains('hidden');
+  if (isOpen) {
+    dropdown.classList.add('hidden');
+    toggleArrowRotation(arrowId, false);
+  } else {
+    dropdown.classList.remove('hidden');
+    toggleArrowRotation(arrowId, true);
+  }
 }
 
 function togglePriority(priority) {
@@ -37,26 +63,31 @@ function setPriority(priority) {
   if (priority === 'low') lowButton.classList.add('low');
 }
 
-function toggleCustomDropdown() {
-  document.getElementById('category-dropdown-options').classList.toggle('hidden');
-  toggleArrowRotation('category-selected-arrow');
+function toggleArrowRotation(arrowId, isOpen) {
+  let arrow = document.getElementById(arrowId);
+  if (arrow) {
+    if (isOpen) {
+      arrow.style.transform = 'rotate(180deg)';
+    } else {
+      arrow.style.transform = 'rotate(0deg)';
+    }
+  }
+}
+
+function openDropdown() {
+  let dropdown = document.getElementById('assigned-to-dropdown-options');
+  dropdown.classList.remove('hidden');
 }
 
 function assignedToDropdown(searchTerm = '') {
   let contactsRef = document.getElementById('assigned-to-dropdown-options');
-  if (searchTerm === '') {
-    contactsRef.classList.toggle('hidden');
-    toggleArrowRotation('assigned-to-arrow');
-  } else {
-    contactsRef.classList.remove('hidden');
-  }
   let html = '';
   let lowerSearch = searchTerm.toLowerCase();
   for (let i = 0; i < contacts.length; i++) {
     if (contacts[i].name.toLowerCase().includes(lowerSearch)) {
       const checked = selectedContacts.includes(i) ? 'checked' : '';
       html += `
-        <div class="assigned-contacts" id="contacts">
+        <div class="assigned-contacts" onclick="checkCheckbox(this); toggleContactSelection(${i}, event);">
           <div class="user-dropdown">
             <div class="user-name-dropdown">
               <span>${contacts[i].initials}</span>
@@ -66,7 +97,7 @@ function assignedToDropdown(searchTerm = '') {
             </div>
           </div>
           <div>
-            <input type="checkbox" class="checkbox" ${checked} onclick="toggleContactSelection(${i}, event)">
+            <input type="checkbox" class="checkbox" ${checked} onclick="eventBubbling(event); toggleContactSelection(${i}, event);">
           </div>
         </div>
       `;
@@ -75,7 +106,24 @@ function assignedToDropdown(searchTerm = '') {
   contactsRef.innerHTML = html;
 }
 
+function checkCheckbox(divElement) {
+  let checkbox = divElement.querySelector('input[type="checkbox"]');
+  checkbox.checked = !checkbox.checked;
+  checkbox.dispatchEvent(new Event('change'));
+}
+
+function rotateAssignedToArrowOnInput() {
+  let input = document.querySelector('input[name="add-task-input3"]');
+  let arrow = document.getElementById('assigned-to-arrow');
+  if (input.value.trim()) {
+    arrow.style.transform = 'rotate(180deg)';
+  } else {
+    arrow.style.transform = 'rotate(0deg)';
+  }
+}
+
 function selectCustomOption(element) {
+  toggleDropdown('category-dropdown-options', 'category-selected-arrow');
   let categoryDropdown = document.getElementById('category-dropdown-selected');
   let p = categoryDropdown.querySelector('p');
   p.textContent = element.textContent;
@@ -122,13 +170,7 @@ function toggleContactSelection(index) {
     selectedContacts.splice(pos, 1);
   }
   showContactsAddTask();
-}
-
-function toggleArrowRotation(arrowId) {
-  let arrow = document.getElementById(arrowId);
-  if (arrow) {
-    arrow.style.transform = arrow.style.transform === 'rotate(180deg)' ? 'rotate(0deg)' : 'rotate(180deg)';
-  }
+  clearAssignedTo();
 }
 
 function validateAddTaskForm() {
@@ -138,6 +180,7 @@ function validateAddTaskForm() {
   if (!checkCategory()) valid = false;
 
   if (valid) {
+    clearFormInputs();
     loadContent('board.html');
     console.log('Form submitted successfully');
     return false;
@@ -181,12 +224,6 @@ function checkCategory() {
   return true;
 }
 
-function closeAssignedToDropdown() {
-  let dropdown = document.getElementById('assigned-to-dropdown-options');
-  dropdown.classList.add('hidden');
-  toggleArrowRotation('assigned-to-arrow');
-}
-
 function eventBubbling(event) {
   event.stopPropagation();
 }
@@ -200,25 +237,24 @@ function closeError(inputId, warningId) {
 
 function pushSubtaskInput(event) {
   let input = document.getElementById('add-task-input4');
-  let li = document.getElementById('subtasks-container');
+  let container = document.getElementById('subtasks-container');
   if (!event.key || event.key === 'Enter') {
     if (event.key === 'Enter') event.preventDefault();
-    if (input.value.trim())
-      li.innerHTML += `
-        <div>
-          <li class="subtask-item">
-            <div onkeydown="saveSubtaskEdit(event, this)" function="editSubtask(this)">
-              <p>${input.value.trim()}</p>
-            </div>
-            <div>
-              <img src="../img/icon/add_task_icon/subtasks/edit.png" onclick="editSubtask(this)" />
-              <img src="../img/icon/add_task_icon/subtasks/delete.png" onclick="deleteSubtask(this)" />
-            </div>
-          </li>
+    if (input.value.trim()) {
+      let subtaskDiv = document.createElement('div');
+      subtaskDiv.className = 'subtask-item';
+      subtaskDiv.innerHTML = `
+        <span><li>${input.value.trim()}</li></span>
+        <div class="subtask-actions">
+          <img src="../img/icon/add_task_icon/subtasks/edit.png" onclick="editSubtask(this)" />
+          <div class="subtask-wrapper"></div>
+          <img src="../img/icon/add_task_icon/subtasks/delete.png" onclick="deleteSubtask(this)" />
         </div>
       `;
-    input.value = '';
-    showPlusIcon();
+      container.appendChild(subtaskDiv);
+      input.value = '';
+      showPlusIcon();
+    }
   }
 }
 
@@ -230,16 +266,34 @@ function preventEnterSubmit(event) {
 }
 
 function clearFormInputs() {
-  ResetInputTexts();
-  ResetWarningMessages();
-  ResetCategory();
-  clearSubtaskInput();
+  clearInputTexts();
+  clearWarningMessages();
+  clearCategory();
+  showPlusIcon();
+  clearSubtaskElements();
+  clearCheckedContacts();
 }
 
-function clearSubtaskInput() {
-  let input = document.getElementById('add-task-input4');
-  input.value = '';
-  showPlusIcon(); // Falls du das Plus-Icon wieder anzeigen möchtest
+function clearCheckedContacts() {
+  let selected = [...selectedContacts];
+  for (let i = 0; i < selected.length; i++) {
+    toggleContactSelection(selected[i]);
+  }
+}
+
+function clearAssignedTo() {
+  let assignedToInput = document.querySelector('input[name="add-task-input3"]');
+  assignedToInput.value = '';
+}
+
+function clearSubtaskElements() {
+  let container = document.getElementById('subtasks-container');
+  container.innerHTML = '';
+}
+
+function deleteSubtask(element) {
+  let subtaskItem = element.closest('.subtask-item');
+  subtaskItem.remove();
 }
 
 function showPlusIcon() {
@@ -249,7 +303,7 @@ function showPlusIcon() {
   `;
 }
 
-function ResetInputTexts() {
+function clearInputTexts() {
   let form = document.getElementById('add-task-form');
   form.reset();
   let errors = document.getElementsByClassName('input-error');
@@ -258,14 +312,14 @@ function ResetInputTexts() {
   }
 }
 
-function ResetWarningMessages() {
+function clearWarningMessages() {
   let warnings = document.getElementsByClassName('input-warning');
   for (let i = 0; i < warnings.length; i++) {
     warnings[i].classList.add('d-none');
   }
 }
 
-function ResetCategory() {
+function clearCategory() {
   let cat = document.getElementById('category-dropdown-selected');
   if (cat) cat.querySelector('p').textContent = 'Select a task category';
 }
@@ -275,24 +329,14 @@ function editSubtask(element) {
   let span = listItem.querySelector('span');
   if (!span) return;
   let oldText = span.textContent.trim();
-  span.outerHTML = `
+  span.outerHTML = editSubtaskInputHTML(oldText);;
+}
+
+function editSubtaskInputHTML(oldText) {
+  return `
     <input type="text" class="edit-subtask-input" value="${oldText}" 
       onkeydown="saveSubtaskEdit(event, this)">
   `;
-}
-
-function showSaveCancelIcons() {
-  let iconSpan = document.getElementById('subtasks-icon');
-  iconSpan.innerHTML = `
-    <img src="../img/icon/add_task_icon/subtasks/clear.png" onclick="clearSubtaskInput()">
-    <div class="subtask-wrapper"></div>
-    <img id="submit-subtask" src="../img/icon/add_task_icon/subtasks/check.png" onclick="pushSubtaskInput(event)">
-  `;
-}
-
-function deleteSubtask(element) {
-  let subtaskItem = element.closest('.subtask-item');
-  subtaskItem.remove();
 }
 
 function onSubtaskInputChange() {
@@ -302,6 +346,15 @@ function onSubtaskInputChange() {
   } else {
     showPlusIcon();
   }
+}
+
+function showSaveCancelIcons() {
+  let iconSpan = document.getElementById('subtasks-icon');
+  iconSpan.innerHTML = `
+    <img src="../img/icon/add_task_icon/subtasks/clear.png" onclick="clearSubtaskInput()">
+    <div class="subtask-wrapper"></div>
+    <img id="submit-subtask" src="../img/icon/add_task_icon/subtasks/check.png" onclick="pushSubtaskInput(event)">
+  `;
 }
 
 function onSubtaskInputKeydown(event) {
