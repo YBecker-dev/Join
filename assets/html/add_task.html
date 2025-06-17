@@ -35,14 +35,16 @@
           </div>
           <div class="input-group add-task date">
             <span>Due Date <span class="required-star">*</span></span>
-            <input
-              type="date"
-              name="add-task-input2"
-              onclick="closeError('add-task-input2','add-task-input2-warning')"
-            />
-            <span class="date-icon">
-              <img src="../img/icon/add_task_icon/event.png" alt="" />
-            </span>
+            <div class="date-input-container">
+              <input
+                type="date"
+                name="add-task-input2"
+                onclick="closeError('add-task-input2','add-task-input2-warning')"
+              />
+              <span class="date-icon">
+                <img src="../img/icon/add_task_icon/event.png" alt="" />
+              </span>
+            </div>
             <span id="add-task-input2-warning" class="input-warning d-none">This field is required</span>
           </div>
         </div>
@@ -67,15 +69,16 @@
         </div>
         <div class="container2">
           <div class="add-task">
-            <label>Assigned to</label>
+            <span>Assigned to</span>
             <div id="assigned-to-dropdown">
               <div id="assigned-to-dropdown-selected" onclick="assignedToDropdown(this.value); eventBubbling(event)">
                 <input
+                  id="add-task-input3"
                   name="add-task-input3"
                   type="text"
                   placeholder="Select a contact"
                   oninput="assignedToDropdown(this.value)"
-                  onclick="openDropdown()"
+                  onclick="openDropdown();"
                 />
                 <div
                   class="assigned-arrow"

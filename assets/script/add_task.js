@@ -21,15 +21,16 @@ function closeDropdown() {
   let assignedArrow = document.getElementById('assigned-to-arrow');
   let categoryRef = document.getElementById('category-dropdown-options');
   let categoryArrow = document.getElementById('category-selected-arrow');
-  contactsRef.classList.add('hidden');
-  categoryRef.classList.add('hidden');
-  assignedArrow.style.transform = 'rotate(0deg)';
-  categoryArrow.style.transform = 'rotate(0deg)';
+  if (contactsRef) contactsRef.classList.add('hidden');
+  if (categoryRef) categoryRef.classList.add('hidden');
+  if (assignedArrow) assignedArrow.style.transform = 'rotate(0deg)';
+  if (categoryArrow) categoryArrow.style.transform = 'rotate(0deg)';
   clearAssignedTo();
 }
 
 function toggleDropdown(dropdownId, arrowId) {
   let dropdown = document.getElementById(dropdownId);
+  if (!dropdown) return;
   let isOpen = !dropdown.classList.contains('hidden');
   if (isOpen) {
     dropdown.classList.add('hidden');
@@ -47,7 +48,7 @@ function togglePriority(priority) {
     if (btn) btn.classList.remove('active');
   });
   let selectedBtn = document.getElementById(priority);
-  selectedBtn.classList.add('active');
+  if (selectedBtn) selectedBtn.classList.add('active');
   setPriority(priority);
 }
 
@@ -55,12 +56,12 @@ function setPriority(priority) {
   let urgentButton = document.getElementById('urgent');
   let mediumButton = document.getElementById('medium');
   let lowButton = document.getElementById('low');
-  urgentButton.classList.remove('urgent');
-  mediumButton.classList.remove('medium');
-  lowButton.classList.remove('low');
-  if (priority === 'urgent') urgentButton.classList.add('urgent');
-  if (priority === 'medium') mediumButton.classList.add('medium');
-  if (priority === 'low') lowButton.classList.add('low');
+  if (urgentButton) urgentButton.classList.remove('urgent');
+  if (mediumButton) mediumButton.classList.remove('medium');
+  if (lowButton) lowButton.classList.remove('low');
+  if (priority === 'urgent' && urgentButton) urgentButton.classList.add('urgent');
+  if (priority === 'medium' && mediumButton) mediumButton.classList.add('medium');
+  if (priority === 'low' && lowButton) lowButton.classList.add('low');
 }
 
 function toggleArrowRotation(arrowId, isOpen) {
@@ -76,11 +77,12 @@ function toggleArrowRotation(arrowId, isOpen) {
 
 function openDropdown() {
   let dropdown = document.getElementById('assigned-to-dropdown-options');
-  dropdown.classList.remove('hidden');
+  if (dropdown) dropdown.classList.remove('hidden');
 }
 
 function assignedToDropdown(searchTerm = '') {
   let contactsRef = document.getElementById('assigned-to-dropdown-options');
+  if (!contactsRef) return;
   let html = '';
   let lowerSearch = searchTerm.toLowerCase();
   for (let i = 0; i < contacts.length; i++) {
@@ -108,31 +110,37 @@ function assignedToDropdown(searchTerm = '') {
 
 function checkCheckbox(divElement) {
   let checkbox = divElement.querySelector('input[type="checkbox"]');
-  checkbox.checked = !checkbox.checked;
-  checkbox.dispatchEvent(new Event('change'));
+  if (checkbox) {
+    checkbox.checked = !checkbox.checked;
+    checkbox.dispatchEvent(new Event('change'));
+  }
 }
 
 function rotateAssignedToArrowOnInput() {
   let input = document.querySelector('input[name="add-task-input3"]');
   let arrow = document.getElementById('assigned-to-arrow');
-  if (input.value.trim()) {
-    arrow.style.transform = 'rotate(180deg)';
-  } else {
-    arrow.style.transform = 'rotate(0deg)';
+  if (arrow) {
+    if (input && input.value.trim()) {
+      arrow.style.transform = 'rotate(180deg)';
+    } else {
+      arrow.style.transform = 'rotate(0deg)';
+    }
   }
 }
 
 function selectCustomOption(element) {
   toggleDropdown('category-dropdown-options', 'category-selected-arrow');
   let categoryDropdown = document.getElementById('category-dropdown-selected');
+  if (!categoryDropdown) return;
   let p = categoryDropdown.querySelector('p');
-  p.textContent = element.textContent;
+  if (p) p.textContent = element.textContent;
   let dropdownOptions = document.getElementById('category-dropdown-options');
-  dropdownOptions.classList.add('hidden');
+  if (dropdownOptions) dropdownOptions.classList.add('hidden');
 }
 
 function addFormValidation(formId) {
   let form = document.getElementById(formId);
+  if (!form) return;
   form.addEventListener('submit', function (event) {
     let inputs = this.querySelectorAll('input:not([name="add-task-input3"]):not([type="checkbox"]), textarea');
     let allFilled = true;
@@ -149,6 +157,7 @@ function addFormValidation(formId) {
 
 function showContactsAddTask() {
   const container = document.getElementById('show-contacts-add-task');
+  if (!container) return;
   container.classList.remove('d-none');
   let html = '';
   for (let i = 0; i < selectedContacts.length; i++) {
@@ -182,10 +191,7 @@ function validateAddTaskForm() {
   if (valid) {
     clearFormInputs();
     loadContent('board.html');
-    console.log('Form submitted successfully');
     return false;
-  } else {
-    console.log('Form validation failed');
   }
   return false;
 }
@@ -193,9 +199,9 @@ function validateAddTaskForm() {
 function checkTitle() {
   let input1 = document.querySelector('input[name="add-task-input1"]');
   let input1Warning = document.getElementById('add-task-input1-warning');
-  if (!input1.value.trim()) {
-    input1.classList.add('input-error');
-    input1Warning.classList.remove('d-none');
+  if (!input1 || !input1.value.trim()) {
+    if (input1) input1.classList.add('input-error');
+    if (input1Warning) input1Warning.classList.remove('d-none');
     return false;
   }
   return true;
@@ -204,9 +210,9 @@ function checkTitle() {
 function checkDate() {
   let input2 = document.querySelector('input[name="add-task-input2"]');
   let input2Warning = document.getElementById('add-task-input2-warning');
-  if (!input2.value.trim()) {
-    input2.classList.add('input-error');
-    input2Warning.classList.remove('d-none');
+  if (!input2 || !input2.value.trim()) {
+    if (input2) input2.classList.add('input-error');
+    if (input2Warning) input2Warning.classList.remove('d-none');
     return false;
   }
   return true;
@@ -215,10 +221,12 @@ function checkDate() {
 function checkCategory() {
   let category = document.getElementById('category-dropdown-selected');
   let categoryWarning = document.getElementById('category-dropdown-warning');
-  let categoryText = category.querySelector('p').textContent.trim();
+  if (!category) return false;
+  let p = category.querySelector('p');
+  let categoryText = p ? p.textContent.trim() : '';
   if (categoryText === 'Select a task category' || categoryText === '') {
     category.classList.add('input-error');
-    categoryWarning.classList.remove('d-none');
+    if (categoryWarning) categoryWarning.classList.remove('d-none');
     return false;
   }
   return true;
@@ -238,6 +246,7 @@ function closeError(inputId, warningId) {
 function pushSubtaskInput(event) {
   let input = document.getElementById('add-task-input4');
   let container = document.getElementById('subtasks-container');
+  if (!input || !container) return;
   if (!event.key || event.key === 'Enter') {
     if (event.key === 'Enter') event.preventDefault();
     if (input.value.trim()) {
@@ -282,30 +291,32 @@ function clearCheckedContacts() {
 }
 
 function clearAssignedTo() {
-  let assignedToInput = document.querySelector('input[name="add-task-input3"]');
-  assignedToInput.value = '';
+  let input = document.getElementById('add-task-input3');
+  if (input) input.value = '';
 }
 
 function clearSubtaskElements() {
   let container = document.getElementById('subtasks-container');
-  container.innerHTML = '';
+  if (container) container.innerHTML = '';
 }
 
 function deleteSubtask(element) {
   let subtaskItem = element.closest('.subtask-item');
-  subtaskItem.remove();
+  if (subtaskItem) subtaskItem.remove();
 }
 
 function showPlusIcon() {
   let iconSpan = document.getElementById('subtasks-icon');
-  iconSpan.innerHTML = `
-    <img src="../img/icon/add_task_icon/plus.png" alt="Add" onclick="pushSubtaskInput(event)">
-  `;
+  if (iconSpan) {
+    iconSpan.innerHTML = `
+      <img src="../img/icon/add_task_icon/plus.png" alt="Add" onclick="pushSubtaskInput(event)">
+    `;
+  }
 }
 
 function clearInputTexts() {
   let form = document.getElementById('add-task-form');
-  form.reset();
+  if (form) form.reset();
   let errors = document.getElementsByClassName('input-error');
   while (errors.length) {
     errors[0].classList.remove('input-error');
@@ -321,15 +332,18 @@ function clearWarningMessages() {
 
 function clearCategory() {
   let cat = document.getElementById('category-dropdown-selected');
-  if (cat) cat.querySelector('p').textContent = 'Select a task category';
+  if (cat) {
+    let p = cat.querySelector('p');
+    if (p) p.textContent = 'Select a task category';
+  }
 }
 
 function editSubtask(element) {
   let listItem = element.closest('.subtask-item');
-  let span = listItem.querySelector('span');
+  let span = listItem ? listItem.querySelector('span') : null;
   if (!span) return;
   let oldText = span.textContent.trim();
-  span.outerHTML = editSubtaskInputHTML(oldText);;
+  span.outerHTML = editSubtaskInputHTML(oldText);
 }
 
 function editSubtaskInputHTML(oldText) {
@@ -341,7 +355,7 @@ function editSubtaskInputHTML(oldText) {
 
 function onSubtaskInputChange() {
   let input = document.getElementById('add-task-input4');
-  if (input.value.trim()) {
+  if (input && input.value.trim()) {
     showSaveCancelIcons();
   } else {
     showPlusIcon();
@@ -350,11 +364,13 @@ function onSubtaskInputChange() {
 
 function showSaveCancelIcons() {
   let iconSpan = document.getElementById('subtasks-icon');
-  iconSpan.innerHTML = `
-    <img src="../img/icon/add_task_icon/subtasks/clear.png" onclick="clearSubtaskInput()">
-    <div class="subtask-wrapper"></div>
-    <img id="submit-subtask" src="../img/icon/add_task_icon/subtasks/check.png" onclick="pushSubtaskInput(event)">
-  `;
+  if (iconSpan) {
+    iconSpan.innerHTML = `
+      <img src="../img/icon/add_task_icon/subtasks/clear.png" onclick="clearSubtaskInput()">
+      <div class="subtask-wrapper"></div>
+      <img id="submit-subtask" src="../img/icon/add_task_icon/subtasks/check.png" onclick="pushSubtaskInput(event)">
+    `;
+  }
 }
 
 function onSubtaskInputKeydown(event) {
