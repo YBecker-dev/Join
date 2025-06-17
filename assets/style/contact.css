@@ -158,3 +158,94 @@ h4 {
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
+
+.newContactOverlay {
+    height: 60%;
+    width: 60vw;
+    position: absolute;
+    margin-top: 5rem;
+    display: flex;
+}
+
+.headDiv {
+    height: 100%;
+    width: 40%;
+    border-bottom-left-radius: 1.2rem;
+    border-top-left-radius: 1.2rem;
+    background-color: #293647;
+}
+
+.contactLogo {
+    height: 5rem;
+    margin-top: 12rem;
+    margin-left: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+}
+
+.addHeadline {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.addTastText {
+    font-size: 1.6rem;
+    color: #ffffff;
+}
+
+.line {
+    height: .2rem;
+    width: 5rem;
+    background-color: #29abe2;
+    margin-top: 1rem;
+    margin-left: 2.8rem;
+}
+
+.editDiv {
+    height: 100%;
+    width: 60%;
+    border-bottom-right-radius: 1.2rem;
+    border-top-right-radius: 1.2rem;
+    background-color: #ffffff;
+}
+
+.closeDiv {
+    display: flex;
+    justify-content: end;
+}
+
+.close {
+    margin-top: 3rem;
+    margin-right: 3rem;
+    margin-bottom: 8rem;
+    height: 2.5rem;
+}
+
+.profilDiv {
+    display: flex;
+    align-items: center;
+}
+
+.profileImg {
+    width: 12rem;
+    margin-left: 4rem;
+    margin-right: 4rem;
+}
+
+.addNewContactDiv {
+    border-width: 2px;
+    border-color: #404447;
+    border-radius: 1rem;
+}
+
+.addNewContact {
+    border: 0;
+}
+
+.addNewContactIcon {
+    width: 2rem;
+}
