@@ -58,9 +58,12 @@ function getAddContactOverlay(){
                       <img src="../img/icon/profile.png">
                    </div>
                   <div class="section-two-contact">
-                    <div class="right-exit">
-                      <img src="../img/icon/close.png" >
+                    <div class="exitBtn-wrapper">
+                        <div class="right-exitBtn">
+                          <img src="../img/icon/close.png" >
+                        </div>
                     </div>
+
                     <div class="right-input-form">
                       <form>
                         <div class="input-group-contact">
@@ -78,7 +81,7 @@ function getAddContactOverlay(){
                       </form>
                     </div>
                     <div class="right-buttons">
-                      <button class="cancelBtn">Cancel X</button>
+                      <button class="cancelBtn transform-left">Cancel X</button>
                       <button class="contactBtn">Create contact <img src="../img/icon/save.png"></button>
                     </div> 
                   </div>
@@ -88,73 +91,3 @@ function getAddContactOverlay(){
     `
 }
 
-function getTaskOverlay(){
-    return`     <div class="overlay-position">
-                    <div class="overlay-header">
-                        <div class="task-type">
-                            <p>Inhalt</p>
-                        </div>
-                        <div class="close-icon">
-                            <img src="../img/icon/close.png" >
-                        </div>                
-                    </div>
-                    <div class="overlay-titel">
-                        <h1>Kochwelt Page &Recipe Recommender</h1>
-                    </div>
-                    <div class="overlay-description-flex">
-                        <p>Build start page with recipe recommendation.</p>
-                    </div>
-                    <div class="overlay-description-flex">
-                        <p>Due date:</p>
-                        <p>10/05/2023</p>
-                    </div>
-                    <div class="overlay-description-flex">
-                        <p>Priority</p>
-                        <div class="overlay-priority">
-                             <p>medium</p>
-                             <img src="../img/icon/priority/Prio media.png">
-                        </div>
-                    </div>
-                    <div class="assigned-to">
-                        <p>Assigned To:</p>
-                        <div class="overlay-peoples">
-                            <div class="peoples-info">
-                                <div class="initials">
-                                    <p>EM</p>
-                                </div>
-                                <div class="people-name">
-                                    <p>Emmanuel Maurer</p>
-                                </div>
-                            </div>   
-                        </div>
-                    </div>
-                    <div class="overlay-subtasks">
-                        <p>Subtasks</p>
-                        <div class="subtask-info">
-                            <div class="overlay-checkbox">
-                                 <input type="checkbox">
-                            </div>
-                            <div class="task-description">
-                                <p>Implement Recipe Recommendation</p>
-                            </div>
-                        </div>    
-                    </div>
-                    <div class="overlay-edit-wrapper">
-                        <div class="overlay-edit">
-                            <div class="overlay-edit-content">
-                                <img src="../img/icon/trash.png">
-                                <p>Delete</p>
-                            </div>
-                            <div class="overlay-seperator"></div>
-                            <div class="overlay-edit-content transform-left">
-                                <img src="../img/icon/edit.png">
-                                <p>Edit</p>
-                            </div>
-                        </div>
-                    </div>    
-                </div>
-                
-
-
-    `
-}
