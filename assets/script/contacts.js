@@ -20,8 +20,22 @@ let myContacts = [
 ];
 
 function init() {
+    //await fetchContactJson();
     renderMyContacts();
+
     //openContactOverlayContactsOverlay();
+}
+
+async function fetchContactJson() {
+    let url = `https:`;
+    let response = await fetch(url);
+    let responseAsJson = await response.json();
+
+    let promises = responseAsJson.results.map(contact => fetch(contact.url).then(c => c.json()));
+    let contacts = await Promise.all(promises);
+    console.log(responseAsJson);
+
+    contacts.push();
 }
 
 function renderMyContacts() {
