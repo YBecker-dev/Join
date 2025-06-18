@@ -69,8 +69,10 @@ function toggleArrowRotation(arrowId, isOpen) {
   if (arrow) {
     if (isOpen) {
       arrow.style.transform = 'rotate(180deg)';
+      arrow.classList.add('arrow-hover');
     } else {
       arrow.style.transform = 'rotate(0deg)';
+      arrow.classList.remove('arrow-hover');
     }
   }
 }
@@ -88,21 +90,7 @@ function assignedToDropdown(searchTerm = '') {
   for (let i = 0; i < contacts.length; i++) {
     if (contacts[i].name.toLowerCase().includes(lowerSearch)) {
       const checked = selectedContacts.includes(i) ? 'checked' : '';
-      html += `
-        <div class="assigned-contacts" onclick="checkCheckbox(this); toggleContactSelection(${i}, event);">
-          <div class="user-dropdown">
-            <div class="user-name-dropdown">
-              <span>${contacts[i].initials}</span>
-            </div>
-            <div>
-              <p>${contacts[i].name}</p>
-            </div>
-          </div>
-          <div>
-            <input type="checkbox" class="checkbox" ${checked} onclick="eventBubbling(event); toggleContactSelection(${i}, event);">
-          </div>
-        </div>
-      `;
+      html += assignedToDropdownHTML(contacts, i, checked);
     }
   }
   contactsRef.innerHTML = html;
@@ -113,18 +101,6 @@ function checkCheckbox(divElement) {
   if (checkbox) {
     checkbox.checked = !checkbox.checked;
     checkbox.dispatchEvent(new Event('change'));
-  }
-}
-
-function rotateAssignedToArrowOnInput() {
-  let input = document.querySelector('input[name="add-task-input3"]');
-  let arrow = document.getElementById('assigned-to-arrow');
-  if (arrow) {
-    if (input && input.value.trim()) {
-      arrow.style.transform = 'rotate(180deg)';
-    } else {
-      arrow.style.transform = 'rotate(0deg)';
-    }
   }
 }
 
@@ -232,15 +208,38 @@ function checkCategory() {
   return true;
 }
 
-function eventBubbling(event) {
-  event.stopPropagation();
+function showError(errorId, inputId, isCategory = false) {
+  let warningElement = document.getElementById(errorId);
+  let inputElement = document.getElementById(inputId);
+  if (!warningElement || !inputElement) return;
+  let fieldIsEmpty;
+  if (isCategory) {
+    let categoryText = '';
+    let categoryTextElement = inputElement.querySelector('p');
+    if (categoryTextElement) {
+      categoryText = categoryTextElement.textContent.trim();
+    }
+    if (categoryText === '' || categoryText === 'Select a task category') {
+      fieldIsEmpty = true;
+    } else {
+      fieldIsEmpty = false;
+    }
+  } else {
+    if (inputElement.value.trim() === '') {
+      fieldIsEmpty = true;
+    } else {
+      fieldIsEmpty = false;
+    }
+  }
+  if (fieldIsEmpty) {
+    warningElement.classList.remove('d-none');
+  } else {
+    warningElement.classList.add('d-none');
+  }
 }
 
-function closeError(inputId, warningId) {
-  let input = document.getElementById(inputId) || document.querySelector(`[name="${inputId}"]`);
-  let warning = document.getElementById(warningId);
-  if (input) input.classList.remove('input-error');
-  if (warning) warning.classList.add('d-none');
+function eventBubbling(event) {
+  event.stopPropagation();
 }
 
 function pushSubtaskInput(event) {
@@ -252,14 +251,8 @@ function pushSubtaskInput(event) {
     if (input.value.trim()) {
       let subtaskDiv = document.createElement('div');
       subtaskDiv.className = 'subtask-item';
-      subtaskDiv.innerHTML = `
-        <span><li>${input.value.trim()}</li></span>
-        <div class="subtask-actions">
-          <img src="../img/icon/add_task_icon/subtasks/edit.png" onclick="editSubtask(this)" />
-          <div class="subtask-wrapper"></div>
-          <img src="../img/icon/add_task_icon/subtasks/delete.png" onclick="deleteSubtask(this)" />
-        </div>
-      `;
+      subtaskDiv.setAttribute('onclick', 'editSubtask(this)');
+      subtaskDiv.innerHTML = pushSubtaskInputHTML(input.value.trim());
       container.appendChild(subtaskDiv);
       input.value = '';
       showPlusIcon();
@@ -290,6 +283,11 @@ function clearCheckedContacts() {
   }
 }
 
+function clearSubtaskInput() {
+  let input = document.getElementById('add-task-input4');
+  if (input) input.value = '';
+}
+
 function clearAssignedTo() {
   let input = document.getElementById('add-task-input3');
   if (input) input.value = '';
@@ -302,7 +300,9 @@ function clearSubtaskElements() {
 
 function deleteSubtask(element) {
   let subtaskItem = element.closest('.subtask-item');
+  let editSubtaskItem = element.closest('.subtask-item-edit');
   if (subtaskItem) subtaskItem.remove();
+  if (editSubtaskItem) editSubtaskItem.remove();
 }
 
 function showPlusIcon() {
@@ -315,12 +315,8 @@ function showPlusIcon() {
 }
 
 function clearInputTexts() {
-  let form = document.getElementById('add-task-form');
-  if (form) form.reset();
-  let errors = document.getElementsByClassName('input-error');
-  while (errors.length) {
-    errors[0].classList.remove('input-error');
-  }
+  let inputText = document.getElementById('add-task-form');
+  if (inputText) inputText.reset();
 }
 
 function clearWarningMessages() {
@@ -331,9 +327,9 @@ function clearWarningMessages() {
 }
 
 function clearCategory() {
-  let cat = document.getElementById('category-dropdown-selected');
-  if (cat) {
-    let p = cat.querySelector('p');
+  let category = document.getElementById('category-dropdown-selected');
+  if (category) {
+    let p = category.querySelector('p');
     if (p) p.textContent = 'Select a task category';
   }
 }
@@ -343,14 +339,35 @@ function editSubtask(element) {
   let span = listItem ? listItem.querySelector('span') : null;
   if (!span) return;
   let oldText = span.textContent.trim();
-  span.outerHTML = editSubtaskInputHTML(oldText);
+
+  let newDiv = document.createElement('div');
+  if (newDiv) {
+    newDiv.className = 'subtask-item-edit';
+    newDiv.innerHTML = editSubtaskInputHTML(oldText);
+  }
+
+  if (listItem.parentNode) {
+    listItem.parentNode.replaceChild(newDiv, listItem);
+  }
 }
 
-function editSubtaskInputHTML(oldText) {
-  return `
-    <input type="text" class="edit-subtask-input" value="${oldText}" 
-      onkeydown="saveSubtaskEdit(event, this)">
-  `;
+function saveSubtaskEdit(event, inputElement) {
+  if (event && event.key && event.key !== 'Enter') return;
+  if (!inputElement.value) {
+    inputElement = inputElement.closest('.input-with-icons').querySelector('input');
+  }
+  if (!inputElement) return;
+
+  let newText = inputElement.value;
+  let subtaskItem = inputElement.closest('.subtask-item-edit');
+  if (!subtaskItem) return;
+
+  let subtaskDiv = document.createElement('div');
+  subtaskDiv.setAttribute('onclick', 'editSubtask(this)');
+  subtaskDiv.className = 'subtask-item';
+  subtaskDiv.innerHTML = saveSubtaskEditHTML(newText);
+
+  subtaskItem.parentNode.replaceChild(subtaskDiv, subtaskItem);
 }
 
 function onSubtaskInputChange() {
@@ -365,11 +382,7 @@ function onSubtaskInputChange() {
 function showSaveCancelIcons() {
   let iconSpan = document.getElementById('subtasks-icon');
   if (iconSpan) {
-    iconSpan.innerHTML = `
-      <img src="../img/icon/add_task_icon/subtasks/clear.png" onclick="clearSubtaskInput()">
-      <div class="subtask-wrapper"></div>
-      <img id="submit-subtask" src="../img/icon/add_task_icon/subtasks/check.png" onclick="pushSubtaskInput(event)">
-    `;
+    iconSpan.innerHTML = showSaveCancelIconsHtml();
   }
 }
 
@@ -378,4 +391,86 @@ function onSubtaskInputKeydown(event) {
     event.preventDefault();
     pushSubtaskInput(event);
   }
+}
+
+function editSubtaskInputHTML(oldText) {
+  return `
+<div class="input-with-icons">
+  <input id="subtask-edit-input" type="text" class="edit-subtask-input input-border-none" value="${oldText}"
+         onkeydown="saveSubtaskEdit(event, this)">
+  <img class="hover-icon" onclick="deleteSubtask(this)" src="../img/icon/add_task_icon/subtasks/delete.png">
+  <div class="subtask-wrapper-edit"></div>
+  <img class="hover-icon" onclick="saveSubtaskEdit(event, this)" src="../img/icon/add_task_icon/subtasks/check.png">
+</div>
+  `;
+}
+
+function showSaveCancelIconsHtml() {
+  return `
+      <img class="hover-icon" src="../img/icon/add_task_icon/subtasks/clear.png" onclick="clearSubtaskInput()">
+      <div class="subtask-wrapper"></div>
+      <img class="hover-icon" id="submit-subtask" onclick="pushSubtaskInput(event)" src="../img/icon/add_task_icon/subtasks/check.png">
+    `;
+}
+
+function saveSubtaskEditHTML(newText) {
+  return `
+    <span><li>${newText}</li></span>
+    <div class="subtask-actions">
+      <img src="../img/icon/add_task_icon/subtasks/edit.png" onclick="editSubtask(this)" />
+      <div class="subtask-wrapper"></div>
+      <img src="../img/icon/add_task_icon/subtasks/delete.png" onclick="deleteSubtask(this)" />
+    </div>
+  `;
+}
+
+function pushSubtaskInputHTML(text) {
+  return `
+        <span><li>${text}</li></span>
+        <div class="subtask-actions">
+          <img src="../img/icon/add_task_icon/subtasks/edit.png" onclick="editSubtask(this)" />
+          <div class="subtask-wrapper"></div>
+          <img src="../img/icon/add_task_icon/subtasks/delete.png" onclick="deleteSubtask(this)" />
+        </div>
+      `;
+}
+
+function assignedToDropdownHTML(contacts, i, checked) {
+  return `
+        <div class="assigned-contacts" onclick="checkCheckbox(this); toggleContactSelection(${i}, event);">
+          <div class="user-dropdown">
+            <div class="user-name-dropdown">
+              <span>${contacts[i].initials}</span>
+            </div>
+            <div>
+              <p>${contacts[i].name}</p>
+            </div>
+          </div>
+          <div>
+            <input type="checkbox" class="checkbox" ${checked} onclick="eventBubbling(event); toggleContactSelection(${i}, event);">
+          </div>
+        </div>
+      `;
+}
+
+function enableCreateTaskButton() {
+  let title = document.getElementById('title');
+  let date = document.getElementById('date');
+  let categorySelected = document.getElementById('category-dropdown-selected');
+  let button = document.getElementById('create-task-button');
+
+  if (!title || !date || !categorySelected || !button) return;
+
+  let categoryText = '';
+  let pElement = categorySelected.querySelector('p');
+  if (pElement) {
+    categoryText = pElement.textContent.trim();
+  } else {
+    categoryText = '';
+  }
+  let categoryChosen = categoryText !== '' && categoryText !== 'Select a task category';
+
+  let allFilled = title.value.trim() !== '' && date.value.trim() !== '' && categoryChosen;
+
+  button.disabled = !allFilled;
 }

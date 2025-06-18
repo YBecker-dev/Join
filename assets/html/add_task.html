@@ -2,14 +2,14 @@
   <div class="contentspace-html">
     <h1>Add Task</h1>
     <div class="required">
-      <p>* This field is required</p>
+      <p><span class="required-star">*</span> This field is required</p>
     </div>
     <form id="add-task-form" onsubmit="return validateAddTaskForm();" onkeydown="return preventEnterSubmit(event);">
       <div class="create-clear-buttons">
         <button type="button" class="clear-button" onclick="clearFormInputs()">
           Clear <img src="../img/icon/add_task_icon/buttons/clear_all.png" />
         </button>
-        <button type="submit" class="create-button">
+        <button disabled type="submit" class="create-button" id="create-task-button">
           Create Task <img src="../img/icon/add_task_icon/buttons/create_task.png" />
         </button>
       </div>
@@ -18,9 +18,11 @@
           <div class="input-group add-task">
             <span>Title <span class="required-star">*</span></span>
             <input
+              id="title"
               type="text"
               name="add-task-input1"
-              onclick="closeError('add-task-input1','add-task-input1-warning')"
+              onclick="showError('add-task-input1-warning', 'title')"
+              oninput="showError('add-task-input1-warning', 'title'); enableCreateTaskButton();"
               placeholder="Enter a Title"
             />
             <span class="input-icon"></span>
@@ -28,7 +30,7 @@
           </div>
           <div class="input-group add-task">
             <span>Description</span>
-            <textarea name="add-task-textarea" placeholder="Enter a Description"></textarea>
+            <textarea id="description" name="add-task-textarea" placeholder="Enter a Description"></textarea>
             <span class="input-icon">
               <img src="../img/icon/add_task_icon/textarea.png" alt="" />
             </span>
@@ -37,9 +39,11 @@
             <span>Due Date <span class="required-star">*</span></span>
             <div class="date-input-container">
               <input
+                id="date"
                 type="date"
                 name="add-task-input2"
-                onclick="closeError('add-task-input2','add-task-input2-warning')"
+                onclick="showError('add-task-input2-warning', 'date')"
+                oninput="showError('add-task-input2-warning', 'date'); enableCreateTaskButton()"
               />
               <span class="date-icon">
                 <img src="../img/icon/add_task_icon/event.png" alt="" />
@@ -85,6 +89,7 @@
                   onclick="toggleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow')"
                 >
                   <img
+                    class="hover-icon"
                     id="assigned-to-arrow"
                     src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png"
                     alt=""
@@ -104,20 +109,21 @@
             <div id="category-dropdown" onclick="eventBubbling(event)">
               <div
                 id="category-dropdown-selected"
-                onclick="toggleDropdown('category-dropdown-options', 'category-selected-arrow'); closeError('category-dropdown-selected','category-dropdown-warning')"
+                onclick="toggleDropdown('category-dropdown-options', 'category-selected-arrow'); showError('category-dropdown-warning', 'category-dropdown-selected', true)"
               >
                 <p>Select a task category</p>
                 <img
+                  class="hover-icon"
                   id="category-selected-arrow"
                   src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png"
                   alt=""
                 />
               </div>
               <ul id="category-dropdown-options" class="hidden custom-dropdown-options">
-                <p class="category-option" onclick="selectCustomOption(this)">
+                <p class="category-option" onclick="selectCustomOption(this); enableCreateTaskButton(); showError('category-dropdown-warning', 'category-dropdown-selected', true)">
                   <span class="category-option-text">Technical Task</span>
                 </p>
-                <p class="category-option" onclick="selectCustomOption(this)">
+                <p class="category-option" onclick="selectCustomOption(this); enableCreateTaskButton(); showError('category-dropdown-warning', 'category-dropdown-selected', true)">
                   <span class="category-option-text">User Story</span>
                 </p>
               </ul>
@@ -135,7 +141,12 @@
               placeholder="Add new subtask"
             />
             <span class="subtasks-icon" id="subtasks-icon">
-              <img src="../img/icon/add_task_icon/plus.png" alt="Add" onclick="pushSubtaskInput(event)" />
+              <img
+                class="hover-icon"
+                src="../img/icon/add_task_icon/plus.png"
+                alt="Add"
+                onclick="pushSubtaskInput(event)"
+              />
             </span>
           </div>
         </div>

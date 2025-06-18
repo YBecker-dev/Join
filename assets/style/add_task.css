@@ -273,21 +273,12 @@ input[type="text"] {
     height: 48px;
 }
 
-.assigned-dropdown-options {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    gap: 8px;
-    padding: 12px 16px;
-    max-height: 300px;
-}
 
 #category-dropdown-selected {
     padding: 12px 16px;
 }
 
-.custom-dropdown-options,
-#assigned-to-options {
+.custom-dropdown-options {
     width: 440px;
     font-size: 1.25rem;
     border-radius: 8px;
@@ -299,7 +290,6 @@ input[type="text"] {
     cursor: pointer;
 }
 
-#custom-dropdown-options,
 #assigned-to-dropdown-options {
     border-top: none;
     border-top: none;
@@ -399,6 +389,14 @@ input[type="text"] {
     height: unset;
 }
 
+.add-task input[name="add-task-input3"]::placeholder {
+    color:black
+}
+
+.add-task input[name="add-task-input3"]:focus {
+    border: none;
+}
+
 #assigned-to-dropdown-selected:hover,
 #category-dropdown-selected:hover {
     border: 1px solid #a89a9a;
@@ -453,7 +451,6 @@ input[type="text"] {
     justify-content: space-between;
     align-items: center;
     padding: 8px 12px;
-    border-bottom: 1px solid #eee;
 }
 
 .subtask-item {
@@ -462,11 +459,6 @@ input[type="text"] {
     padding-left: 28px;
     border-radius: 8px;
     transition: background 0.2s, transform 0.2s;
-}
-
-#submit-subtask {
-    filter: brightness(0) saturate(100%) invert(17%) sepia(15%) saturate(1112%) hue-rotate(176deg) brightness(95%) contrast(90%);
-
 }
 
 .subtask-wrapper {
@@ -492,8 +484,6 @@ input[type="text"] {
     background: #EEEEEE;
     transform: translateY(-1px);
 }
-
-.subtasks-container:hover {}
 
 .subtasks-container {
     border-radius: 8px;
@@ -540,4 +530,73 @@ input[type="text"] {
 
 .category-option:hover .category-option-text {
     transform: translateX(1px);
+}
+
+.hover-icon:hover {
+    background-color: #EEEEEE !important;
+    border-radius: 100%;
+}
+
+.input-border-none {
+    border: none;
+}
+
+.subtask-item-edit {
+    padding: 0px;
+    border-bottom: 1px solid rgb(59, 175, 228);
+    border-radius: 0px;
+}
+
+#subtask-edit-input {
+    font-size: 16px;
+}
+
+
+.input-with-icons {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.input-with-icons input {
+    flex: 1;
+    padding-right: 40px;
+}
+
+.input-with-icons img {
+    position: absolute;
+    right: 12px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.input-with-icons img:hover {
+    transform: translateY(-1px);
+}
+
+.input-with-icons img:first-of-type {
+    right: 45px;
+}
+
+.subtask-wrapper-edit {
+    border-left: solid 1px #A8A8A8;
+    height: 24px;
+    right: 40px;
+    position: absolute;
+}
+
+.input-with-icons input[type="text"]:focus {
+    outline: none;
+    box-shadow: none;
+    border: none
+}
+
+.input-with-icons input[type="text"] {
+    padding: 8px 16px;
+}
+
+.arrow-hover:hover {
+    background-color: #D2E3FF !important;
 }
