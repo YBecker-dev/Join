@@ -163,6 +163,7 @@ h4 {
 =======
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 3468a6d633934e9e754feecf31eb4147ebec020d
 .overlay{
     position: fixed;
@@ -379,6 +380,8 @@ h4 {
     width: 24px;
 }
 =======
+=======
+>>>>>>> 0c71d560af5570e5c938c196128644b698f2afac
 .newContactOverlay {
     height: 65%;
     width: 60vw;
@@ -497,4 +500,3 @@ h4 {
 .save-close {
     width: 1rem;
 }
->>>>>>> jenny
