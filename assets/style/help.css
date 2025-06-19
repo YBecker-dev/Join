@@ -1,0 +1,78 @@
+.content-position{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    
+
+}
+h1{
+    padding: 0;
+    margin: 0;
+    font-size: 61px;
+    font-weight: 700;
+}
+.What-is-Join>h3{
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 120%;
+}
+
+p{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 120%;
+}
+.header{
+    position: sticky;
+    top: 200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 73px;
+    width: 85%
+}
+.backward{
+    height: 37px;
+    width: 37px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.help-content{
+    height: 1024px;
+    width: 85%;
+}
+.What-is-Join{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: start;
+    padding-top: 16px;
+}
+.div1{
+    /*height: 61px;*/
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 35px;
+    text-align: start;
+}
+.div1>h2{
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 120%;
+}
+.counter>h3{
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 120%;
+}
+a,.join-color{
+    color: #29abe2;
+    text-decoration: none;
+}
