@@ -8,25 +8,23 @@
     <link rel="stylesheet" href="../style/standart.css" />
     <link rel="stylesheet" href="../../style.css" />
     <link rel="stylesheet" href="../style/buttons.css" />
-    <link rel="stylesheet" href="../style/contact.css">
-    <link rel="stylesheet" href="../style/summary_user.css">
-    <link rel="stylesheet" href="../style/board.css">
-    <link rel="stylesheet" href="../style/help.css">
+    <link rel="stylesheet" href="../style/contact.css" />
+    <link rel="stylesheet" href="../style/summary_user.css" />
+    <link rel="stylesheet" href="../style/board.css" />
+    <link rel="stylesheet" href="../style/help.css" />
+    <link rel="stylesheet" href="../style/testboard.css" />
     <title>Leaderbord</title>
   </head>
-  <body onload="loadContent('add_task.html');">
-
-
+  <body onload="loadContent('testboard.html');">
     <div class="overlay d-none" id="overlayBoard" onclick="toggleBoardOverlay()">
       <div class="overlay-content-flex">
         <div class="overlay-content-render" id="overlay-content-loader"></div>
       </div>
     </div>
-    
+
     <div class="overlay d-none" id="overlayContact" onclick="toggleContactOverlay()">
       <div class="overlay-content-flex">
-        <div class="overlay-content-render-contact" id="overlay-contact-content-loader">
-        </div>
+        <div class="overlay-content-render-contact" id="overlay-contact-content-loader"></div>
       </div>
     </div>
 
@@ -34,7 +32,12 @@
       <div class="header-content">
         <p>Kanban Project Management Tool</p>
         <div class="header-user">
-          <img class="help-icon" onclick="loadContent('help.html')" src="../img/icon/header_user_interface/help.png" alt="help" />
+          <img
+            class="help-icon"
+            onclick="loadContent('help.html')"
+            src="../img/icon/header_user_interface/help.png"
+            alt="help"
+          />
           <p class="user">SM</p>
         </div>
       </div>
@@ -59,6 +62,9 @@
         <a class="sidebar-links" href="#" onclick="loadContent('contacts.html')">
           <img src="../img/icon/tasks_icon/contacts.png" alt="" />Contacts</a
         >
+        <a class="sidebar-links" href="#" onclick="loadContent('testboard.html')">
+          <img src="../img/icon/tasks_icon/contacts.png" alt="" />Test Board</a
+        >
       </div>
       <div class="sidebar-legal-stuff">
         <a href="#" onclick="loadContent('privacy-policy.html')">Prvacy Police</a>
@@ -67,13 +73,10 @@
     </div>
 
     <script src="../script/templates.js"></script>
-    <script src="../script/main.js"></script>
+    <script src="../script/testboard.js"></script>
     <script src="../script/add_task.js"></script>
+    <script src="../script/main.js"></script>
     <script src="../script/contacts.js"></script>
     <script src="../script/board.js"></script>
   </body>
 </html>
-
-
-
-

@@ -165,11 +165,12 @@ function validateAddTaskForm() {
   if (!checkCategory()) valid = false;
 
   if (valid) {
+    saveTaskToFirebase(); 
     clearFormInputs();
-    loadContent('board.html');
+    loadContent('testboard.html');
     return false;
   }
-  return false;
+  return valid;
 }
 
 function checkTitle() {
@@ -458,9 +459,7 @@ function enableCreateTaskButton() {
   let date = document.getElementById('date');
   let categorySelected = document.getElementById('category-dropdown-selected');
   let button = document.getElementById('create-task-button');
-
   if (!title || !date || !categorySelected || !button) return;
-
   let categoryText = '';
   let pElement = categorySelected.querySelector('p');
   if (pElement) {
@@ -469,8 +468,45 @@ function enableCreateTaskButton() {
     categoryText = '';
   }
   let categoryChosen = categoryText !== '' && categoryText !== 'Select a task category';
-
   let allFilled = title.value.trim() !== '' && date.value.trim() !== '' && categoryChosen;
-
   button.disabled = !allFilled;
+}
+
+async function saveTaskToFirebase() {
+
+  let title = document.getElementById('title').value;
+  let description = document.getElementById('description').value;
+  let date = document.getElementById('date').value;
+
+  let categorySelected = document.getElementById('category-dropdown-selected');
+  let categoryText = '';
+  let pElement = categorySelected.getElementsByTagName('p')[0];
+  if (pElement) categoryText = pElement.textContent.trim();
+
+  let subtasks = [];
+  document.querySelectorAll('.subtask-item li').forEach(li => subtasks.push(li.textContent));
+
+  let assignedTo = [];
+  document.querySelectorAll('.show-contacts-add-task h3').forEach(h3 => assignedTo.push(h3.textContent));
+
+  let priority = '';
+  if (document.getElementById('urgent')?.classList.contains('active')) priority = 'Urgent';
+  if (document.getElementById('medium')?.classList.contains('active')) priority = 'Medium';
+  if (document.getElementById('low')?.classList.contains('active')) priority = 'Low';
+
+  let taskData = {
+    title,
+    description,
+    date,
+    category: categoryText,
+    subtasks,
+    assignedTo,
+    priority
+  };
+
+  await fetch(BASE_URL_TASKS + "tasks.json", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(taskData)
+  });
 }

@@ -1,0 +1,38 @@
+.board-task-container{
+    margin-left: 64px;
+}
+
+.board-tasks {
+    display: flex;
+    flex-direction: column;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    padding: 16px;
+    width: 252px;
+    gap: 24px;
+}
+
+.board-status {
+    display: flex;
+    padding-left: 64px;
+    gap: 26px;
+}
+
+.board-to-do,
+.board-in-progress,
+.board-awaiting-feedback,
+.board-done {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    width: 252px;
+    align-items: center;
+    padding: 0 8px;
+}
+
+.board-tasks-section {
+    display: flex;
+    gap: 26px;
+    flex-direction: column;
+}
