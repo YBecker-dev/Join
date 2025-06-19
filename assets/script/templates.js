@@ -3,7 +3,7 @@
 function getNoteTemplateContact(index) {
   let contacts = myContacts[index];
 
-  return    `<div onclick="openContactOverlay()" class="person">
+    return  `<div onclick="openContactOverlay()" class="person">
                 <p class="initial">${getInitials(contacts.givenName, contacts.surname)}</p>
                 <div>
                     <h4>${contacts.givenName} ${contacts.surname}</h4>
@@ -25,7 +25,7 @@ function getNoteTemplateAddNewContact() {
 
                  <div class="editDiv">
                     <div class="closeDiv">
-                        <img class="close" src="../img/icon/close.png" alt="Close-Button">
+                        <img onclick="closeOverlay" class="close" src="../img/icon/close.png" alt="Close-Button">
                     </div>
                             
                     <div class="profilDiv">
@@ -48,11 +48,11 @@ function getNoteTemplateAddNewContact() {
                         </div>           
                     </div>
                     <div class="accept">
-                        <button class="clear-button">Cancel <img class="save-close" src="../img/icon/close.png" alt="Close-Button"></button>
-                        <button class="create-button">Create contact<img class="save-close" src="../img/icon/save.png" alt=""></button>
+                        <button onclick="closeOverlay" class="clear-button">Cancel<img class="save-close" src="../img/icon/close.png" alt="Close-Button"></button>
+                        <button onclick="saveToLocalstorage" class="create-button">Create contact<img class="save-close" src="../img/icon/save.png" alt=""></button>
                     </div>
                 </div>
-            </div>`
+            </div>`;
 }
 
 
@@ -83,7 +83,7 @@ function getNoteTemplateContactOverlay() {
                     <h4>Phone</h4>
                     <a class="phone" href="tel:">${contacts.phone}</a>
                 </div>
-            </div> `
+            </div>`;
 }
 
 
@@ -97,7 +97,7 @@ function getEditContactOverlay() {
                     <div class="line"></div>
                 </div>
                 <div class="editDiv">
-                    <div class="closeDiv">
+                    <div onclick="closeContactOverlay" class="closeDiv">
                         <img class="close" src="../img/icon/close.png" alt="Close-Button">
                     </div>
                     <div class="profilDiv">
@@ -120,11 +120,11 @@ function getEditContactOverlay() {
                         </div> 
                     </div>
                     <div class="accept">
-                        <button class="clear-button">Delete</button>
-                        <button class="create-button">Create contact<img class="save-close" src="../img/icon/save.png" alt=""></button>
+                        <button onclick="deleteContact" class="clear-button">Delete</button>
+                        <button onclick="saveToLocalStorage" class="create-button">Create contact<img class="save-close" src="../img/icon/save.png" alt=""></button>
                     </div>
                 </div>
-            </div>`
+            </div>`;
 }
 
 
@@ -173,7 +173,7 @@ function getAddContactOverlay(){
                 </div>
                 
     
-    `
+    `;
 }
 
 
@@ -245,5 +245,5 @@ function getTaskOverlay(){
                 
 
 
-    `
+    `;
 }
