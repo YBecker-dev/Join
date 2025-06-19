@@ -1,7 +1,9 @@
+
+// Contact Overview
 function getNoteTemplateContact(index) {
   let contacts = myContacts[index];
 
-  return `<div onclick="openContactOverlay()" class="person">
+  return    `<div onclick="openContactOverlay()" class="person">
                 <p class="initial">${getInitials(contacts.givenName, contacts.surname)}</p>
                 <div>
                     <h4>${contacts.givenName} ${contacts.surname}</h4>
@@ -10,33 +12,119 @@ function getNoteTemplateContact(index) {
             </div>`;
 }
 
+// add new Contact
+function getNoteTemplateAddNewContact() {
+
+    return  `<div class="newContactOverlay">
+                <div class="headDiv">
+                    <img class="contactLogo" src="../img/Logo/Logo_white.png" alt="Logo_white">
+                    <p class="addHeadline">Add contact</p>
+                    <p class="addTastText">Tasks are better with a team!</p>
+                    <div class="line"></div>
+                </div>
+
+                 <div class="editDiv">
+                    <div class="closeDiv">
+                        <img class="close" src="../img/icon/close.png" alt="Close-Button">
+                    </div>
+                            
+                    <div class="profilDiv">
+                        <div>
+                            <img class="profileImg" src="../img/icon/profile.png" alt="profile Image">
+                        </div>
+                        <div>
+                            <div class="addNewContactDiv">
+                                <input class="addNewContact" type="" placeholder="Name" required>
+                                <img class="addNewContactIcon" src="../img/icon/person.png" alt="Person Icon">
+                            </div> 
+                            <div class="addNewContactDiv">
+                                <input class="addNewContact" type="email" placeholder="Email" required>
+                                <img class="addNewContactIcon" src="../img/icon/mail.png" alt="Email Icon">
+                            </div> 
+                            <div class="addNewContactDiv">
+                                <input class="addNewContact" type="tel" placeholder="Phone" required>
+                                <img class="addNewContactIcon" src="../img/icon/phone.png" alt="phone Icon">
+                            </div> 
+                        </div>           
+                    </div>
+                    <div class="accept">
+                        <button class="clear-button">Cancel <img class="save-close" src="../img/icon/close.png" alt="Close-Button"></button>
+                        <button class="create-button">Create contact<img class="save-close" src="../img/icon/save.png" alt=""></button>
+                    </div>
+                </div>
+            </div>`
+}
+
+
+// Contact view
 function getNoteTemplateContactOverlay() {
 
-    return `    <div class="contactOverlay">
-                    <div class="contactInformations">
-                        <p class="initialOverlay">${getInitials(contacts.givenName, contacts.surname)}</p>
-                        <div>
-                            <p class="nanesDetail">${contacts.givenName} ${contacts.surname}</p>
-                            <div class="contactIcons">
-                                <div onclick="openContactOverlay()">
-                                    <img class="editIcon" src="../img/icon/edit.png" alt="pencil">
-                                    <span class="editText">edit</span>
-                                </div>
-                                <div onclick="deleteContact()">
-                                    <img class="editIcon" src="../img/icon/trash.png" alt="wastebasket">
-                                    <span class="editText">delete</span>
-                                </div>
+    return  `<div class="contactOverlay">
+                <div class="contactInformations">
+                    <p class="initialOverlay">${getInitials(contacts.givenName, contacts.surname)}</p>
+                    <div>
+                        <p class="nanesDetail">${contacts.givenName} ${contacts.surname}</p>
+                        <div class="contactIcons">
+                            <div onclick="openContactOverlay()">
+                                <img class="editIcon" src="../img/icon/edit.png" alt="pencil">
+                                <span class="editText">edit</span>
+                            </div>
+                            <div onclick="deleteContact()">
+                                <img class="editIcon" src="../img/icon/trash.png" alt="wastebasket">
+                                <span class="editText">delete</span>
                             </div>
                         </div>
                     </div>
-                    <div class="infoBlock">
-                        <p>Contact Information</p>
-                        <h4>Email</h4>
-                        <a class="mail" href="mailto:">${contacts.mail}</a>
-                        <h4>Phone</h4>
-                        <a class="phone" href="tel:">${contacts.phone}</a>
+                </div>
+                <div class="infoBlock">
+                    <p>Contact Information</p>
+                    <h4>Email</h4>
+                    <a class="mail" href="mailto:">${contacts.mail}</a>
+                    <h4>Phone</h4>
+                    <a class="phone" href="tel:">${contacts.phone}</a>
+                </div>
+            </div> `
+}
+
+
+// edit Contact
+function getEditContactOverlay() {
+
+    return  `<div class="newContactOverlay">
+                <div class="headDiv">
+                    <img class="contactLogo" src="../img/Logo/Logo_white.png" alt="Logo_white">
+                    <p class="addHeadline">Add contact</p>
+                    <div class="line"></div>
+                </div>
+                <div class="editDiv">
+                    <div class="closeDiv">
+                        <img class="close" src="../img/icon/close.png" alt="Close-Button">
                     </div>
-                </div> `
+                    <div class="profilDiv">
+                        <div>
+                            <img class="profileImg" src="../img/icon/profile.png" alt="profile Image">
+                        </div>
+                        <div>
+                            <div class="addNewContactDiv">
+                                <input class="addNewContact" type="" placeholder="Name" required>
+                                <img class="addNewContactIcon" src="../img/icon/person.png" alt="Person Icon">
+                            </div> 
+                            <div class="addNewContactDiv">
+                                <input class="addNewContact" type="email" placeholder="Email" required>
+                                <img class="addNewContactIcon" src="../img/icon/mail.png" alt="Email Icon">
+                            </div> 
+                            <div class="addNewContactDiv">
+                                <input class="addNewContact" type="tel" placeholder="Phone" required>
+                                <img class="addNewContactIcon" src="../img/icon/phone.png" alt="phone Icon">
+                            </div>  
+                        </div> 
+                    </div>
+                    <div class="accept">
+                        <button class="clear-button">Delete</button>
+                        <button class="create-button">Create contact<img class="save-close" src="../img/icon/save.png" alt=""></button>
+                    </div>
+                </div>
+            </div>`
 }
 
 
@@ -87,6 +175,7 @@ function getAddContactOverlay(){
     
     `
 }
+
 
 function getTaskOverlay(){
     return`     <div class="overlay-position">

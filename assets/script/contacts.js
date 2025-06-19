@@ -50,6 +50,8 @@ function getInitials(first, last) {
     return first[0].toUpperCase() + last[0].toUpperCase();
 }
 
+
+
 function toggleContactOverlay() {
     console.log('connect')
     let overlayRef = document.getElementById('overlayContact');

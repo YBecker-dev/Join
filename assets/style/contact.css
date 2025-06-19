@@ -38,7 +38,7 @@ button {
 }
 
 .person:hover {
-    background-color: #293647;
+    background-color: #c4c6ca;
     color: #ffffff;
 }
 
@@ -97,8 +97,8 @@ h2 {
 
 .contactOverlay {
     position: absolute;
-    margin-top: 80px;
-    margin-left: 100px;
+    margin-top: 5rem;
+    margin-left: 5rem;
 }
 
 .contactInformations {
@@ -161,7 +161,7 @@ h4 {
 
 .newContactOverlay {
     height: 38rem;
-    width: 100rem;
+    width: 75rem;
     position: absolute;
     top: 7rem;
     left: .5rem;
@@ -243,7 +243,7 @@ h4 {
 
 .addNewContactDiv {
     margin-top: 0.1rem;
-    margin-left: 2rem;
+    margin-left: 1.5rem;
     margin-bottom: 2.5rem;
     padding-left: 2rem;
     padding-right: 2rem;
@@ -261,7 +261,7 @@ h4 {
 
 .addNewContact {
     border: 0;
-    width: 30rem;
+    width: 20rem;
     height: 3rem;
 }
 
