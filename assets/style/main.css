@@ -58,3 +58,9 @@ header {
     right: 0;
     bottom: 0;
 }
+.help-icon:hover{
+    cursor: pointer;
+    height: 22px;
+    width: 22px;
+    transition: 0.3s;
+}

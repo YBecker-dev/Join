@@ -12,7 +12,11 @@ function loadContent(page) {
         initSummary();
       } else if (page === 'privacy-policy.html') {
       } else if (page === 'legal-notice.html') {
+      } else if (page === 'help.html'){
+
       }
     });
 }
+
+
   

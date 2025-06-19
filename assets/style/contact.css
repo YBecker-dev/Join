@@ -158,8 +158,13 @@ h4 {
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
+<<<<<<< HEAD
+/*Overlay Style*/
+=======
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 3468a6d633934e9e754feecf31eb4147ebec020d
 .overlay{
     position: fixed;
     top: 0;
@@ -269,15 +274,31 @@ h4 {
     justify-content: center;
    
 }
-.right-exit{
+.exitBtn-wrapper{
+    display: flex;
+    flex-direction: row-reverse;
+    
+    align-items: center;
+}
+.right-exitBtn{
     
     height: 32px;
+    width: 32px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     margin-bottom: 60px;
 }
-.right-exit>img{
+.right-exitBtn>:hover{
+   
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: ghostwhite;
+    
+
+}
+
+.right-exitBtn>img{
     height: 24px;
     width: 24px;
 }
@@ -328,6 +349,17 @@ h4 {
     color: #2A3647;
     border: 1px solid #293647;
 }
+.cancelBtn:hover{
+    background-color: #FFFFFF;
+    color: #29abe2;
+    border: 1px solid #29abe2;
+    transform: scale(1.01 );
+    transition: 0.1s;
+    box-shadow: 2px 2px 1px 1px rgb(197, 220, 224);
+}
+.trasform-left{
+    transform-origin: left top;
+}
 .contactBtn{
     padding: 0;
     margin: 0;
@@ -340,11 +372,16 @@ h4 {
     justify-content: center;
     gap: 4px;
 }
+.contactBtn:hover{
+    box-shadow: 2px 2px 1px 1px rgb(149, 164, 167);
+}
 .contactBtn>img{
     height: 24px;
     width: 24px;
 }
 =======
+=======
+>>>>>>> 0c71d560af5570e5c938c196128644b698f2afac
 .newContactOverlay {
     height: 65%;
     width: 60vw;
@@ -463,4 +500,3 @@ h4 {
 .save-close {
     width: 1rem;
 }
->>>>>>> jenny
