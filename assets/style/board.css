@@ -217,7 +217,9 @@
 .transform-left{
     transform-origin: right top;
 }
-
+.transform-bottom{
+    transform-origin: right bottom;
+}
 
 /*Board style*/
 .header-position{
@@ -226,6 +228,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 16px;
 
 }
 .header-space{
@@ -255,6 +258,11 @@
    justify-content: center;
    align-items: center;
    gap: 11px;  
+}
+.addTaskBtn:hover{
+    box-shadow: 0px 3px 5px 3px rgba(0, 0, 0, 0.217);
+    transition: calc(1.01);
+    transition: 0.1s;
 }
 .addTaskBtn>img{
     height: 18.67px;
@@ -290,7 +298,14 @@
     height: 17.58px;
     width: 17.58px;
 }
-
+.search-icon:hover{
+    padding-left: 5px;
+    cursor: pointer;
+    transform: calc(1.05, 1.05);
+    transition: 0.2s;
+    background-color: #D1D1D1;
+    border-radius: 50%;
+}
 
 .categorys{
     height: 79.5px;
@@ -319,6 +334,17 @@
     flex-direction: row;
     justify-content: space-between;
 }
+.category-content-img{
+   height: 24px;
+   width: 24px;
+   background-image: url(/assets/img/icon/plus\ button.png);
+   background-position: center;
+}
+.category-content-img:hover{
+    cursor: pointer;
+    background-image: url(/assets/img/icon/output-onlinepngtools.png);
+    background-position: center;
+}
 .category-content>h4{
     margin: 0;
 }
@@ -326,7 +352,7 @@
 .board-position{
     height: 100%;
     width: 100%;
-    background-color: #0038FF;
+    
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -337,7 +363,25 @@
 }
 .drag-area{
     height: 100%;
-    width: 246px;
-    background-color: red;
+    width: 252px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px
     
+    
+}
+.drag-area-highlight {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.task-body{
+    height: 263px;
+    width: 252px;
+    border-radius: 24px;
+    background-color: #f0f0f0;
+    border: 1px solid black;
+
+}
+.task-body:hover{
+    cursor: pointer;
 }
