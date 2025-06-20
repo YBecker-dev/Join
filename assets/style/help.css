@@ -1,13 +1,18 @@
 .content-position{
-    height: 100vh;
+    position: absolute;
+    overflow: auto;
+    height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    gap: 30px;
-    
-
+}
+.sticky-wrapper{
+    width: 100%;
+    padding-top: 169px;
+    padding-left: 96px;
+    padding-right: 96px;
+    padding-bottom: 50px;
 }
 h1{
     padding: 0;
@@ -27,21 +32,34 @@ p{
     line-height: 120%;
 }
 .header{
-    position: sticky;
-    top: 200px;
+    /*top: 200px;*/
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     height: 73px;
-    width: 85%
+    width: 85%;
+    margin-bottom: 20px;
+    
+}
+.headline{
+    flex-grow: 1;
+    text-align: start;
+
 }
 .backward{
+    position: fixed;
     height: 37px;
     width: 37px;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 100;
+}
+.backward:hover{
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: rgb(222, 237, 241);
 }
 .help-content{
     height: 1024px;
@@ -75,4 +93,9 @@ p{
 a,.join-color{
     color: #29abe2;
     text-decoration: none;
+}
+.space{
+    height: 50px;
+    width: 100%;
+    
 }
