@@ -43,7 +43,7 @@ function getTaskOverlay(){
     return`     <div class="overlay-position">
                     <div class="overlay-header">
                         <div class="task-type">
-                            <p>Inhalt</p>
+                            <p class="p-Tag">Inhalt</p>
                         </div>
                         <div class="close-icon">
                             <img src="../img/icon/close.png" >
@@ -53,40 +53,40 @@ function getTaskOverlay(){
                         <h1>Kochwelt Page &Recipe Recommender</h1>
                     </div>
                     <div class="overlay-description-flex">
-                        <p>Build start page with recipe recommendation.</p>
+                        <p class="p-Tag">Build start page with recipe recommendation.</p>
                     </div>
                     <div class="overlay-description-flex">
-                        <p>Due date:</p>
-                        <p>10/05/2023</p>
+                        <p class="p-Tag">Due date:</p>
+                        <p class="p-Tag">10/05/2023</p>
                     </div>
                     <div class="overlay-description-flex">
-                        <p>Priority</p>
+                        <p class="p-Tag">Priority</p>
                         <div class="overlay-priority">
-                             <p>medium</p>
+                             <p class="p-Tag">medium</p>
                              <img src="../img/icon/priority/Prio media.png">
                         </div>
                     </div>
                     <div class="assigned-to">
-                        <p>Assigned To:</p>
+                        <p class="p-Tag">Assigned To:</p>
                         <div class="overlay-peoples">
                             <div class="peoples-info">
                                 <div class="initials">
-                                    <p>EM</p>
+                                    <p class="p-Tag">EM</p>
                                 </div>
                                 <div class="people-name">
-                                    <p>Emmanuel Maurer</p>
+                                    <p class="p-Tag">Emmanuel Maurer</p>
                                 </div>
                             </div>   
                         </div>
                     </div>
                     <div class="overlay-subtasks">
-                        <p>Subtasks</p>
+                        <p class="p-Tag">Subtasks</p>
                         <div class="subtask-info">
                             <div class="overlay-checkbox">
                                  <input type="checkbox">
                             </div>
                             <div class="task-description">
-                                <p>Implement Recipe Recommendation</p>
+                                <p class="p-Tag">Implement Recipe Recommendation</p>
                             </div>
                         </div>    
                     </div>
@@ -94,12 +94,12 @@ function getTaskOverlay(){
                         <div class="overlay-edit">
                             <div class="overlay-edit-content">
                                 <img src="../img/icon/trash.png">
-                                <p>Delete</p>
+                                <p class="p-Tag">Delete</p>
                             </div>
                             <div class="overlay-seperator"></div>
                             <div class="overlay-edit-content transform-left">
                                 <img src="../img/icon/edit.png">
-                                <p>Edit</p>
+                                <p class="p-Tag">Edit</p>
                             </div>
                         </div>
                     </div>    

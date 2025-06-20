@@ -1,5 +1,5 @@
 /*Overlay-Design */
-p{
+.p-Tag{
     padding: 0;
     font-size: 20px;
     font-weight: 400;
@@ -97,7 +97,6 @@ p{
     display: flex;
     gap: 25px;
 }
-
 
 .overlay-priority{
     height: 24px;
@@ -220,3 +219,125 @@ p{
 }
 
 
+/*Board style*/
+.header-position{
+    height: 232px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.header-space{
+    height: 79.5px;
+    width: 100%;
+}
+.board-header{
+    height: 73px;
+    width: 87%;
+   
+    
+}
+.board-header-content{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.board-form{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 32px;
+}
+.addTaskBtn{
+   margin: 0;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 11px;  
+}
+.addTaskBtn>img{
+    height: 18.67px;
+    width: 18.67px;
+    
+}
+.input-find-Task{
+  height: 50px;
+  width: 422px;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #D1D1D1;
+}
+.input-find-Task>input{
+    border: #FFFFFF;
+    height: 24px;
+    width: 366px;
+    padding: 12px 0px 12px 16px;
+    border-right: 1px solid #D1D1D1;
+}
+.search-icon{
+    height: 32px;
+    width: 32px;
+    padding-left: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.search-icon>img{
+    height: 17.58px;
+    width: 17.58px;
+}
+
+
+.categorys{
+    height: 79.5px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    
+
+}
+.categorys-wrapper{
+    height: 24px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 26px;
+    padding-left: 50px;
+    padding-right: 50px;
+
+}
+.category-content{
+    height: 100%;
+    width: 244px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.category-content>h4{
+    margin: 0;
+}
+
+.board-position{
+    height: 100%;
+    width: 100%;
+    background-color: #0038FF;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 26px;
+    padding-left: 50px;
+    padding-right: 50px;
+     
+}
+.drag-area{
+    height: 100%;
+    width: 246px;
+    background-color: red;
+    
+}
