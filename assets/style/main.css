@@ -57,7 +57,9 @@ header {
     left: 232px;
     right: 0;
     bottom: 0;
+    overflow: auto;
 }
+
 .help-icon:hover{
     cursor: pointer;
     height: 22px;

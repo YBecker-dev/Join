@@ -214,6 +214,16 @@ label {
     margin-bottom: 24px;
 }
 
+.priority-buttons img{
+    width: 20px;
+    height: 14.5px;
+}
+
+.priority-button-medium-img{
+    height: auto!important;
+}
+
+
 .priority-buttons button {
     margin: 0;
 }
@@ -330,6 +340,7 @@ input[type="text"] {
     flex-wrap: wrap;
     align-items: center;
     gap: 4px;
+    z-index: 1;
 }
 
 .clear-button {
@@ -369,6 +380,10 @@ input[type="text"] {
     font-size: 12px;
 }
 
+.user-dropdown > div > p {
+    font-size: 20px;
+}
+
 .assigned-contacts {
     display: flex;
     justify-content: space-between;
@@ -390,7 +405,7 @@ input[type="text"] {
 }
 
 .add-task input[name="add-task-input3"]::placeholder {
-    color:black
+    color: black
 }
 
 .add-task input[name="add-task-input3"]:focus {
@@ -599,4 +614,8 @@ input[type="text"] {
 
 .arrow-hover:hover {
     background-color: #D2E3FF !important;
+}
+
+#category-dropdown p {
+    font-size: 20px;
 }
