@@ -83,7 +83,7 @@ function getTaskOverlay(){
                         <p class="p-Tag">Subtasks</p>
                         <div class="subtask-info">
                             <div class="overlay-checkbox">
-                                 <input type="checkbox">
+                                 <input class="checkbox"type="checkbox">
                             </div>
                             <div class="task-description">
                                 <p class="p-Tag">Implement Recipe Recommendation</p>
@@ -93,12 +93,14 @@ function getTaskOverlay(){
                     <div class="overlay-edit-wrapper">
                         <div class="overlay-edit">
                             <div class="overlay-edit-content">
-                                <img src="../img/icon/trash.png">
+                                <div class="trashImg"></div>
+                                
                                 <p class="p-Tag">Delete</p>
                             </div>
                             <div class="overlay-seperator"></div>
                             <div class="overlay-edit-content transform-left">
-                                <img src="../img/icon/edit.png">
+                                <div class="editImg"></div>
+                                
                                 <p class="p-Tag">Edit</p>
                             </div>
                         </div>

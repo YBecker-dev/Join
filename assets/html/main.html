@@ -18,13 +18,13 @@
   <body onload="loadContent('testboard.html');">
     <div class="overlay d-none" id="overlayBoard" onclick="toggleBoardOverlay()">
       <div class="overlay-content-flex">
-        <div class="overlay-content-render" id="overlay-content-loader"></div>
+        <div class="overlay-content-render" id="overlay-content-loader" onclick="preventBubbling(event)"></div>
       </div>
     </div>
 
     <div class="overlay d-none" id="overlayContact" onclick="toggleContactOverlay()">
       <div class="overlay-content-flex">
-        <div class="overlay-content-render-contact" id="overlay-contact-content-loader"></div>
+        <div class="overlay-content-render-contact" id="overlay-contact-content-loader" ></div>
       </div>
     </div>
 

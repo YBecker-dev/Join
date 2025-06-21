@@ -114,3 +114,6 @@ function removeHighlight(id) {
     document.getElementById(id).classList.remove('drag-area-highlight');
 }
 
+function preventBubbling (event){
+    event.stopPropagation();   
+}
