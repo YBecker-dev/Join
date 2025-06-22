@@ -9,6 +9,7 @@ async function loadContent(page) {
     initAddTask();
   } else if (page === 'contacts.html') {
   } else if (page === 'board.html') {
+    initBoard()
   } else if (page === 'summary_user.html') {
     initSummary();
   } else if (page === 'privacy-policy.html') {

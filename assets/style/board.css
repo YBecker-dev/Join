@@ -168,7 +168,10 @@
     border-radius: 5px;
     background-color: #D1D1D1;
 }
-
+.checkbox:hover{
+    cursor: pointer;
+    background-color: #D1D1D1;
+}
 .overlay-subtasks{
     height: 100px;
     width: 445px;

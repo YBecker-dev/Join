@@ -40,7 +40,7 @@ function toggleBoardOverlay(){
 }
 function moveTo(newStatus){
     // suche im Array nach dem Task mit der passenden Id unabhängig vom Index
-    let checkTask = todos.find(task => task.id == currentDraggedElement);
+    let checkTask = todos.find(task => task.id === currentDraggedElement);
     if(checkTask){
         checkTask.status = newStatus; // Ändere den Status
         console.log(checkTask.status) 
@@ -51,7 +51,7 @@ function moveTo(newStatus){
     initBoard();
 }
 function checkToDo(){
-    let doing = todos.filter(todo => todo.status == 'todo') // filtere ale tasks mit status todo aus dem array
+    let doing = todos.filter(todo => todo.status === 'todo') // filtere ale tasks mit status todo aus dem array
     //console.log(doing);
     document.getElementById('todo').innerHTML='';
     for(index = 0; index < doing.length; index++){
@@ -73,7 +73,7 @@ function startDragging(id){
 
 
 function checkInProgress(){
-    let doing = todos.filter(todo =>todo.status == 'inProgress') // filtere ale tasks mit status todo aus dem array
+    let doing = todos.filter(todo =>todo.status === 'inProgress') // filtere ale tasks mit status todo aus dem array
    
     document.getElementById('inProgress').innerHTML='';
     for(index = 0; index < doing.length; index++){
@@ -84,7 +84,7 @@ function checkInProgress(){
     }
 }
 function checkAwaitFeedback(){
-    let doing = todos.filter(todo =>todo.status == 'awaitFeedback') // filtere ale tasks mit status todo aus dem array
+    let doing = todos.filter(todo =>todo.status === 'awaitFeedback') // filtere ale tasks mit status todo aus dem array
     document.getElementById('awaitFeedback').innerHTML='';
     for(index = 0; index < doing.length; index++){
         const element = doing[index];
@@ -94,7 +94,7 @@ function checkAwaitFeedback(){
     }
 }
 function checkDone(){
-    let doing = todos.filter(todo =>todo.status == 'done') // filtere ale tasks mit status todo aus dem array
+    let doing = todos.filter(todo =>todo.status === 'done') // filtere ale tasks mit status todo aus dem array
     document.getElementById('done').innerHTML='';
     for(index = 0; index < doing.length; index++){
         const element = doing[index];

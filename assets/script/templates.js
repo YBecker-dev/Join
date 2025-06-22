@@ -45,7 +45,7 @@ function getTaskOverlay(){
                         <div class="task-type">
                             <p class="p-Tag">Inhalt</p>
                         </div>
-                        <div class="close-icon">
+                        <div class="close-icon" onclick="toggleBoardOverlay()">
                             <img src="../img/icon/close.png" >
                         </div>                
                     </div>
@@ -83,7 +83,7 @@ function getTaskOverlay(){
                         <p class="p-Tag">Subtasks</p>
                         <div class="subtask-info">
                             <div class="overlay-checkbox">
-                                 <input class="checkbox"type="checkbox">
+                                 <input class="checkbox" type="checkbox">
                             </div>
                             <div class="task-description">
                                 <p class="p-Tag">Implement Recipe Recommendation</p>
