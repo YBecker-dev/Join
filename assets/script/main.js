@@ -19,3 +19,12 @@ async function loadContent(page) {
     await initTestBoard();
   }
 }
+function toggleLogOutOverlay(){
+  console.log('check')
+  let logOutBoard = document.getElementById('overlay-logout');
+  if(logOutBoard.classList.contains('d-none')){
+    logOutBoard.classList.remove('d-none')
+  }else{
+    logOutBoard.classList.add('d-none')
+  }
+}

@@ -36,6 +36,9 @@
     background: white;
     color: #2aabe2;
 }
+.user:hover{
+    cursor: pointer;
+}
 
 .contentspace-html {
     width: 100%;

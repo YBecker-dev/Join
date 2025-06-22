@@ -66,3 +66,28 @@ header {
     width: 22px;
     transition: 0.3s;
 }
+
+.logout-overlay{
+    position: absolute;
+    top: 96px;
+    right: 20px;
+    height: 158px;
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    justify-content: center;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: #293647;
+    z-index: 20;
+}
+.section1{
+    height: 46px;
+    width: 130px;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
