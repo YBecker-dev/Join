@@ -1,4 +1,4 @@
-<body>
+<body onload="initContacts()">
         <div class="myMain">
 
             <section class="contactList">
@@ -10,6 +10,15 @@
                 </button>
 
                 <div id="contactContent">
+
+                    <!-- <div onclick="openContactOverlay()" class="person">
+                        <p class="initial">${getInitials(contacts.givenName, contacts.surname)}</p>
+                        <div>
+                            <h4>${contacts.givenName} ${contacts.surname}</h4>
+                            <p><a class="mail">${contacts.mail}</a></p>
+                        </div>
+                    </div> -->
+
                 </div>
             </section>
 
@@ -95,7 +104,7 @@
                 </div>
 
                 <div id="editContactOverlay">
-                    <div class="newContactOverlay">
+                    <!-- <div class="newContactOverlay">
                         <div class="headDiv">
                             <img class="contactLogo" src="../img/Logo/Logo_white.png" alt="Logo_white">
                             <p class="addHeadline">Add contact</p>
@@ -132,9 +141,9 @@
                                 <button class="clear-button">Delete</button>
                                 <button class="create-button">Create contact<img class="save-close" src="../img/icon/save.png" alt=""></button>
                             </div>
-                        </div>
+                        </div> 
 
-                    </div>
+                    </div>-->
                 </div>
             </section>
         </div>

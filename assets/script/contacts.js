@@ -19,9 +19,9 @@ let myContacts = [
     },  
 ];
 
-function init() {
+function initContacts() {
     //await fetchContactJson();
-    renderMyContacts();
+        renderMyContacts();
 
     //openContactOverlayContactsOverlay();
 }
@@ -40,9 +40,10 @@ async function fetchContactJson() {
 
 function renderMyContacts() {
     let myContactsContentRef = document.getElementById('contactContent');
-
+    myContactsContentRef.innerHTML = '';
+    
     for (let i = 0; i < myContacts.length; i++) {
-        myContactsContentRef.innerHTML += getNoteTemplateContact(i);
+        myContactsContentRef.innerHTML += getNoteTemplateContact(myContacts);
     }
 }
 
@@ -50,6 +51,16 @@ function getInitials(first, last) {
     return first[0].toUpperCase() + last[0].toUpperCase();
 }
 
+
+
+
+
+
+
+function renderContactOverlay() {
+   let contactOverlay = document.getElementById('contactContentOverlay');
+   contactOverlay.innerHTML = "";
+}
 
 
 function toggleContactOverlay() {
