@@ -27,6 +27,12 @@
       </div>
     </div>
 
+    <section class="logout-overlay d-none" id="overlay-logout"  onclick="toggleLogOutOverlay()">
+      <div class="logout-overlay-content" id="logout-overlay-content">
+        
+      </div>
+    </section>
+
     <header>
       <div class="header-content">
         <p>Kanban Project Management Tool</p>
@@ -37,16 +43,14 @@
             src="../img/icon/header_user_interface/help.png"
             alt="help"
           />
-          <p class="user" id="userBtn" onclick="toggleLogOutOverlay()">SM</p>
+          <div class="nameBtn" id="userBtn" onclick="toggleLogOutOverlay()">
+            <p class="user" >SM</p>
+          </div>
         </div>
       </div>
     </header>
 
-    <section class="logout-overlay d-none" id="overlay-logout">
-      <div class="section1">Legal Notice</div>
-      <div class="section1">Privacy Policy</div>
-      <div class="section1">Log out</div>
-    </section>
+     
 
     <main id="main-content" class="main-content"></main>
 

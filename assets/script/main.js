@@ -37,11 +37,11 @@ async function loadContent(page) {
 }
 
 function toggleLogOutOverlay(){
-  console.log('check')
-  let logOutBoard = document.getElementById('overlay-logout');
-  if(logOutBoard.classList.contains('d-none')){
-    logOutBoard.classList.remove('d-none')
-  }else{
-    logOutBoard.classList.add('d-none')
+  let logOutRef = document.getElementById('overlay-logout');
+  let menuContent = document.getElementById('logout-overlay-content');
+  logOutRef.classList.toggle('d-none');
+  if(!logOutRef.classList.contains('d-none')){
+    menuContent.innerHTML = getLogOutMenu();
   }
 }
+
