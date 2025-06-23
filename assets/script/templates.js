@@ -1,13 +1,13 @@
 
 // Contact Overview
 function getNoteTemplateContact(index) {
-  let contacts = myContacts[index];
+    let contact = myContacts[index];
 
-    return  `<div onclick="openContactOverlay()" class="person">
-                <p class="initial">${getInitials(contacts.givenName, contacts.surname)}</p>
+    return  `<div onclick="openDetails(${index})" class="person">
+                <p class="initial">${getInitials(contact.givenName, contact.surname)}</p>
                 <div>
-                    <h4>${contacts.givenName} ${contacts.surname}</h4>
-                    <p><a class="mail">${contacts.mail}</a></p>
+                    <h4>${contact.givenName} ${contact.surname}</h4>
+                    <p><a class="mail">${contact.mail}</a></p>
                 </div>
             </div>`;
 }
@@ -57,32 +57,34 @@ function getNoteTemplateAddNewContact() {
 
 
 // Contact view
-function getNoteTemplateContactOverlay() {
-  return `    <div class="contactOverlay">
-                    <div class="contactInformations">
-                        <p class="initialOverlay">${getInitials(contacts.givenName, contacts.surname)}</p>
-                        <div>
-                            <p class="nanesDetail">${contacts.givenName} ${contacts.surname}</p>
-                            <div class="contactIcons">
-                                <div onclick="openContactOverlay()">
-                                    <img class="editIcon" src="../img/icon/edit.png" alt="pencil">
-                                    <span class="editText">edit</span>
-                                </div>
-                                <div onclick="deleteContact()">
-                                    <img class="editIcon" src="../img/icon/trash.png" alt="wastebasket">
-                                    <span class="editText">delete</span>
-                                </div>
+function getNoteTemplateContactDetails(indexDetails) {
+    let contact = myContacts[indexDetails];
+
+    return  `<div class="contactOverlay">
+                <div class="contactInformations">
+                    <p class="initialOverlay">${getInitials(contact.givenName, contact.surname)}</p>
+                    <div>
+                        <p class="namesDetail">${contact.givenName} ${contact.surname}</p>
+                        <div class="contactIcons">
+                            <div onclick="openContactOverlay()">
+                                <img class="editIcon" src="../img/icon/edit.png" alt="pencil">
+                                <span class="editText">edit</span>
+                            </div>
+                            <div onclick="deleteContact()">
+                                <img class="editIcon" src="../img/icon/trash.png" alt="wastebasket">
+                                <span class="editText">delete</span>
                             </div>
                         </div>
                     </div>
-                    <div class="infoBlock">
-                        <p>Contact Information</p>
-                        <h4>Email</h4>
-                        <a class="mail" href="mailto:">${contacts.mail}</a>
-                        <h4>Phone</h4>
-                        <a class="phone" href="tel:">${contacts.phone}</a>
-                    </div>
-                </div> `;
+                </div>
+                <div class="infoBlock">
+                    <p>Contact Information</p>
+                    <h4>Email</h4>
+                    <a class="mail" href="mailto:${contact.mail}">${contact.mail}</a>
+                    <h4>Phone</h4>
+                    <a class="phone" href="tel:${contact.phone}">${contact.phone}</a>
+                </div>
+            </div>`;
 }
 
 function getTaskOverlay(task, taskId) {

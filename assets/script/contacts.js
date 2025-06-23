@@ -19,30 +19,35 @@ let myContacts = [
     },  
 ];
 
-function init() {
-    //await fetchContactJson();
-    renderMyContacts();
-
-    //openContactOverlayContactsOverlay();
+function initContacts() {
+    renderContacts();
+    // renderContactOverlay();
 }
 
-async function fetchContactJson() {
-    let url = `https:`;
+async function fetchDataJson() {
+    let url = `https://`;
     let response = await fetch(url);
     let responseAsJson = await response.json();
 
-    let promises = responseAsJson.results.map(contact => fetch(contact.url).then(c => c.json()));
-    let contacts = await Promise.all(promises);
+    let promises = responseAsJson.results.map(contacts => fetch(contacts.url).then(r => r.json()));
+    let allContacts = await Promise.all(promises);
     console.log(responseAsJson);
 
-    contacts.push();
 }
 
-function renderMyContacts() {
-    let myContactsContentRef = document.getElementById('contactContent');
 
-    for (let i = 0; i < myContacts.length; i++) {
-        myContactsContentRef.innerHTML += getNoteTemplateContact(i);
+function initContacts() {
+    renderContacts();
+    
+    openDetails();
+}
+
+function renderContacts() {
+    let contentRef = document.getElementById('contactContent');
+    contentRef.innerHTML = '';
+
+    for (let index = 0; index < myContacts.length; index++) {
+        contentRef.innerHTML += getNoteTemplateContact(index);
     }
 }
 
@@ -50,6 +55,10 @@ function getInitials(first, last) {
     return first[0].toUpperCase() + last[0].toUpperCase();
 }
 
+function openDetails(index) {
+    let details = document.getElementById('contactDetails');
+    details.innerHTML = getNoteTemplateContactDetails(index);
+}
 
 
 function toggleContactOverlay() {
