@@ -82,8 +82,10 @@ async function pushTasksInBoard() {
       for (let contactIndex = 0; contactIndex < task.assignedTo.length; contactIndex++) {
         let userId = task.assignedTo[contactIndex];
         let contact = findContactById(contacts, userId);
-        let displayInitials = contact ? contact.initials : userId; // Fallback: ID, falls nicht gefunden
-        assignedContact += '<span class="board-contact-name">' + displayInitials + '</span>';
+        if (contact) {
+          let displayInitials = contact.initials;
+          assignedContact += '<span class="board-contact-name">' + displayInitials + '</span>';
+        }
       }
     }
 
@@ -138,7 +140,6 @@ async function pushTasksInBoard() {
           <div class="board-task-assigned-contact">${assignedContact}</div>
           ${priorityImg}
         </div>
-        <button onclick="deleteTaskFromFirebase('${taskId}')">test delete</button>
       </div>
     `;
 
@@ -170,7 +171,7 @@ async function toggleBoardOverlay(taskId) {
   let task = await response.json();
   if (!task) return;
 
-  overlay_content.innerHTML = getTaskOverlay(task);
+  overlay_content.innerHTML = getTaskOverlay(task, taskId);
 }
 
 function findContactById(contacts, id) {

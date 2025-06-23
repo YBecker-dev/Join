@@ -37,7 +37,7 @@
 .overlay-position {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 24px;
     padding-top: 48px;
     padding-bottom: 48px;
     padding-left: 40px;
@@ -52,18 +52,8 @@
     justify-content: space-between;
 }
 
-.task-type {
-    width: 164px;
-    color: #FFFFFF;
-    border-radius: 8px;
-    background-color: #0038FF;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .task-type>p {
-    padding: 0;
+    padding: 4px 24px;
     font-size: 23px;
     font-weight: 400;
     line-height: 120%;
@@ -89,10 +79,7 @@
     border-radius: 50%;
 }
 
-.overlay-titel {}
-
 .overlay-titel>h1 {
-    padding: 0;
     font-size: 61px;
     font-weight: 700;
     color: #000000;
@@ -218,60 +205,35 @@
     gap: 8px;
 }
 
-.overlay-edit-content:hover .p-Tag {
-    cursor: pointer;
-    color: #2aabe2;
-    transform: scale(1.05);
-    font-weight: 700;
-
-}
-
-.overlay-edit-content:hover .trashImg {
-
-    cursor: pointer;
-    background-image: url(/assets/img/icon/icons8-müll-24.png);
-    background-position: center;
-    background-size: cover;
-
-}
-
-.overlay-edit-content:hover .editImg {
-
-    cursor: pointer;
-    background-image: url(/assets/img/icon/blue_edit.png);
-    background-position: center;
-    background-size: contain;
-
-}
-
-.trashImg {
-    height: 24px;
-    width: 24px;
-    background-image: url(/assets/img/icon/trash.png);
-    background-position: center;
-    background-size: contain;
-}
-
-.editImg {
-    height: 24px;
-    width: 24px;
-    background-image: url(/assets/img/icon/edit.png);
-    background-position: center;
-    background-size: contain;
-
-}
-
-/*.editImg:hover{
-    cursor: pointer;
-    background-image: url(/assets/img/icon/blue_edit.png);
-    background-position: center;
-    background-size: contain;
-}*/
-.overlay-edit-content>p {
-    padding: 0;
+.trashImg p,
+.editImg p {
     font-size: 16px;
-    font-weight: 400;
     line-height: 120%;
+}
+
+.trashImg,
+.editImg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    transform-origin: right center;
+    gap: 8px;
+}
+
+.trashImg:hover,
+.editImg:hover {
+    transform: scaleX(1.05);
+}
+
+.trashImg:hover p,
+.trashImg:hover img,
+.editImg:hover p,
+.editImg:hover img {
+    color: #2AABE2;
+    filter: brightness(0) saturate(100%) invert(56%) sepia(94%) saturate(749%) hue-rotate(161deg) brightness(97%) contrast(92%);
 }
 
 .overlay-seperator {
