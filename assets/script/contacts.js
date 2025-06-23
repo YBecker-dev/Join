@@ -33,7 +33,7 @@ async function fetchDataJson() {
 
 function initContacts() {
     renderContacts();
-    openDetails(0);
+    openDetails();
 }
 
 function renderContacts() {
@@ -53,4 +53,15 @@ function getInitials(first, last) {
 function openDetails(index) {
     let details = document.getElementById('contactDetails');
     details.innerHTML = getNoteTemplateContactDetails(index);
+}
+
+function toggleContactOverlay() {
+    console.log('connect')
+    let overlayRef = document.getElementById('overlayContact');
+    let overlay_content = document.getElementById('overlay-contact-content-loader');
+    overlayRef.classList.toggle('d-none');
+    if(!overlayRef.classList.contains('d-none')){
+        overlay_content.innerHTML= getAddContactOverlay();
+    }
+    
 }
