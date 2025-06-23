@@ -38,12 +38,12 @@ function getNoteTemplateContactOverlay() {
                 </div> `;
 }
 
-function getTaskOverlay(task) {
-    let categoryInfo = backgroundColorTitle(task);
-    let categoryText = categoryInfo.categoryText;
-    let categoryClass = categoryInfo.categoryClass;
+function getTaskOverlay(task, taskId) {
+  let categoryInfo = backgroundColorTitle(task);
+  let categoryText = categoryInfo.categoryText;
+  let categoryClass = categoryInfo.categoryClass;
 
-    return `
+  return `
     <div class="overlay-position">
       <div class="overlay-header">
         <div class="task-type">
@@ -82,13 +82,17 @@ function getTaskOverlay(task) {
       <div class="overlay-edit-wrapper">
         <div class="overlay-edit">
           <div class="overlay-edit-content">
-            <div class="trashImg"></div>
-            <p class="p-Tag">Delete</p>
+            <div class="trashImg" onclick="deleteTaskFromFirebase('${taskId}')">
+              <img src="../img/icon/trash.png" alt="trash">
+              <p class="p-Tag">Delete</p>
+            </div>
           </div>
           <div class="overlay-seperator"></div>
-          <div class="overlay-edit-content transform-left">
-            <div class="editImg"></div>
-            <p class="p-Tag">Edit</p>
+          <div class="overlay-edit-content">
+            <div class="editImg">
+              <img src="../img/icon/edit.png" alt="edit">
+              <p class="p-Tag">Edit</p>
+            </div>
           </div>
         </div>
       </div>    
