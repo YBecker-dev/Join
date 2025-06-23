@@ -19,11 +19,6 @@ let myContacts = [
     },  
 ];
 
-function initContacts() {
-    renderContacts();
-    // renderContactOverlay();
-}
-
 async function fetchDataJson() {
     let url = `https://`;
     let response = await fetch(url);
@@ -38,17 +33,17 @@ async function fetchDataJson() {
 
 function initContacts() {
     renderContacts();
-    
-    openDetails();
+    openDetails(0);
 }
 
 function renderContacts() {
     let contentRef = document.getElementById('contactContent');
-    contentRef.innerHTML = '';
+    let html = "";
 
     for (let index = 0; index < myContacts.length; index++) {
-        contentRef.innerHTML += getNoteTemplateContact(index);
+        html += getNoteTemplateContact(index);
     }
+    contentRef.innerHTML = html;
 }
 
 function getInitials(first, last) {
@@ -58,16 +53,4 @@ function getInitials(first, last) {
 function openDetails(index) {
     let details = document.getElementById('contactDetails');
     details.innerHTML = getNoteTemplateContactDetails(index);
-}
-
-
-function toggleContactOverlay() {
-    console.log('connect')
-    let overlayRef = document.getElementById('overlayContact');
-    let overlay_content = document.getElementById('overlay-contact-content-loader');
-    overlayRef.classList.toggle('d-none');
-    if(!overlayRef.classList.contains('d-none')){
-        overlay_content.innerHTML= getAddContactOverlay();
-    }
-    
 }

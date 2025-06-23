@@ -76,24 +76,6 @@ function openDropdown() {
   if (dropdown) dropdown.classList.remove('hidden');
 }
 
-async function loadContacts() {
-  const response = await fetch(BASE_URL_TASKS_AND_USERS);
-  const data = await response.json();
-  contacts = [];
-  if (data) {
-    for (const id in data) {
-      contacts.push({
-        id: id,
-        name: data[id].name,
-        initials: data[id].initials,
-        email: data[id].email,
-        phone: data[id].phone,
-      });
-    }
-  }
-  assignedToDropdown(); // Aktualisiere das Dropdown nach dem Laden
-}
-
 function assignedToDropdown(searchTerm = '') {
   let contactsRef = document.getElementById('assigned-to-dropdown-options');
   if (!contactsRef) return;
@@ -453,8 +435,8 @@ function assignedToDropdownHTML(contacts, i, checked) {
   return `
         <div class="assigned-contacts" onclick="checkCheckbox(this); toggleContactSelection(${i}, event);">
           <div class="user-dropdown">
-            <div class="user-name-dropdown">
-              <span>${contacts[i].initials}</span>
+            <div class="user-name-dropdown" style="background-color: ${contacts[i].color};">
+              <span >${contacts[i].initials}</span>
             </div>
             <div>
               <p>${contacts[i].name}</p>

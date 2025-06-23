@@ -58,7 +58,6 @@ function getNoteTemplateAddNewContact() {
 
 // Contact view
 function getNoteTemplateContactDetails(indexDetails) {
-    let contact = myContacts[indexDetails];
 
     return  `<div class="contactOverlay">
                 <div class="contactInformations">
