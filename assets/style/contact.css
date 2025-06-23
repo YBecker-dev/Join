@@ -3,8 +3,8 @@
 }
 
 .contactList {
-    width: 420px;
-    height: 100%;
+    width: 38rem;
+    height: 89vh;
     background-color: #ffffff;
 }
 
@@ -38,7 +38,7 @@ button {
 }
 
 .person:hover {
-    background-color: #293647;
+    background-color: #c4c6ca;
     color: #ffffff;
 }
 
@@ -95,11 +95,11 @@ h2 {
     font-size: 24px;
 }
 
-/*.contactOverlay {
+.contactOverlay {
     position: absolute;
-    margin-top: 80px;
-    margin-left: 100px;
-}*/
+    margin-top: 5rem;
+    margin-left: 5rem;
+}
 
 .contactInformations {
     display: flex;
@@ -158,13 +158,7 @@ h4 {
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
-<<<<<<< HEAD
-/*Overlay Style*/
-=======
 
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 3468a6d633934e9e754feecf31eb4147ebec020d
 .overlay{
     position: fixed;
     top: 0;
@@ -379,14 +373,15 @@ h4 {
     height: 24px;
     width: 24px;
 }
-=======
-=======
->>>>>>> 0c71d560af5570e5c938c196128644b698f2afac
+
 .newContactOverlay {
-    height: 65%;
-    width: 60vw;
+    height: 38rem;
+    width: 75rem;
     position: absolute;
-    margin-top: 5rem;
+    top: 7rem;
+    left: .5rem;
+    /* position: absolute; */
+    /* margin-top: 3rem; */
     display: flex;
 }
 
@@ -399,7 +394,7 @@ h4 {
 }
 
 .contactLogo {
-    height: 3rem;
+    height: 3.5rem;
     margin-top: 8rem;
     margin-left: 2rem;
     display: flex;
@@ -410,12 +405,14 @@ h4 {
 .addHeadline {
     margin-top: 1rem;
     margin-bottom: 1rem;
-    font-size: 3.5rem;
+    margin-left: 2rem;
+    font-size: 3.3rem;
     font-weight: bold;
     color: #ffffff;
 }
 
 .addTastText {
+    margin-left: 2rem;
     font-size: 1.5rem;
     color: #ffffff;
 }
@@ -425,7 +422,7 @@ h4 {
     width: 5rem;
     background-color: #29abe2;
     margin-top: 1rem;
-    margin-left: 2.8rem;
+    margin-left: 2rem;
 }
 
 .editDiv {
@@ -445,7 +442,7 @@ h4 {
 }
 
 .close {
-    height: 2.5rem;
+    height: 2rem;
 }
 
 .profilDiv {
@@ -454,33 +451,37 @@ h4 {
 }
 
 .profileImg {
-    width: 
-    10rem;
+    width: 10rem;
     margin-left: 4rem;
     margin-right: 4rem;
 }
 
 .addNewContactDiv {
     margin-top: 0.1rem;
-    margin-left: 2rem;
+    margin-left: 1.5rem;
+    margin-bottom: 2.5rem;
     padding-left: 2rem;
     padding-right: 2rem;
-    border-color: #a6adb3;
-    margin-bottom: 2.5rem;
     border: solid;
+    border-width: 0.06rem;
+    border-color: #a6adb3;
     border-radius: 0.5rem;
     display: flex;
     align-items: center;
 }
 
+.addNewContactDiv:focus {
+    border-color: #29abe2;
+}
+
 .addNewContact {
     border: 0;
-    width: 15rem;
+    width: 20rem;
     height: 3rem;
 }
 
-.addNewContact:active {
-    border: 0;
+.addNewContact:focus {
+    display: none;
 }
 
 .addNewContactIcon {
@@ -498,5 +499,5 @@ h4 {
 }
 
 .save-close {
-    width: 1rem;
+    width: 2rem;
 }
