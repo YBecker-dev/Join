@@ -148,10 +148,10 @@ function getTaskOverlay(task, taskId) {
   `;
 }
 
-function contactsOverlayTemplate(initials, name) {
+function contactsOverlayTemplate(initials, name, color) {
   return `
         <div class="peoples-info">
-          <div class="initials">
+          <div class="initials" style="background-color: ${color};">
             <p class="p-Tag">${initials}</p>
           </div>
           <div class="people-name">
@@ -186,4 +186,34 @@ function getLogOutMenu() {
                 </div>
     
     `;
+}
+
+function boardHtmlTemplate(taskId, categoryClass, categoryText, titleText, descriptionText, assignedContact, priorityImg, progressBar) {
+  return `
+    <div class="board-task-container" onclick="toggleBoardOverlay('${taskId}')" ondragstart="startDragging('${taskId}')" draggable="true"> 
+      <div class="board-tasks">
+    <p class="${categoryClass}">${categoryText}</p>
+        <div class="board-tasks-title-description">
+          <p class="board-task-title">${titleText}</p>
+          <p class="board-task-description">${descriptionText}</p>
+        </div>
+        <div class="board-task-subtasks">${progressBar}</div>
+        <div class="board-task-assigned-priority">
+          <div class="board-task-assigned-contact">${assignedContact}</div>
+          ${priorityImg}
+        </div>
+      </div>
+      </div>
+    `
+}
+
+function progressbarHtml(percent, doneCount, totalCount) { 
+  return `
+    <div class="board-task-subtasks-row">
+      <div class="progress-bar-container">
+        <div class="progress-bar" style="width: ${percent}%;"></div>
+      </div>
+      <span class="progress-bar-text">${doneCount}/${totalCount} Subtasks</span>
+    </div>
+  `;
 }

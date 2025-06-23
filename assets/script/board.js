@@ -84,74 +84,67 @@ async function pushTasksInBoard() {
         let contact = findContactById(contacts, userId);
         if (contact) {
           let displayInitials = contact.initials;
-          assignedContact += '<span class="board-contact-name">' + displayInitials + '</span>';
+          assignedContact += `<span class="board-contact-name" style="background-color:${contact.color}">${displayInitials}</span>`;
         }
       }
     }
 
-    let priorityImg = '';
-    if (task.priority === 'Urgent') {
-      priorityImg = '<img src="../img/icon/priority/urgent.png" alt="Urgent" class="priority-img">';
-    } else if (task.priority === 'Medium') {
-      priorityImg = '<img src="../img/icon/priority/medium.png" alt="Medium" class="priority-img">';
-    } else if (task.priority === 'Low') {
-      priorityImg = '<img src="../img/icon/priority/low.png" alt="Low" class="priority-img">';
-    }
+    let priorityImg = showPriorityImg(task);
+    let progressBar = progressBarSubtasks(task);
 
-    let doneCount = 0;
-    let totalCount = 0;
-    let progressBar = '';
-    if (Array.isArray(task.subtasks)) {
-      totalCount = task.subtasks.length;
-      for (let subtaskIndex = 0; subtaskIndex < task.subtasks.length; subtaskIndex++) {
-        if (typeof task.subtasks[subtaskIndex] === 'object' && task.subtasks[subtaskIndex].done) {
-          doneCount++;
-        }
+    let div = document.createElement('section');
+    div.innerHTML = boardHtmlTemplate(
+      taskId,
+      categoryClass,
+      categoryText,
+      titleText,
+      descriptionText,
+      assignedContact,
+      priorityImg,
+      progressBar
+    );
+    dragandDropboard(task, div);
+  }
+}
+
+function showPriorityImg(task) {
+  let priorityImg = '';
+  if (task.priority === 'Urgent') {
+    priorityImg = '<img src="../img/icon/priority/urgent.png" alt="Urgent" class="priority-img">';
+  } else if (task.priority === 'Medium') {
+    priorityImg = '<img src="../img/icon/priority/medium.png" alt="Medium" class="priority-img">';
+  } else if (task.priority === 'Low') {
+    priorityImg = '<img src="../img/icon/priority/low.png" alt="Low" class="priority-img">';
+  }
+  return priorityImg;
+}
+
+function progressBarSubtasks(task) {
+  let doneCount = 0;
+  let totalCount = 0;
+  let progressBar = '';
+  if (Array.isArray(task.subtasks)) {
+    totalCount = task.subtasks.length;
+    for (let subtaskIndex = 0; subtaskIndex < task.subtasks.length; subtaskIndex++) {
+      if (typeof task.subtasks[subtaskIndex] === 'object' && task.subtasks[subtaskIndex].done) {
+        doneCount++;
       }
-      let percent = totalCount > 0 ? (doneCount / totalCount) * 100 : 0;
-      progressBar = `
-    <div class="board-task-subtasks-row">
-      <div class="progress-bar-container">
-        <div class="progress-bar" style="width: ${percent}%;"></div>
-      </div>
-      <span class="progress-bar-text">${doneCount}/${totalCount} Subtasks</span>
-    </div>
-  `;
     }
+    let percent = totalCount > 0 ? (doneCount / totalCount) * 100 : 0;
+    progressBar = progressbarHtml(percent, doneCount, totalCount);
+  }
+  return progressBar;
+}
 
-    let div = document.createElement('div');
-    div.className = 'board-task-container';
-    div.onclick = function () {
-      toggleBoardOverlay(taskId);
-    };
-    div.draggable = true;
-    div.ondragstart = function () {
-      startDragging(taskId);
-    };
-    div.innerHTML = `
-      <div class="board-tasks">
-    <p class="${categoryClass}">${categoryText}</p>
-        <div class="board-tasks-title-description">
-          <p class="board-task-title">${titleText}</p>
-          <p class="board-task-description">${descriptionText}</p>
-        </div>
-        <div class="board-task-subtasks">${progressBar}</div>
-        <div class="board-task-assigned-priority">
-          <div class="board-task-assigned-contact">${assignedContact}</div>
-          ${priorityImg}
-        </div>
-      </div>
-    `;
-
-    if (task.status === 'todo') {
-      document.getElementById('todo').appendChild(div);
-    } else if (task.status === 'inProgress') {
-      document.getElementById('inProgress').appendChild(div);
-    } else if (task.status === 'awaitFeedback') {
-      document.getElementById('awaitFeedback').appendChild(div);
-    } else if (task.status === 'done') {
-      document.getElementById('done').appendChild(div);
-    }
+function dragandDropboard(task, div) {
+  if (task.status === 'todo') {
+    document.getElementById('todo').appendChild(div);
+  } else if (task.status === 'inProgress') {
+    document.getElementById('inProgress').appendChild(div);
+  } else if (task.status === 'awaitFeedback') {
+    document.getElementById('awaitFeedback').appendChild(div);
+  } else if (task.status === 'done') {
+    document.getElementById('done').appendChild(div);
   }
 }
 
@@ -189,6 +182,7 @@ function getContactInitialsAndName(userId) {
       return {
         initials: contacts[i].initials,
         name: contacts[i].name,
+        color: contacts[i].color,
       };
     }
   }
@@ -200,7 +194,7 @@ function getAssignedToHTML(task) {
     for (let i = 0; i < task.assignedTo.length; i++) {
       let userId = task.assignedTo[i];
       let contactData = getContactInitialsAndName(userId);
-      html += contactsOverlayTemplate(contactData.initials, contactData.name);
+      html += contactsOverlayTemplate(contactData.initials, contactData.name, contactData.color);
     }
   }
   return html;
