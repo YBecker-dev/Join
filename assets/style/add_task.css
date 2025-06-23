@@ -38,6 +38,7 @@
 }
 .user:hover{
     cursor: pointer;
+    background-color: #D1D1D1;
 }
 
 .contentspace-html {

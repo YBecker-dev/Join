@@ -1,6 +1,4 @@
-*{
-    
-}
+
 .contentspace-html{/*zur Veranschaulichung */
     width: 100%;
     height: 100%;
@@ -84,11 +82,7 @@
     background-image: url(/assets/img/icon/check-Vector.png);
     background-position: center;
     background-size: cover;
-    margin-right: 4px;
-   
-    
-    
-    
+    margin-right: 4px;    
 }
 .content-one-icon{
     width: 69px;
@@ -97,8 +91,7 @@
     background-color: #2A3647;
     display: flex;
     justify-content: center;
-    align-items: center;
-   
+    align-items: center;  
 }
 
 .section-two{

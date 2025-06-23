@@ -112,3 +112,10 @@ function getTaskOverlay(){
     `
 }
 
+function getLogOutMenu(){
+    return`     <div class="section1" onclick="preventBubbling(event)"  id="legalNotice">Legal Notice</div>
+                <div class="section1" onclick="preventBubbling(event)"  id="privacyPolicy">Privacy Policy</div>
+                <div class="section1" onclick="preventBubbling(event)"  id="logOut">Log out</div>
+    
+    `
+}
