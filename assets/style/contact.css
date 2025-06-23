@@ -2,6 +2,7 @@
     display: flex;
 }
 
+/* Contact List */
 .contactList {
     width: 38rem;
     height: 89vh;
@@ -42,18 +43,18 @@ button {
     color: #ffffff;
 }
 
-.person:target {
-    background-color: #293647;
+.person:active {
+    background-color: #293647; /* richtige Pseudoklasse suchen */
     color: #ffffff;
 }
 
 .initial {
     margin-right: 4rem;
-    width: 5rem;
+    width: 3.5rem;
     height: 3.5rem;
     align-content: center;
     border-radius: 6rem;
-    background-color: orange;
+    background-color: orange; /* wird gelöscht */
     color: white;
     font-size: 2rem;
 }
@@ -63,6 +64,7 @@ button {
     text-align: start;
 }
 
+/* Detail view */
 .details {
     width: 100%;
     background-color: #f6f7f8;
@@ -118,7 +120,7 @@ h2 {
     font-size: 4rem; 
 }
 
-.nanesDetail {
+.namesDetail {
     font-size: 2.5rem;
 }
 .contactIcons{
@@ -159,6 +161,10 @@ h4 {
     margin-bottom: 1rem;
 }
 
+
+
+
+ 
 .overlay{
     position: fixed;
     top: 0;
@@ -168,6 +174,7 @@ h4 {
     z-index: 1;
     background-color: rgb(84, 94, 97,0.375);  
 }
+
 .overlay-content-flex{
     height: 100vh;
     width: 100%;
@@ -372,7 +379,7 @@ h4 {
 .contactBtn>img{
     height: 24px;
     width: 24px;
-}
+} */
 
 .newContactOverlay {
     height: 38rem;
