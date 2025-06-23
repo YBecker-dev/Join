@@ -1,16 +1,8 @@
 let currentDraggedTaskId = null;
 
 async function initBoard() {
+  await loadContacts();
   await pushTasksInBoard();
-}
-
-function toggleBoardOverlay() {
-  let overlayRef = document.getElementById('overlayBoard');
-  let overlay_content = document.getElementById('overlay-content-loader');
-  overlayRef.classList.toggle('d-none');
-  if (!overlayRef.classList.contains('d-none')) {
-    overlay_content.innerHTML = getTaskOverlay();
-  }
 }
 
 function allowDrop(ev) {
@@ -25,12 +17,42 @@ function removeHighlight(id) {
   document.getElementById(id).classList.remove('drag-area-highlight');
 }
 
+function removeAllHighlights() {
+  removeHighlight('todo');
+  removeHighlight('inProgress');
+  removeHighlight('awaitFeedback');
+  removeHighlight('done');
+}
+
+if (typeof removeAllHighlights === 'function') {
+  document.addEventListener('dragend', removeAllHighlights);
+}
+
 function preventBubbling(event) {
   event.stopPropagation();
 }
 
+function startDragging(taskId) {
+  currentDraggedTaskId = taskId;
+}
+
+async function moveTo(newStatus) {
+  if (!currentDraggedTaskId) return;
+  let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + currentDraggedTaskId + '.json');
+  let task = await response.json();
+  if (!task) return;
+  task.status = newStatus;
+  await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + currentDraggedTaskId + '.json', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(task),
+  });
+  await pushTasksInBoard();
+  currentDraggedTaskId = null;
+}
+
 async function pushTasksInBoard() {
-  let response = await fetch(BASE_URL_TASKS + 'tasks.json');
+  let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json');
   let data = await response.json();
   if (!data) return;
 
@@ -45,16 +67,9 @@ async function pushTasksInBoard() {
     let taskId = entries[i][0];
     let task = entries[i][1];
 
-    let categoryText = '';
-    let categoryClass = '';
-    if (task.category) {
-      categoryText = task.category;
-      if (task.category === 'User Story') {
-        categoryClass = 'category-user-story';
-      } else if (task.category === 'Technical Task') {
-        categoryClass = 'category-technical-task';
-      }
-    }
+    let categoryInfo = backgroundColorTitle(task);
+    let categoryText = categoryInfo.categoryText;
+    let categoryClass = categoryInfo.categoryClass;
 
     let titleText = '';
     if (task.title) titleText = task.title;
@@ -65,8 +80,10 @@ async function pushTasksInBoard() {
     let assignedContact = '';
     if (Array.isArray(task.assignedTo)) {
       for (let contactIndex = 0; contactIndex < task.assignedTo.length; contactIndex++) {
-        let name = task.assignedTo[contactIndex];
-        assignedContact += `<span class="board-contact-name">${name}</span>`;
+        let userId = task.assignedTo[contactIndex];
+        let contact = findContactById(contacts, userId);
+        let displayInitials = contact ? contact.initials : userId; // Fallback: ID, falls nicht gefunden
+        assignedContact += '<span class="board-contact-name">' + displayInitials + '</span>';
       }
     }
 
@@ -102,7 +119,9 @@ async function pushTasksInBoard() {
 
     let div = document.createElement('div');
     div.className = 'board-task-container';
-    div.onclick = toggleBoardOverlay;
+    div.onclick = function () {
+      toggleBoardOverlay(taskId);
+    };
     div.draggable = true;
     div.ondragstart = function () {
       startDragging(taskId);
@@ -136,38 +155,81 @@ async function pushTasksInBoard() {
 }
 
 async function deleteTaskFromFirebase(taskId) {
-  await fetch(BASE_URL_TASKS + 'tasks/' + taskId + '.json', {
+  await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json', {
     method: 'DELETE',
   });
   location.reload();
 }
 
-function startDragging(taskId) {
-  currentDraggedTaskId = taskId;
-}
+async function toggleBoardOverlay(taskId) {
+  let overlayRef = document.getElementById('overlayBoard');
+  let overlay_content = document.getElementById('overlay-content-loader');
+  overlayRef.classList.toggle('d-none');
 
-async function moveTo(newStatus) {
-  if (!currentDraggedTaskId) return;
-  let response = await fetch(BASE_URL_TASKS + 'tasks/' + currentDraggedTaskId + '.json');
+  let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
   let task = await response.json();
   if (!task) return;
-  task.status = newStatus;
-  await fetch(BASE_URL_TASKS + 'tasks/' + currentDraggedTaskId + '.json', {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(task),
-  });
-  await pushTasksInBoard();
-  currentDraggedTaskId = null;
+
+  overlay_content.innerHTML = getTaskOverlay(task);
 }
 
-function removeAllHighlights() {
-  removeHighlight('todo');
-  removeHighlight('inProgress');
-  removeHighlight('awaitFeedback');
-  removeHighlight('done');
+function findContactById(contacts, id) {
+  for (let i = 0; i < contacts.length; i++) {
+    if (contacts[i].id === id) {
+      return contacts[i];
+    }
+  }
+  return null;
 }
 
-if (typeof removeAllHighlights === 'function') {
-  document.addEventListener('dragend', removeAllHighlights);
+function getContactInitialsAndName(userId) {
+  for (let i = 0; i < contacts.length; i++) {
+    if (contacts[i].id === userId) {
+      return {
+        initials: contacts[i].initials,
+        name: contacts[i].name,
+      };
+    }
+  }
+}
+
+function getAssignedToHTML(task) {
+  let html = '';
+  if (task.assignedTo && task.assignedTo.length > 0 && contacts && contacts.length > 0) {
+    for (let i = 0; i < task.assignedTo.length; i++) {
+      let userId = task.assignedTo[i];
+      let contactData = getContactInitialsAndName(userId);
+      html += contactsOverlayTemplate(contactData.initials, contactData.name);
+    }
+  }
+  return html;
+}
+
+function showSubtasksInOverlay(task) {
+  let html = '';
+  if (task.subtasks && task.subtasks.length > 0) {
+    for (let i = 0; i < task.subtasks.length; i++) {
+      let subtask = task.subtasks[i];
+      let title = '';
+      title = subtask;
+      html += overlaySubtaskHtml(title);
+    }
+  } else {
+    html = '<p class="p-Tag">Keine Subtasks</p>';
+  }
+  return html;
+}
+
+function backgroundColorTitle(task) {
+  let categoryText = '';
+  let categoryClass = '';
+  if (task.category) {
+    categoryText = task.category;
+    if (task.category === 'User Story') {
+      categoryClass = 'category-user-story';
+    } else if (task.category === 'Technical Task') {
+      categoryClass = 'category-technical-task';
+    }
+  }
+  return { categoryText: categoryText, categoryClass: categoryClass };
 }

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <title>User anlegen</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 2em;
+      }
+      label,
+      input,
+      button {
+        display: block;
+        margin: 0.5em 0;
+      }
+      #output {
+        margin-top: 1em;
+        background: #f0f0f0;
+        padding: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Neuen User anlegen</h2>
+    <form id="userForm">
+      <label for="name">Name (Vorname Nachname):</label>
+      <input type="text" id="name" required />
+      <label for="email">E-Mail:</label>
+      <input type="email" id="email" required />
+      <label for="phone">Telefonnummer:</label>
+      <input type="tel" id="phone" required />
+      <button type="submit">User speichern</button>
+    </form>
+    <div id="output"></div>
+
+    <script>
+      const FIREBASE_URL = 'https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/users/';
+
+      function getInitials(name) {
+        return name
+          .split(' ')
+          .map((n) => n[0]?.toUpperCase() || '')
+          .join('');
+      }
+
+      function generateRandomId() {
+        return Math.random().toString(36).substr(2, 9);
+      }
+
+      document.getElementById('userForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        if (!name || !email || !phone) return;
+
+        const initials = getInitials(name);
+        const id = generateRandomId();
+
+        const user = {
+          name: name,
+          initials: initials,
+          email: email,
+          phone: phone,
+        };
+
+        // Sende an Firebase
+        const response = await fetch(FIREBASE_URL + id + '.json', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(user),
+        });
+
+        if (response.ok) {
+          document.getElementById('output').textContent = 'User erfolgreich gespeichert!';
+          e.target.reset(); // Formular leeren
+        } else {
+          document.getElementById('output').textContent = 'Fehler beim Speichern!';
+        }
+      });
+    </script>
+  </body>
+</html>

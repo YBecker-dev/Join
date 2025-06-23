@@ -11,8 +11,7 @@ function getNoteTemplateContact(index) {
 }
 
 function getNoteTemplateContactOverlay() {
-
-    return `    <div class="contactOverlay">
+  return `    <div class="contactOverlay">
                     <div class="contactInformations">
                         <p class="initialOverlay">${getInitials(contacts.givenName, contacts.surname)}</p>
                         <div>
@@ -36,79 +35,88 @@ function getNoteTemplateContactOverlay() {
                         <h4>Phone</h4>
                         <a class="phone" href="tel:">${contacts.phone}</a>
                     </div>
-                </div> `
+                </div> `;
 }
 
-function getTaskOverlay(){
-    return`     <div class="overlay-position">
-                    <div class="overlay-header">
-                        <div class="task-type">
-                            <p class="p-Tag">Inhalt</p>
-                        </div>
-                        <div class="close-icon" onclick="toggleBoardOverlay()">
-                            <img src="../img/icon/close.png" >
-                        </div>                
-                    </div>
-                    <div class="overlay-titel">
-                        <h1>Kochwelt Page &Recipe Recommender</h1>
-                    </div>
-                    <div class="overlay-description-flex">
-                        <p class="p-Tag">Build start page with recipe recommendation.</p>
-                    </div>
-                    <div class="overlay-description-flex">
-                        <p class="p-Tag">Due date:</p>
-                        <p class="p-Tag">10/05/2023</p>
-                    </div>
-                    <div class="overlay-description-flex">
-                        <p class="p-Tag">Priority</p>
-                        <div class="overlay-priority">
-                             <p class="p-Tag">medium</p>
-                             <img src="../img/icon/priority/Prio media.png">
-                        </div>
-                    </div>
-                    <div class="assigned-to">
-                        <p class="p-Tag">Assigned To:</p>
-                        <div class="overlay-peoples">
-                            <div class="peoples-info">
-                                <div class="initials">
-                                    <p class="p-Tag">EM</p>
-                                </div>
-                                <div class="people-name">
-                                    <p class="p-Tag">Emmanuel Maurer</p>
-                                </div>
-                            </div>   
-                        </div>
-                    </div>
-                    <div class="overlay-subtasks">
-                        <p class="p-Tag">Subtasks</p>
-                        <div class="subtask-info">
-                            <div class="overlay-checkbox">
-                                 <input class="checkbox" type="checkbox">
-                            </div>
-                            <div class="task-description">
-                                <p class="p-Tag">Implement Recipe Recommendation</p>
-                            </div>
-                        </div>    
-                    </div>
-                    <div class="overlay-edit-wrapper">
-                        <div class="overlay-edit">
-                            <div class="overlay-edit-content">
-                                <div class="trashImg"></div>
-                                
-                                <p class="p-Tag">Delete</p>
-                            </div>
-                            <div class="overlay-seperator"></div>
-                            <div class="overlay-edit-content transform-left">
-                                <div class="editImg"></div>
-                                
-                                <p class="p-Tag">Edit</p>
-                            </div>
-                        </div>
-                    </div>    
-                </div>
-                
+function getTaskOverlay(task) {
+    let categoryInfo = backgroundColorTitle(task);
+    let categoryText = categoryInfo.categoryText;
+    let categoryClass = categoryInfo.categoryClass;
 
-
-    `
+    return `
+    <div class="overlay-position">
+      <div class="overlay-header">
+        <div class="task-type">
+        <p class="p-Tag ${categoryClass}">${categoryText}</p>
+        </div>
+        <div class="close-icon" onclick="toggleBoardOverlay()">
+          <img src="../img/icon/close.png" >
+        </div>                
+      </div>
+      <div class="overlay-titel">
+        <h1>${task.title || ''}</h1>
+      </div>
+      <div class="overlay-description-flex">
+        <p class="p-Tag">${task.description || ''}</p>
+      </div>
+      <div class="overlay-description-flex">
+        <p class="p-Tag">Due date:</p>
+        <p class="p-Tag">${task.date || ''}</p>
+      </div>
+      <div class="overlay-description-flex">
+        <p class="p-Tag">Priority:</p>
+        <div class="overlay-priority">
+          <p class="p-Tag">${task.priority || ''} <img src="../img/icon/priority/${task.priority}.png" alt=""></p>
+        </div>
+      </div>
+      <div class="assigned-to">
+        <p class="p-Tag">Assigned To:</p>
+        <div class="overlay-peoples">
+            ${getAssignedToHTML(task)}
+        </div>
+      </div>
+      <div class="overlay-subtasks">
+        <p class="p-Tag">Subtasks:</p>
+        ${showSubtasksInOverlay(task)}
+      </div>
+      <div class="overlay-edit-wrapper">
+        <div class="overlay-edit">
+          <div class="overlay-edit-content">
+            <div class="trashImg"></div>
+            <p class="p-Tag">Delete</p>
+          </div>
+          <div class="overlay-seperator"></div>
+          <div class="overlay-edit-content transform-left">
+            <div class="editImg"></div>
+            <p class="p-Tag">Edit</p>
+          </div>
+        </div>
+      </div>    
+    </div>
+  `;
 }
 
+function contactsOverlayTemplate(initials, name) {
+  return `
+        <div class="peoples-info">
+          <div class="initials">
+            <p class="p-Tag">${initials}</p>
+          </div>
+          <div class="people-name">
+            <p class="p-Tag">${name}</p>
+          </div>
+        </div>
+      `;
+}
+
+function overlaySubtaskHtml(subtask) {
+  return `
+       <div class="subtask-info">
+           <div class="overlay-checkbox">
+              <input class="checkbox" type="checkbox"/>
+           </div>
+           <div class="task-description">
+              <p class="p-Tag">${subtask}</p>
+           </div>
+       </div>`;
+}
