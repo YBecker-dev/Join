@@ -42,7 +42,7 @@ a:hover {
 
 .d-none,
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .input-error {

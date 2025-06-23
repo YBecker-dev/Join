@@ -3,14 +3,8 @@ let urgentButton = document.getElementById('urgent');
 let mediumButton = document.getElementById('medium');
 let lowButton = document.getElementById('low');
 
-let contacts = [
-  { name: 'John Doe', initials: 'JD' },
-  { name: 'Jane Smith', initials: 'JS' },
-  { name: 'Alice Johnson', initials: 'AJ' },
-  { name: 'Bob Brown', initials: 'BB' },
-];
-
-function initAddTask() {
+async function initAddTask() {
+  await loadContacts();
   setPriority('medium');
   addFormValidation('add-task-form');
   document.addEventListener('click', closeDropdown);
@@ -82,9 +76,28 @@ function openDropdown() {
   if (dropdown) dropdown.classList.remove('hidden');
 }
 
+async function loadContacts() {
+  const response = await fetch(BASE_URL_TASKS_AND_USERS);
+  const data = await response.json();
+  contacts = [];
+  if (data) {
+    for (const id in data) {
+      contacts.push({
+        id: id,
+        name: data[id].name,
+        initials: data[id].initials,
+        email: data[id].email,
+        phone: data[id].phone,
+      });
+    }
+  }
+  assignedToDropdown(); // Aktualisiere das Dropdown nach dem Laden
+}
+
 function assignedToDropdown(searchTerm = '') {
   let contactsRef = document.getElementById('assigned-to-dropdown-options');
   if (!contactsRef) return;
+  if (!Array.isArray(contacts)) return;
   let html = '';
   let lowerSearch = searchTerm.toLowerCase();
   for (let i = 0; i < contacts.length; i++) {
@@ -165,9 +178,9 @@ function validateAddTaskForm() {
   if (!checkCategory()) valid = false;
 
   if (valid) {
-    saveTaskToFirebase(); 
+    saveTaskToFirebase();
     clearFormInputs();
-    loadContent('testboard.html');
+    loadContent('board.html');
     return false;
   }
   return valid;
@@ -473,7 +486,6 @@ function enableCreateTaskButton() {
 }
 
 async function saveTaskToFirebase() {
-
   let title = document.getElementById('title').value;
   let description = document.getElementById('description').value;
   let date = document.getElementById('date').value;
@@ -484,10 +496,12 @@ async function saveTaskToFirebase() {
   if (pElement) categoryText = pElement.textContent.trim();
 
   let subtasks = [];
-  document.querySelectorAll('.subtask-item li').forEach(li => subtasks.push(li.textContent));
+  document.querySelectorAll('.subtask-item li').forEach((li) => subtasks.push(li.textContent));
 
   let assignedTo = [];
-  document.querySelectorAll('.show-contacts-add-task h3').forEach(h3 => assignedTo.push(h3.textContent));
+  for (let i = 0; i < selectedContacts.length; i++) {
+    assignedTo.push(contacts[selectedContacts[i]].id);
+  }
 
   let priority = '';
   if (document.getElementById('urgent')?.classList.contains('active')) priority = 'Urgent';
@@ -501,12 +515,13 @@ async function saveTaskToFirebase() {
     category: categoryText,
     subtasks,
     assignedTo,
-    priority
+    priority,
+    status: 'todo',
   };
 
-  await fetch(BASE_URL_TASKS + "tasks.json", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(taskData)
+  await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(taskData),
   });
 }
