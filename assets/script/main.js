@@ -9,16 +9,15 @@ async function loadContent(page) {
     initAddTask();
   } else if (page === 'contacts.html') {
   } else if (page === 'board.html') {
-    initBoard()
+    await initBoard();
   } else if (page === 'summary_user.html') {
     initSummary();
   } else if (page === 'privacy-policy.html') {
   } else if (page === 'legal-notice.html') {
   } else if (page === 'help.html') {
-  } else if (page === 'testboard.html') {
-    await initTestBoard();
   }
 }
+
 function toggleLogOutOverlay(){
   console.log('check')
   let logOutBoard = document.getElementById('overlay-logout');

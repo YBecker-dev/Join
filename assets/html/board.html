@@ -1,55 +1,69 @@
-
 <body>
-    <!--<h1>Willkommen auf der Board-Seite</h1>-->
-    <!--<button onclick="initBoard()">Board-Test</button>-->
-    <div class="header-position">
-        <div class="header-space"></div>
-        <div class="board-header">
-            <div class="board-header-content">
-                <h1>Board</h1>
-                <div class="board-form">
-                    <form>
-                        <div class="input-find-Task">
-                          <input id="find-Task" type="text" placeholder="Find Task" >
-                          <span class="search-icon"><img src="../img/icon/search.png"></span>
-                        </div>
-                    </form>
-                    <button class="addTaskBtn">Add task <img src="../img/icon/add.png"></button>    
-                </div>
+  <div class="header-position">
+    <div class="header-space"></div>
+    <div class="board-header">
+      <div class="board-header-content">
+        <h1>Board</h1>
+        <div class="board-form">
+          <form>
+            <div class="input-find-Task">
+              <input id="find-Task" type="text" placeholder="Find Task" />
+              <span class="search-icon"><img src="../img/icon/search.png" /></span>
             </div>
+          </form>
+          <button class="addTaskBtn">Add task <img src="../img/icon/add.png" /></button>
         </div>
-        <div class="categorys">
-            <div class="categorys-wrapper">
-                <div class="category-content">
-                    <h4>To do</h4>
-                    <div class="category-content-img"></div>
-                    
-                </div>
-                <div class="category-content">
-                    <h4>in progress</h4>
-                    <div class="category-content-img"></div>
-                    
-                </div>
-                <div class="category-content">
-                    <h4>Await feedback</h4>
-                    <div class="category-content-img"></div>
-                    
-                </div>
-                <div class="category-content">
-                    <h4>Done</h4>
-                    <div class="category-content-img"></div>
-                    
-                </div>
-            </div>
+      </div>
+    </div>
+    <div class="categorys">
+      <div class="categorys-wrapper">
+        <div class="category-content">
+          <h4>To do</h4>
+          <div class="category-content-img"></div>
         </div>
+        <div class="category-content">
+          <h4>in progress</h4>
+          <div class="category-content-img"></div>
+        </div>
+        <div class="category-content">
+          <h4>Await feedback</h4>
+          <div class="category-content-img"></div>
+        </div>
+        <div class="category-content">
+          <h4>Done</h4>
+          <div class="category-content-img"></div>
+        </div>
+      </div>
     </div>
-    <div class="board-position">
-    <div class="drag-area" id="todo" ondrop="moveTo('todo')" ondragleave="removeHighlight('todo')" ondragover="allowDrop(event); highlight('todo')"></div>
-    <div class="drag-area" id="inProgress" ondrop="moveTo('inProgress')" ondragleave="removeHighlight('inProgress')" ondragover="allowDrop(event); highlight('inProgress')"></div>
-    <div class="drag-area" id="awaitFeedback" ondrop="moveTo('awaitFeedback')" ondragleave="removeHighlight('awaitFeedback')" ondragover="allowDrop(event); highlight('awaitFeedback')"></div>
-    <div class="drag-area" id="done" ondrop="moveTo('done')" ondragleave="removeHighlight('done')" ondragover="allowDrop(event); highlight('done')"></div>
-
-    </div>
-   
+  </div>
+  <div class="board-position">
+    <div
+      class="drag-area"
+      id="todo"
+      ondrop="moveTo('todo')"
+      ondragleave="removeHighlight('todo')"
+      ondragover="allowDrop(event); highlight('todo')"
+    ></div>
+    <div
+      class="drag-area"
+      id="inProgress"
+      ondrop="moveTo('inProgress')"
+      ondragleave="removeHighlight('inProgress')"
+      ondragover="allowDrop(event); highlight('inProgress')"
+    ></div>
+    <div
+      class="drag-area"
+      id="awaitFeedback"
+      ondrop="moveTo('awaitFeedback')"
+      ondragleave="removeHighlight('awaitFeedback')"
+      ondragover="allowDrop(event); highlight('awaitFeedback')"
+    ></div>
+    <div
+      class="drag-area"
+      id="done"
+      ondrop="moveTo('done')"
+      ondragleave="removeHighlight('done')"
+      ondragover="allowDrop(event); highlight('done')"
+    ></div>
+  </div>
 </body>
-

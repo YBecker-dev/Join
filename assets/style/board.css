@@ -436,3 +436,113 @@
 .task-body:hover{
     cursor: pointer;
 }
+
+.board-task-container {
+    width: 252px;
+    cursor: pointer;
+}
+
+.board-tasks {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 24px;
+    padding: 16px;
+    width: 252px;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.board-task-assigned-priority {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.category-user-story {
+    background-color: #0138ff;
+    color: white;
+    border-radius: 8px;
+    padding: 4px 16px;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.category-technical-task {
+    background-color: #20d7c0;
+    color: white;
+    border-radius: 8px;
+    padding: 4px 16px;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.board-task-description {
+    color: #A8A8A8
+}
+
+.board-task-title {
+    color: #2A3647;
+    font-weight: 700;
+    line-height: 120%;
+}
+
+.board-task-assigned-contact {
+    display: flex;
+    flex-direction: row;
+    margin-left: 8px;
+}
+
+.board-contact-name {
+    height: 32px;
+    width: 32px;
+    border: white solid 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-left: -8px;
+    z-index: 1;
+    position: relative;
+    color: white;
+    background: pink;
+}
+
+.board-tasks-title-description {
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.board-task-subtasks {
+    width: 100%;
+}
+
+.board-task-subtasks-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.progress-bar-container {
+    flex: 1;
+    height: 8px;
+    background: #F4F4F4;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #4489ff;
+    border-radius: 4px;
+}
+
+.progress-bar-text {
+    color: black;
+    font-size: 12px;
+    white-space: nowrap;
+}

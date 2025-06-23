@@ -165,9 +165,9 @@ function validateAddTaskForm() {
   if (!checkCategory()) valid = false;
 
   if (valid) {
-    saveTaskToFirebase(); 
+    saveTaskToFirebase();
     clearFormInputs();
-    loadContent('testboard.html');
+    loadContent('board.html');
     return false;
   }
   return valid;
@@ -473,7 +473,6 @@ function enableCreateTaskButton() {
 }
 
 async function saveTaskToFirebase() {
-
   let title = document.getElementById('title').value;
   let description = document.getElementById('description').value;
   let date = document.getElementById('date').value;
@@ -484,10 +483,10 @@ async function saveTaskToFirebase() {
   if (pElement) categoryText = pElement.textContent.trim();
 
   let subtasks = [];
-  document.querySelectorAll('.subtask-item li').forEach(li => subtasks.push(li.textContent));
+  document.querySelectorAll('.subtask-item li').forEach((li) => subtasks.push(li.textContent));
 
   let assignedTo = [];
-  document.querySelectorAll('.show-contacts-add-task h3').forEach(h3 => assignedTo.push(h3.textContent));
+  document.querySelectorAll('.show-contacts-add-task h3').forEach((h3) => assignedTo.push(h3.textContent));
 
   let priority = '';
   if (document.getElementById('urgent')?.classList.contains('active')) priority = 'Urgent';
@@ -501,12 +500,13 @@ async function saveTaskToFirebase() {
     category: categoryText,
     subtasks,
     assignedTo,
-    priority
+    priority,
+    status: "todo"
   };
 
-  await fetch(BASE_URL_TASKS + "tasks.json", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(taskData)
+  await fetch(BASE_URL_TASKS + 'tasks.json', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(taskData),
   });
 }
