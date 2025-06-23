@@ -64,6 +64,7 @@ button {
     text-align: start;
 }
 
+/* Detail view */
 .details {
     width: 100%;
     background-color: #f6f7f8;
@@ -160,6 +161,10 @@ h4 {
     margin-bottom: 1rem;
 }
 
+
+
+
+ 
 .overlay{
     position: fixed;
     top: 0;
@@ -169,6 +174,7 @@ h4 {
     z-index: 1;
     background-color: rgb(84, 94, 97,0.375);  
 }
+
 .overlay-content-flex{
     height: 100vh;
     width: 100%;
@@ -373,7 +379,7 @@ h4 {
 .contactBtn>img{
     height: 24px;
     width: 24px;
-}
+} */
 
 .newContactOverlay {
     height: 38rem;
