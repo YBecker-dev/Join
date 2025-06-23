@@ -6,13 +6,17 @@ async function loadContacts() {
   let data = await response.json();
   contacts = [];
   if (data) {
-    for (const id in data) {
+    let keys = Object.keys(data);
+    for (let i = 0; i < keys.length; i++) {
+      let id = keys[i];
+      let user = data[id];
       contacts.push({
         id: id,
-        name: data[id].name,
-        initials: data[id].initials,
-        email: data[id].email,
-        phone: data[id].phone
+        name: user.name,
+        initials: user.initials,
+        email: user.email,
+        phone: user.phone,
+        color: user.color
       });
     }
   }
@@ -26,6 +30,7 @@ async function loadContent(page) {
   if (page === 'add_task.html') {
     await initAddTask();
   } else if (page === 'contacts.html') {
+    initContacts();
   } else if (page === 'board.html') {
     await initBoard();
   } else if (page === 'summary_user.html') {
