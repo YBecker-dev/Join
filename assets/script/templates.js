@@ -128,7 +128,7 @@ function overlaySubtaskHtml(subtask) {
 function getLogOutMenu() {
   return `
        <div class="section1" onclick="preventBubbling(event)"  id="legalNotice">
-                    <a href="#"> Legal Notice</a>
+                    <a href="/assets/html/legal-notice.html"> Legal Notice</a>
                 </div>
                 <div class="section1" onclick="preventBubbling(event)"  id="privacyPolicy">
                     <a href="#">Privacy Policy</a>
