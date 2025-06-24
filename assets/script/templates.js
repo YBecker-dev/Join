@@ -108,7 +108,7 @@ function getTaskOverlay(task, taskId) {
         <h1>${task.title || ''}</h1>
       </div>
       <div class="overlay-description-flex">
-        <p class="p-Tag">${task.description || ''}</p>
+        <p class="p-Tag text-allign">${task.description || ''}</p>
       </div>
       <div class="overlay-description-flex">
         <p class="p-Tag">Due date:</p>
@@ -117,7 +117,7 @@ function getTaskOverlay(task, taskId) {
       <div class="overlay-description-flex">
         <p class="p-Tag">Priority:</p>
         <div class="overlay-priority">
-          <p class="p-Tag">${task.priority || ''} <img src="../img/icon/priority/${task.priority}.png" alt=""></p>
+          <p class="p-Tag padding-priority">${task.priority || ''} <img src="../img/icon/priority/${task.priority}.png" alt=""></p>
         </div>
       </div>
       <div class="assigned-to">

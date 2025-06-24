@@ -261,6 +261,10 @@ async function editTask(taskId) {
   if (!task) return;
 
   overlay_content.innerHTML = `
+    <div class="overlay-section">
+    <div class="overlay-header-edit">
+     <img class="close-icon" src="../img/icon/close.png" alt="Close" onclick="toggleBoardOverlay('${taskId}')" />
+     </div>
     <form id="edit-task-form" onsubmit="saveEditedTask(event, '${taskId}'); return false;">
       <div class="input-group edittask add-task">
         <span>Title</span>
@@ -278,7 +282,7 @@ async function editTask(taskId) {
       <div class="input-group edittask add-task date">
         <span>Due Date <span class="required-star">*</span></span>
         <div class="date-input-container date-input-edit">
-          <input id="edit-date" type="date" value="${task.dueDate || ''}"/>
+          <input id="edit-date" type="date" value="${task.date || ''}"/>
           <span>
             <img class="date-icon-edit" src="../img/icon/add_task_icon/event.png" alt="" />
           </span>
@@ -286,7 +290,7 @@ async function editTask(taskId) {
       </div>
       <div class="priority priority-edit">
         <span>Priority</span>
-        <div class="priority-buttons">
+        <div class="priority-buttons priority-buttons-edit">
           <button type="button" id="edit-urgent" class="add-task-button${
             task.priority === 'Urgent' ? ' active urgent' : ''
           }" onclick="togglePriority('Urgent', 'edit-');">
@@ -307,7 +311,7 @@ async function editTask(taskId) {
       <div class="add-task">
        <span>Assigned to</span>
        <div id="assigned-to-dropdown">
-         <div id="assigned-to-dropdown-selected" onclick="assignedToDropdown(this.value); eventBubbling(event)">
+         <div id="assigned-to-dropdown-selected" class="assigned-to-dropdown-selected-edit" onclick="assignedToDropdown(this.value); eventBubbling(event)">
            <input
              id="add-task-input3"
              name="add-task-input3"
@@ -319,25 +323,46 @@ async function editTask(taskId) {
              <img class="hover-icon" id="assigned-to-arrow" src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png" alt=""/>
            </div>
          </div>
-         <div id="assigned-to-dropdown-options" class="hidden custom-dropdown-options" onclick="eventBubbling(event)">
+         <div id="assigned-to-dropdown-options" class="hidden custom-dropdown-options custom-dropdown-options-edit" onclick="eventBubbling(event)">
          </div>
-         <div class="show-contacts-add-task" id="show-contacts-add-task"></div>
+         <div class="show-contacts-add-task show-contacts-add-task" id="show-contacts-add-task"></div>
        </div>
       </div>
-      <div class="input-group edittask add-task">
+      <div class="input-group edittask add-task subtask-edit">
         <span>Subtasks</span>
-        <input id="edit-subtasks" type="text" value="${
-          (task.subtasks && task.subtasks.join(', ')) || ''
-        }" placeholder="Kommagetrennt">
+        <input class="add-task-input-edit"
+          id="add-task-input4"
+          oninput="onSubtaskInputChange()"
+          onkeydown="onSubtaskInputKeydown(event)"
+          name="add-task-input4"
+          type="text"
+          placeholder="Add new subtask"
+          value=""
+        />
+        <span class="subtasks-icon" id="subtasks-icon">
+          <img
+            class="hover-icon"
+            src="../img/icon/add_task_icon/plus.png"
+            alt="Add"
+            onclick="pushSubtaskInput(event)"
+          />
+        </span>
       </div>
-      <div class="create-clear-buttons">
-        <button type="button" class="clear-button" onclick="toggleBoardOverlay('${taskId}')">Cancel</button>
-        <button type="submit" class="create-button">Save</button>
-      </div>
+      <div id="subtasks-container" class="subtasks-container"></div>
     </form>
+    <div class="create-clear-buttons-edit">
+      <button type="submit" class="create-button" form="edit-task-form">Save</button>
+    </div>
   `;
 
-  // Kontakte initialisieren
+  let subtasksContainer = document.getElementById('subtasks-container');
+  if (task.subtasks && Array.isArray(task.subtasks)) {
+    subtasksContainer.innerHTML = '';
+    task.subtasks.forEach((subtask, i) => {
+      subtasksContainer.innerHTML += pushSubtaskInputHTML(subtask);
+    });
+  }
+
   selectedContacts = [];
   if (task.assignedTo && Array.isArray(task.assignedTo)) {
     for (let i = 0; i < contacts.length; i++) {
@@ -346,11 +371,8 @@ async function editTask(taskId) {
       }
     }
   }
-
-  // Kontakte als Badges anzeigen (wie bei Add Task)
   showContactsAddTask();
 
-  // Input-Feld leeren, damit keine Namen angezeigt werden
   let input = document.getElementById('add-task-input3');
   if (input) input.value = '';
 }
@@ -365,31 +387,21 @@ async function saveEditedTask(event, taskId) {
   if (document.getElementById('edit-medium').classList.contains('active')) priority = 'Medium';
   if (document.getElementById('edit-low').classList.contains('active')) priority = 'Low';
 
-  // AssignedTo und Subtasks wie gehabt
   let assignedTo = [];
   for (let i = 0; i < selectedContacts.length; i++) {
     assignedTo.push(contacts[selectedContacts[i]].id);
   }
 
   let subtasks = [];
-  let subtasksInput = document.getElementById('edit-subtasks');
-  if (subtasksInput) {
-    let rawSubtasks = subtasksInput.value.split(',');
-    for (let i = 0; i < rawSubtasks.length; i++) {
-      let trimmed = rawSubtasks[i].trim();
-      if (trimmed !== '') {
-        subtasks.push(trimmed);
-      }
-    }
-  }
+  document.querySelectorAll('#subtasks-container .subtask-item li').forEach((li) => {
+    subtasks.push(li.textContent.trim());
+  });
 
-  // Status aus der Datenbank holen
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
   let oldTask = await response.json();
   let status = oldTask.status || 'todo';
   let category = oldTask.category || '';
 
-  // Task-Objekt bauen
   let updatedTask = {
     title,
     description,
@@ -401,7 +413,6 @@ async function saveEditedTask(event, taskId) {
     category,
   };
 
-  // In Datenbank speichern
   await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json', {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },

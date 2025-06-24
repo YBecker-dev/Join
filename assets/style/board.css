@@ -8,6 +8,7 @@
     justify-content: start;
     align-items: center;
     gap: 10px;
+    cursor: pointer;
 }
 
 .overlay {
@@ -54,21 +55,26 @@
     opacity: 0;
 }
 
+.overlay-content-render-edit {
+    padding: 40px 48px;
+}
+
 .overlay-position {
     display: flex;
     flex-direction: column;
     gap: 24px;
-    padding-top: 48px;
-    padding-bottom: 48px;
-    padding-left: 40px;
-    padding-right: 40px;
+    padding: 48px 40px;
+    max-height: 913px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.overlay-position::-webkit-scrollbar {
+    display: none;
 }
 
 .overlay-header {
-    width: 445px;
     display: flex;
-    flex-direction: row;
-    align-items: center;
     justify-content: space-between;
 }
 
@@ -100,8 +106,7 @@
 }
 
 .overlay-titel>h1 {
-    font-size: 61px;
-    font-weight: 700;
+    font-size: 60px;
     color: #000000;
     text-align: start;
 }
@@ -331,6 +336,17 @@
 
 }
 
+.text-allign {
+    text-align: start;
+    max-height: 150px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.padding-priority {
+    padding-left: 18px;
+}
+
 .input-find-Task {
     height: 50px;
     width: 422px;
@@ -502,7 +518,14 @@
 }
 
 .board-task-description {
-    color: #A8A8A8
+    color: #A8A8A8;
+    max-width: 200px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    text-overflow: ellipsis;
 }
 
 .board-task-title {
@@ -571,20 +594,19 @@
 }
 
 .edittask {
-    padding: 4px 12px;
+    padding: 0;
     width: unset;
 }
 
 .overlay-content-render form {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 100%;
-}
-
-.priority-buttons-edit,
-.textarea-edit {
-    width: 440px;
+    gap: 4px;
+    max-height: 730px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 8px;
 }
 
 .input-icon-edit {
@@ -597,6 +619,7 @@
 #edit-date {
     font-size: 20px;
     cursor: pointer;
+    width: unset;
 }
 
 .date-input-edit {
@@ -607,10 +630,6 @@
     position: absolute;
     right: 16px;
     bottom: 15px;
-}
-
-.priority-edit {
-    width: 440px;
 }
 
 #edit-urgent,
@@ -629,4 +648,36 @@
 .priority-edit span {
     text-align: start;
     font-size: 20px;
+}
+
+.create-clear-buttons-edit {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.overlay-section {
+    padding: 48px 40px;
+    max-height: 931px;
+}
+
+.show-contacts-add-task {
+    margin-bottom: 32px;
+}
+
+#edit-description,
+#edit-title,
+#edit-subtasks,
+.assigned-to-dropdown-selected-edit,
+.custom-dropdown-options-edit,
+.add-task-input-edit {
+    width: unset !important;
+}
+
+.subtask-edit {
+    margin: 0;
+}
+
+.overlay-header-edit {
+    display: flex;
+    justify-content: flex-end;
 }

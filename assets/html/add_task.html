@@ -120,10 +120,16 @@
                 />
               </div>
               <ul id="category-dropdown-options" class="hidden custom-dropdown-options">
-                <p class="category-option" onclick="selectCustomOption(this); enableCreateTaskButton(); showError('category-dropdown-warning', 'category-dropdown-selected', true)">
+                <p
+                  class="category-option"
+                  onclick="selectCustomOption(this); enableCreateTaskButton(); showError('category-dropdown-warning', 'category-dropdown-selected', true)"
+                >
                   <span class="category-option-text">Technical Task</span>
                 </p>
-                <p class="category-option" onclick="selectCustomOption(this); enableCreateTaskButton(); showError('category-dropdown-warning', 'category-dropdown-selected', true)">
+                <p
+                  class="category-option"
+                  onclick="selectCustomOption(this); enableCreateTaskButton(); showError('category-dropdown-warning', 'category-dropdown-selected', true)"
+                >
                   <span class="category-option-text">User Story</span>
                 </p>
               </ul>
@@ -149,8 +155,8 @@
               />
             </span>
           </div>
+          <div id="subtasks-container" class="subtasks-container"></div>
         </div>
-        <div id="subtasks-container" class="subtasks-container"></div>
       </div>
     </form>
   </div>

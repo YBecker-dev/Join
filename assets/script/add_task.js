@@ -262,11 +262,7 @@ function pushSubtaskInput(event) {
   if (!event.key || event.key === 'Enter') {
     if (event.key === 'Enter') event.preventDefault();
     if (input.value.trim()) {
-      let subtaskDiv = document.createElement('div');
-      subtaskDiv.className = 'subtask-item';
-      subtaskDiv.setAttribute('onclick', 'editSubtask(this)');
-      subtaskDiv.innerHTML = pushSubtaskInputHTML(input.value.trim());
-      container.appendChild(subtaskDiv);
+      container.innerHTML += pushSubtaskInputHTML(input.value.trim());
       input.value = '';
       showPlusIcon();
     }
@@ -439,12 +435,14 @@ function saveSubtaskEditHTML(newText) {
 
 function pushSubtaskInputHTML(text) {
   return `
+      <div class="subtask-item" onclick="editSubtask(this)">
         <span><li>${text}</li></span>
         <div class="subtask-actions">
           <img src="../img/icon/add_task_icon/subtasks/edit.png" onclick="editSubtask(this)" />
           <div class="subtask-wrapper"></div>
           <img src="../img/icon/add_task_icon/subtasks/delete.png" onclick="deleteSubtask(this)" />
         </div>
+      </div>
       `;
 }
 
