@@ -99,16 +99,21 @@ header {
     justify-content: center;
     align-items: center;
 }
-.section1>a{
-    text-decoration: none;
+.section1>p{
+    
     color: #FFFFFF;
 }
 .section1:hover{
     cursor: pointer;
     background-color: #102542;
 }
-.section1:hover>a{
-    color: #FFFFFF;
+.section1>a{
     text-decoration: none;
-    
+    color: #FFFFFF;
+}
+.section1:hover>a{
+    cursor: pointer;
+    background-color: #102542;
+    text-decoration: none;
+    color: #FFFFFF;
 }
