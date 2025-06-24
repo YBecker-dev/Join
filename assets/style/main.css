@@ -107,4 +107,13 @@ header {
     cursor: pointer;
     background-color: #102542;
 }
-
+.section1>a{
+    text-decoration: none;
+    color: #FFFFFF;
+}
+.section1:hover>a{
+    cursor: pointer;
+    background-color: #102542;
+    text-decoration: none;
+    color: #FFFFFF;
+}
