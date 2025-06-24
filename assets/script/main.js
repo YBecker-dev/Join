@@ -34,7 +34,7 @@ async function loadContent(page) {
   } else if (page === 'board.html') {
     await initBoard();
   } else if (page === 'summary_user.html') {
-    initSummary();
+    await initSummary();
   } else if (page === 'privacy-policy.html') {
   } else if (page === 'legal-notice.html') {
   } else if (page === 'help.html') {
