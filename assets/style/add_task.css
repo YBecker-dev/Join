@@ -442,6 +442,8 @@ input[type="text"] {
     margin-top: 8px;
     display: flex;
     gap: 8px;
+    flex-wrap: wrap;
+    width: 440px;
 }
 
 .contact-items {
@@ -628,4 +630,8 @@ input[type="text"] {
 
 #category-dropdown p {
     font-size: 20px;
+}
+
+.checked-assigned-to {
+    background-color: #D2E3FF !important;
 }

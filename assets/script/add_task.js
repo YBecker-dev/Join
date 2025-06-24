@@ -91,14 +91,29 @@ function assignedToDropdown(searchTerm = '') {
   contactsRef.innerHTML = html;
 }
 
+function onContactCheckboxClick(i, checkbox) {
+  changeColorIfItsChecked(i, checkbox.checked);
+  toggleContactSelection(i);
+  checkCheckbox(checkbox);
+}
+
 function checkCheckbox(divElement) {
   let checkbox = divElement.querySelector('input[type="checkbox"]');
   if (checkbox) {
     checkbox.checked = !checkbox.checked;
     checkbox.dispatchEvent(new Event('change'));
-
-  checkbox.classList.toggle('background-checkbox');
   }
+}
+
+function changeColorIfItsChecked(i, checked) {
+  let userDropdownRef = document.getElementById('user-dropdown-' + i);
+  let assignedContactRef = document.getElementById('assigned-contact-' + i);
+  let userNameDropdownRef = document.getElementById('user-name-dropdown-' + i);
+  if (!userDropdownRef || !assignedContactRef || !userNameDropdownRef) return;
+
+  userDropdownRef.classList.toggle('checked-assigned-to', checked);
+  assignedContactRef.classList.toggle('checked-assigned-to', checked);
+  userNameDropdownRef.classList.toggle('checked-assigned-to', checked);
 }
 
 function selectCustomOption(element) {
@@ -435,17 +450,17 @@ function pushSubtaskInputHTML(text) {
 
 function assignedToDropdownHTML(contacts, i, checked) {
   return `
-        <div class="assigned-contacts" onclick="checkCheckbox(this); toggleContactSelection(${i}, event);">
-          <div class="user-dropdown">
+        <div class="assigned-contacts" id="assigned-contact-${i}" onclick="onContactCheckboxClick(${i}, this)">
+          <div class="user-dropdown" id="user-dropdown-${i}">
             <div class="user-name-dropdown " style="background-color: ${contacts[i].color};">
               <span >${contacts[i].initials}</span>
             </div>
-            <div>
+            <div id="user-name-dropdown-${i}">
               <p>${contacts[i].name}</p>
             </div>
           </div>
           <div>
-            <input type="checkbox" class="checkbox" ${checked} onclick="eventBubbling(event); toggleContactSelection(${i}, event);">
+            <input type="checkbox" class="checkbox" ${checked} onclick="eventBubbling(event); onContactCheckboxClick(${i}, this)">
           </div>
         </div>
       `;

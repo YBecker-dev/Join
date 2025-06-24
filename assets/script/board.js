@@ -103,7 +103,7 @@ async function pushTasksInBoard() {
       priorityImg,
       progressBar
     );
-    dragandDropboard(task, div);
+    enableDragAndDropBoard(task, div);
   }
 }
 
@@ -136,7 +136,7 @@ function progressBarSubtasks(task) {
   return progressBar;
 }
 
-function dragandDropboard(task, div) {
+function enableDragAndDropBoard(task, div) {
   if (task.status === 'todo') {
     document.getElementById('todo').appendChild(div);
   } else if (task.status === 'inProgress') {
@@ -158,13 +158,19 @@ async function deleteTaskFromFirebase(taskId) {
 async function toggleBoardOverlay(taskId) {
   let overlayRef = document.getElementById('overlayBoard');
   let overlay_content = document.getElementById('overlay-content-loader');
-  overlayRef.classList.toggle('d-none');
+  toggleOverlay(overlayRef);
 
+  overlayRef.classList.remove('d-none');
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
   let task = await response.json();
   if (!task) return;
-
   overlay_content.innerHTML = getTaskOverlay(task, taskId);
+
+  overlayRef.classList.add('visible');
+  let contentRender = overlayRef.querySelector('.overlay-content-render');
+  if (contentRender) {
+    contentRender.classList.add('show');
+  }
 }
 
 function findContactById(contacts, id) {
@@ -174,6 +180,25 @@ function findContactById(contacts, id) {
     }
   }
   return null;
+}
+
+function toggleOverlay(overlayRef) {
+  if (!overlayRef.classList.contains('d-none')) {
+    let contentRender = overlayRef.querySelector('.overlay-content-render');
+    if (contentRender) {
+      contentRender.classList.remove('show');
+      contentRender.classList.add('hide');
+      overlayRef.classList.remove('visible');
+      setTimeout(() => {
+        overlayRef.classList.add('d-none');
+        contentRender.classList.remove('hide');
+      }, 200);
+    } else {
+      overlayRef.classList.remove('visible');
+      overlayRef.classList.add('d-none');
+    }
+    return;
+  }
 }
 
 function getContactInitialsAndName(userId) {
