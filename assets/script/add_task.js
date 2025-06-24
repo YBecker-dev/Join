@@ -84,7 +84,7 @@ function assignedToDropdown(searchTerm = '') {
   let lowerSearch = searchTerm.toLowerCase();
   for (let i = 0; i < contacts.length; i++) {
     if (contacts[i].name.toLowerCase().includes(lowerSearch)) {
-      const checked = selectedContacts.includes(i) ? 'checked' : '';
+      let checked = selectedContacts.includes(i) ? 'checked' : '';
       html += assignedToDropdownHTML(contacts, i, checked);
     }
   }
@@ -96,6 +96,8 @@ function checkCheckbox(divElement) {
   if (checkbox) {
     checkbox.checked = !checkbox.checked;
     checkbox.dispatchEvent(new Event('change'));
+
+  checkbox.classList.toggle('background-checkbox');
   }
 }
 
@@ -134,8 +136,8 @@ function showContactsAddTask() {
   for (let i = 0; i < selectedContacts.length; i++) {
     const contact = contacts[selectedContacts[i]];
     html += `
-      <div class="contact-items">
-        <h3>${contact.initials}</h3>
+      <div class="contact-items" style="background-color:${contact.color};">
+        <span>${contact.initials}</span>
       </div>
     `;
   }
@@ -435,7 +437,7 @@ function assignedToDropdownHTML(contacts, i, checked) {
   return `
         <div class="assigned-contacts" onclick="checkCheckbox(this); toggleContactSelection(${i}, event);">
           <div class="user-dropdown">
-            <div class="user-name-dropdown" style="background-color: ${contacts[i].color};">
+            <div class="user-name-dropdown " style="background-color: ${contacts[i].color};">
               <span >${contacts[i].initials}</span>
             </div>
             <div>

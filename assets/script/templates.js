@@ -12,6 +12,37 @@ function getNoteTemplateContact(index) {
             </div>`;
 }
 
+// Contact view
+function getNoteTemplateContactDetails(indexDetails) {
+    let contact = myContacts[indexDetails];
+
+    return  `<div class="contactOverlay">
+                <div class="contactInformations">
+                    <p class="initialOverlay">${getInitials(contact.givenName, contact.surname)}</p>
+                    <div>
+                        <h3 class="namesDetail">${contact.givenName} ${contact.surname}</h3>
+                        <div class="contactIcons">
+                            <div onclick="openContactOverlay()">
+                                <img class="editIcon" src="../img/icon/edit.png" alt="pencil">
+                                <span class="editText">edit</span>
+                            </div>
+                            <div onclick="deleteContact()">
+                                <img class="editIcon" src="../img/icon/trash.png" alt="wastebasket">
+                                <span class="editText">delete</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="infoBlock">
+                    <p>Contact Information</p>
+                    <h4>Email</h4>
+                    <a class="mail" href="mailto:${contact.mail}">${contact.mail}</a>
+                    <h4>Phone</h4>
+                    <a class="phone" href="tel:${contact.phone}">${contact.phone}</a>
+                </div>
+            </div>`;
+}
+
 // add new Contact
 function getNoteTemplateAddNewContact() {
 
@@ -56,35 +87,7 @@ function getNoteTemplateAddNewContact() {
 }
 
 
-// Contact view
-function getNoteTemplateContactDetails(indexDetails) {
 
-    return  `<div class="contactOverlay">
-                <div class="contactInformations">
-                    <p class="initialOverlay">${getInitials(contact.givenName, contact.surname)}</p>
-                    <div>
-                        <p class="namesDetail">${contact.givenName} ${contact.surname}</p>
-                        <div class="contactIcons">
-                            <div onclick="openContactOverlay()">
-                                <img class="editIcon" src="../img/icon/edit.png" alt="pencil">
-                                <span class="editText">edit</span>
-                            </div>
-                            <div onclick="deleteContact()">
-                                <img class="editIcon" src="../img/icon/trash.png" alt="wastebasket">
-                                <span class="editText">delete</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="infoBlock">
-                    <p>Contact Information</p>
-                    <h4>Email</h4>
-                    <a class="mail" href="mailto:${contact.mail}">${contact.mail}</a>
-                    <h4>Phone</h4>
-                    <a class="phone" href="tel:${contact.phone}">${contact.phone}</a>
-                </div>
-            </div>`;
-}
 
 function getTaskOverlay(task, taskId) {
   let categoryInfo = backgroundColorTitle(task);
@@ -148,10 +151,10 @@ function getTaskOverlay(task, taskId) {
   `;
 }
 
-function contactsOverlayTemplate(initials, name) {
+function contactsOverlayTemplate(initials, name, color) {
   return `
         <div class="peoples-info">
-          <div class="initials">
+          <div class="initials" style="background-color: ${color};">
             <p class="p-Tag">${initials}</p>
           </div>
           <div class="people-name">
@@ -186,4 +189,34 @@ function getLogOutMenu() {
                 </div>
     
     `;
+}
+
+function boardHtmlTemplate(taskId, categoryClass, categoryText, titleText, descriptionText, assignedContact, priorityImg, progressBar) {
+  return `
+    <div class="board-task-container" onclick="toggleBoardOverlay('${taskId}')" ondragstart="startDragging('${taskId}')" draggable="true"> 
+      <div class="board-tasks">
+    <p class="${categoryClass}">${categoryText}</p>
+        <div class="board-tasks-title-description">
+          <p class="board-task-title">${titleText}</p>
+          <p class="board-task-description">${descriptionText}</p>
+        </div>
+        <div class="board-task-subtasks">${progressBar}</div>
+        <div class="board-task-assigned-priority">
+          <div class="board-task-assigned-contact">${assignedContact}</div>
+          ${priorityImg}
+        </div>
+      </div>
+      </div>
+    `
+}
+
+function progressbarHtml(percent, doneCount, totalCount) { 
+  return `
+    <div class="board-task-subtasks-row">
+      <div class="progress-bar-container">
+        <div class="progress-bar" style="width: ${percent}%;"></div>
+      </div>
+      <span class="progress-bar-text">${doneCount}/${totalCount} Subtasks</span>
+    </div>
+  `;
 }
