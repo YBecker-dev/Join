@@ -1,24 +1,28 @@
 //const BASE_URL_TASKS_AND_USERS = 'https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/';
 
  async function initSummary() {
-  // Initialize summary page elements and functionality here
+  // Initialize summary page elements and functionality hereS
   await checkTasks()
 }
 
+let statusArray = [];
+let priorityArray = [];
 
 let taskID;
 let taskKey;
 let taskObjekt;
-const statusArray = [];
-const priorityArray = [];
+
 let todoCount = 0
 let inProgressCount = 0
 let awaitFeedbackCount = 0
 let doneCount = 0
 let urgentCount = 0
+/**
+ * Load and Process User task data from a Firebase_realtime_database
+ * converting the fetch request into a JSON file. Saving the task status and priority
+ * in local arrays   
+ */
 async function checkTasks() {
-
-  console.log('chekck_task --> connect');
   try{
     let response = await fetch(BASE_URL_TASKS_AND_USERS+".json");
     if(response.ok){
@@ -38,15 +42,14 @@ async function checkTasks() {
           //console.log(taskObjekt[z].status);
           //console.log(taskObjekt[z].priority);
           statusArray.push(taskObjekt[z].status)
-          priorityArray.push(taskObjekt[z].priority);
-           
+          priorityArray.push(taskObjekt[z].priority);      
         }
-        console.table(priorityArray);
+        //console.table(priorityArray);
         statusCount();
-        processPriority(); 
+        processPriority();
+        clearArrays() 
       }
     }
-
   }catch(error){
     console.error(error)
   }
@@ -57,14 +60,21 @@ function processPriority(){
       urgentCount ++;
     }
   })
-  //console.log(urgentCount)
   includePriorityToSummery(urgentCount);
 }
-
+/**
+ * transfer the priority status "urgent" to summery.html to dispklay an overview for 
+ * tasks with the "urgent" priority 
+ * @param {number} urgentCount 
+ */
 function includePriorityToSummery(urgentCount){
   let urgent = document.getElementById('task_urgent');
   urgent.innerText = urgentCount
 }
+/**
+ * iterate through the "statusArray" and set for each element containing the specific declaration 
+ *  and set the corresponding counter plus one for each target
+ */
 function statusCount(){  
   statusArray.forEach(element => {
     if(element === 'todo'){
@@ -78,26 +88,48 @@ function statusCount(){
     }
     else if(element === 'awaitFeedback'){
       awaitFeedbackCount++;
-    }
-   
+    } 
   });
-   //console.log( todoCount);
-   //console.log('Anzahl inProgress ',inProgressCount);
-   //console.log('Anzahl awaitFeedback ',awaitFeedbackCount);
-   //console.log('Anzahl dones ',doneCount);
-   //console.log(statusArray.length);
-   includeTaskCountToSummery(todoCount,inProgressCount,awaitFeedbackCount,doneCount);
+  includeTaskCountToSummery(todoCount,inProgressCount,awaitFeedbackCount,doneCount);
+  clearCounter()
 }
-
+/**
+ * Transfer the actuall counts to summery.html to display an overview of all Tasks
+ * 
+ * @param {number} todoCount 
+ * @param {number} inProgressCount 
+ * @param {number} awaitFeedbackCount 
+ * @param {number} doneCount 
+ */
 function includeTaskCountToSummery(todoCount,inProgressCount,awaitFeedbackCount,doneCount){
   let todo = document.getElementById('task_to_do');
   let inProgress = document.getElementById('task_in_progress');
   let awaitFeedback = document.getElementById('task_awaiting_feedback');
   let done = document.getElementById('task_done');
   let tasksInBoard = document.getElementById('task_in_board');
-  todo.innerText = todoCount;
+  todo.innerHTML = todoCount;
   inProgress.innerText = inProgressCount;
   awaitFeedback.innerText = awaitFeedbackCount;
   done.innerText = doneCount;
   tasksInBoard.innerText = statusArray.length
+}
+
+/**
+ * Delete used arrays to prevent an incorrect Summery Presentation
+ * after reloadig the summery page
+ */
+function clearArrays(){
+  priorityArray=[];
+  statusArray=[];
+}
+/**
+ * Set all counters to = 0 to prevent also an incorect Summery Presentation
+ * after realoding the summery page
+ */
+function clearCounter(){
+  todoCount=0
+  inProgressCount=0
+  awaitFeedbackCount=0
+  doneCount=0
+  urgentCount=0
 }
