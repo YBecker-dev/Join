@@ -1,4 +1,4 @@
-let selectedContacts = [];
+selectedContacts = [];
 let urgentButton = document.getElementById('urgent');
 let mediumButton = document.getElementById('medium');
 let lowButton = document.getElementById('low');
@@ -35,15 +35,15 @@ function toggleDropdown(dropdownId, arrowId) {
   }
 }
 
-function togglePriority(priority) {
-  let priorities = ['urgent', 'medium', 'low'];
-  priorities.forEach((id) => {
+function togglePriority(priority, prefix = '') {
+  const ids = [prefix + 'urgent', prefix + 'medium', prefix + 'low'];
+  ids.forEach((id) => {
     let btn = document.getElementById(id);
-    if (btn) btn.classList.remove('active');
+    if (btn) btn.classList.remove('active', 'urgent', 'medium', 'low');
   });
-  let selectedBtn = document.getElementById(priority);
-  if (selectedBtn) selectedBtn.classList.add('active');
-  setPriority(priority);
+  let selectedBtn = document.getElementById(prefix + priority.toLowerCase());
+  if (selectedBtn) selectedBtn.classList.add('active', priority.toLowerCase());
+  if (!prefix) setPriority(priority);
 }
 
 function setPriority(priority) {

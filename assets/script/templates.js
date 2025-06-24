@@ -140,7 +140,7 @@ function getTaskOverlay(task, taskId) {
           </div>
           <div class="overlay-seperator"></div>
           <div class="overlay-edit-content">
-            <div class="editImg">
+            <div class="editImg" onclick="editTask('${taskId}')">
               <img src="../img/icon/edit.png" alt="edit">
               <p class="p-Tag">Edit</p>
             </div>

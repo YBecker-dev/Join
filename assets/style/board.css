@@ -452,7 +452,6 @@
     border-radius: 24px;
     background-color: #f0f0f0;
     border: 1px solid black;
-
 }
 
 .task-body:hover {
@@ -569,4 +568,65 @@
     color: black;
     font-size: 12px;
     white-space: nowrap;
+}
+
+.edittask {
+    padding: 4px 12px;
+    width: unset;
+}
+
+.overlay-content-render form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.priority-buttons-edit,
+.textarea-edit {
+    width: 440px;
+}
+
+.input-icon-edit {
+    position: absolute;
+    right: 16px;
+    cursor: pointer;
+    bottom: 4px;
+}
+
+#edit-date {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.date-input-edit {
+    gap: 0;
+}
+
+.date-icon-edit {
+    position: absolute;
+    right: 16px;
+    bottom: 15px;
+}
+
+.priority-edit {
+    width: 440px;
+}
+
+#edit-urgent,
+#edit-medium,
+#edit-low {
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 5px 15px;
+}
+
+#edit-urgent:hover,
+#edit-medium:hover,
+#edit-low:hover {
+    box-shadow: 0px 3px 4px 1px rgba(0, 0, 0, 0.3);
+    background-color: white;
+}
+
+.priority-edit span {
+    text-align: start;
+    font-size: 20px;
 }

@@ -253,3 +253,162 @@ function backgroundColorTitle(task) {
   }
   return { categoryText: categoryText, categoryClass: categoryClass };
 }
+
+async function editTask(taskId) {
+  let overlay_content = document.getElementById('overlay-content-loader');
+  let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
+  let task = await response.json();
+  if (!task) return;
+
+  overlay_content.innerHTML = `
+    <form id="edit-task-form" onsubmit="saveEditedTask(event, '${taskId}'); return false;">
+      <div class="input-group edittask add-task">
+        <span>Title</span>
+        <input id="edit-title" type="text" value="${task.title || ''}" required>
+      </div>
+      <div class="input-group edittask add-task">
+        <span>Description</span>
+        <textarea id="edit-description" name="add-task-textarea" placeholder="Enter a Description">${
+          task.description || ''
+        }</textarea>
+        <span class="input-icon-edit">
+          <img src="../img/icon/add_task_icon/textarea.png" alt="" />
+        </span>
+      </div>
+      <div class="input-group edittask add-task date">
+        <span>Due Date <span class="required-star">*</span></span>
+        <div class="date-input-container date-input-edit">
+          <input id="edit-date" type="date" value="${task.dueDate || ''}"/>
+          <span>
+            <img class="date-icon-edit" src="../img/icon/add_task_icon/event.png" alt="" />
+          </span>
+        </div>
+      </div>
+      <div class="priority priority-edit">
+        <span>Priority</span>
+        <div class="priority-buttons">
+          <button type="button" id="edit-urgent" class="add-task-button${
+            task.priority === 'Urgent' ? ' active urgent' : ''
+          }" onclick="togglePriority('Urgent', 'edit-');">
+            Urgent <img src="../img/icon/priority/urgent.png" alt="" />
+          </button>
+          <button type="button" id="edit-medium" class="add-task-button${
+            task.priority === 'Medium' ? ' active medium' : ''
+          }" onclick="togglePriority('Medium', 'edit-');">
+            Medium <img src="../img/icon/priority/medium.png" alt="" />
+          </button>
+          <button type="button" id="edit-low" class="add-task-button${
+            task.priority === 'Low' ? ' active low' : ''
+          }" onclick="togglePriority('Low', 'edit-');">
+            Low <img src="../img/icon/priority/low.png" alt="" />
+          </button>
+        </div>
+      </div>
+      <div class="add-task">
+       <span>Assigned to</span>
+       <div id="assigned-to-dropdown">
+         <div id="assigned-to-dropdown-selected" onclick="assignedToDropdown(this.value); eventBubbling(event)">
+           <input
+             id="add-task-input3"
+             name="add-task-input3"
+             type="text"
+             placeholder="Select a contact"
+             oninput="assignedToDropdown(this.value)"
+             onclick="openDropdown();"/>
+           <div class="assigned-arrow" onclick="toggleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow')">
+             <img class="hover-icon" id="assigned-to-arrow" src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png" alt=""/>
+           </div>
+         </div>
+         <div id="assigned-to-dropdown-options" class="hidden custom-dropdown-options" onclick="eventBubbling(event)">
+         </div>
+         <div class="show-contacts-add-task" id="show-contacts-add-task"></div>
+       </div>
+      </div>
+      <div class="input-group edittask add-task">
+        <span>Subtasks</span>
+        <input id="edit-subtasks" type="text" value="${
+          (task.subtasks && task.subtasks.join(', ')) || ''
+        }" placeholder="Kommagetrennt">
+      </div>
+      <div class="create-clear-buttons">
+        <button type="button" class="clear-button" onclick="toggleBoardOverlay('${taskId}')">Cancel</button>
+        <button type="submit" class="create-button">Save</button>
+      </div>
+    </form>
+  `;
+
+  // Kontakte initialisieren
+  selectedContacts = [];
+  if (task.assignedTo && Array.isArray(task.assignedTo)) {
+    for (let i = 0; i < contacts.length; i++) {
+      if (task.assignedTo.includes(contacts[i].id)) {
+        selectedContacts.push(i);
+      }
+    }
+  }
+
+  // Kontakte als Badges anzeigen (wie bei Add Task)
+  showContactsAddTask();
+
+  // Input-Feld leeren, damit keine Namen angezeigt werden
+  let input = document.getElementById('add-task-input3');
+  if (input) input.value = '';
+}
+
+async function saveEditedTask(event, taskId) {
+  event.preventDefault();
+  let title = document.getElementById('edit-title').value.trim();
+  let description = document.getElementById('edit-description').value.trim();
+  let date = document.getElementById('edit-date').value;
+  let priority = '';
+  if (document.getElementById('edit-urgent').classList.contains('active')) priority = 'Urgent';
+  if (document.getElementById('edit-medium').classList.contains('active')) priority = 'Medium';
+  if (document.getElementById('edit-low').classList.contains('active')) priority = 'Low';
+
+  // AssignedTo und Subtasks wie gehabt
+  let assignedTo = [];
+  for (let i = 0; i < selectedContacts.length; i++) {
+    assignedTo.push(contacts[selectedContacts[i]].id);
+  }
+
+  let subtasks = [];
+  let subtasksInput = document.getElementById('edit-subtasks');
+  if (subtasksInput) {
+    let rawSubtasks = subtasksInput.value.split(',');
+    for (let i = 0; i < rawSubtasks.length; i++) {
+      let trimmed = rawSubtasks[i].trim();
+      if (trimmed !== '') {
+        subtasks.push(trimmed);
+      }
+    }
+  }
+
+  // Status aus der Datenbank holen
+  let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
+  let oldTask = await response.json();
+  let status = oldTask.status || 'todo';
+  let category = oldTask.category || '';
+
+  // Task-Objekt bauen
+  let updatedTask = {
+    title,
+    description,
+    date,
+    priority,
+    assignedTo,
+    subtasks,
+    status,
+    category,
+  };
+
+  // In Datenbank speichern
+  await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(updatedTask),
+  });
+
+  toggleBoardOverlay(taskId);
+  await pushTasksInBoard();
+  return false;
+}
