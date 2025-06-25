@@ -40,3 +40,15 @@ async function loadContent(page) {
   } else if (page === 'help.html') {
   }
 }
+
+function toggleLogOutOverlay(){
+  console.log('check')
+  let logOutRef = document.getElementById('overlay-logout');
+  let menuContent = document.getElementById('logout-overlay-content');
+  logOutRef.classList.toggle('d-none');
+ if(!menuContent.classList.contains('d-none')){
+   menuContent.innerHTML = getLogOutMenu();
+ }
+  
+
+}
