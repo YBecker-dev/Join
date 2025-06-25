@@ -476,3 +476,50 @@ async function toggleSubtaskDone(taskId, subtaskIndex) {
 
   await pushTasksInBoard();
 }
+
+
+async function openCreateTask() {
+  let response = await fetch('../html/add_task.html');
+  let html = await response.text();
+  let tempDiv = document.createElement('div');
+  tempDiv.innerHTML = html;
+
+  let clearBtn = tempDiv.querySelector('.clear-button');
+  if (clearBtn) {
+    let cancelBtnHtml = `<button type="button" class="cancel-button" onclick="closeCreateTask()">Cancel <img src="../img/icon/close.png" alt="" class=""></button>`;
+    clearBtn.outerHTML = cancelBtnHtml;
+  }
+
+  let contentSpace = tempDiv.querySelector('.contentspace-html');
+  if (contentSpace) {
+    contentSpace.classList.add('content-add-task');
+  }
+  let overlayBg = document.getElementById('overlay-add-task');
+  let overlayContent = document.getElementById('add-task-overlay-content');
+  overlayContent.innerHTML =
+    `<img onclick="closeCreateTask()" src="../img/icon/close.png" alt="" class="close-overlay-x">` + tempDiv.innerHTML;
+  animatedOpeningAddTask(overlayBg, overlayContent);
+}
+
+function closeCreateTask() {
+  let overlayBg = document.getElementById('overlay-add-task');
+  let overlayContent = document.getElementById('add-task-overlay-content');
+  overlayContent.classList.remove('show');
+  overlayContent.classList.add('hide');
+  overlayBg.classList.remove('visible');
+  setTimeout(() => {
+    overlayBg.classList.add('d-none');
+    overlayContent.innerHTML = '';
+    overlayContent.classList.remove('hide');
+  }, 300);
+}
+
+function animatedOpeningAddTask(overlayBg, overlayContent) {
+  overlayBg.classList.remove('d-none');
+  overlayBg.classList.remove('visible');
+  overlayContent.classList.remove('show', 'hide');
+  setTimeout(() => {
+    overlayBg.classList.add('visible');
+    overlayContent.classList.add('show');
+  }, 10);
+}

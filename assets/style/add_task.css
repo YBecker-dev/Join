@@ -336,7 +336,8 @@ input[type="text"] {
 }
 
 .create-button,
-.clear-button {
+.clear-button,
+.cancel-button {
     margin: 0;
     display: flex;
     justify-content: space-between;
@@ -346,7 +347,15 @@ input[type="text"] {
     z-index: 1;
 }
 
-.clear-button {
+.create-button img,
+.clear-button img,
+.cancel-button img {
+    height: 24px;
+    width: 24px;
+}
+
+.clear-button,
+.cancel-button {
     background-color: white;
     color: rgb(41, 54, 71);
     font-weight: normal;

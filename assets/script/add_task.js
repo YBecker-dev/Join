@@ -180,6 +180,7 @@ function validateAddTaskForm() {
   if (valid) {
     saveTaskToFirebase();
     clearFormInputs();
+    closeCreateTask();
     loadContent('board.html');
     return false;
   }
