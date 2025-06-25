@@ -1,9 +1,8 @@
-
 // Contact Overview
 function getNoteTemplateContact(index) {
-    let contact = myContacts[index];
+  let contact = myContacts[index];
 
-    return  `<div onclick="openDetails(${index})" class="person">
+  return `<div onclick="openDetails(${index})" class="person">
                 <p class="initial">${getInitials(contact.givenName, contact.surname)}</p>
                 <div>
                     <h4>${contact.givenName} ${contact.surname}</h4>
@@ -14,9 +13,9 @@ function getNoteTemplateContact(index) {
 
 // Contact view
 function getNoteTemplateContactDetails(indexDetails) {
-    let contact = myContacts[indexDetails];
+  let contact = myContacts[indexDetails];
 
-    return  `<div class="contactOverlay">
+  return `<div class="contactOverlay">
                 <div class="contactInformations">
                     <p class="initialOverlay">${getInitials(contact.givenName, contact.surname)}</p>
                     <div>
@@ -45,8 +44,7 @@ function getNoteTemplateContactDetails(indexDetails) {
 
 // add new Contact
 function getNoteTemplateAddNewContact() {
-
-    return  `<div class="newContactOverlay">
+  return `<div class="newContactOverlay">
                 <div class="headDiv">
                     <img class="contactLogo" src="../img/Logo/Logo_white.png" alt="Logo_white">
                     <p class="addHeadline">Add contact</p>
@@ -86,9 +84,6 @@ function getNoteTemplateAddNewContact() {
             </div>`;
 }
 
-
-
-
 function getTaskOverlay(task, taskId) {
   let categoryInfo = backgroundColorTitle(task);
   let categoryText = categoryInfo.categoryText;
@@ -117,7 +112,9 @@ function getTaskOverlay(task, taskId) {
       <div class="overlay-description-flex">
         <p class="p-Tag">Priority:</p>
         <div class="overlay-priority">
-          <p class="p-Tag padding-priority">${task.priority || ''} <img src="../img/icon/priority/${task.priority}.png" alt=""></p>
+          <p class="p-Tag padding-priority">${task.priority || ''} <img src="../img/icon/priority/${
+    task.priority
+  }.png" alt=""></p>
         </div>
       </div>
       <div class="assigned-to">
@@ -128,7 +125,7 @@ function getTaskOverlay(task, taskId) {
       </div>
       <div class="overlay-subtasks">
         <p class="p-Tag">Subtasks:</p>
-        ${showSubtasksInOverlay(task)}
+        ${showSubtasksInOverlay(task, taskId)}
       </div>
       <div class="overlay-edit-wrapper">
         <div class="overlay-edit">
@@ -164,16 +161,18 @@ function contactsOverlayTemplate(initials, name, color) {
       `;
 }
 
-function overlaySubtaskHtml(subtask) {
+function overlaySubtaskHtml(subtask, subtaskIndex, taskId) {
   return `
-       <div class="subtask-info">
-           <div class="overlay-checkbox">
-              <input class="checkbox" type="checkbox"/>
-           </div>
-           <div class="task-description">
-              <p class="p-Tag">${subtask}</p>
-           </div>
-       </div>`;
+    <div class="subtask-info subtask-item">
+      <div class="overlay-checkbox">
+       <input class="checkbox" type="checkbox" ${
+         subtask.status === 'checked' ? 'checked' : ''
+       } onchange="toggleSubtaskDone('${taskId}', ${subtaskIndex})"/>
+      </div>
+      <div class="task-description">
+        <li class="p-Tag">${subtask.text}</li>
+      </div>
+    </div>`;
 }
 
 function getLogOutMenu() {
@@ -191,7 +190,16 @@ function getLogOutMenu() {
     `;
 }
 
-function boardHtmlTemplate(taskId, categoryClass, categoryText, titleText, descriptionText, assignedContact, priorityImg, progressBar) {
+function boardHtmlTemplate(
+  taskId,
+  categoryClass,
+  categoryText,
+  titleText,
+  descriptionText,
+  assignedContact,
+  priorityImg,
+  progressBar
+) {
   return `
     <div class="board-task-container" onclick="toggleBoardOverlay('${taskId}')" ondragstart="startDragging('${taskId}')" draggable="true"> 
       <div class="board-tasks">
@@ -207,10 +215,10 @@ function boardHtmlTemplate(taskId, categoryClass, categoryText, titleText, descr
         </div>
       </div>
       </div>
-    `
+    `;
 }
 
-function progressbarHtml(percent, doneCount, totalCount) { 
+function progressbarHtml(percent, doneCount, totalCount) {
   return `
     <div class="board-task-subtasks-row">
       <div class="progress-bar-container">
@@ -220,6 +228,70 @@ function progressbarHtml(percent, doneCount, totalCount) {
     </div>
   `;
 }
+
+function pushSubtaskInputHTML(text, checked = false) {
+  return `
+    <div class="subtask-item">
+      <input type="checkbox" ${checked ? 'checked' : ''}>
+      <span><li>${text}</li></span>
+      <div class="subtask-actions">
+        <img src="../img/icon/add_task_icon/subtasks/edit.png" onclick="editSubtask(this)" />
+        <div class="subtask-wrapper"></div>
+        <img src="../img/icon/add_task_icon/subtasks/delete.png" onclick="deleteSubtask(this)" />
+      </div>
+    </div>
+  `;
+}
+
+function editSubtaskInputHTML(oldText) {
+  return `
+<div class="input-with-icons">
+  <input id="subtask-edit-input" type="text" class="edit-subtask-input input-border-none" value="${oldText}"
+         onkeydown="saveSubtaskEdit(event, this)">
+  <img class="hover-icon" onclick="deleteSubtask(this)" src="../img/icon/add_task_icon/subtasks/delete.png">
+  <div class="subtask-wrapper-edit"></div>
+  <img class="hover-icon" onclick="saveSubtaskEdit(event, this)" src="../img/icon/add_task_icon/subtasks/check.png">
+</div>
+  `;
+}
+
+function showSaveCancelIconsHtml() {
+  return `
+      <img class="hover-icon" src="../img/icon/add_task_icon/subtasks/clear.png" onclick="clearSubtaskInput()">
+      <div class="subtask-wrapper"></div>
+      <img class="hover-icon" id="submit-subtask" onclick="pushSubtaskInput(event)" src="../img/icon/add_task_icon/subtasks/check.png">
+    `;
+}
+
+function saveSubtaskEditHTML(newText) {
+  return `
+    <span><li>${newText}</li></span>
+    <div class="subtask-actions">
+      <img src="../img/icon/add_task_icon/subtasks/edit.png" onclick="editSubtask(this)" />
+      <div class="subtask-wrapper"></div>
+      <img src="../img/icon/add_task_icon/subtasks/delete.png" onclick="deleteSubtask(this)" />
+    </div>
+  `;
+}
+
+function assignedToDropdownHTML(contacts, i, checked) {
+  return `
+        <div class="assigned-contacts" id="assigned-contact-${i}" onclick="onContactCheckboxClick(${i}, this)">
+          <div class="user-dropdown" id="user-dropdown-${i}">
+            <div class="user-name-dropdown " style="background-color: ${contacts[i].color};">
+              <span >${contacts[i].initials}</span>
+            </div>
+            <div id="user-name-dropdown-${i}">
+              <p>${contacts[i].name}</p>
+            </div>
+          </div>
+          <div>
+            <input type="checkbox" class="checkbox" ${checked} onclick="eventBubbling(event); onContactCheckboxClick(${i}, this)">
+          </div>
+        </div>
+      `;
+}
+
 
 function getEmptyDragArea(noTaskText){
   return `

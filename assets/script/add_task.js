@@ -4,6 +4,7 @@ let mediumButton = document.getElementById('medium');
 let lowButton = document.getElementById('low');
 
 async function initAddTask() {
+  selectedContacts = [];
   await loadContacts();
   setPriority('medium');
   addFormValidation('add-task-form');
@@ -283,6 +284,7 @@ function clearFormInputs() {
   showPlusIcon();
   clearSubtaskElements();
   clearCheckedContacts();
+  subtasks = [];
 }
 
 function clearCheckedContacts() {
@@ -493,7 +495,13 @@ async function saveTaskToFirebase() {
   if (pElement) categoryText = pElement.textContent.trim();
 
   let subtasks = [];
-  document.querySelectorAll('.subtask-item li').forEach((li) => subtasks.push(li.textContent));
+  document.querySelectorAll('.subtask-item').forEach((item) => {
+    let text = item.querySelector('li').textContent.trim();
+    subtasks.push({
+      text: text,
+      status: 'unchecked'
+    });
+  });
 
   let assignedTo = [];
   for (let i = 0; i < selectedContacts.length; i++) {

@@ -3,6 +3,7 @@ let currentDraggedTaskId = null;
 async function initBoard() {
   await loadContacts();
   await pushTasksInBoard();
+  document.addEventListener('dragend', removeAllHighlights);
   emptyDragArea();
 }
 
@@ -10,24 +11,21 @@ function allowDrop(ev) {
   ev.preventDefault();
 }
 
-function highlight(id) {
-  document.getElementById(id).classList.add('drag-area-highlight');
-}
-
-function removeHighlight(id) {
-  document.getElementById(id).classList.remove('drag-area-highlight');
+function toggleHighlight(id, add) {
+  let element = document.getElementById(id);
+  if (!element) return;
+  if (add) {
+    element.classList.add('drag-area-highlight');
+  } else {
+    element.classList.remove('drag-area-highlight');
+  }
 }
 
 function removeAllHighlights() {
-  removeHighlight('todo');
-  removeHighlight('inProgress');
-  removeHighlight('awaitFeedback');
-  removeHighlight('done');
-}
-
-if (typeof removeAllHighlights === 'function') {
-  document.addEventListener('dragend', removeAllHighlights);
-  
+  toggleHighlight('todo', false);
+  toggleHighlight('inProgress', false);
+  toggleHighlight('awaitFeedback', false);
+  toggleHighlight('done', false);
 }
 
 function preventBubbling(event) {
@@ -153,7 +151,7 @@ function progressBarSubtasks(task) {
   if (Array.isArray(task.subtasks)) {
     totalCount = task.subtasks.length;
     for (let subtaskIndex = 0; subtaskIndex < task.subtasks.length; subtaskIndex++) {
-      if (typeof task.subtasks[subtaskIndex] === 'object' && task.subtasks[subtaskIndex].done) {
+      if (task.subtasks[subtaskIndex].status === 'checked') {
         doneCount++;
       }
     }
@@ -252,14 +250,18 @@ function getAssignedToHTML(task) {
   return html;
 }
 
-function showSubtasksInOverlay(task) {
+function showSubtasksInOverlay(task, taskId) {
   let html = '';
-  if (task.subtasks && task.subtasks.length > 0) {
-    for (let i = 0; i < task.subtasks.length; i++) {
-      let subtask = task.subtasks[i];
-      let title = '';
-      title = subtask;
-      html += overlaySubtaskHtml(title);
+  let subtasks = task.subtasks;
+  if (subtasks && !Array.isArray(subtasks)) {
+    subtasks = Object.values(subtasks);
+  }
+  if (subtasks && subtasks.length > 0) {
+    for (let i = 0; i < subtasks.length; i++) {
+      let subtask = subtasks[i];
+      let text = subtask && subtask.text !== undefined ? subtask.text : subtask;
+      let status = subtask && subtask.status !== undefined ? subtask.status : 'unchecked';
+      html += overlaySubtaskHtml({ text, status }, i, taskId);
     }
   } else {
     html = '<p class="p-Tag">Keine Subtasks</p>';
@@ -352,7 +354,7 @@ async function editTask(taskId) {
          </div>
          <div id="assigned-to-dropdown-options" class="hidden custom-dropdown-options custom-dropdown-options-edit" onclick="eventBubbling(event)">
          </div>
-         <div class="show-contacts-add-task show-contacts-add-task" id="show-contacts-add-task"></div>
+         <div class="show-contacts-add-task show-contacts-add-task-edit" id="show-contacts-add-task"></div>
        </div>
       </div>
       <div class="input-group edittask add-task subtask-edit">
@@ -383,10 +385,12 @@ async function editTask(taskId) {
   `;
 
   let subtasksContainer = document.getElementById('subtasks-container');
+  subtasksContainer.innerHTML = '';
   if (task.subtasks && Array.isArray(task.subtasks)) {
-    subtasksContainer.innerHTML = '';
-    task.subtasks.forEach((subtask, i) => {
-      subtasksContainer.innerHTML += pushSubtaskInputHTML(subtask);
+    task.subtasks.forEach((subtask) => {
+      const text = subtask.text !== undefined ? subtask.text : subtask;
+      const checked = subtask.status === 'checked';
+      subtasksContainer.innerHTML += pushSubtaskInputHTML(text, checked);
     });
   }
 
@@ -399,7 +403,6 @@ async function editTask(taskId) {
     }
   }
   showContactsAddTask();
-
   let input = document.getElementById('add-task-input3');
   if (input) input.value = '';
 }
@@ -420,8 +423,13 @@ async function saveEditedTask(event, taskId) {
   }
 
   let subtasks = [];
-  document.querySelectorAll('#subtasks-container .subtask-item li').forEach((li) => {
-    subtasks.push(li.textContent.trim());
+  document.querySelectorAll('#subtasks-container .subtask-item').forEach((item) => {
+    const text = item.querySelector('li').textContent.trim();
+    const checkbox = item.querySelector('input[type="checkbox"]');
+    subtasks.push({
+      text: text,
+      status: checkbox && checkbox.checked ? 'checked' : 'unchecked',
+    });
   });
 
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
@@ -449,4 +457,22 @@ async function saveEditedTask(event, taskId) {
   toggleBoardOverlay(taskId);
   await pushTasksInBoard();
   return false;
+}
+
+async function toggleSubtaskDone(taskId, subtaskIndex) {
+  let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
+  let task = await response.json();
+  let subtask = task.subtasks[subtaskIndex];
+  if (subtask.status === undefined) {
+    subtask.status = 'unchecked';
+  }
+  subtask.status = subtask.status === 'checked' ? 'unchecked' : 'checked';
+
+  await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(task),
+  });
+
+  await pushTasksInBoard();
 }

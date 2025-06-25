@@ -41,31 +41,29 @@
       class="drag-area"
       id="todo"
       ondrop="moveTo('todo')"
-      ondragleave="removeHighlight('todo')"
-      ondragover="allowDrop(event); highlight('todo')"
+      ondragleave="toggleHighlight('todo', false)"
+      ondragover="allowDrop(event); toggleHighlight('todo', true)"
     ></div>
     <div
       class="drag-area"
       id="inProgress"
       ondrop="moveTo('inProgress')"
-      ondragleave="removeHighlight('inProgress')"
-      ondragover="allowDrop(event); highlight('inProgress')"
+      ondragleave="toggleHighlight('inProgress', false)"
+      ondragover="allowDrop(event); toggleHighlight('inProgress', true)"
     ></div>
     <div
       class="drag-area"
       id="awaitFeedback"
       ondrop="moveTo('awaitFeedback')"
-      ondragleave="removeHighlight('awaitFeedback')"
-      ondragover="allowDrop(event); highlight('awaitFeedback')"
+      ondragleave="toggleHighlight('awaitFeedback', false)"
+      ondragover="allowDrop(event); toggleHighlight('awaitFeedback', true)"
     ></div>
     <div
       class="drag-area"
       id="done"
       ondrop="moveTo('done')"
-      ondragleave="removeHighlight('done')"
-      ondragover="allowDrop(event); highlight('done')"
+      ondragleave="toggleHighlight('done', false)"
+      ondragover="allowDrop(event); toggleHighlight('done', true)"
     ></div>
   </div>
 </body>
-
-

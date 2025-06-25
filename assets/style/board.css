@@ -541,7 +541,8 @@
     max-width: 200px;
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
+    line-clamp: 2; 
     -webkit-box-orient: vertical;
     white-space: normal;
     text-overflow: ellipsis;
@@ -679,7 +680,7 @@
     max-height: 931px;
 }
 
-.show-contacts-add-task {
+.show-contacts-add-task-edit {
     margin-bottom: 32px;
 }
 

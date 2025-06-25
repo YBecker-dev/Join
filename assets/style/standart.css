@@ -79,3 +79,21 @@ input[type="date"]:focus {
     border: 1px solid #2AABE2;
 }
 
+.checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    background: url('../img/icon/checkbox.png') no-repeat center center;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    margin: 0;
+    padding: 0;
+}
+
+.checkbox:checked {
+    background: url('../img/icon/checked_checkbox.png') no-repeat center center;
+    background-size: contain;
+}
