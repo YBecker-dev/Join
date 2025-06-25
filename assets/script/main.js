@@ -49,6 +49,4 @@ function toggleLogOutOverlay(){
  if(!menuContent.classList.contains('d-none')){
    menuContent.innerHTML = getLogOutMenu();
  }
-  
-
 }
