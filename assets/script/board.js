@@ -3,6 +3,7 @@ let currentDraggedTaskId = null;
 async function initBoard() {
   await loadContacts();
   await pushTasksInBoard();
+  emptyDragArea();
 }
 
 function allowDrop(ev) {
@@ -26,6 +27,7 @@ function removeAllHighlights() {
 
 if (typeof removeAllHighlights === 'function') {
   document.addEventListener('dragend', removeAllHighlights);
+  
 }
 
 function preventBubbling(event) {
@@ -34,7 +36,31 @@ function preventBubbling(event) {
 
 function startDragging(taskId) {
   currentDraggedTaskId = taskId;
+  
 }
+
+function emptyDragArea(){
+  let noTaskText;
+  let doneArea = document.getElementById('done');
+  let awaitFeedbackArea = document.getElementById('awaitFeedback');
+  let inProgressArea = document.getElementById('inProgress');
+  let todoArea = document.getElementById('todo');
+  if(doneArea.childElementCount === 0){
+    noTaskText = 'Done';
+    doneArea.innerHTML = getEmptyDragArea(noTaskText);
+  }if(awaitFeedbackArea.childElementCount === 0){
+    noTaskText = 'Await feedback';
+    awaitFeedbackArea.innerHTML = getEmptyDragArea(noTaskText);
+  }if(inProgressArea.childElementCount === 0){
+    noTaskText = 'In progress';
+    inProgressArea.innerHTML = getEmptyDragArea(noTaskText);
+  }if(todoArea.childElementCount === 0){
+    noTaskText = 'To do';
+    todoArea.innerHTML = getEmptyDragArea(noTaskText);
+  }
+}
+
+
 
 async function moveTo(newStatus) {
   if (!currentDraggedTaskId) return;
@@ -48,6 +74,7 @@ async function moveTo(newStatus) {
     body: JSON.stringify(task),
   });
   await pushTasksInBoard();
+  emptyDragArea();
   currentDraggedTaskId = null;
 }
 

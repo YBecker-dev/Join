@@ -460,6 +460,25 @@
 
 .drag-area-highlight {
     background-color: rgba(0, 0, 0, 0.2);
+    border: 1px dashed #000000;
+    width: 252px;
+    height: auto;
+}
+.empty-task-box{
+    height: 48px;
+    width: 252px;
+    border-radius: 10px;
+    border: 1px dashed #A8A8A8;
+    background-color: #e7e7e7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.no-task-text{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 120%;
+    /*font-family: Open Sans*/
 }
 
 .task-body {

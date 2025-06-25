@@ -220,3 +220,11 @@ function progressbarHtml(percent, doneCount, totalCount) {
     </div>
   `;
 }
+
+function getEmptyDragArea(noTaskText){
+  return `
+    <div class="empty-task-box">
+      <span class="no-task-text">No task ${noTaskText}</span>
+    </div>
+  `
+}
