@@ -17,10 +17,28 @@ let myContacts = [
     mail: 'michaelaklein@gmail.com',
     phone: '+49123455681',
   },
+  {
+    givenName: 'Dennis',
+    surname: 'Schmidt',
+    mail: 'schmidt-d@gmail.com',
+    phone: '+491288996',
+  },
+  {
+    givenName: 'Luisa',
+    surname: 'Neubert',
+    mail: 'l-neubert@gmail.com',
+    phone: '+4912323416',
+  },
+  {
+    givenName: 'Chris',
+    surname: 'Müller',
+    mail: 'Chrismüller@gmail.com',
+    phone: '+4912252525',
+  },
 ];
 
 async function fetchDataJson() {
-    let url = 'https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/';
+    let url = `https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app`;
     let response = await fetch(url + 'users.json');
     let responseAsJson = await response.json();
 
@@ -53,16 +71,17 @@ function openDetails(index) {
   details.innerHTML = getNoteTemplateContactDetails(index);
 }
 
-
-function editContactOverlay() {
-    
+function openEditOverlay() {
+    let contentOverlayRef = document.getElementById('editContactOverlay');
+    contentOverlayRef.innerHTML = getNoteTemplateEditContact(index);
+    setEvantlistlener = 'click'
 }
 
 
 function toggleContactOverlay() {
     console.log('connect')
     let overlayRef = document.getElementById('overlayContact');
-    let overlay_content = document.getElementById('overlay-contact-content-loader');
+    //let overlay_content = document.getElementById('overlay-contact-content-loader');
     overlayRef.classList.toggle('d-none');
     if(!overlayRef.classList.contains('d-none')){
         overlay_content.innerHTML= getAddContactOverlay();

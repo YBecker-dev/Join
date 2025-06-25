@@ -2,10 +2,10 @@
     display: flex;
 }
 
-/* Contact List */
+/* Contact List side */
 .contactList {
     width: 38rem;
-    height: 89vh;
+    height: 100%;
     background-color: #ffffff;
 }
 
@@ -64,7 +64,7 @@ button {
     text-align: start;
 }
 
-/* Detail view */
+/* Details side */
 .details {
     width: 100%;
     background-color: #f6f7f8;
@@ -97,7 +97,9 @@ h2 {
     font-size: 24px;
 }
 
-.contactOverlay {
+
+/* deteils view */
+.namesDetails {
     position: absolute;
     margin-top: 5rem;
     margin-left: 5rem;
@@ -120,7 +122,7 @@ h2 {
     font-size: 4rem; 
 }
 
-.namesDetail {
+.infoNames {
     font-size: 2.5rem;
 }
 .contactIcons{
@@ -163,8 +165,139 @@ h4 {
 
 
 
+.newContactOverlay {
+    height: 38rem;
+    width: 75rem;
+    position: absolute;
+    top: 7rem;
+    left: .5rem;
+    /* position: absolute; */
+    /* margin-top: 3rem; */
+    display: flex;
+}
+
+.headDiv {
+    height: 100%;
+    width: 35%;
+    border-bottom-left-radius: 1.2rem;
+    border-top-left-radius: 1.2rem;
+    background-color: #293647;
+}
+
+.contactLogo {
+    height: 3.5rem;
+    margin-top: 8rem;
+    margin-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+}
+
+.addHeadline {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 2rem;
+    font-size: 3.3rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.addTastText {
+    margin-left: 2rem;
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
+.line {
+    height: .2rem;
+    width: 5rem;
+    background-color: #29abe2;
+    margin-top: 1rem;
+    margin-left: 2rem;
+}
+
+.editDiv {
+    height: 100%;
+    width: 65%;
+    border-bottom-right-radius: 1.2rem;
+    border-top-right-radius: 1.2rem;
+    background-color: #ffffff;
+}
+
+.closeDiv {
+    margin-top: 3rem;
+    margin-right: 3rem;
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: end;
+}
+
+.close {
+    height: 2rem;
+}
+
+.profilDiv {
+    display: flex;
+    align-items: center;
+}
+
+.profileImg {
+    width: 10rem;
+    margin-left: 4rem;
+    margin-right: 4rem;
+}
+
+.addNewContactDiv {
+    margin-top: 0.1rem;
+    margin-left: 1.5rem;
+    margin-bottom: 2.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border: solid;
+    border-width: 0.06rem;
+    border-color: #a6adb3;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.addNewContactDiv:focus {
+    border-color: #29abe2;
+}
+
+.addNewContact {
+    border: 0;
+    width: 20rem;
+    height: 3rem;
+}
+
+.addNewContact:focus {
+    display: none;
+}
+
+.addNewContactIcon {
+    width: 2rem;
+
+}
+
+.accept {
+    display: flex;
+    margin-left: 20rem;
+}
+
+.accept > .create-button {
+    margin-left: 1rem;
+}
+
+.save-close {
+    width: 2rem;
+}
+
 
  
+
+
+
 .overlay{
     position: fixed;
     top: 0;
@@ -379,132 +512,4 @@ h4 {
 .contactBtn>img{
     height: 24px;
     width: 24px;
-} */
-
-.newContactOverlay {
-    height: 38rem;
-    width: 75rem;
-    position: absolute;
-    top: 7rem;
-    left: .5rem;
-    /* position: absolute; */
-    /* margin-top: 3rem; */
-    display: flex;
-}
-
-.headDiv {
-    height: 100%;
-    width: 35%;
-    border-bottom-left-radius: 1.2rem;
-    border-top-left-radius: 1.2rem;
-    background-color: #293647;
-}
-
-.contactLogo {
-    height: 3.5rem;
-    margin-top: 8rem;
-    margin-left: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-}
-
-.addHeadline {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    margin-left: 2rem;
-    font-size: 3.3rem;
-    font-weight: bold;
-    color: #ffffff;
-}
-
-.addTastText {
-    margin-left: 2rem;
-    font-size: 1.5rem;
-    color: #ffffff;
-}
-
-.line {
-    height: .2rem;
-    width: 5rem;
-    background-color: #29abe2;
-    margin-top: 1rem;
-    margin-left: 2rem;
-}
-
-.editDiv {
-    height: 100%;
-    width: 65%;
-    border-bottom-right-radius: 1.2rem;
-    border-top-right-radius: 1.2rem;
-    background-color: #ffffff;
-}
-
-.closeDiv {
-    margin-top: 3rem;
-    margin-right: 3rem;
-    margin-bottom: 3rem;
-    display: flex;
-    justify-content: end;
-}
-
-.close {
-    height: 2rem;
-}
-
-.profilDiv {
-    display: flex;
-    align-items: center;
-}
-
-.profileImg {
-    width: 10rem;
-    margin-left: 4rem;
-    margin-right: 4rem;
-}
-
-.addNewContactDiv {
-    margin-top: 0.1rem;
-    margin-left: 1.5rem;
-    margin-bottom: 2.5rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    border: solid;
-    border-width: 0.06rem;
-    border-color: #a6adb3;
-    border-radius: 0.5rem;
-    display: flex;
-    align-items: center;
-}
-
-.addNewContactDiv:focus {
-    border-color: #29abe2;
-}
-
-.addNewContact {
-    border: 0;
-    width: 20rem;
-    height: 3rem;
-}
-
-.addNewContact:focus {
-    display: none;
-}
-
-.addNewContactIcon {
-    width: 2rem;
-
-}
-
-.accept {
-    display: flex;
-    margin-left: 20rem;
-}
-
-.accept > .create-button {
-    margin-left: 1rem;
-}
-
-.save-close {
-    width: 2rem;
 }
