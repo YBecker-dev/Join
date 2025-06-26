@@ -48,7 +48,7 @@ function getNoteTemplateContactDetails(indexDetails) {
 
 // add new Contact
 function getNoteTemplateAddNewContact() {
-
+  let newContact
 
   return `
             <div class="newContactOverlay">
