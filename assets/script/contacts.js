@@ -77,14 +77,17 @@ function openEditOverlay() {
     setEvantlistlener = 'click'
 }
 
+function deleteContact() {
+
+}
+
 
 function toggleContactOverlay() {
     console.log('connect')
     let overlayRef = document.getElementById('overlayContact');
-    //let overlay_content = document.getElementById('overlay-contact-content-loader');
+    let overlay_content = document.getElementById('overlay-contact-content-loader');
     overlayRef.classList.toggle('d-none');
     if(!overlayRef.classList.contains('d-none')){
-        overlay_content.innerHTML= getAddContactOverlay();
+        overlay_content.innerHTML= getNoteTemplateAddNewContact();
     }   
 }
-
