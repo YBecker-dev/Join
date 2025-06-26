@@ -24,7 +24,7 @@ function getNoteTemplateContactDetails(indexDetails) {
                 <div>
                   <h3 class="infoNames">${contact.givenName} ${contact.surname}</h3>
                   <div class="contactIcons">
-                    <div onclick="openEditOverlay()">
+                    <div id="editOverlay" onclick="openEditOverlay()">
                       <img class="editIcon" src="../img/icon/edit.png" alt="pencil">
                       <span class="editText">edit</span>
                     </div>

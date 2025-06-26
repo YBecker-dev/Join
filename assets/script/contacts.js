@@ -71,17 +71,6 @@ function openDetails(index) {
   details.innerHTML = getNoteTemplateContactDetails(index);
 }
 
-function openEditOverlay() {
-    let contentOverlayRef = document.getElementById('editContactOverlay');
-    contentOverlayRef.innerHTML = getNoteTemplateEditContact(index);
-    setEvantlistlener = 'click'
-}
-
-function deleteContact() {
-
-}
-
-
 function toggleContactOverlay() {
     console.log('connect')
     let overlayRef = document.getElementById('overlayContact');
@@ -93,4 +82,37 @@ function toggleContactOverlay() {
         overlayRef.classList.add('d-none');
         overlayRef.innerHTML = ''; 
     } 
+}
+
+function toggleEditOverlay() {
+  let editOverlayRef = document.getElementById('editOverlay');
+      editOverlayRef.classList.remove('d-none');
+    if(!editOverlayRef.classList.contains('d-none')){
+        edit_overlay_content.innerHTML= getNoteTemplateEditContact();
+    }  else {
+        editOverlayRef.classList.add('d-none');
+        editOverlayRef.innerHTML = ''; 
+    } 
+}
+
+function closeOverlay() {
+    let overlayRef = document.getElementById('overlayContact');
+    let contentOverlayRef = document.getElementById('editContactOverlay');
+    overlayRef.classList.add('d-none');
+    contentOverlayRef.classList.add('d-none');
+    overlayRef.innerHTML = '';
+    contentOverlayRef.innerHTML = '';
+}
+
+
+
+
+function openEditOverlay() {
+    let contentOverlayRef = document.getElementById('editContactOverlay');
+    contentOverlayRef.innerHTML = getNoteTemplateEditContact(index);
+    setEvantlistlener = 'click'
+}
+
+function deleteContact() {
+
 }
