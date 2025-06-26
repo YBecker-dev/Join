@@ -69,6 +69,10 @@
     text-align: start;
 }
 
+.overlay-titel {
+    word-break: break-word;
+}
+
 .overlay-description-flex {
     display: flex;
     gap: 25px;
@@ -506,12 +510,14 @@
     -webkit-box-orient: vertical;
     white-space: normal;
     text-overflow: ellipsis;
+    word-break: break-word;
 }
 
 .board-task-title {
     color: #2A3647;
     font-weight: 700;
     line-height: 120%;
+    word-break: break-word;
 }
 
 .board-task-assigned-contact {
@@ -702,7 +708,8 @@
 }
 
 .content-add-task {
-    bottom: 34px
+    bottom: 36px;
+    right: 24px;
 }
 
 .overlay {
@@ -750,6 +757,6 @@
 }
 
 .overlay-header-edit {
-    display : flex;
+    display: flex;
     justify-content: flex-end;
 }

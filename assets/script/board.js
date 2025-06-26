@@ -34,89 +34,140 @@ function preventBubbling(event) {
 
 function startDragging(taskId) {
   currentDraggedTaskId = taskId;
-  
 }
 
-function emptyDragArea(){
+function emptyDragArea() {
   let noTaskText;
   let doneArea = document.getElementById('done');
   let awaitFeedbackArea = document.getElementById('awaitFeedback');
   let inProgressArea = document.getElementById('inProgress');
   let todoArea = document.getElementById('todo');
-  if(doneArea.childElementCount === 0){
+  if (doneArea.childElementCount === 0) {
     noTaskText = 'Done';
     doneArea.innerHTML = getEmptyDragArea(noTaskText);
-  }if(awaitFeedbackArea.childElementCount === 0){
+  }
+  if (awaitFeedbackArea.childElementCount === 0) {
     noTaskText = 'Await feedback';
     awaitFeedbackArea.innerHTML = getEmptyDragArea(noTaskText);
-  }if(inProgressArea.childElementCount === 0){
+  }
+  if (inProgressArea.childElementCount === 0) {
     noTaskText = 'In progress';
     inProgressArea.innerHTML = getEmptyDragArea(noTaskText);
-  }if(todoArea.childElementCount === 0){
+  }
+  if (todoArea.childElementCount === 0) {
     noTaskText = 'To do';
     todoArea.innerHTML = getEmptyDragArea(noTaskText);
   }
 }
 
-
-
 async function moveTo(newStatus) {
   if (!currentDraggedTaskId) return;
-  let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + currentDraggedTaskId + '.json');
-  let task = await response.json();
+  let allTasks = await fetchAllTasks();
+  let maxSequence = getMaxSequenceForStatus(allTasks, newStatus);
+  let task = await fetchTaskById(currentDraggedTaskId);
   if (!task) return;
+  updateTaskStatusAndSequence(task, newStatus, maxSequence);
+  await saveTask(currentDraggedTaskId, task);
+  await pushTasksInBoard();
+  emptyDragArea();
+  currentDraggedTaskId = null;
+}
+
+async function fetchAllTasks() {
+  let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json');
+  return await response.json();
+}
+
+// sucht höchste id/sequence beim Drag and Drop
+function getMaxSequenceForStatus(allTasks, newStatus) {
+  let maxSequence = 0;
+  if (allTasks) {
+    let allTasksArray = Object.values(allTasks);
+    for (let index = 0; index < allTasksArray.length; index++) {
+      let otherTask = allTasksArray[index];
+      if (otherTask.status === newStatus && otherTask.sequence != null) {
+        if (otherTask.sequence >= maxSequence) {
+          maxSequence = otherTask.sequence + 1;
+        }
+      }
+    }
+  }
+  return maxSequence;
+}
+
+async function fetchTaskById(taskId) {
+  let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
+  return await response.json();
+}
+
+function updateTaskStatusAndSequence(task, newStatus, maxSequence) {
   task.status = newStatus;
-  await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + currentDraggedTaskId + '.json', {
+  task.sequence = maxSequence;
+}
+
+async function saveTask(taskId, task) {
+  await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json', {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(task),
   });
-  await pushTasksInBoard();
-  emptyDragArea();
-  currentDraggedTaskId = null;
 }
 
 async function pushTasksInBoard() {
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json');
   let data = await response.json();
   if (!data) return;
+  clearAllColumns();
+  let entries = Object.entries(data);
+  let columns = getColumns();
+  for (let columnIndex = 0; columnIndex < columns.length; columnIndex++) {
+    let column = columns[columnIndex];
+    let tasksInColumn = collectTasksForColumn(entries, column.status);
+    sortTasksBySequence(tasksInColumn);
+    renderTasksInColumn(tasksInColumn, column.elementId);
+  }
+}
 
+function clearAllColumns() {
   document.getElementById('todo').innerHTML = '';
   document.getElementById('inProgress').innerHTML = '';
   document.getElementById('awaitFeedback').innerHTML = '';
   document.getElementById('done').innerHTML = '';
+}
 
-  let entries = Object.entries(data);
+function getColumns() {
+  return [
+    { status: 'todo', elementId: 'todo' },
+    { status: 'inProgress', elementId: 'inProgress' },
+    { status: 'awaitFeedback', elementId: 'awaitFeedback' },
+    { status: 'done', elementId: 'done' },
+  ];
+}
 
-  for (let i = 0; i < entries.length; i++) {
-    let taskId = entries[i][0];
-    let task = entries[i][1];
+function collectTasksForColumn(entries, status) {
+  let tasksInColumn = [];
+  for (let entryIndex = 0; entryIndex < entries.length; entryIndex++) {
+    let taskId = entries[entryIndex][0];
+    let task = entries[entryIndex][1];
+    if (task.status === status) {
+      tasksInColumn.push({ id: taskId, task: task });
+    }
+  }
+  return tasksInColumn;
+}
 
+function renderTasksInColumn(tasksInColumn, elementId) {
+  for (let taskIndex = 0; taskIndex < tasksInColumn.length; taskIndex++) {
+    let taskId = tasksInColumn[taskIndex].id;
+    let task = tasksInColumn[taskIndex].task;
     let categoryInfo = backgroundColorTitle(task);
     let categoryText = categoryInfo.categoryText;
     let categoryClass = categoryInfo.categoryClass;
-
-    let titleText = '';
-    if (task.title) titleText = task.title;
-
-    let descriptionText = '';
-    if (task.description) descriptionText = task.description;
-
-    let assignedContact = '';
-    if (Array.isArray(task.assignedTo)) {
-      for (let contactIndex = 0; contactIndex < task.assignedTo.length; contactIndex++) {
-        let userId = task.assignedTo[contactIndex];
-        let contact = findContactById(contacts, userId);
-        if (contact) {
-          let displayInitials = contact.initials;
-          assignedContact += `<span class="board-contact-name" style="background-color:${contact.color}">${displayInitials}</span>`;
-        }
-      }
-    }
-
+    let titleText = task.title || '';
+    let descriptionText = task.description || '';
+    let assignedContact = getAssignedContactHtml(task);
     let priorityImg = showPriorityImg(task);
     let progressBar = progressBarSubtasks(task);
-
     let div = document.createElement('section');
     div.innerHTML = boardHtmlTemplate(
       taskId,
@@ -128,7 +179,37 @@ async function pushTasksInBoard() {
       priorityImg,
       progressBar
     );
+    document.getElementById(elementId).appendChild(div);
     enableDragAndDropBoard(task, div);
+  }
+}
+
+function getAssignedContactHtml(task) {
+  let assignedContact = '';
+  if (Array.isArray(task.assignedTo)) {
+    for (let contactIndex = 0; contactIndex < task.assignedTo.length; contactIndex++) {
+      let userId = task.assignedTo[contactIndex];
+      let contact = findContactById(contacts, userId);
+      if (contact) {
+        let displayInitials = contact.initials;
+        assignedContact += `<span class="board-contact-name" style="background-color:${contact.color}">${displayInitials}</span>`;
+      }
+    }
+  }
+  return assignedContact;
+}
+
+function sortTasksBySequence(tasksArray) {
+  for (let outerIndex = 0; outerIndex < tasksArray.length - 1; outerIndex++) {
+    for (let innerIndex = 0; innerIndex < tasksArray.length - outerIndex - 1; innerIndex++) {
+      let sequenceA = tasksArray[innerIndex].task.sequence != null ? tasksArray[innerIndex].task.sequence : 0;
+      let sequenceB = tasksArray[innerIndex + 1].task.sequence != null ? tasksArray[innerIndex + 1].task.sequence : 0;
+      if (sequenceA > sequenceB) {
+        let temp = tasksArray[innerIndex];
+        tasksArray[innerIndex] = tasksArray[innerIndex + 1];
+        tasksArray[innerIndex + 1] = temp;
+      }
+    }
   }
 }
 
@@ -477,8 +558,8 @@ async function toggleSubtaskDone(taskId, subtaskIndex) {
   await pushTasksInBoard();
 }
 
-
 async function openCreateTask() {
+  selectedContacts = [];
   let response = await fetch('../html/add_task.html');
   let html = await response.text();
   let tempDiv = document.createElement('div');
@@ -500,7 +581,7 @@ async function openCreateTask() {
     `<img onclick="closeCreateTask()" src="../img/icon/close.png" alt="" class="close-overlay-x">` + tempDiv.innerHTML;
   animatedOpeningAddTask(overlayBg, overlayContent);
 }
-
+getContactInitialsAndNamegetContactInitialsAndName
 function closeCreateTask() {
   let overlayBg = document.getElementById('overlay-add-task');
   let overlayContent = document.getElementById('add-task-overlay-content');

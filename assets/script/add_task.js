@@ -500,13 +500,29 @@ async function saveTaskToFirebase() {
     let text = item.querySelector('li').textContent.trim();
     subtasks.push({
       text: text,
-      status: 'unchecked'
+      status: 'unchecked',
     });
   });
 
   let assignedTo = [];
   for (let i = 0; i < selectedContacts.length; i++) {
     assignedTo.push(contacts[selectedContacts[i]].id);
+  }
+
+  // Drag and Drop id/sequence zuweisen 
+  let sequence = 0;
+  let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json');
+  let tasks = await response.json();
+  if (tasks) {
+    let tasksArr = Object.values(tasks);
+    for (let i = 0; i < tasksArr.length; i++) {
+      let task = tasksArr[i];
+      if (task.status === 'todo' && task.sequence != null) {
+        if (task.sequence  >= sequence) {
+          sequence = task.sequence + 1;
+        }
+      }
+    }
   }
 
   let priority = '';
@@ -523,6 +539,7 @@ async function saveTaskToFirebase() {
     assignedTo,
     priority,
     status: 'todo',
+    sequence: sequence,
   };
 
   await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json', {
