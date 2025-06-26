@@ -3,6 +3,7 @@
  async function initSummary() {
   // Initialize summary page elements and functionality hereS
   await checkTasks()
+  displayUserName();
 }
 
 let statusArray = [];
@@ -132,4 +133,13 @@ function clearCounter(){
   awaitFeedbackCount=0
   doneCount=0
   urgentCount=0
+}
+/**
+ * load full name of the logged user from local Storage and displays on Summery.html
+ */
+function displayUserName(){
+  let userName = document.getElementById('userName');
+  let loggedUser = JSON.parse(localStorage.getItem('announcedUser'));
+  console.log(loggedUser);
+  userName.innerText = loggedUser;
 }

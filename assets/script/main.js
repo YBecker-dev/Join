@@ -1,3 +1,4 @@
+
 let contacts = [];
 let BASE_URL_TASKS_AND_USERS = 'https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/';
 
@@ -25,6 +26,7 @@ async function loadContacts() {
 async function loadContent(page) {
   let response = await fetch(page);
   let html = await response.text();
+  displayUserInitials();
   document.getElementById('main-content').innerHTML = html;
 
   if (page === 'add_task.html') {
@@ -40,6 +42,19 @@ async function loadContent(page) {
   } else if (page === 'help.html') {
   }
 }
+/**
+ * load the logged user name from local storage and precessed 
+ * the string to the Initials 
+ */
+function displayUserInitials(){ // Sehr Fehleranfällig !!!
+  let userInitials =  document.getElementById('userInitials');
+  let userName = JSON.parse(localStorage.getItem('announcedUser'));
+  let firstinitial = userName.slice(0,1);
+  let searchposition = userName.search(" ");
+  let secondinitial = userName.slice(searchposition+1,searchposition+2);
+  let initials = firstinitial.concat(secondinitial);
+  userInitials.innerText = initials;
+}
 
 function toggleLogOutOverlay(){
   console.log('check')
@@ -50,3 +65,14 @@ function toggleLogOutOverlay(){
    menuContent.innerHTML = getLogOutMenu();
  }
 }
+/**
+ * Delete local Storage before the logged-in user is logged out
+ * @param {a Tag} event 
+ */
+function handleLogOut(event){
+  event.preventDefault();
+  resetAnnouncedUserStorage();
+  window.location.href = "/index.html";
+}
+
+let resetAnnouncedUserStorage = () =>{localStorage.removeItem('announcedUser')};
