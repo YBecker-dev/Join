@@ -67,6 +67,7 @@ async function checkUser(event){
             findUser = true;
             //console.log( 'name' , userObjekt.name ,'mail' ,userObjekt.mail );
             const announcedUser = userObjekt.name;
+            //console.log(announcedUser);
             storeAnnoncedUserName(announcedUser);
             break;
           }
@@ -99,4 +100,11 @@ let storeAnnoncedUserName = (announcedUser) => {
   localStorage.setItem('announcedUser',JSON.stringify(announcedUser));
 };
 
-
+function logginAsGuest(){
+  
+  let guestUser = 'Guest Guest';
+  console.log(guestUser); 
+  localStorage.setItem('announcedUser',JSON.stringify(guestUser));
+  console.log(JSON.parse(localStorage.getItem('announcedUser')));
+  window.location.href = "assets/html/main.html";
+}

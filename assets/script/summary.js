@@ -138,8 +138,16 @@ function clearCounter(){
  * load full name of the logged user from local Storage and displays on Summery.html
  */
 function displayUserName(){
+  let userGreeting = document.getElementById('userGreeting');
   let userName = document.getElementById('userName');
   let loggedUser = JSON.parse(localStorage.getItem('announcedUser'));
   console.log(loggedUser);
-  userName.innerText = loggedUser;
+  if(loggedUser === 'Guest Guest'){
+    userName.innerText = '';
+    userGreeting.innerText ='Good morning'; 
+  }else{
+    userGreeting.innerText = 'Good morning,';
+    userName.innerText = loggedUser;
+  }
+  
 }
