@@ -9,6 +9,10 @@
     background-color: #ffffff;
 }
 
+/* .contactList::-webkit-scrollbar {
+   width: 2rem;
+} */
+
 button {
     margin-top: 1rem;
 }
@@ -163,22 +167,19 @@ h4 {
     margin-bottom: 1rem;
 }
 
-
-
+/* add new Contact Overlay */
 .newContactOverlay {
-    height: 38rem;
-    width: 75rem;
+    height: 40rem;
+    width: 80rem;
     position: absolute;
-    top: 7rem;
-    left: .5rem;
-    /* position: absolute; */
-    /* margin-top: 3rem; */
+    top: 8rem;
+    left: 10rem;
     display: flex;
 }
 
 .headDiv {
     height: 100%;
-    width: 35%;
+    width: 30rem;
     border-bottom-left-radius: 1.2rem;
     border-top-left-radius: 1.2rem;
     background-color: #293647;
@@ -187,7 +188,7 @@ h4 {
 .contactLogo {
     height: 3.5rem;
     margin-top: 8rem;
-    margin-left: 2rem;
+    margin-left: 3rem;
     display: flex;
     flex-direction: column;
     justify-content: left;
@@ -196,14 +197,14 @@ h4 {
 .addHeadline {
     margin-top: 1rem;
     margin-bottom: 1rem;
-    margin-left: 2rem;
-    font-size: 3.3rem;
+    margin-left: 3rem;
+    font-size: 3.5rem;
     font-weight: bold;
     color: #ffffff;
 }
 
 .addTastText {
-    margin-left: 2rem;
+    margin-left: 3rem;
     font-size: 1.5rem;
     color: #ffffff;
 }
@@ -213,12 +214,12 @@ h4 {
     width: 5rem;
     background-color: #29abe2;
     margin-top: 1rem;
-    margin-left: 2rem;
+    margin-left: 3rem;
 }
 
 .editDiv {
     height: 100%;
-    width: 65%;
+    width: 49rem;
     border-bottom-right-radius: 1.2rem;
     border-top-right-radius: 1.2rem;
     background-color: #ffffff;
@@ -244,12 +245,12 @@ h4 {
 .profileImg {
     width: 10rem;
     margin-left: 4rem;
-    margin-right: 4rem;
+    margin-right: 2rem;
 }
 
 .addNewContactDiv {
-    margin-top: 0.1rem;
-    margin-left: 1.5rem;
+    margin-top: 1rem;
+    margin-left: 3.5rem;
     margin-bottom: 2.5rem;
     padding-left: 2rem;
     padding-right: 2rem;
@@ -277,7 +278,6 @@ h4 {
 
 .addNewContactIcon {
     width: 2rem;
-
 }
 
 .accept {
@@ -291,225 +291,4 @@ h4 {
 
 .save-close {
     width: 2rem;
-}
-
-
- 
-
-
-
-.overlay{
-    position: fixed;
-    top: 0;
-    left: 0;
-    min-height: 100%;
-    width: 100%;
-    z-index: 1;
-    background-color: rgb(84, 94, 97,0.375);  
-}
-
-.overlay-content-flex{
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-/* .overlay-content-render-contact{
-    height: 592px;
-    width: 1212px;
-    background-color: #FFFFFF;
-    border-radius: 30px;
-    display: flex;
-    flex-direction: row
-} */
-
-.content-left{
-    height: auto;
-    width: 467px;
-    padding-bottom: 55px;
-    background-color: #293647;
-    border-bottom-left-radius: 30px;
-    border-top-left-radius: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.left-logo{
-    
-    height: 66.48px;
-    width: 371px;
-    display: flex;
-}
-.left-logo>img{
-    height: 66.48px;
-    width: 55.6px;
-}
-
-.left-headline{
-    height: 129px;
-    width: 371px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    margin-top: 12px;
-}
-.left-headline>h1{
-    width: 366px;
-    padding: 0;
-    color: #FFFFFF;
-    font-size: 61px;
-    font-weight: 700;
-    text-align: start;
-}
-.left-headline>h4{
-    padding: 0;
-    margin: 0;
-    color: #FFFFFF;
-    font-size: 27px;
-    font-weight: 400;
-}
-.left-wrapper>img{
-    height: 66.48px;
-    width: 55.6px;
-}
-.left-separator{
-    width: 366px;
-    display: flex;
-    justify-content: flex-start;
-}
-.content-right{
-    height: auto;
-    width: 745px;
-    display: flex;
-}
-.section-one-contact{
-    height: 100%;
-    width: 286px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 50px;
-}
-.section-one-contact>img{
-    height: 120px;
-    width: 120px;
-}
-.section-two-contact{
-    height: 100%;
-    width: 422px;
-    /*padding-top: 32px;*/
-    padding-bottom: 70px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-   
-}
-.exitBtn-wrapper{
-    display: flex;
-    flex-direction: row-reverse;
-    
-    align-items: center;
-}
-.right-exitBtn{
-    
-    height: 32px;
-    width: 32px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 60px;
-}
-.right-exitBtn>:hover{
-   
-    border-radius: 50%;
-    cursor: pointer;
-    background-color: ghostwhite;
-    
-
-}
-
-.right-exitBtn>img{
-    height: 24px;
-    width: 24px;
-}
-.right-input-form>form{
-    height: 215px;
-    width: 422px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    /*Unsicher*/
-    margin-bottom: 52px;
-
-}
-.input-group-contact{
-  height: 50px;
-  width: 422px;
-  
-  border-radius: 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  border: 1px solid #D1D1D1;
-}
-.input-group-contact>input{
-    border: #FFFFFF;
-    height: 24px;
-    width: 366px;
-    padding: 12px 0px 12px 16px;
-}
-.input-icon-contact>img{
-    height: 24px;
-    width: 24px;
-}
-.right-buttons{
-    height: 57px;
-    width: 364px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-.cancelBtn{
-    padding: 0;
-    margin: 0;
-    height: 100%;
-    width: 126px;
-    border-radius: 10px;
-    background-color: #FFFFFF;
-    color: #2A3647;
-    border: 1px solid #293647;
-}
-.cancelBtn:hover{
-    background-color: #FFFFFF;
-    color: #29abe2;
-    border: 1px solid #29abe2;
-    transform: scale(1.01 );
-    transition: 0.1s;
-    box-shadow: 2px 2px 1px 1px rgb(197, 220, 224);
-}
-.trasform-left{
-    transform-origin: left top;
-}
-.contactBtn{
-    padding: 0;
-    margin: 0;
-    height: 100%;
-    width: 214px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-}
-.contactBtn:hover{
-    box-shadow: 2px 2px 1px 1px rgb(149, 164, 167);
-}
-.contactBtn>img{
-    height: 24px;
-    width: 24px;
 }
