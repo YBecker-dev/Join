@@ -86,8 +86,11 @@ function toggleContactOverlay() {
     console.log('connect')
     let overlayRef = document.getElementById('overlayContact');
     let overlay_content = document.getElementById('overlay-contact-content-loader');
-    overlayRef.classList.toggle('d-none');
+    overlayRef.classList.remove('d-none');
     if(!overlayRef.classList.contains('d-none')){
         overlay_content.innerHTML= getNoteTemplateAddNewContact();
-    }   
+    }  else {
+        overlayRef.classList.add('d-none');
+        overlayRef.innerHTML = ''; 
+    } 
 }

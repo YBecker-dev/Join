@@ -60,7 +60,7 @@ function getNoteTemplateAddNewContact() {
               </div>
               <div class="editDiv">
                 <div class="closeDiv">
-                  <img onclick="closeOverlay" class="close" src="../img/icon/close.png" alt="Close-Button">
+                  <img onclick="closeOverlay()" class="close" src="../img/icon/close.png" alt="Close-Button">
                 </div>        
                 <div class="profilDiv">
                   <div>
