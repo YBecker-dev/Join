@@ -315,14 +315,14 @@ h4 {
     justify-content: center;
     align-items: center;
 }
-.overlay-content-render-contact{
+/* .overlay-content-render-contact{
     height: 592px;
     width: 1212px;
     background-color: #FFFFFF;
     border-radius: 30px;
     display: flex;
     flex-direction: row
-}
+} */
 
 .content-left{
     height: auto;
