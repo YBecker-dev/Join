@@ -1,7 +1,7 @@
 const BASE_URL = "https://authenticationprototyp-default-rtdb.europe-west1.firebasedatabase.app/"
 let passwordInput = document.getElementById('password')
 const passwordValue = document.getElementById('password-icon');
-let announcedUserStorage =[]
+//let announcedUserStorage = [];
 
 // Eventlistner 
 passwordInput.addEventListener('input', function(){
@@ -66,7 +66,8 @@ async function checkUser(event){
           if(mail.value == userObjekt.mail && password.value == userObjekt.password){
             findUser = true;
             //console.log( 'name' , userObjekt.name ,'mail' ,userObjekt.mail );
-            const announcedUser = {'name':userObjekt.name};
+            const announcedUser = userObjekt.name;
+            //console.log(announcedUser);
             storeAnnoncedUserName(announcedUser);
             break;
           }
@@ -88,13 +89,22 @@ async function checkUser(event){
   }
 }
 let resetForm = () => document.getElementById("login-form").reset()
+
 let resetPwIcon =() => {
   passwordValue.src = "./assets/img/icon/lock.png";
   passwordInput.type="password";
   passwordValue.classList.remove('eye-icon');
-}
+};
+
 let storeAnnoncedUserName = (announcedUser) => {
-  announcedUserStorage.push(announcedUser)
-  console.table(announcedUserStorage);
+  localStorage.setItem('announcedUser',JSON.stringify(announcedUser));
+};
+
+function logginAsGuest(){
+  
+  let guestUser = 'Guest Guest';
+  console.log(guestUser); 
+  localStorage.setItem('announcedUser',JSON.stringify(guestUser));
+  console.log(JSON.parse(localStorage.getItem('announcedUser')));
+  window.location.href = "assets/html/main.html";
 }
-let resetAnnouncedUserStorage = () =>{announcedUserStorage=[];}

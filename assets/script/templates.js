@@ -183,7 +183,7 @@ function getLogOutMenu() {
                 <div class="section1" onclick="loadContent('privacy-policy.html')"  id="privacyPolicy">
                     <p>Privacy Policy</p>
                 </div>
-                <div class="section1" onclick="resetAnnouncedUserStorage()"  id="logOut">
+                <div class="section1" onclick="handleLogOut(event)"  id="logOut">
                     <a href="/index.html">Log out</a>
                 </div>
     

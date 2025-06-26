@@ -265,7 +265,8 @@
     top: 547.5px;
     left: 968px;
     height: 136px;
-    width: 385px;
+    min-width: 385px;
+    text-align: start;
 }
 .greeting>h2{
     padding: 0;
