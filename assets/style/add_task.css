@@ -345,6 +345,7 @@ input[type="text"] {
     align-items: center;
     gap: 4px;
     z-index: 1;
+    padding: 16px;
 }
 
 .create-button img,
@@ -643,4 +644,56 @@ input[type="text"] {
 
 .checked-assigned-to {
     background-color: #D2E3FF !important;
+}
+
+.wrapper-create-task-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.wrapper-create-task {
+    height: 74px;
+    width: 326px;
+    border-radius: 15px;
+    background-color: #293647;
+    color: white;
+    z-index: 2;
+    animation: slideUpWrapper 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@keyframes slideUpWrapper {
+    from {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.wrapper-create-task-center {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    padding: 0 32px;
+
+}
+
+.wrapper-create-task-center img {
+    filter: brightness(0) invert(1);
+}
+
+.wrapper-create-task-center p {
+    font-size: 20px;
 }

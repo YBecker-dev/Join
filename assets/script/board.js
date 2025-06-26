@@ -354,7 +354,8 @@ async function editTask(taskId) {
     <form id="edit-task-form" onsubmit="saveEditedTask(event, '${taskId}'); return false;">
       <div class="input-group edittask add-task">
         <span>Title</span>
-        <input id="edit-title" type="text" value="${task.title || ''}" required>
+        <input onclick="showError('add-task-input1-warning', 'edit-title')" oninput="showError('add-task-input1-warning', 'edit-title');" id="edit-title" type="text" value="${task.title || ''}" required>
+        <span id="add-task-input1-warning" class="input-warning d-none">This field is required</span>
       </div>
       <div class="input-group edittask add-task">
         <span>Description</span>
@@ -368,11 +369,12 @@ async function editTask(taskId) {
       <div class="input-group edittask add-task date">
         <span>Due Date <span class="required-star">*</span></span>
         <div class="date-input-container date-input-edit">
-          <input id="edit-date" type="date" value="${task.date || ''}"/>
+          <input onclick="showError('add-task-input2-warning', 'edit-date')" oninput="showError('add-task-input2-warning', 'edit-date');" id="edit-date" type="date" value="${task.date || ''}"/>
           <span>
             <img class="date-icon-edit" src="../img/icon/add_task_icon/event.png" alt="" />
           </span>
         </div>
+        <span id="add-task-input2-warning" class="input-warning d-none">This field is required</span>
       </div>
       <div class="priority priority-edit">
         <span>Priority</span>
@@ -437,7 +439,7 @@ async function editTask(taskId) {
       <div id="subtasks-container" class="subtasks-container"></div>
     </form>
     <div class="create-clear-buttons-edit">
-      <button type="submit" class="create-button" form="edit-task-form">Save</button>
+      <button type="submit" class="create-button" form="edit-task-form">OK <img src="../img/icon/add_task_icon/buttons/create_task.png" /></button>
     </div>
   `;
 
@@ -559,7 +561,7 @@ async function openCreateTask() {
     `<img onclick="closeCreateTask()" src="../img/icon/close.png" alt="" class="close-overlay-x">` + tempDiv.innerHTML;
   animatedOpeningAddTask(overlayBg, overlayContent);
 }
-getContactInitialsAndNamegetContactInitialsAndName;
+
 function closeCreateTask() {
   let overlayBg = document.getElementById('overlay-add-task');
   let overlayContent = document.getElementById('add-task-overlay-content');

@@ -8,7 +8,7 @@ async function initAddTask() {
   await loadContacts();
   setPriority('medium');
   addFormValidation('add-task-form');
-  document.addEventListener('click', function() {
+  document.addEventListener('click', function () {
     handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'close');
     handleDropdown('category-dropdown-options', 'category-selected-arrow', 'close');
     clearAssignedTo();
@@ -49,6 +49,17 @@ function toggleArrowRotation(arrow, isOpen) {
       arrow.classList.remove('arrow-hover');
     }
   }
+}
+
+function togglePriority(priority, prefix = '') {
+  const ids = [prefix + 'urgent', prefix + 'medium', prefix + 'low'];
+  ids.forEach((id) => {
+    let btn = document.getElementById(id);
+    if (btn) btn.classList.remove('active', 'urgent', 'medium', 'low');
+  });
+  let selectedBtn = document.getElementById(prefix + priority.toLowerCase());
+  if (selectedBtn) selectedBtn.classList.add('active', priority.toLowerCase());
+  if (!prefix) setPriority(priority);
 }
 
 function setPriority(priority) {
@@ -164,12 +175,22 @@ function validateAddTaskForm() {
 
   if (valid) {
     saveTaskToFirebase();
-    clearAllTaskFields();
     closeCreateTask();
-    loadContent('board.html');
+    showWrapperCreateTask();
+    setTimeout(() => {
+      loadContent('board.html');
+    }, 1000);
+    closeCreateTask()
     return false;
   }
   return valid;
+}
+
+function showWrapperCreateTask() {
+  let wrapper = document.getElementById('wrapper-create-task-section');
+  if (wrapper) {
+    wrapper.classList.remove('d-none');
+  }
 }
 
 function checkTitle() {
@@ -492,7 +513,7 @@ async function saveTaskToFirebase() {
     assignedTo.push(contacts[selectedContacts[i]].id);
   }
 
-  // Drag and Drop id/sequence zuweisen 
+  // Drag and Drop id/sequence zuweisen
   let sequence = 0;
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json');
   let tasks = await response.json();
@@ -501,7 +522,7 @@ async function saveTaskToFirebase() {
     for (let i = 0; i < tasksArr.length; i++) {
       let task = tasksArr[i];
       if (task.status === 'todo' && task.sequence != null) {
-        if (task.sequence  >= sequence) {
+        if (task.sequence >= sequence) {
           sequence = task.sequence + 1;
         }
       }

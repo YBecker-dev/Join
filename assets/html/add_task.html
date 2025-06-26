@@ -1,4 +1,13 @@
 <body>
+  <section class="wrapper-create-task-section d-none" id="wrapper-create-task-section">
+    <div class="wrapper-create-task">
+      <div class="wrapper-create-task-center">
+        <p>Task added to board</p>
+        <img src="../img/icon/tasks_icon/board.png" alt="" />
+      </div>
+    </div>
+  </section>
+
   <div class="contentspace-html">
     <h1>Add Task</h1>
     <div class="required">
@@ -25,7 +34,6 @@
               oninput="showError('add-task-input1-warning', 'title'); enableCreateTaskButton();"
               placeholder="Enter a Title"
             />
-            <span class="input-icon"></span>
             <span id="add-task-input1-warning" class="input-warning d-none">This field is required</span>
           </div>
           <div class="input-group add-task">

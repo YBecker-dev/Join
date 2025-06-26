@@ -44,8 +44,8 @@
 }
 
 .close-icon {
-    height: 32px;
-    width: 32px;
+    height: 24px;
+    width: 24px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -592,8 +592,10 @@
     max-height: 730px;
     overflow-y: auto;
     overflow-x: hidden;
-    padding-right: 8px;
+    padding-right: 12px;
+    padding-top: 16px;
 }
+
 
 .input-icon-edit {
     position: absolute;
@@ -639,10 +641,11 @@
 .create-clear-buttons-edit {
     display: flex;
     justify-content: flex-end;
+    margin: 24px 27px;
 }
 
 .overlay-section {
-    padding: 48px 40px;
+    padding: 48px 15px 48px 40px;
     max-height: 931px;
 }
 
