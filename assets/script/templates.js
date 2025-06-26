@@ -120,7 +120,7 @@ function getTaskOverlay(task, taskId) {
       <div class="assigned-to">
         <p class="p-Tag">Assigned To:</p>
         <div class="overlay-peoples">
-            ${getAssignedToHTML(task)}
+            ${getAssignedContactsHtml(task, "overlay")}
         </div>
       </div>
       <div class="overlay-subtasks">

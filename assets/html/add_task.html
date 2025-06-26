@@ -75,18 +75,18 @@
           <div class="add-task">
             <span>Assigned to</span>
             <div id="assigned-to-dropdown">
-              <div id="assigned-to-dropdown-selected" onclick="assignedToDropdown(this.value); eventBubbling(event)">
+              <div id="assigned-to-dropdown-selected" onclick="eventBubbling(event)">
                 <input
                   id="add-task-input3"
                   name="add-task-input3"
                   type="text"
                   placeholder="Select a contact"
                   oninput="assignedToDropdown(this.value)"
-                  onclick="openDropdown();"
+                  onclick="handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'open'); assignedToDropdown(this.value)"
                 />
                 <div
                   class="assigned-arrow"
-                  onclick="toggleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow')"
+                  onclick="handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'toggle'); assignedToDropdown(document.getElementById('add-task-input3').value);"
                 >
                   <img
                     class="hover-icon"
@@ -109,7 +109,7 @@
             <div id="category-dropdown" onclick="eventBubbling(event)">
               <div
                 id="category-dropdown-selected"
-                onclick="toggleDropdown('category-dropdown-options', 'category-selected-arrow'); showError('category-dropdown-warning', 'category-dropdown-selected', true)"
+                onclick="handleDropdown('category-dropdown-options', 'category-selected-arrow', 'toggle'); showError('category-dropdown-warning', 'category-dropdown-selected', true)"
               >
                 <p>Select a task category</p>
                 <img
@@ -119,16 +119,16 @@
                   alt=""
                 />
               </div>
-              <ul id="category-dropdown-options" class="hidden custom-dropdown-options">
+              <ul id="category-dropdown-options" class="hidden custom-dropdown-options" onclick="eventBubbling(event)">
                 <p
                   class="category-option"
-                  onclick="selectCustomOption(this); enableCreateTaskButton(); showError('category-dropdown-warning', 'category-dropdown-selected', true)"
+                  onclick="eventBubbling(event); selectCustomOption(this); enableCreateTaskButton(); showError('category-dropdown-warning', 'category-dropdown-selected', true)"
                 >
                   <span class="category-option-text">Technical Task</span>
                 </p>
                 <p
                   class="category-option"
-                  onclick="selectCustomOption(this); enableCreateTaskButton(); showError('category-dropdown-warning', 'category-dropdown-selected', true)"
+                  onclick="eventBubbling(event); selectCustomOption(this); enableCreateTaskButton(); showError('category-dropdown-warning', 'category-dropdown-selected', true)"
                 >
                   <span class="category-option-text">User Story</span>
                 </p>

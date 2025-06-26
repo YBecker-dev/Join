@@ -8,43 +8,47 @@ async function initAddTask() {
   await loadContacts();
   setPriority('medium');
   addFormValidation('add-task-form');
-  document.addEventListener('click', closeDropdown);
+  document.addEventListener('click', function() {
+    handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'close');
+    handleDropdown('category-dropdown-options', 'category-selected-arrow', 'close');
+    clearAssignedTo();
+  });
 }
 
-function closeDropdown() {
-  let contactsRef = document.getElementById('assigned-to-dropdown-options');
-  let assignedArrow = document.getElementById('assigned-to-arrow');
-  let categoryRef = document.getElementById('category-dropdown-options');
-  let categoryArrow = document.getElementById('category-selected-arrow');
-  if (contactsRef) contactsRef.classList.add('hidden');
-  if (categoryRef) categoryRef.classList.add('hidden');
-  if (assignedArrow) assignedArrow.style.transform = 'rotate(0deg)';
-  if (categoryArrow) categoryArrow.style.transform = 'rotate(0deg)';
-  clearAssignedTo();
-}
-
-function toggleDropdown(dropdownId, arrowId) {
+function handleDropdown(dropdownId, arrowId, action = 'toggle') {
   let dropdown = document.getElementById(dropdownId);
+  let arrow = arrowId ? document.getElementById(arrowId) : null;
   if (!dropdown) return;
-  let isOpen = !dropdown.classList.contains('hidden');
-  if (isOpen) {
-    dropdown.classList.add('hidden');
-    toggleArrowRotation(arrowId, false);
-  } else {
+
+  if (action === 'open') {
     dropdown.classList.remove('hidden');
-    toggleArrowRotation(arrowId, true);
+    toggleArrowRotation(arrow, true);
+    clearAssignedTo();
+  } else if (action === 'close') {
+    dropdown.classList.add('hidden');
+    toggleArrowRotation(arrow, false);
+  } else {
+    let isOpen = !dropdown.classList.contains('hidden');
+    if (isOpen) {
+      dropdown.classList.add('hidden');
+      toggleArrowRotation(arrow, false);
+    } else {
+      dropdown.classList.remove('hidden');
+      toggleArrowRotation(arrow, true);
+    }
   }
 }
 
-function togglePriority(priority, prefix = '') {
-  const ids = [prefix + 'urgent', prefix + 'medium', prefix + 'low'];
-  ids.forEach((id) => {
-    let btn = document.getElementById(id);
-    if (btn) btn.classList.remove('active', 'urgent', 'medium', 'low');
-  });
-  let selectedBtn = document.getElementById(prefix + priority.toLowerCase());
-  if (selectedBtn) selectedBtn.classList.add('active', priority.toLowerCase());
-  if (!prefix) setPriority(priority);
+function toggleArrowRotation(arrow, isOpen) {
+  if (arrow) {
+    if (isOpen) {
+      arrow.style.transform = 'rotate(180deg)';
+      arrow.classList.add('arrow-hover');
+    } else {
+      arrow.style.transform = 'rotate(0deg)';
+      arrow.classList.remove('arrow-hover');
+    }
+  }
 }
 
 function setPriority(priority) {
@@ -57,24 +61,6 @@ function setPriority(priority) {
   if (priority === 'urgent' && urgentButton) urgentButton.classList.add('urgent');
   if (priority === 'medium' && mediumButton) mediumButton.classList.add('medium');
   if (priority === 'low' && lowButton) lowButton.classList.add('low');
-}
-
-function toggleArrowRotation(arrowId, isOpen) {
-  let arrow = document.getElementById(arrowId);
-  if (arrow) {
-    if (isOpen) {
-      arrow.style.transform = 'rotate(180deg)';
-      arrow.classList.add('arrow-hover');
-    } else {
-      arrow.style.transform = 'rotate(0deg)';
-      arrow.classList.remove('arrow-hover');
-    }
-  }
-}
-
-function openDropdown() {
-  let dropdown = document.getElementById('assigned-to-dropdown-options');
-  if (dropdown) dropdown.classList.remove('hidden');
 }
 
 function assignedToDropdown(searchTerm = '') {
@@ -118,7 +104,6 @@ function changeColorIfItsChecked(i, checked) {
 }
 
 function selectCustomOption(element) {
-  toggleDropdown('category-dropdown-options', 'category-selected-arrow');
   let categoryDropdown = document.getElementById('category-dropdown-selected');
   if (!categoryDropdown) return;
   let p = categoryDropdown.querySelector('p');
@@ -179,7 +164,7 @@ function validateAddTaskForm() {
 
   if (valid) {
     saveTaskToFirebase();
-    clearFormInputs();
+    clearAllTaskFields();
     closeCreateTask();
     loadContent('board.html');
     return false;
@@ -253,10 +238,6 @@ function showError(errorId, inputId, isCategory = false) {
   }
 }
 
-function eventBubbling(event) {
-  event.stopPropagation();
-}
-
 function pushSubtaskInput(event) {
   let input = document.getElementById('add-task-input4');
   let container = document.getElementById('subtasks-container');
@@ -278,7 +259,9 @@ function preventEnterSubmit(event) {
   }
 }
 
-function clearFormInputs() {
+function clearAllTaskFields() {
+  clearAssignedTo();
+  clearSubtaskInput();
   clearInputTexts();
   clearWarningMessages();
   clearCategory();
