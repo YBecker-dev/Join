@@ -86,11 +86,7 @@ input[type="date"]:focus {
     height: 24px;
     background: url('../img/icon/checkbox.png') no-repeat center center;
     background-size: contain;
-    border: none;
     cursor: pointer;
-    outline: none;
-    margin: 0;
-    padding: 0;
 }
 
 .checkbox:checked {

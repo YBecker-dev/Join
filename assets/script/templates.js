@@ -120,7 +120,7 @@ function getTaskOverlay(task, taskId) {
       <div class="assigned-to">
         <p class="p-Tag">Assigned To:</p>
         <div class="overlay-peoples">
-            ${getAssignedContactsHtml(task, "overlay")}
+            ${getAssignedContactsHtml(task, 'overlay')}
         </div>
       </div>
       <div class="overlay-subtasks">
@@ -130,7 +130,7 @@ function getTaskOverlay(task, taskId) {
       <div class="overlay-edit-wrapper">
         <div class="overlay-edit">
           <div class="overlay-edit-content">
-            <div class="trashImg" onclick="deleteTaskFromFirebase('${taskId}')">
+            <div class="trashImg"  onclick="deleteTaskFromFirebase('${taskId}'); toggleBoardOverlay()">
               <img src="../img/icon/trash.png" alt="trash">
               <p class="p-Tag">Delete</p>
             </div>
@@ -275,28 +275,29 @@ function saveSubtaskEditHTML(newText) {
 }
 
 function assignedToDropdownHTML(contacts, i, checked) {
+  let isChecked = checked === 'checked';
+  let checkedClass = isChecked ? 'checked-assigned-to' : '';
   return `
-        <div class="assigned-contacts" id="assigned-contact-${i}" onclick="onContactCheckboxClick(${i}, this)">
-          <div class="user-dropdown" id="user-dropdown-${i}">
-            <div class="user-name-dropdown " style="background-color: ${contacts[i].color};">
-              <span >${contacts[i].initials}</span>
-            </div>
-            <div id="user-name-dropdown-${i}">
-              <p>${contacts[i].name}</p>
-            </div>
-          </div>
-          <div>
-            <input type="checkbox" class="checkbox" ${checked} onclick="eventBubbling(event); onContactCheckboxClick(${i}, this)">
-          </div>
+    <div class="assigned-contacts ${checkedClass}" id="assigned-contact-${i}" onclick="onContactCheckboxClick(${i}, this)">
+      <div class="user-dropdown ${checkedClass}" id="user-dropdown-${i}">
+        <div class="user-name-dropdown ${checkedClass}" style="background-color: ${contacts[i].color} !important;">
+          <span>${contacts[i].initials}</span>
         </div>
-      `;
+        <div id="user-name-dropdown-${i}" class="user-name-label ${checkedClass}">
+          <p>${contacts[i].name}</p>
+        </div>
+      </div>
+      <div>
+        <input type="checkbox" class="checkbox dropdown-checkbox" ${checked} onclick="eventBubbling(event); onContactCheckboxClick(${i}, this)">
+      </div>
+    </div>
+  `;
 }
 
-
-function getEmptyDragArea(noTaskText){
+function getEmptyDragArea(noTaskText) {
   return `
     <div class="empty-task-box">
       <span class="no-task-text">No task ${noTaskText}</span>
     </div>
-  `
+  `;
 }

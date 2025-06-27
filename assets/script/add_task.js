@@ -175,12 +175,11 @@ function validateAddTaskForm() {
 
   if (valid) {
     saveTaskToFirebase();
-    closeCreateTask();
     showWrapperCreateTask();
     setTimeout(() => {
+      closeCreateTask();
       loadContent('board.html');
     }, 1000);
-    closeCreateTask()
     return false;
   }
   return valid;
@@ -407,68 +406,6 @@ function onSubtaskInputKeydown(event) {
     event.preventDefault();
     pushSubtaskInput(event);
   }
-}
-
-function editSubtaskInputHTML(oldText) {
-  return `
-<div class="input-with-icons">
-  <input id="subtask-edit-input" type="text" class="edit-subtask-input input-border-none" value="${oldText}"
-         onkeydown="saveSubtaskEdit(event, this)">
-  <img class="hover-icon" onclick="deleteSubtask(this)" src="../img/icon/add_task_icon/subtasks/delete.png">
-  <div class="subtask-wrapper-edit"></div>
-  <img class="hover-icon" onclick="saveSubtaskEdit(event, this)" src="../img/icon/add_task_icon/subtasks/check.png">
-</div>
-  `;
-}
-
-function showSaveCancelIconsHtml() {
-  return `
-      <img class="hover-icon" src="../img/icon/add_task_icon/subtasks/clear.png" onclick="clearSubtaskInput()">
-      <div class="subtask-wrapper"></div>
-      <img class="hover-icon" id="submit-subtask" onclick="pushSubtaskInput(event)" src="../img/icon/add_task_icon/subtasks/check.png">
-    `;
-}
-
-function saveSubtaskEditHTML(newText) {
-  return `
-    <span><li>${newText}</li></span>
-    <div class="subtask-actions">
-      <img src="../img/icon/add_task_icon/subtasks/edit.png" onclick="editSubtask(this)" />
-      <div class="subtask-wrapper"></div>
-      <img src="../img/icon/add_task_icon/subtasks/delete.png" onclick="deleteSubtask(this)" />
-    </div>
-  `;
-}
-
-function pushSubtaskInputHTML(text) {
-  return `
-      <div class="subtask-item" onclick="editSubtask(this)">
-        <span><li>${text}</li></span>
-        <div class="subtask-actions">
-          <img src="../img/icon/add_task_icon/subtasks/edit.png" onclick="editSubtask(this)" />
-          <div class="subtask-wrapper"></div>
-          <img src="../img/icon/add_task_icon/subtasks/delete.png" onclick="deleteSubtask(this)" />
-        </div>
-      </div>
-      `;
-}
-
-function assignedToDropdownHTML(contacts, i, checked) {
-  return `
-        <div class="assigned-contacts" id="assigned-contact-${i}" onclick="onContactCheckboxClick(${i}, this)">
-          <div class="user-dropdown" id="user-dropdown-${i}">
-            <div class="user-name-dropdown " style="background-color: ${contacts[i].color};">
-              <span >${contacts[i].initials}</span>
-            </div>
-            <div id="user-name-dropdown-${i}">
-              <p>${contacts[i].name}</p>
-            </div>
-          </div>
-          <div>
-            <input type="checkbox" class="checkbox" ${checked} onclick="eventBubbling(event); onContactCheckboxClick(${i}, this)">
-          </div>
-        </div>
-      `;
 }
 
 function enableCreateTaskButton() {

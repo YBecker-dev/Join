@@ -303,6 +303,7 @@ input[type="text"] {
     overflow: auto;
     max-height: 332px;
     cursor: pointer;
+    gap: 1px;
 }
 
 #assigned-to-dropdown-options {
@@ -408,6 +409,7 @@ input[type="text"] {
     justify-content: space-between;
     align-items: center;
     padding: 12px 16px;
+    border-radius: 15px;
 }
 
 .add-task input[type="text"] {
@@ -642,8 +644,23 @@ input[type="text"] {
     font-size: 20px;
 }
 
-.checked-assigned-to {
-    background-color: #D2E3FF !important;
+.checked-assigned-to,
+.checkbox-dropdown.checked-assigned-to {
+    background-color: #293647 !important;
+    color: white;
+}
+
+.assigned-contacts:hover,
+.assigned-contacts:hover .user-dropdown,
+.assigned-contacts:hover .user-name-dropdown,
+.assigned-contacts:hover .checkbox-dropdown {
+    background-color: #091931 !important;
+    color: white;
+}
+
+.assigned-contacts:hover .user-name-label {
+    background-color: #091931 !important;
+    color: white !important;
 }
 
 .wrapper-create-task-section {
@@ -696,4 +713,12 @@ input[type="text"] {
 
 .wrapper-create-task-center p {
     font-size: 20px;
+}
+
+.assigned-contacts>div:hover {
+    background: transparent !important;
+}
+
+.dropdown-checkbox:checked {
+    filter: brightness(0) invert(1);
 }

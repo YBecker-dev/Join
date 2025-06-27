@@ -80,4 +80,12 @@ function handleLogOut(event){
   window.location.href = "/index.html";
 }
 
-let resetAnnouncedUserStorage = () =>{localStorage.removeItem('announcedUser')};
+let resetAnnouncedUserStorage = () => { localStorage.removeItem('announcedUser') };
+
+
+function changeColorbyHtmlLinks(element) {
+  document.querySelectorAll('.sidebar-links').forEach(link => {
+    link.classList.remove('active');
+  });
+  element.classList.add('active');
+}

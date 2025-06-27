@@ -261,7 +261,7 @@ async function deleteTaskFromFirebase(taskId) {
   await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json', {
     method: 'DELETE',
   });
-  location.reload();
+   await pushTasksInBoard();
 }
 
 async function toggleBoardOverlay(taskId) {
@@ -465,8 +465,6 @@ async function editTask(taskId) {
   let input = document.getElementById('add-task-input3');
   if (input) input.value = '';
 }
-
-
 
 async function saveEditedTask(event, taskId) {
   event.preventDefault();

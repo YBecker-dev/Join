@@ -144,21 +144,12 @@
     flex-direction: row;
     align-items: center;
     gap: 16px;
-    /*margin-left: 16px;*/
-    padding-left: 16px;
-    padding-right: 16px;
+    padding: 0 16px;
 }
 
 .subtask-info:hover {
     cursor: pointer;
-    /*box-shadow: 5px 5px 5px 0px #D1D1D1;*/
-    /*border: 5px 5px 5px 5px solid #D1D1D1;*/
     border-radius: 5px;
-    background-color: #D1D1D1;
-}
-
-.checkbox:hover {
-    cursor: pointer;
     background-color: #D1D1D1;
 }
 

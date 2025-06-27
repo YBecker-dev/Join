@@ -51,6 +51,13 @@ header {
     height: 24px;
 }
 
+.sidebar-links:hover {
+    background-color: #2A3D58;
+    color: white;
+    cursor: pointer;
+    font-weight: 400;
+}
+
 .main-content {
     position: fixed;
     top: 96px;
@@ -116,4 +123,12 @@ header {
     background-color: #102542;
     text-decoration: none;
     color: #FFFFFF;
+}
+
+.sidebar-links.active {
+    background-color: #091931;
+    color: #fff;
+}
+.sidebar-links.active img {
+    filter: brightness(0) invert(1);
 }
