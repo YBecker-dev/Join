@@ -4,6 +4,7 @@
   // Initialize summary page elements and functionality hereS
   await checkTasks()
   displayUserName();
+  checkTime();
 }
 
 let statusArray = [];
@@ -144,10 +145,33 @@ function displayUserName(){
   console.log(loggedUser);
   if(loggedUser === 'Guest Guest'){
     userName.innerText = '';
-    userGreeting.innerText ='Good morning'; 
+    //userGreeting.innerText ='Good morning'; 
   }else{
-    userGreeting.innerText = 'Good morning,';
+    
+    //userGreeting.innerText = 'Good morning,';
     userName.innerText = loggedUser;
   }
   
 }
+
+//function checkTime(){
+  //const Zeit = new Date();
+  //const Stunde = Zeit.toLocaleTimeString();
+
+  //const jetzt = Zeit.getHours
+  //console.log(jetzt); 
+  //changeGreetings(jetzt);
+//}
+
+//function changeGreetings(jetzt){
+//  let userGreeting = document.getElementById('userGreeting');
+//  if(jetzt > 4 && jetzt <= 12){
+//    userGreeting.innerText = 'Good morning'
+//  } 
+//  else if(jetzt >= 12 && jetzt <=18){
+//    userGreeting.innerText = 'Good afernoon'
+//  }
+//  else{
+//    userGreeting.innerText = 'Good evening'
+//  }
+//}

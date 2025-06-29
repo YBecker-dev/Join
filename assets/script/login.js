@@ -101,7 +101,6 @@ let storeAnnoncedUserName = (announcedUser) => {
 };
 
 function logginAsGuest(){
-  
   let guestUser = 'Guest Guest';
   console.log(guestUser); 
   localStorage.setItem('announcedUser',JSON.stringify(guestUser));
