@@ -50,6 +50,7 @@ async function fetchDataJson() {
 function initContacts() {
     renderContacts();
     openDetails();
+    renderNewContact();
 }
 
 function renderContacts() {
@@ -82,6 +83,20 @@ function toggleContactOverlay() {
         overlayRef.classList.add('d-none');
         overlayRef.innerHTML = ''; 
     } 
+}
+
+function addnewContact() {
+  let contactNameRef = document.getElementById('newContactName');
+  let contactName = contactNameRef.value;
+  let contactMail = document.getElementById('newContactMail');
+  let contactPhone = document.getElementById('newContactPhone');
+
+  contactName.push(nameInput);
+
+  renderNewContact();
+  contactNameRef.value
+
+
 }
 
 function toggleEditOverlay() {

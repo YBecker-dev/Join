@@ -68,15 +68,15 @@ function getNoteTemplateAddNewContact() {
                   </div>
                   <div>
                     <div class="addNewContactDiv">
-                      <input class="addNewContact" type="" placeholder="Name" required>
+                      <input id="newContactName" class="addNewContact" type="" placeholder="Name" required>
                       <img class="addNewContactIcon" src="../img/icon/person.png" alt="Person Icon">
                     </div> 
                     <div class="addNewContactDiv">
-                      <input class="addNewContact" type="email" placeholder="Email" required>
+                      <input id="newContactMail" class="addNewContact" type="email" placeholder="Email" required>
                       <img class="addNewContactIcon" src="../img/icon/mail.png" alt="Email Icon">
                     </div> 
                     <div class="addNewContactDiv">
-                      <input class="addNewContact" type="tel" placeholder="Phone" required>
+                      <input id="newContactPhone" class="addNewContact" type="tel" placeholder="Phone" required>
                       <img class="addNewContactIcon" src="../img/icon/phone.png" alt="phone Icon">
                     </div> 
                   </div>           
