@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../style/help.css" />
     <title>Leaderbord</title>
   </head>
-  <body onload="loadContent('board.html');">
+  <body onload="loadContent('summary_user.html');">
     <div class="overlay d-none" id="overlayBoard" onclick="toggleBoardOverlay()">
       <div class="overlay-content-flex">
         <div class="overlay-content-render" id="overlay-content-loader" onclick="preventBubbling(event)"></div>
@@ -33,7 +33,7 @@
 
     <section id="overlay-add-task" class="overlay overlay-add-task d-none">
       <div class="add-task-overlay-content" id="add-task-overlay-content">
-        <img onclick="closeCreateTask()" src="../img/icon/close.png" alt="">
+        <img onclick="closeCreateTask()" src="../img/icon/close.png" alt="" />
       </div>
     </section>
 
@@ -61,22 +61,48 @@
         <div class="sidebar-logo">
           <img src="../img/Logo/Logo_white.png" alt="Logo" />
         </div>
-        <a class="sidebar-links" href="#" onclick="loadContent('summary_user.html')">
-          <img src="../img/icon/tasks_icon/summary.png" alt="" />Summary</a
-        >
-        <a class="sidebar-links" href="#" onclick="loadContent('add_task.html')">
-          <img src="../img/icon/tasks_icon/add_task.png" alt="" />Add Task</a
-        >
-        <a class="sidebar-links" href="#" onclick="loadContent('board.html')">
-          <img src="../img/icon/tasks_icon/board.png" alt="" />Board</a
-        >
-        <a class="sidebar-links" href="#" onclick="loadContent('contacts.html')">
-          <img src="../img/icon/tasks_icon/contacts.png" alt="" />Contacts</a
-        >
+        <div class="sidebar-links-container">
+          <a
+            class="sidebar-links"
+            id="sidebar-summary"
+            href="#"
+            onclick="changeColorbyHtmlLinks(this); loadContent('summary_user.html')"
+          >
+            <img src="../img/icon/tasks_icon/summary.png" alt="" />Summary
+          </a>
+          <a
+            class="sidebar-links"
+            id="sidebar-add-task"
+            href="#"
+            onclick="changeColorbyHtmlLinks(this); loadContent('add_task.html')"
+          >
+            <img src="../img/icon/tasks_icon/add_task.png" alt="" />Add Task
+          </a>
+          <a
+            class="sidebar-links"
+            id="sidebar-board"
+            href="#"
+            onclick="changeColorbyHtmlLinks(this); loadContent('board.html')"
+          >
+            <img src="../img/icon/tasks_icon/board.png" alt="" />Board
+          </a>
+          <a
+            class="sidebar-links"
+            id="sidebar-contacts"
+            href="#"
+            onclick="changeColorbyHtmlLinks(this); loadContent('contacts.html')"
+          >
+            <img src="../img/icon/tasks_icon/contacts.png" alt="" />Contacts
+          </a>
+        </div>
       </div>
       <div class="sidebar-legal-stuff">
-        <a href="#" onclick="loadContent('privacy-policy.html')">Prvacy Police</a>
-        <a href="#" onclick="loadContent('legal-notice.html')">Legal Notice</a>
+        <a class="sidebar-links privacy-legal " href="#" onclick="loadContent('privacy-policy.html'); changeColorbyHtmlLinks(this);"
+          >Privacy Policy</a
+        >
+        <a class="sidebar-links privacy-legal" href="#" onclick="loadContent('legal-notice.html'); changeColorbyHtmlLinks(this);"
+          >Legal Notice</a
+        >
       </div>
     </div>
 

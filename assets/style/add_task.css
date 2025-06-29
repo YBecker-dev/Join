@@ -303,6 +303,7 @@ input[type="text"] {
     overflow: auto;
     max-height: 332px;
     cursor: pointer;
+    gap: 1px;
 }
 
 #assigned-to-dropdown-options {
@@ -345,6 +346,7 @@ input[type="text"] {
     align-items: center;
     gap: 4px;
     z-index: 1;
+    padding: 16px;
 }
 
 .create-button img,
@@ -407,6 +409,7 @@ input[type="text"] {
     justify-content: space-between;
     align-items: center;
     padding: 12px 16px;
+    border-radius: 15px;
 }
 
 .add-task input[type="text"] {
@@ -641,6 +644,81 @@ input[type="text"] {
     font-size: 20px;
 }
 
-.checked-assigned-to {
-    background-color: #D2E3FF !important;
+.checked-assigned-to,
+.checkbox-dropdown.checked-assigned-to {
+    background-color: #293647 !important;
+    color: white;
+}
+
+.assigned-contacts:hover,
+.assigned-contacts:hover .user-dropdown,
+.assigned-contacts:hover .user-name-dropdown,
+.assigned-contacts:hover .checkbox-dropdown {
+    background-color: #091931 !important;
+    color: white;
+}
+
+.assigned-contacts:hover .user-name-label {
+    background-color: #091931 !important;
+    color: white !important;
+}
+
+.wrapper-create-task-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.wrapper-create-task {
+    height: 74px;
+    width: 326px;
+    border-radius: 15px;
+    background-color: #293647;
+    color: white;
+    z-index: 2;
+    animation: slideUpWrapper 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@keyframes slideUpWrapper {
+    from {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.wrapper-create-task-center {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    padding: 0 32px;
+
+}
+
+.wrapper-create-task-center img {
+    filter: brightness(0) invert(1);
+}
+
+.wrapper-create-task-center p {
+    font-size: 20px;
+}
+
+.assigned-contacts>div:hover {
+    background: transparent !important;
+}
+
+.dropdown-checkbox:checked {
+    filter: brightness(0) invert(1);
 }

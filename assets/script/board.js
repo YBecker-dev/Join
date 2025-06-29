@@ -165,7 +165,7 @@ function renderTasksInColumn(tasksInColumn, elementId) {
     let categoryClass = categoryInfo.categoryClass;
     let titleText = task.title || '';
     let descriptionText = task.description || '';
-    let assignedContact = getAssignedContactHtml(task);
+    let assignedContact = getAssignedContactsHtml(task, 'board');
     let priorityImg = showPriorityImg(task);
     let progressBar = progressBarSubtasks(task);
     let div = document.createElement('section');
@@ -184,19 +184,22 @@ function renderTasksInColumn(tasksInColumn, elementId) {
   }
 }
 
-function getAssignedContactHtml(task) {
-  let assignedContact = '';
-  if (Array.isArray(task.assignedTo)) {
-    for (let contactIndex = 0; contactIndex < task.assignedTo.length; contactIndex++) {
-      let userId = task.assignedTo[contactIndex];
-      let contact = findContactById(contacts, userId);
+function getAssignedContactsHtml(task, type) {
+  let html = '';
+  if (Array.isArray(task.assignedTo) && contacts && contacts.length > 0) {
+    for (let i = 0; i < task.assignedTo.length; i++) {
+      let userId = task.assignedTo[i];
+      let contact = findContactById(userId);
       if (contact) {
-        let displayInitials = contact.initials;
-        assignedContact += `<span class="board-contact-name" style="background-color:${contact.color}">${displayInitials}</span>`;
+        if (type === 'board') {
+          html += `<span class="board-contact-name" style="background-color:${contact.color}">${contact.initials}</span>`;
+        } else if (type === 'overlay') {
+          html += contactsOverlayTemplate(contact.initials, contact.name, contact.color);
+        }
       }
     }
   }
-  return assignedContact;
+  return html;
 }
 
 function sortTasksBySequence(tasksArray) {
@@ -258,7 +261,7 @@ async function deleteTaskFromFirebase(taskId) {
   await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json', {
     method: 'DELETE',
   });
-  location.reload();
+   await pushTasksInBoard();
 }
 
 async function toggleBoardOverlay(taskId) {
@@ -279,9 +282,9 @@ async function toggleBoardOverlay(taskId) {
   }
 }
 
-function findContactById(contacts, id) {
+function findContactById(userId) {
   for (let i = 0; i < contacts.length; i++) {
-    if (contacts[i].id === id) {
+    if (contacts[i].id === userId) {
       return contacts[i];
     }
   }
@@ -307,30 +310,6 @@ function toggleOverlay(overlayRef) {
   }
 }
 
-function getContactInitialsAndName(userId) {
-  for (let i = 0; i < contacts.length; i++) {
-    if (contacts[i].id === userId) {
-      return {
-        initials: contacts[i].initials,
-        name: contacts[i].name,
-        color: contacts[i].color,
-      };
-    }
-  }
-}
-
-function getAssignedToHTML(task) {
-  let html = '';
-  if (task.assignedTo && task.assignedTo.length > 0 && contacts && contacts.length > 0) {
-    for (let i = 0; i < task.assignedTo.length; i++) {
-      let userId = task.assignedTo[i];
-      let contactData = getContactInitialsAndName(userId);
-      html += contactsOverlayTemplate(contactData.initials, contactData.name, contactData.color);
-    }
-  }
-  return html;
-}
-
 function showSubtasksInOverlay(task, taskId) {
   let html = '';
   let subtasks = task.subtasks;
@@ -339,10 +318,7 @@ function showSubtasksInOverlay(task, taskId) {
   }
   if (subtasks && subtasks.length > 0) {
     for (let i = 0; i < subtasks.length; i++) {
-      let subtask = subtasks[i];
-      let text = subtask && subtask.text !== undefined ? subtask.text : subtask;
-      let status = subtask && subtask.status !== undefined ? subtask.status : 'unchecked';
-      html += overlaySubtaskHtml({ text, status }, i, taskId);
+      html += overlaySubtaskHtml(subtasks[i], i, taskId);
     }
   } else {
     html = '<p class="p-Tag">Keine Subtasks</p>';
@@ -378,7 +354,8 @@ async function editTask(taskId) {
     <form id="edit-task-form" onsubmit="saveEditedTask(event, '${taskId}'); return false;">
       <div class="input-group edittask add-task">
         <span>Title</span>
-        <input id="edit-title" type="text" value="${task.title || ''}" required>
+        <input onclick="showError('add-task-input1-warning', 'edit-title')" oninput="showError('add-task-input1-warning', 'edit-title');" id="edit-title" type="text" value="${task.title || ''}" required>
+        <span id="add-task-input1-warning" class="input-warning d-none">This field is required</span>
       </div>
       <div class="input-group edittask add-task">
         <span>Description</span>
@@ -392,11 +369,12 @@ async function editTask(taskId) {
       <div class="input-group edittask add-task date">
         <span>Due Date <span class="required-star">*</span></span>
         <div class="date-input-container date-input-edit">
-          <input id="edit-date" type="date" value="${task.date || ''}"/>
+          <input onclick="showError('add-task-input2-warning', 'edit-date')" oninput="showError('add-task-input2-warning', 'edit-date');" id="edit-date" type="date" value="${task.date || ''}"/>
           <span>
             <img class="date-icon-edit" src="../img/icon/add_task_icon/event.png" alt="" />
           </span>
         </div>
+        <span id="add-task-input2-warning" class="input-warning d-none">This field is required</span>
       </div>
       <div class="priority priority-edit">
         <span>Priority</span>
@@ -429,7 +407,7 @@ async function editTask(taskId) {
              placeholder="Select a contact"
              oninput="assignedToDropdown(this.value)"
              onclick="openDropdown();"/>
-           <div class="assigned-arrow" onclick="toggleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow')">
+           <div class="assigned-arrow" onclick="handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'toggle')">
              <img class="hover-icon" id="assigned-to-arrow" src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png" alt=""/>
            </div>
          </div>
@@ -461,7 +439,7 @@ async function editTask(taskId) {
       <div id="subtasks-container" class="subtasks-container"></div>
     </form>
     <div class="create-clear-buttons-edit">
-      <button type="submit" class="create-button" form="edit-task-form">Save</button>
+      <button type="submit" class="create-button" form="edit-task-form">OK <img src="../img/icon/add_task_icon/buttons/create_task.png" /></button>
     </div>
   `;
 
@@ -581,7 +559,7 @@ async function openCreateTask() {
     `<img onclick="closeCreateTask()" src="../img/icon/close.png" alt="" class="close-overlay-x">` + tempDiv.innerHTML;
   animatedOpeningAddTask(overlayBg, overlayContent);
 }
-getContactInitialsAndNamegetContactInitialsAndName
+
 function closeCreateTask() {
   let overlayBg = document.getElementById('overlay-add-task');
   let overlayContent = document.getElementById('add-task-overlay-content');

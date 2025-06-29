@@ -1,4 +1,3 @@
-
 let contacts = [];
 let BASE_URL_TASKS_AND_USERS = 'https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/';
 
@@ -17,7 +16,7 @@ async function loadContacts() {
         initials: user.initials,
         email: user.email,
         phone: user.phone,
-        color: user.color
+        color: user.color,
       });
     }
   }
@@ -26,7 +25,7 @@ async function loadContacts() {
 async function loadContent(page) {
   let response = await fetch(page);
   let html = await response.text();
-  displayUserInitials();
+  // displayUserInitials();
   document.getElementById('main-content').innerHTML = html;
 
   if (page === 'add_task.html') {
@@ -41,43 +40,56 @@ async function loadContent(page) {
   } else if (page === 'legal-notice.html') {
   } else if (page === 'help.html') {
   }
-}
-/**
- * load the logged user name from local storage and precessed 
- * the string to the Initials 
- */
-function displayUserInitials(){ // Sehr Fehleranfällig !!!
-  let userInitials =  document.getElementById('userInitials');
-  let userName = JSON.parse(localStorage.getItem('announcedUser'));
-  if(userName !== 'Guest Guest'){
-    let firstinitial = userName.slice(0,1);
-    let searchposition = userName.search(" ");
-    let secondinitial = userName.slice(searchposition+1,searchposition+2);
-    let initials = firstinitial.concat(secondinitial);
-    userInitials.innerText = initials;
-  }else{
-    userInitials.innerText = 'G';
+  if (page === 'summary_user.html') {
+    changeColorbyHtmlLinks(document.getElementById('sidebar-summary'));
   }
-  
 }
 
-function toggleLogOutOverlay(){
-  console.log('check')
+/**
+ * load the logged user name from local storage and precessed
+ * the string to the Initials
+ */
+function displayUserInitials() {
+  // Sehr Fehleranfällig !!!
+  let userInitials = document.getElementById('userInitials');
+  let userName = JSON.parse(localStorage.getItem('announcedUser'));
+  if (userName !== 'Guest Guest') {
+    let firstinitial = userName.slice(0, 1);
+    let searchposition = userName.search(' ');
+    let secondinitial = userName.slice(searchposition + 1, searchposition + 2);
+    let initials = firstinitial.concat(secondinitial);
+    userInitials.innerText = initials;
+  } else {
+    userInitials.innerText = 'G';
+  }
+}
+
+function toggleLogOutOverlay() {
+  console.log('check');
   let logOutRef = document.getElementById('overlay-logout');
   let menuContent = document.getElementById('logout-overlay-content');
   logOutRef.classList.toggle('d-none');
- if(!menuContent.classList.contains('d-none')){
-   menuContent.innerHTML = getLogOutMenu();
- }
+  if (!menuContent.classList.contains('d-none')) {
+    menuContent.innerHTML = getLogOutMenu();
+  }
 }
 /**
  * Delete local Storage before the logged-in user is logged out
- * @param {a Tag} event 
+ * @param {a Tag} event
  */
-function handleLogOut(event){
+function handleLogOut(event) {
   event.preventDefault();
   resetAnnouncedUserStorage();
-  window.location.href = "/index.html";
+  window.location.href = '/index.html';
 }
 
-let resetAnnouncedUserStorage = () =>{localStorage.removeItem('announcedUser')};
+let resetAnnouncedUserStorage = () => {
+  localStorage.removeItem('announcedUser');
+};
+
+function changeColorbyHtmlLinks(element) {
+  document.querySelectorAll('.sidebar-links').forEach((sidebarLink) => {
+    sidebarLink.classList.remove('active');
+  });
+  element.classList.add('active');
+}

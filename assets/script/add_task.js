@@ -8,31 +8,46 @@ async function initAddTask() {
   await loadContacts();
   setPriority('medium');
   addFormValidation('add-task-form');
-  document.addEventListener('click', closeDropdown);
+  document.addEventListener('click', function () {
+    handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'close');
+    handleDropdown('category-dropdown-options', 'category-selected-arrow', 'close');
+    clearAssignedTo();
+  });
 }
 
-function closeDropdown() {
-  let contactsRef = document.getElementById('assigned-to-dropdown-options');
-  let assignedArrow = document.getElementById('assigned-to-arrow');
-  let categoryRef = document.getElementById('category-dropdown-options');
-  let categoryArrow = document.getElementById('category-selected-arrow');
-  if (contactsRef) contactsRef.classList.add('hidden');
-  if (categoryRef) categoryRef.classList.add('hidden');
-  if (assignedArrow) assignedArrow.style.transform = 'rotate(0deg)';
-  if (categoryArrow) categoryArrow.style.transform = 'rotate(0deg)';
-  clearAssignedTo();
-}
-
-function toggleDropdown(dropdownId, arrowId) {
+function handleDropdown(dropdownId, arrowId, action = 'toggle') {
   let dropdown = document.getElementById(dropdownId);
+  let arrow = arrowId ? document.getElementById(arrowId) : null;
   if (!dropdown) return;
-  let isOpen = !dropdown.classList.contains('hidden');
-  if (isOpen) {
-    dropdown.classList.add('hidden');
-    toggleArrowRotation(arrowId, false);
-  } else {
+
+  if (action === 'open') {
     dropdown.classList.remove('hidden');
-    toggleArrowRotation(arrowId, true);
+    toggleArrowRotation(arrow, true);
+    clearAssignedTo();
+  } else if (action === 'close') {
+    dropdown.classList.add('hidden');
+    toggleArrowRotation(arrow, false);
+  } else {
+    let isOpen = !dropdown.classList.contains('hidden');
+    if (isOpen) {
+      dropdown.classList.add('hidden');
+      toggleArrowRotation(arrow, false);
+    } else {
+      dropdown.classList.remove('hidden');
+      toggleArrowRotation(arrow, true);
+    }
+  }
+}
+
+function toggleArrowRotation(arrow, isOpen) {
+  if (arrow) {
+    if (isOpen) {
+      arrow.style.transform = 'rotate(180deg)';
+      arrow.classList.add('arrow-hover');
+    } else {
+      arrow.style.transform = 'rotate(0deg)';
+      arrow.classList.remove('arrow-hover');
+    }
   }
 }
 
@@ -57,24 +72,6 @@ function setPriority(priority) {
   if (priority === 'urgent' && urgentButton) urgentButton.classList.add('urgent');
   if (priority === 'medium' && mediumButton) mediumButton.classList.add('medium');
   if (priority === 'low' && lowButton) lowButton.classList.add('low');
-}
-
-function toggleArrowRotation(arrowId, isOpen) {
-  let arrow = document.getElementById(arrowId);
-  if (arrow) {
-    if (isOpen) {
-      arrow.style.transform = 'rotate(180deg)';
-      arrow.classList.add('arrow-hover');
-    } else {
-      arrow.style.transform = 'rotate(0deg)';
-      arrow.classList.remove('arrow-hover');
-    }
-  }
-}
-
-function openDropdown() {
-  let dropdown = document.getElementById('assigned-to-dropdown-options');
-  if (dropdown) dropdown.classList.remove('hidden');
 }
 
 function assignedToDropdown(searchTerm = '') {
@@ -118,7 +115,6 @@ function changeColorIfItsChecked(i, checked) {
 }
 
 function selectCustomOption(element) {
-  toggleDropdown('category-dropdown-options', 'category-selected-arrow');
   let categoryDropdown = document.getElementById('category-dropdown-selected');
   if (!categoryDropdown) return;
   let p = categoryDropdown.querySelector('p');
@@ -179,12 +175,21 @@ function validateAddTaskForm() {
 
   if (valid) {
     saveTaskToFirebase();
-    clearFormInputs();
-    closeCreateTask();
-    loadContent('board.html');
+    showWrapperCreateTask();
+    setTimeout(() => {
+      closeCreateTask();
+      loadContent('board.html');
+    }, 1000);
     return false;
   }
   return valid;
+}
+
+function showWrapperCreateTask() {
+  let wrapper = document.getElementById('wrapper-create-task-section');
+  if (wrapper) {
+    wrapper.classList.remove('d-none');
+  }
 }
 
 function checkTitle() {
@@ -253,10 +258,6 @@ function showError(errorId, inputId, isCategory = false) {
   }
 }
 
-function eventBubbling(event) {
-  event.stopPropagation();
-}
-
 function pushSubtaskInput(event) {
   let input = document.getElementById('add-task-input4');
   let container = document.getElementById('subtasks-container');
@@ -278,7 +279,9 @@ function preventEnterSubmit(event) {
   }
 }
 
-function clearFormInputs() {
+function clearAllTaskFields() {
+  clearAssignedTo();
+  clearSubtaskInput();
   clearInputTexts();
   clearWarningMessages();
   clearCategory();
@@ -405,68 +408,6 @@ function onSubtaskInputKeydown(event) {
   }
 }
 
-function editSubtaskInputHTML(oldText) {
-  return `
-<div class="input-with-icons">
-  <input id="subtask-edit-input" type="text" class="edit-subtask-input input-border-none" value="${oldText}"
-         onkeydown="saveSubtaskEdit(event, this)">
-  <img class="hover-icon" onclick="deleteSubtask(this)" src="../img/icon/add_task_icon/subtasks/delete.png">
-  <div class="subtask-wrapper-edit"></div>
-  <img class="hover-icon" onclick="saveSubtaskEdit(event, this)" src="../img/icon/add_task_icon/subtasks/check.png">
-</div>
-  `;
-}
-
-function showSaveCancelIconsHtml() {
-  return `
-      <img class="hover-icon" src="../img/icon/add_task_icon/subtasks/clear.png" onclick="clearSubtaskInput()">
-      <div class="subtask-wrapper"></div>
-      <img class="hover-icon" id="submit-subtask" onclick="pushSubtaskInput(event)" src="../img/icon/add_task_icon/subtasks/check.png">
-    `;
-}
-
-function saveSubtaskEditHTML(newText) {
-  return `
-    <span><li>${newText}</li></span>
-    <div class="subtask-actions">
-      <img src="../img/icon/add_task_icon/subtasks/edit.png" onclick="editSubtask(this)" />
-      <div class="subtask-wrapper"></div>
-      <img src="../img/icon/add_task_icon/subtasks/delete.png" onclick="deleteSubtask(this)" />
-    </div>
-  `;
-}
-
-function pushSubtaskInputHTML(text) {
-  return `
-      <div class="subtask-item" onclick="editSubtask(this)">
-        <span><li>${text}</li></span>
-        <div class="subtask-actions">
-          <img src="../img/icon/add_task_icon/subtasks/edit.png" onclick="editSubtask(this)" />
-          <div class="subtask-wrapper"></div>
-          <img src="../img/icon/add_task_icon/subtasks/delete.png" onclick="deleteSubtask(this)" />
-        </div>
-      </div>
-      `;
-}
-
-function assignedToDropdownHTML(contacts, i, checked) {
-  return `
-        <div class="assigned-contacts" id="assigned-contact-${i}" onclick="onContactCheckboxClick(${i}, this)">
-          <div class="user-dropdown" id="user-dropdown-${i}">
-            <div class="user-name-dropdown " style="background-color: ${contacts[i].color};">
-              <span >${contacts[i].initials}</span>
-            </div>
-            <div id="user-name-dropdown-${i}">
-              <p>${contacts[i].name}</p>
-            </div>
-          </div>
-          <div>
-            <input type="checkbox" class="checkbox" ${checked} onclick="eventBubbling(event); onContactCheckboxClick(${i}, this)">
-          </div>
-        </div>
-      `;
-}
-
 function enableCreateTaskButton() {
   let title = document.getElementById('title');
   let date = document.getElementById('date');
@@ -509,7 +450,7 @@ async function saveTaskToFirebase() {
     assignedTo.push(contacts[selectedContacts[i]].id);
   }
 
-  // Drag and Drop id/sequence zuweisen 
+  // Drag and Drop id/sequence zuweisen
   let sequence = 0;
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json');
   let tasks = await response.json();
@@ -518,7 +459,7 @@ async function saveTaskToFirebase() {
     for (let i = 0; i < tasksArr.length; i++) {
       let task = tasksArr[i];
       if (task.status === 'todo' && task.sequence != null) {
-        if (task.sequence  >= sequence) {
+        if (task.sequence >= sequence) {
           sequence = task.sequence + 1;
         }
       }
