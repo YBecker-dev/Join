@@ -25,7 +25,7 @@ async function loadContacts() {
 async function loadContent(page) {
   let response = await fetch(page);
   let html = await response.text();
-  // displayUserInitials();
+  displayUserInitials();
   document.getElementById('main-content').innerHTML = html;
 
   if (page === 'add_task.html') {

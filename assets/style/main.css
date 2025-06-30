@@ -1,3 +1,51 @@
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: white;
+    position: fixed;
+    height: 96px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 5px 15px;
+}
+
+.logo-responsive {
+    display: none;
+}
+
+.header-content>p {
+    font-size: 20px;
+    color: #293647;
+    font-weight: 500;
+    padding: 0 0 0 340px;
+}
+
+.header-user {
+    display: flex;
+    align-items: center;
+    padding-right: 40px;
+    gap: 1rem;
+    font-size: 20px;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 3px solid black;
+    font-size: 1.25rem;
+    background: white;
+    color: #2aabe2;
+}
+
+.user:hover {
+    cursor: pointer;
+    background-color: #D1D1D1;
+}
+
 .sidebar {
     position: sticky;
     width: 232px;
@@ -148,4 +196,112 @@ header {
     display: flex;
     flex-direction: column;
     gap: 15px;
+}
+
+
+/* // responsive design */
+
+@media (max-width: 1439px) {
+    #sidebar-summary {
+        order: 1;
+    }
+
+    #sidebar-board {
+        order: 2;
+    }
+
+    #sidebar-add-task {
+        order: 3;
+    }
+
+    #sidebar-contacts {
+        order: 4;
+    }
+
+    .sidebar-legal-stuff {
+        display: none;
+    }
+
+    .sidebar-logo {
+        display: none;
+    }
+
+    .sidebar-links-container {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 16px;
+    }
+
+    .sidebar {
+        height: 80px;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        padding: 0;
+        position: fixed;
+    }
+
+    .sidebar-links {
+        height: 76px;
+        padding: 0;
+        flex-direction: column;
+        justify-content: center;
+        font-size: 14px;
+        gap: 4px;
+        line-height: 120%;
+        width: 80px;
+    }
+
+    .sidebar-links.active {
+        border-radius: 15px;
+    }
+
+    header {
+        position: unset;
+    }
+
+    .header-content {
+        height: 80px;
+        padding: 16px 20px;
+        position: fixed;
+        top: 0;
+        z-index: 2;
+    }
+
+    .header-content>p {
+        display: none;
+    }
+
+    .header-user img {
+        display: none;
+    }
+
+    .header-user {
+        padding-right: 0;
+    }
+
+    .user {
+        height: 40px;
+        width: 40px;
+    }
+
+    .logo-responsive {
+        display: unset;
+        width: 32px;
+        height: 40px;
+    }
+
+    .main-content {
+        padding: 0 16px;
+        top: 0;
+        left: 0;
+    }
+
+}
+
+@media (max-width: 1008px) {
+    .main-content {
+        position: unset;
+        margin-top: 80px;
+    }
 }

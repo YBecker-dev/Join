@@ -8,14 +8,14 @@
     </div>
   </section>
 
-  <div class="contentspace-html">
-    <h1>Add Task</h1>
-    <div class="required">
-      <p><span class="required-star">*</span> This field is required</p>
+  <div class="contentspace-html addtask">
+    <div class="headline-addtask">
+      <h1>Add Task</h1>
     </div>
+    <div class="required"></div>
     <form id="add-task-form" onsubmit="return validateAddTaskForm();" onkeydown="return preventEnterSubmit(event);">
       <div class="create-clear-buttons">
-        <button type="button" class="clear-button" onclick="clearFormInputs();">
+        <button type="button" class="clear-button" onclick="clearAllTaskFields();">
           Clear <img src="../img/icon/add_task_icon/buttons/clear_all.png" />
         </button>
         <button disabled type="submit" class="create-button" id="create-task-button">
@@ -167,5 +167,6 @@
         </div>
       </div>
     </form>
+    <p><span class="required-star">*</span> This field is required</p>
   </div>
 </body>

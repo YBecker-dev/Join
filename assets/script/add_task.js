@@ -80,12 +80,16 @@ function assignedToDropdown(searchTerm = '') {
   if (!Array.isArray(contacts)) return;
   let html = '';
   let lowerSearch = searchTerm.toLowerCase();
-  for (let i = 0; i < contacts.length; i++) {
-    if (contacts[i].name.toLowerCase().includes(lowerSearch)) {
-      let checked = selectedContacts.includes(i) ? 'checked' : '';
-      html += assignedToDropdownHTML(contacts, i, checked);
-    }
+for (let i = 0; i < contacts.length; i++) {
+  if (
+    contacts[i] &&
+    contacts[i].name &&
+    contacts[i].name.toLowerCase().includes(lowerSearch)
+  ) {
+    let checked = selectedContacts.includes(i) ? 'checked' : '';
+    html += assignedToDropdownHTML(contacts, i, checked);
   }
+}
   contactsRef.innerHTML = html;
 }
 
