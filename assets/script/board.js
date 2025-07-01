@@ -261,7 +261,7 @@ async function deleteTaskFromFirebase(taskId) {
   await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json', {
     method: 'DELETE',
   });
-   await pushTasksInBoard();
+  await pushTasksInBoard();
 }
 
 async function toggleBoardOverlay(taskId) {
@@ -354,7 +354,9 @@ async function editTask(taskId) {
     <form id="edit-task-form" onsubmit="saveEditedTask(event, '${taskId}'); return false;">
       <div class="input-group edittask add-task">
         <span>Title</span>
-        <input onclick="showError('add-task-input1-warning', 'edit-title')" oninput="showError('add-task-input1-warning', 'edit-title');" id="edit-title" type="text" value="${task.title || ''}" required>
+        <input onclick="showError('add-task-input1-warning', 'edit-title')" oninput="showError('add-task-input1-warning', 'edit-title');" id="edit-title" type="text" value="${
+          task.title || ''
+        }" required>
         <span id="add-task-input1-warning" class="input-warning d-none">This field is required</span>
       </div>
       <div class="input-group edittask add-task">
@@ -369,7 +371,9 @@ async function editTask(taskId) {
       <div class="input-group edittask add-task date">
         <span>Due Date <span class="required-star">*</span></span>
         <div class="date-input-container date-input-edit">
-          <input onclick="showError('add-task-input2-warning', 'edit-date')" oninput="showError('add-task-input2-warning', 'edit-date');" id="edit-date" type="date" value="${task.date || ''}"/>
+          <input onclick="showError('add-task-input2-warning', 'edit-date')" oninput="showError('add-task-input2-warning', 'edit-date');" id="edit-date" type="date" value="${
+            task.date || ''
+          }"/>
           <span>
             <img class="date-icon-edit" src="../img/icon/add_task_icon/event.png" alt="" />
           </span>
@@ -399,17 +403,14 @@ async function editTask(taskId) {
       <div class="add-task">
        <span>Assigned to</span>
        <div id="assigned-to-dropdown">
-         <div id="assigned-to-dropdown-selected" class="assigned-to-dropdown-selected-edit" onclick="assignedToDropdown(this.value); eventBubbling(event)">
-           <input
-             id="add-task-input3"
-             name="add-task-input3"
-             type="text"
-             placeholder="Select a contact"
-             oninput="assignedToDropdown(this.value)"
-             onclick="openDropdown();"/>
-           <div class="assigned-arrow" onclick="handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'toggle')">
-             <img class="hover-icon" id="assigned-to-arrow" src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png" alt=""/>
-           </div>
+              <div id="assigned-to-dropdown-selected" onclick="eventBubbling(event)">
+                <input
+                  id="add-task-input3" name="add-task-input3" type="text" placeholder="Select a contact"  oninput="assignedToDropdown(this.value)" onclick="handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'open'); assignedToDropdown(this.value)">
+                <div
+                  class="assigned-arrow" onclick="handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'toggle'); assignedToDropdown(document.getElementById('add-task-input3').value);">
+                  <img
+                    class="hover-icon" id="assigned-to-arrow" src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png" alt="">
+                </div>
          </div>
          <div id="assigned-to-dropdown-options" class="hidden custom-dropdown-options custom-dropdown-options-edit" onclick="eventBubbling(event)">
          </div>

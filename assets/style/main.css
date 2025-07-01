@@ -35,7 +35,7 @@
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    border: 3px solid black;
+    border: 2px solid black;
     font-size: 1.25rem;
     background: white;
     color: #2aabe2;
@@ -265,7 +265,7 @@ header {
         padding: 16px 20px;
         position: fixed;
         top: 0;
-        z-index: 2;
+        z-index: 20;
     }
 
     .header-content>p {
@@ -289,6 +289,7 @@ header {
         display: unset;
         width: 32px;
         height: 40px;
+        overflow: unset;
     }
 
     .main-content {
@@ -303,5 +304,10 @@ header {
     .main-content {
         position: unset;
         margin-top: 80px;
+        overflow: unset;
+    }
+
+    .add-task-no-scroll {
+        overflow: hidden;
     }
 }

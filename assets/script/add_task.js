@@ -21,19 +21,19 @@ function handleDropdown(dropdownId, arrowId, action = 'toggle') {
   if (!dropdown) return;
 
   if (action === 'open') {
-    dropdown.classList.remove('hidden');
+    openDropdownWithAnimation(dropdownId);
     toggleArrowRotation(arrow, true);
     clearAssignedTo();
   } else if (action === 'close') {
-    dropdown.classList.add('hidden');
+    closeDropdownWithAnimation(dropdownId);
     toggleArrowRotation(arrow, false);
   } else {
-    let isOpen = !dropdown.classList.contains('hidden');
+    let isOpen = dropdown.classList.contains('show');
     if (isOpen) {
-      dropdown.classList.add('hidden');
+      closeDropdownWithAnimation(dropdownId);
       toggleArrowRotation(arrow, false);
     } else {
-      dropdown.classList.remove('hidden');
+      openDropdownWithAnimation(dropdownId);
       toggleArrowRotation(arrow, true);
     }
   }
@@ -79,18 +79,33 @@ function assignedToDropdown(searchTerm = '') {
   if (!contactsRef) return;
   if (!Array.isArray(contacts)) return;
   let html = '';
-  let lowerSearch = searchTerm.toLowerCase();
-for (let i = 0; i < contacts.length; i++) {
-  if (
-    contacts[i] &&
-    contacts[i].name &&
-    contacts[i].name.toLowerCase().includes(lowerSearch)
-  ) {
-    let checked = selectedContacts.includes(i) ? 'checked' : '';
-    html += assignedToDropdownHTML(contacts, i, checked);
+  let lowerSearch = searchTerm.trim().toLowerCase();
+  for (let i = 0; i < contacts.length; i++) {
+    if (contacts[i] && contacts[i].name) {
+      let name = contacts[i].name.trim().toLowerCase();
+      if (lowerSearch === '' || name.startsWith(lowerSearch)) {
+        let checked = selectedContacts.includes(i) ? 'checked' : '';
+        html += assignedToDropdownHTML(contacts, i, checked);
+      }
+    }
   }
-}
   contactsRef.innerHTML = html;
+  animatedSearch(contactsRef, searchTerm);
+}
+
+function animatedSearch(contactsRef, searchTerm) {
+  if (!contactsRef.classList.contains('show')) return;
+  contactsRef.classList.remove('expanded');
+  let maxDropdownHeight = 332;
+  let contentHeight = contactsRef.scrollHeight;
+  if (searchTerm.trim() !== '' && contentHeight < maxDropdownHeight) {
+    contactsRef.style.maxHeight = contentHeight + 'px';
+    contactsRef.style.overflowY = 'hidden';
+  } else {
+    contactsRef.style.maxHeight = maxDropdownHeight + 'px';
+    contactsRef.style.overflowY = 'auto';
+  }
+  contactsRef.classList.add('expanded');
 }
 
 function onContactCheckboxClick(i, checkbox) {
@@ -492,4 +507,33 @@ async function saveTaskToFirebase() {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(taskData),
   });
+}
+
+function openDropdownWithAnimation(id) {
+  const dropdown = document.getElementById(id);
+  if (!dropdown) return;
+  if (dropdown.classList.contains('show') && dropdown.style.maxHeight === '332px') {
+    return;
+  }
+  dropdown.classList.add('show');
+  dropdown.classList.remove('hidden');
+  dropdown.style.maxHeight = '0';
+  dropdown.style.opacity = '0';
+  setTimeout(() => {
+    dropdown.style.maxHeight = '332px';
+    dropdown.style.opacity = '1';
+  }, 50);
+}
+
+function closeDropdownWithAnimation(id) {
+  const dropdown = document.getElementById(id);
+  if (!dropdown) return;
+  dropdown.classList.remove('expanded', 'show', 'hidden');
+  dropdown.classList.add('closing');
+  setTimeout(() => {
+    dropdown.classList.remove('closing');
+    dropdown.classList.add('hidden');
+    dropdown.style.maxHeight = '';
+    dropdown.style.opacity = '';
+  }, 300);
 }

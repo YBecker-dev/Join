@@ -229,10 +229,9 @@ function progressbarHtml(percent, doneCount, totalCount) {
   `;
 }
 
-function pushSubtaskInputHTML(text, checked = false) {
+function pushSubtaskInputHTML(text) {
   return `
     <div class="subtask-item">
-      <input type="checkbox" ${checked ? 'checked' : ''}>
       <span><li>${text}</li></span>
       <div class="subtask-actions">
         <img src="../img/icon/add_task_icon/subtasks/edit.png" onclick="editSubtask(this)" />
