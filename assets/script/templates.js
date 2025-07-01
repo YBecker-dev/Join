@@ -5,7 +5,7 @@ function getNoteTemplateContact(index) {
   return  ` 
             <div onclick="openDetails(${index})" class="person">
               <p class="initial">${getInitials(contact.givenName, contact.surname)}</p>
-              <div>
+            <div>
                 <h4>${contact.givenName} ${contact.surname}</h4>
                 <p><a class="mail">${contact.mail}</a></p>
               </div>
@@ -24,11 +24,11 @@ function getNoteTemplateContactDetails(indexDetails) {
                 <div>
                   <h3 class="infoNames">${contact.givenName} ${contact.surname}</h3>
                   <div class="contactIcons">
-                    <div id="editOverlay" onclick="openEditOverlay()">
+                    <div id="editOverlay" onclick="openEditOverlay(${indexDetails})">
                       <img class="editIcon" src="../img/icon/edit.png" alt="pencil">
                       <span class="editText">edit</span>
                     </div>
-                    <div onclick="deleteContact()">
+                    <div onclick="deleteContact(${indexDetails})">
                       <img class="editIcon" src="../img/icon/trash.png" alt="wastebasket">
                       <span class="editText">delete</span>
                     </div>
@@ -43,97 +43,93 @@ function getNoteTemplateContactDetails(indexDetails) {
                 <a class="phone" href="tel:${contact.phone}">${contact.phone}</a>
               </div>
             </div>
-          `;
+  `;
 }
 
-// add new Contact
+// add new Contact 
 function getNoteTemplateAddNewContact() {
-  let newContact
-
   return `
-            <div class="newContactOverlay">
-              <div class="headDiv">
-                <img class="contactLogo" src="../img/Logo/Logo_white.png" alt="Logo_white">
-                <p class="addHeadline">Add contact</p>
-                <p class="addTastText">Tasks are better with a team!</p>
-                <div class="line"></div>
-              </div>
-              <div class="editDiv">
-                <div class="closeDiv">
-                  <img onclick="closeOverlay()" class="close" src="../img/icon/close.png" alt="Close-Button">
-                </div>        
-                <div class="profilDiv">
-                  <div>
-                    <img class="profileImg" src="../img/icon/profile.png" alt="profile Image">
-                  </div>
-                  <div>
-                    <div class="addNewContactDiv">
-                      <input id="newContactName" class="addNewContact" type="" placeholder="Name" required>
-                      <img class="addNewContactIcon" src="../img/icon/person.png" alt="Person Icon">
-                    </div> 
-                    <div class="addNewContactDiv">
-                      <input id="newContactMail" class="addNewContact" type="email" placeholder="Email" required>
-                      <img class="addNewContactIcon" src="../img/icon/mail.png" alt="Email Icon">
-                    </div> 
-                    <div class="addNewContactDiv">
-                      <input id="newContactPhone" class="addNewContact" type="tel" placeholder="Phone" required>
-                      <img class="addNewContactIcon" src="../img/icon/phone.png" alt="phone Icon">
-                    </div> 
-                  </div>           
-                </div>
-                <div class="accept">
-                  <button onclick="closeOverlay" class="clear-button">Cancel<img class="save-close" src="../img/icon/close.png" alt="Close-Button"></button>
-                  <button onclick="saveToLocalstorage" class="create-button">Create contact<img class="save-close" src="../img/icon/save.png" alt=""></button>
-                </div>
-              </div>
-            </div>
-          `;
+    <div class="newContactOverlay" onclick="event.stopPropagation()">
+      <div class="headDiv">
+        <img class="contactLogo" src="../img/Logo/Logo_white.png" alt="Logo_white">
+        <p class="addHeadline">Add contact</p>
+        <p class="addTastText">Tasks are better with a team!</p>
+        <div class="line"></div>
+      </div>
+      <div class="editDiv">
+        <div class="closeDiv">
+          <img onclick="closeOverlay()" class="close" src="../img/icon/close.png" alt="Close-Button">
+        </div>        
+        <div class="profilDiv">
+          <div>
+            <img class="profileImg" src="../img/icon/profile.png" alt="profile Image">
+          </div>
+          <div>
+            <div class="addNewContactDiv" onclick="event.stopPropagation()">
+              <input id="newContactName" class="addNewContact" type="text" placeholder="Name" required onclick="event.stopPropagation()">
+              <img class="addNewContactIcon" src="../img/icon/person.png" alt="Person Icon">
+            </div> 
+            <div class="addNewContactDiv" onclick="event.stopPropagation()">
+              <input id="newContactMail" class="addNewContact" type="email" placeholder="Email" required onclick="event.stopPropagation()">
+              <img class="addNewContactIcon" src="../img/icon/mail.png" alt="Email Icon">
+            </div> 
+            <div class="addNewContactDiv" onclick="event.stopPropagation()">
+              <input id="newContactPhone" class="addNewContact" type="tel" placeholder="Phone" required onclick="event.stopPropagation()">
+              <img class="addNewContactIcon" src="../img/icon/phone.png" alt="phone Icon">
+            </div> 
+          </div>           
+        </div>
+        <div class="accept">
+          <button onclick="closeOverlay()" class="clear-button">Cancel<img class="save-close" src="../img/icon/close.png" alt="Close-Button"></button>
+          <button onclick="saveToLocalstorage()" class="create-button">Create contact<img class="save-close" src="../img/icon/save.png" alt=""></button>
+        </div>
+      </div>
+    </div>
+  `;
 }
 
 // edit Contact
-function getNoteTemplateEditContact() {
-
+function getNoteTemplateEditContact(index) {
+  let contact = myContacts[index] || {};
 
   return `
-            <div class="editContactOverlay">
-              <div class="headDiv">
-                <img class="contactLogo" src="../img/Logo/Logo_white.png" alt="Logo_white">
-                <p class="addHeadline">Add contact</p>
-                <div class="line"></div>
-              </div>
-              <div class="editDiv">
-                <div class="closeDiv">
-                  <img class="close" src="../img/icon/close.png" alt="Close-Button">
-                </div>           
-                <div class="profilDiv">
-                  <div>
-                    <img class="profileImg" src="../img/icon/profile.png" alt="profile Image">
-                  </div>
-                <div>
-                <div class="addNewContactDiv">
-                  <input class="addNewContact" type="" placeholder="Name" required>
-                  <img class="addNewContactIcon" src="../img/icon/person.png" alt="Person Icon">
-                </div> 
-                <div class="addNewContactDiv">
-                  <input class="addNewContact" type="email" placeholder="Email" required>
-                  <img class="addNewContactIcon" src="../img/icon/mail.png" alt="Email Icon">
-                </div> 
-                <div class="addNewContactDiv">
-                  <input class="addNewContact" type="tel" placeholder="Phone" required>
-                  <img class="addNewContactIcon" src="../img/icon/phone.png" alt="phone Icon">
-                </div>               
-              </div>                 
-            </div>
-            <div class="accept">
-              <button class="clear-button">Delete</button>
-              <button class="create-button">Create contact<img class="save-close" src="../img/icon/save.png" alt=""></button>
-            </div>
-          </div> 
+    <div class="editContactOverlay" onclick="event.stopPropagation()">
+      <div class="headDiv">
+        <img class="contactLogo" src="../img/Logo/Logo_white.png" alt="Logo_white">
+        <p class="addHeadline">Edit contact</p>
+        <div class="line"></div>
+      </div>
+      <div class="editDiv">
+        <div class="closeDiv">
+          <img onclick="closeOverlay()" class="close" src="../img/icon/close.png" alt="Close-Button">
+        </div>           
+        <div class="profilDiv">
+          <div>
+            <img class="profileImg" src="../img/icon/profile.png" alt="profile Image">
+          </div>
+          <div>
+            <div class="addNewContactDiv" onclick="event.stopPropagation()">
+              <input id="editContactName" class="addNewContact" type="text" placeholder="Name" value="${contact.givenName || ''} ${contact.surname || ''}" required onclick="event.stopPropagation()">
+              <img class="addNewContactIcon" src="../img/icon/person.png" alt="Person Icon">
+            </div> 
+            <div class="addNewContactDiv" onclick="event.stopPropagation()">
+              <input id="editContactMail" class="addNewContact" type="email" placeholder="Email" value="${contact.mail || ''}" required onclick="event.stopPropagation()">
+              <img class="addNewContactIcon" src="../img/icon/mail.png" alt="Email Icon">
+            </div> 
+            <div class="addNewContactDiv" onclick="event.stopPropagation()">
+              <input id="editContactPhone" class="addNewContact" type="tel" placeholder="Phone" value="${contact.phone || ''}" required onclick="event.stopPropagation()">
+              <img class="addNewContactIcon" src="../img/icon/phone.png" alt="phone Icon">
+            </div>               
+          </div>                 
         </div>
-      `;
+        <div class="accept">
+          <button onclick="deleteContact(${index})" class="clear-button">Delete</button>
+          <button onclick="updateContact(${index})" class="create-button">Save changes<img class="save-close" src="../img/icon/save.png" alt=""></button>
+        </div>
+      </div> 
+    </div>
+  `;
 }
-
-
 
 function getTaskOverlay(task, taskId) {
   let categoryInfo = backgroundColorTitle(task);
@@ -341,7 +337,6 @@ function assignedToDropdownHTML(contacts, i, checked) {
       `;
 }
 
-
 function getEmptyDragArea(noTaskText){
   return `
     <div class="empty-task-box">
@@ -349,3 +344,4 @@ function getEmptyDragArea(noTaskText){
     </div>
   `
 }
+
