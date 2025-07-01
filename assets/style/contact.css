@@ -4,14 +4,11 @@
 
 /* Contact List side */
 .contactList {
+    overflow-y: visible;
     width: 38rem;
     height: 100%;
     background-color: #ffffff;
 }
-
-/* .contactList::-webkit-scrollbar {
-   width: 2rem;
-} */
 
 button {
     margin-top: 1rem;
@@ -101,7 +98,6 @@ h2 {
     font-size: 24px;
 }
 
-
 /* deteils view */
 .namesDetails {
     position: absolute;
@@ -121,7 +117,7 @@ h2 {
     height: 6rem;
     align-content: center;
     border-radius: 6rem;
-    background-color: orange;
+    background-color: orange; /* muss noch angepasst werden */
     color: white;
     font-size: 4rem; 
 }
@@ -168,7 +164,8 @@ h4 {
 }
 
 /* add new Contact Overlay */
-.newContactOverlay {
+.newContactOverlay,
+.editContactOverlay {
     height: 40rem;
     width: 80rem;
     position: absolute;
@@ -204,7 +201,7 @@ h4 {
 }
 
 .contactLogo {
-    height: 4rem;
+    height: 5rem;
     margin-top: 8rem;
     margin-left: 3rem;
     display: flex;
@@ -215,21 +212,21 @@ h4 {
 .addHeadline {
     margin-top: 1rem;
     margin-bottom: 1rem;
-    margin-left: 3rem;
-    font-size: 3.5rem;
+    margin-left: 1rem;
+    font-size: 4rem;
     font-weight: bold;
     color: #ffffff;
 }
 
 .addTastText {
-    margin-left: 3rem;
-    font-size: 1.5rem;
+    margin-left: 1rem;
+    font-size: 1.8rem;
     color: #ffffff;
 }
 
 .line {
     height: .2rem;
-    width: 5rem;
+    width: 7rem;
     background-color: #29abe2;
     margin-top: 1rem;
     margin-left: 3rem;
