@@ -477,10 +477,6 @@ input[type="text"] {
     color: #e74c3c;
 }
 
-.mt-16 {
-    margin-top: -16px !important;
-}
-
 .subtask-item {
     cursor: pointer;
     padding: 8px 12px 8px 24px;
@@ -521,8 +517,7 @@ input[type="text"] {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    height: 32px;
-    margin-top: 8px;
+    margin-top: -16px;
 }
 
 .subtask-item span {
@@ -838,12 +833,28 @@ input[type="text"] {
     }
 
     .required-responsive {
-        padding: 16px 0 60px 0px;
+        padding: 24px 0 52px 0px;
         text-align: start;
         position: unset;
     }
 
     .task-attribute .container2 {
         gap: 16px;
+    }
+
+    .subtasks-container {
+        margin-top: -12px;
+    }
+
+    .subtask-item:hover,
+    .subtask-item:hover .subtask-actions,
+    .category-option:hover,
+    .category-option:hover .category-option-text {
+        background: none !important;
+        transform: none !important;
+    }
+
+    .subtask-actions {
+        opacity: 1;
     }
 }

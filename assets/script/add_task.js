@@ -138,8 +138,7 @@ function selectCustomOption(element) {
   if (!categoryDropdown) return;
   let p = categoryDropdown.querySelector('p');
   if (p) p.textContent = element.textContent;
-  let dropdownOptions = document.getElementById('category-dropdown-options');
-  if (dropdownOptions) dropdownOptions.classList.add('hidden');
+  handleDropdown('category-dropdown-options', 'category-selected-arrow', 'close');
 }
 
 function addFormValidation(formId) {
