@@ -3,7 +3,6 @@
     padding: 0;
     font-size: 20px;
     font-weight: 400;
-    line-height: 120%;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -40,7 +39,6 @@
     padding: 4px 24px;
     font-size: 23px;
     font-weight: 400;
-    line-height: 120%;
 }
 
 .close-icon {
@@ -191,7 +189,6 @@
 .trashImg p,
 .editImg p {
     font-size: 16px;
-    line-height: 120%;
 }
 
 .trashImg,
@@ -434,8 +431,6 @@
 .no-task-text {
     font-size: 16px;
     font-weight: 400;
-    line-height: 120%;
-    /*font-family: Open Sans*/
 }
 
 .task-body {
@@ -509,7 +504,6 @@
 .board-task-title {
     color: #2A3647;
     font-weight: 700;
-    line-height: 120%;
     word-break: break-word;
 }
 
