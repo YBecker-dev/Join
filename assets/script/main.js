@@ -30,18 +30,21 @@ async function loadContent(page) {
 
   if (page === 'add_task.html') {
     await initAddTask();
+    changeColorbyHtmlLinks(document.getElementById('sidebar-add-task'));
   } else if (page === 'contacts.html') {
     initContacts();
+    changeColorbyHtmlLinks(document.getElementById('sidebar-contacts'));
   } else if (page === 'board.html') {
     await initBoard();
+    changeColorbyHtmlLinks(document.getElementById('sidebar-board'));
   } else if (page === 'summary_user.html') {
     await initSummary();
-  } else if (page === 'privacy-policy.html') {
-  } else if (page === 'legal-notice.html') {
-  } else if (page === 'help.html') {
-  }
-  if (page === 'summary_user.html') {
     changeColorbyHtmlLinks(document.getElementById('sidebar-summary'));
+  } else if (page === 'privacy-policy.html') {
+    changeColorbyHtmlLinks(document.getElementById('sidebar-privacy-policy'));
+  } else if (page === 'legal-notice.html') {
+    changeColorbyHtmlLinks(document.getElementById('sidebar-legal-notice'));
+  } else if (page === 'help.html') {
   }
 }
 

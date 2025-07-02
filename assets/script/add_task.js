@@ -527,6 +527,7 @@ function openDropdownWithAnimation(id) {
 function closeDropdownWithAnimation(id) {
   const dropdown = document.getElementById(id);
   if (!dropdown) return;
+  if (!dropdown.classList.contains('show') && !dropdown.classList.contains('expanded')) return;
   dropdown.classList.remove('expanded', 'show', 'hidden');
   dropdown.classList.add('closing');
   setTimeout(() => {

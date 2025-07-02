@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../style/help.css" />
     <title>Leaderbord</title>
   </head>
-  <body onload="loadContent('summary_user.html');">
+  <body onload="loadContent('board.html');">
     <div class="overlay d-none" id="overlayBoard" onclick="toggleBoardOverlay()">
       <div class="overlay-content-flex">
         <div class="overlay-content-render" id="overlay-content-loader" onclick="preventBubbling(event)"></div>
@@ -98,10 +98,10 @@
         </div>
       </div>
       <div class="sidebar-legal-stuff">
-        <a class="sidebar-links privacy-legal " href="#" onclick="loadContent('privacy-policy.html'); changeColorbyHtmlLinks(this);"
+        <a class="sidebar-links privacy-legal" id="sidebar-privacy-policy" href="#" onclick="loadContent('privacy-policy.html'); changeColorbyHtmlLinks(this);"
           >Privacy Policy</a
         >
-        <a class="sidebar-links privacy-legal" href="#" onclick="loadContent('legal-notice.html'); changeColorbyHtmlLinks(this);"
+        <a class="sidebar-links privacy-legal" id="sidebar-legal-notice" href="#" onclick="loadContent('legal-notice.html'); changeColorbyHtmlLinks(this);"
           >Legal Notice</a
         >
       </div>
