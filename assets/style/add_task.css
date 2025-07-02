@@ -5,7 +5,6 @@
     font-size: 60px;
     padding: 0;
     font-weight: 700;
-    line-height: 120%;
 }
 
 .title_description_date {
@@ -328,7 +327,11 @@ input[type="text"] {
     padding: 16px;
     width: 183px;
     height: 56px;
-    line-height: 120%;
+    justify-content: space-between;
+}
+
+.cancel-button {
+     width: 126px;
 }
 
 .create-button {
@@ -461,7 +464,6 @@ input[type="text"] {
     border-radius: 50%;
     font-size: 12px;
     color: white;
-    line-height: 120%;
 }
 
 .assigned-arrow {

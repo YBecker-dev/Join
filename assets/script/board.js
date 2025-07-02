@@ -182,6 +182,7 @@ function renderTasksInColumn(tasksInColumn, elementId) {
     );
     document.getElementById(elementId).appendChild(div);
     enableDragAndDropBoard(task, div);
+    enableTouchDrag(div, taskId); //test
   }
 }
 
@@ -404,14 +405,14 @@ async function editTask(taskId) {
       <div class="add-task">
        <span>Assigned to</span>
        <div id="assigned-to-dropdown">
-              <div id="assigned-to-dropdown-selected" onclick="eventBubbling(event)">
-                <input
-                  id="add-task-input3" name="add-task-input3" type="text" placeholder="Select a contact"  oninput="assignedToDropdown(this.value)" onclick="handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'open'); assignedToDropdown(this.value)">
-                <div
-                  class="assigned-arrow" onclick="handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'toggle'); assignedToDropdown(document.getElementById('add-task-input3').value);">
-                  <img
-                    class="hover-icon" id="assigned-to-arrow" src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png" alt="">
-                </div>
+        <div id="assigned-to-dropdown-selected" onclick="eventBubbling(event)">
+          <input
+            id="add-task-input3" name="add-task-input3" type="text" placeholder="Select a contact"  oninput="assignedToDropdown(this.value)" onclick="handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'open'); assignedToDropdown(this.value)">
+          <div
+            class="assigned-arrow" onclick="handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'toggle'); assignedToDropdown(document.getElementById('add-task-input3').value);">
+            <img
+              class="hover-icon" id="assigned-to-arrow" src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png" alt="">
+          </div>
          </div>
          <div id="assigned-to-dropdown-options" class="hidden custom-dropdown-options custom-dropdown-options-edit" onclick="eventBubbling(event)">
          </div>
@@ -542,6 +543,14 @@ async function openCreateTask() {
   selectedContacts = [];
   let response = await fetch('../html/add_task.html');
   let html = await response.text();
+
+  let btn = document.getElementById('addTaskBtn');
+  if (!btn) return;
+  if (window.innerWidth <= 1233) {
+    btn.onclick = loadContent('add_task.html');
+    return;
+  }
+
   let tempDiv = document.createElement('div');
   tempDiv.innerHTML = html;
 
@@ -583,6 +592,60 @@ function animatedOpeningAddTask(overlayBg, overlayContent) {
     overlayBg.classList.add('visible');
     overlayContent.classList.add('show');
   }, 10);
+}
+
+//test
+function enableTouchDrag(element, taskId) {
+  let dragTimer = null;
+  let dragStarted = false;
+
+  element.addEventListener('touchstart', function (e) {
+    dragStarted = false;
+    dragTimer = setTimeout(() => {
+      dragStarted = true;
+      startDragging(taskId);
+      element.classList.add('dragging');
+    }, 400);
+  });
+
+  element.addEventListener('touchend', function (e) {
+    clearTimeout(dragTimer);
+    if (dragStarted) {
+      element.classList.remove('dragging');
+      currentDraggedTaskId = null;
+    }
+  });
+
+  element.addEventListener('touchmove', function (e) {
+    clearTimeout(dragTimer);
+  });
+}
+
+//test
+function enableTouchDrag(element, taskId) {
+  let dragTimer = null;
+  let dragStarted = false;
+
+  element.addEventListener('touchstart', function (e) {
+    dragStarted = false;
+    dragTimer = setTimeout(() => {
+      dragStarted = true;
+      startDragging(taskId);
+      element.classList.add('dragging');
+    }, 400);
+  });
+
+  element.addEventListener('touchend', function (e) {
+    clearTimeout(dragTimer);
+    if (dragStarted) {
+      element.classList.remove('dragging');
+      currentDraggedTaskId = null;
+    }
+  });
+
+  element.addEventListener('touchmove', function (e) {
+    clearTimeout(dragTimer);
+  });
 }
 
 let initEventListnerProcessTasksInformation = () => {
