@@ -5,6 +5,7 @@ async function initBoard() {
   await pushTasksInBoard();
   document.addEventListener('dragend', removeAllHighlights);
   emptyDragArea();
+  initEventListnerProcessTasksInformation();
 }
 
 function allowDrop(ev) {
@@ -582,4 +583,42 @@ function animatedOpeningAddTask(overlayBg, overlayContent) {
     overlayBg.classList.add('visible');
     overlayContent.classList.add('show');
   }, 10);
+}
+
+let initEventListnerProcessTasksInformation = () => {
+  let searchInput = document.getElementById('find-task');
+  if (searchInput){
+    searchInput.addEventListener('input', processTasksInformation);
+  }
+}
+
+function processTasksInformation(){
+  let boardRef = document.getElementById('board');
+  let boardEntries = boardRef.children;
+  for(let boardSection of boardEntries){
+    //console.log(boardSection.children);
+    let sectionEntrie = boardSection.children
+    for(let htmlCollection of sectionEntrie){
+      //console.log(htmlCollection.children);
+      let taskContainerOuter = htmlCollection.children;
+      for(let taskContainerInner of taskContainerOuter){
+        let taskContent = taskContainerInner.children;
+        for(let targetDiv of taskContent){
+          //console.log(targetDiv);
+          let taskContent = targetDiv.children;
+          for(let taskEntries of taskContent){
+            //console.log(taskEntries);
+            let targetDiv = taskEntries.children;
+            for(let targetContent of targetDiv){
+              //console.log(targetContent);
+              if(targetContent.classList.contains('board-task-title')){
+                let taskTitle = targetContent.innerText;
+                console.log(taskTitle);
+              }
+            }
+          } 
+        }
+      }
+    }
+  } 
 }

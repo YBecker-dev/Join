@@ -4,7 +4,7 @@
   // Initialize summary page elements and functionality hereS
   await checkTasks()
   displayUserName();
-  checkTime();
+  //checkTime();
 }
 
 let statusArray = [];
@@ -145,14 +145,17 @@ function displayUserName(){
   console.log(loggedUser);
   if(loggedUser === 'Guest Guest'){
     userName.innerText = '';
-    //userGreeting.innerText ='Good morning'; 
+    userGreeting.innerText ='Good morning'; 
   }else{
     
-    //userGreeting.innerText = 'Good morning,';
+    userGreeting.innerText = 'Good morning,';
     userName.innerText = loggedUser;
   }
   
 }
+
+
+
 
 //function checkTime(){
   //const Zeit = new Date();
