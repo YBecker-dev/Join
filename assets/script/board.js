@@ -5,6 +5,7 @@ async function initBoard() {
   await pushTasksInBoard();
   document.addEventListener('dragend', removeAllHighlights);
   emptyDragArea();
+  initEventListnerProcessTasksInformation();
 }
 
 function allowDrop(ev) {
@@ -181,7 +182,6 @@ function renderTasksInColumn(tasksInColumn, elementId) {
     );
     document.getElementById(elementId).appendChild(div);
     enableDragAndDropBoard(task, div);
-    enableTouchDrag(div, taskId); //test
   }
 }
 
@@ -593,29 +593,40 @@ function animatedOpeningAddTask(overlayBg, overlayContent) {
   }, 10);
 }
 
-//test
-function enableTouchDrag(element, taskId) {
-  let dragTimer = null;
-  let dragStarted = false;
+let initEventListnerProcessTasksInformation = () => {
+  let searchInput = document.getElementById('find-task');
+  if (searchInput) {
+    searchInput.addEventListener('input', processTasksInformation);
+  }
+};
 
-  element.addEventListener('touchstart', function (e) {
-    dragStarted = false;
-    dragTimer = setTimeout(() => {
-      dragStarted = true;
-      startDragging(taskId);
-      element.classList.add('dragging');
-    }, 400);
-  });
-
-  element.addEventListener('touchend', function (e) {
-    clearTimeout(dragTimer);
-    if (dragStarted) {
-      element.classList.remove('dragging');
-      currentDraggedTaskId = null;
+function processTasksInformation() {
+  let boardRef = document.getElementById('board');
+  let boardEntries = boardRef.children;
+  for (let boardSection of boardEntries) {
+    //console.log(boardSection.children);
+    let sectionEntrie = boardSection.children;
+    for (let htmlCollection of sectionEntrie) {
+      //console.log(htmlCollection.children);
+      let taskContainerOuter = htmlCollection.children;
+      for (let taskContainerInner of taskContainerOuter) {
+        let taskContent = taskContainerInner.children;
+        for (let targetDiv of taskContent) {
+          //console.log(targetDiv);
+          let taskContent = targetDiv.children;
+          for (let taskEntries of taskContent) {
+            //console.log(taskEntries);
+            let targetDiv = taskEntries.children;
+            for (let targetContent of targetDiv) {
+              //console.log(targetContent);
+              if (targetContent.classList.contains('board-task-title')) {
+                let taskTitle = targetContent.innerText;
+                console.log(taskTitle);
+              }
+            }
+          }
+        }
+      }
     }
-  });
-
-  element.addEventListener('touchmove', function (e) {
-    clearTimeout(dragTimer);
-  });
+  }
 }

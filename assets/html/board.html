@@ -1,97 +1,69 @@
 <body>
-  <section class="board">
-    <div class="header-position">
-      <div class="header-space"></div>
-      <div class="board-header">
-        <div class="board-header-content">
-          <h1>Board</h1>
-          <div class="board-form">
-            <form class="search-form-board">
-              <div class="input-find-Task">
-                <input id="find-Task" type="text" placeholder="Find Task" />
-                <span class="search-icon"><img src="../img/icon/search.png" /></span>
-              </div>
-            </form>
-            <button onclick="openCreateTask()" class="addTaskBtn" id="addTaskBtn">
-              <span>Add task</span> <img src="../img/icon/add.png" />
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="categorys">
-        <div class="categorys-wrapper">
-          <div class="category-content">
-            <h4>To do</h4>
-            <div onclick="openCreateTask()" class="category-content-img"></div>
-          </div>
-          <div class="category-content">
-            <h4>in progress</h4>
-            <div onclick="openCreateTask()" class="category-content-img"></div>
-          </div>
-          <div class="category-content">
-            <h4>Await feedback</h4>
-            <div onclick="openCreateTask()" class="category-content-img"></div>
-          </div>
-          <div class="category-content">
-            <h4>Done</h4>
-            <div onclick="openCreateTask()" class="category-content-img"></div>
-          </div>
+  <div class="header-position">
+    <div class="header-space"></div>
+    <div class="board-header">
+      <div class="board-header-content">
+        <h1>Board</h1>
+        <div class="board-form">
+          <form>
+            <div class="input-find-Task">
+              <input id="find-Task" type="text" placeholder="Find Task" oninput="processTasksInformation()" />
+              <span class="search-icon" ><img src="../img/icon/search.png" /></span>
+            </div>
+          </form>
+          <button onclick="openCreateTask()" class="addTaskBtn">Add task <img src="../img/icon/add.png" /></button>
         </div>
       </div>
     </div>
-    <div class="board-position">
-      <div>
-        <div class="category-content-responsive">
+    <div class="categorys">
+      <div class="categorys-wrapper">
+        <div class="category-content">
           <h4>To do</h4>
           <div onclick="openCreateTask()" class="category-content-img"></div>
         </div>
-        <div
-          class="drag-area"
-          id="todo"
-          ondrop="moveTo('todo')"
-          ondragleave="toggleHighlight('todo', false)"
-          ondragover="allowDrop(event); toggleHighlight('todo', true)"
-        ></div>
-      </div>
-      <div>
-        <div class="category-content-responsive">
-          <h4>in Progress</h4>
+        <div class="category-content">
+          <h4>in progress</h4>
           <div onclick="openCreateTask()" class="category-content-img"></div>
         </div>
-        <div
-          class="drag-area"
-          id="inProgress"
-          ondrop="moveTo('inProgress')"
-          ondragleave="toggleHighlight('inProgress', false)"
-          ondragover="allowDrop(event); toggleHighlight('inProgress', true)"
-        ></div>
-      </div>
-      <div>
-        <div class="category-content-responsive">
-          <h4>Await Feedback</h4>
+        <div class="category-content">
+          <h4>Await feedback</h4>
           <div onclick="openCreateTask()" class="category-content-img"></div>
         </div>
-        <div
-          class="drag-area"
-          id="awaitFeedback"
-          ondrop="moveTo('awaitFeedback')"
-          ondragleave="toggleHighlight('awaitFeedback', false)"
-          ondragover="allowDrop(event); toggleHighlight('awaitFeedback', true)"
-        ></div>
-      </div>
-      <div>
-        <div class="category-content-responsive">
+        <div class="category-content">
           <h4>Done</h4>
           <div onclick="openCreateTask()" class="category-content-img"></div>
         </div>
-        <div
-          class="drag-area"
-          id="done"
-          ondrop="moveTo('done')"
-          ondragleave="toggleHighlight('done', false)"
-          ondragover="allowDrop(event); toggleHighlight('done', true)"
-        ></div>
       </div>
     </div>
-  </section>
+  </div>
+  <div class="board-position" id="board">
+    <div
+      class="drag-area"
+      id="todo"
+      ondrop="moveTo('todo')"
+      ondragleave="toggleHighlight('todo', false)"
+      ondragover="allowDrop(event); toggleHighlight('todo', true)"
+    ></div>
+    <div
+      class="drag-area"
+      id="inProgress"
+      ondrop="moveTo('inProgress')"
+      ondragleave="toggleHighlight('inProgress', false)"
+      ondragover="allowDrop(event); toggleHighlight('inProgress', true)"
+    ></div>
+    <div
+      class="drag-area"
+      id="awaitFeedback"
+      ondrop="moveTo('awaitFeedback')"
+      ondragleave="toggleHighlight('awaitFeedback', false)"
+      ondragover="allowDrop(event); toggleHighlight('awaitFeedback', true)"
+    ></div>
+    <div
+      class="drag-area"
+      id="done"
+      ondrop="moveTo('done')"
+      ondragleave="toggleHighlight('done', false)"
+      ondragover="allowDrop(event); toggleHighlight('done', true)"
+    ></div>
+  </div>
 </body>
