@@ -649,39 +649,54 @@ function enableTouchDrag(element, taskId) {
 }
 
 let initEventListnerProcessTasksInformation = () => {
-  let searchInput = document.getElementById('find-task');
+  let searchInput = document.getElementById('find-Task');
   if (searchInput){
     searchInput.addEventListener('input', processTasksInformation);
   }
 }
 
+
+let test =[]
 function processTasksInformation(){
   let boardRef = document.getElementById('board');
   let boardEntries = boardRef.children;
+  let taskTitle;
   for(let boardSection of boardEntries){
-    //console.log(boardSection.children);
     let sectionEntrie = boardSection.children
     for(let htmlCollection of sectionEntrie){
-      //console.log(htmlCollection.children);
       let taskContainerOuter = htmlCollection.children;
       for(let taskContainerInner of taskContainerOuter){
         let taskContent = taskContainerInner.children;
         for(let targetDiv of taskContent){
-          //console.log(targetDiv);
           let taskContent = targetDiv.children;
           for(let taskEntries of taskContent){
-            //console.log(taskEntries);
             let targetDiv = taskEntries.children;
             for(let targetContent of targetDiv){
-              //console.log(targetContent);
               if(targetContent.classList.contains('board-task-title')){
-                let taskTitle = targetContent.innerText;
-                console.log(taskTitle);
+                taskTitle = targetContent.innerText;
+                
+                test.push(taskTitle);
               }
             }
           } 
         }
       }
     }
-  } 
+  }
+  //console.table(test);
+  matchingSearchTask(taskTitle);
 }
+function matchingSearchTask(taskTitel){
+  //console.log(taskTitel);
+  
+  let inputRef = document.getElementById('find-Task');
+  console.log(test);
+  let matchingString = test.filter(titel => {
+    return titel.toLowerCase().includes(inputRef);
+  });
+  console.log(matchingString);
+}
+//let textCompareison =()=>{
+//  let inputRef = document.getElementById('find-Task');
+//  return inputRef;
+//}
