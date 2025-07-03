@@ -1,3 +1,8 @@
+.register-content {
+    max-width: 598px;
+    height: 630px;
+}
+
 .go-to-start {
     position: absolute;
     top: 73px;
@@ -83,4 +88,20 @@
 
 .eye-icon:hover {
     cursor: pointer;
+}
+
+
+@media (max-width: 1180px) {
+    .signup-header h1 {
+        font-size: 47px;
+    }
+
+    .go-to-start {
+        top: 62px;
+        left: 24px;
+    }
+
+    .register-content {
+        height: 595px;
+    }
 }
