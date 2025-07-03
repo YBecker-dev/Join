@@ -594,13 +594,15 @@ function animatedOpeningAddTask(overlayBg, overlayContent) {
 }
 
 let initEventListnerProcessTasksInformation = () => {
-  let searchInput = document.getElementById('find-task');
+  let searchInput = document.getElementById('find-Task');
   if (searchInput) {
     searchInput.addEventListener('input', processTasksInformation);
   }
 };
 
+let taskCollection = [];
 function processTasksInformation() {
+  taskCollection = [];
   let boardRef = document.getElementById('board');
   let boardEntries = boardRef.children;
   for (let boardSection of boardEntries) {
@@ -619,9 +621,14 @@ function processTasksInformation() {
             let targetDiv = taskEntries.children;
             for (let targetContent of targetDiv) {
               //console.log(targetContent);
-              if (targetContent.classList.contains('board-task-title')) {
-                let taskTitle = targetContent.innerText;
-                console.log(taskTitle);
+              let lastInstance = targetContent.children;
+              for(let instanceInfo of lastInstance){
+                //console.log(instanceInfo);
+                if (instanceInfo.classList.contains('board-task-title')) {
+                let taskTitle = instanceInfo.innerText;
+                //console.log(taskTitle);
+                taskCollection.push(taskTitle);
+                }
               }
             }
           }
@@ -629,4 +636,32 @@ function processTasksInformation() {
       }
     }
   }
+  showSearchResult();
+}
+
+function showSearchResult(){
+  let inputRef = document.getElementById('find-Task');
+  if(!inputRef){
+    console.log('Kein Treffer')
+    return
+  }
+  const inputValue = inputRef.value;
+  const searchResult = processTaskSearch(taskCollection,inputValue);
+  console.log('Suchbegriff', inputValue);
+  console.log('Gefundene Tasks', searchResult);
+  hideTasks(searchResult)
+}
+
+function processTaskSearch(filterTask,searchString){
+  // filterTask = taskCollection
+  // serchString == inputValue
+  const searchTerm = String(searchString).toLowerCase();
+  return filterTask.filter(singleTasks =>{
+    const singleTasksSmall = singleTasks.toLowerCase();
+    return singleTasksSmall.includes(searchTerm);
+  });
+}
+
+function hideTasks(searchResult){
+  //console.log(searchResult);
 }
