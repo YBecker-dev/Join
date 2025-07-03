@@ -24,7 +24,7 @@
     top: 0;
     left: 0;
     z-index: 2;
-    background-color: #F6F7F8 !important;
+    background-color: #F6F7F8;
     transition: opacity 1s cubic-bezier(0.77, 0, 0.175, 1);
     pointer-events: none;
 }
@@ -64,12 +64,19 @@
     z-index: 1;
 }
 
+.Signup-responsive {
+    display: none;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    gap: 21px;
+}
+
 .login-underline {
     width: 160px;
     height: 4px;
     background: #2AABE2;
     border-radius: 2px;
-    margin-bottom: 32px;
 }
 
 .login {
@@ -78,6 +85,8 @@
     align-items: center;
     position: relative;
     min-height: 100vh;
+    padding: 0 16px;
+    flex-direction: column;
 }
 
 .login-content,
@@ -90,27 +99,31 @@
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 5px 15px;
     position: relative;
-    width: 652px;
+    width: 100%;
+    max-width: 652px;
+    margin: 32px;
+    gap: 32px;
+}
+
+.login-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .register-form {
     height: 422px;
 }
 
-.register-content {
-    width: 598px;
-    height: 630px;
-}
-
 .input-group {
     position: relative;
     width: 100%;
-    margin-bottom: 2rem;
+    padding: 0 16px;
 }
 
 .input-group input {
     position: relative;
-    width: 450px;
+    width: 100%;
     padding: 16px;
     border: 1px solid #D1D1D1;
     border-radius: 8px;
@@ -121,7 +134,7 @@
 
 .input-icon {
     position: absolute;
-    right: 16px;
+    right: 32px;
     top: 11px;
 }
 
@@ -167,4 +180,122 @@ textarea::placeholder {
 
 .eye-icon:hover {
     cursor: pointer;
+}
+
+.logo-fade-wrapper {
+    position: relative;
+    width: 100px;
+    /* gleiche Größe wie dein Logo */
+    height: 120px;
+}
+
+.logo-fade-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    pointer-events: none;
+    z-index: 1;
+}
+
+#logo-white {
+    opacity: 1;
+    z-index: 2;
+}
+
+#logo-dark {
+    opacity: 0;
+    z-index: 1;
+}
+
+#login-form,
+#register-form {
+    width: 100%;
+    max-width: 454px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+#register-form {
+    gap: 24px;
+}
+
+.input-group-container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding-bottom: 20px;
+
+}
+
+@media (max-width: 1180px) {
+    .main-header-logo {
+        background-color: #293647;
+    }
+
+    .Signup {
+        display: none;
+    }
+
+    .login-buttons {
+        flex-direction: column;
+        gap: 21px;
+        padding: 0 0 32px 0;
+    }
+
+    .login-btn,
+    .guest-btn,
+    #signup-btn {
+
+        width: 180px;
+        height: 51px;
+        font-size: 16px;
+    }
+
+    #start-logo,
+    .main-header img {
+        width: 64px;
+        height: 78px;
+        top: 37px;
+        left: 38px;
+    }
+
+    .Signup-responsive {
+        display: flex;
+    }
+
+    .login-underline {
+        width: 88px;
+    }
+
+    .input-group {
+        height: 50px;
+    }
+
+    .login-content {
+        height: 475px;
+    }
+
+    .login-content h1 {
+        font-size: 47px;
+        padding: 32px 0 16px 0;
+    }
+
+    #start-logo.logo-zoom,
+    #start-logo.preload {
+        width: 100px;
+        height: 120px;
+    }
+}
+
+@media (max-height: 840px) {
+
+    #start-logo,
+    .login-footer,
+    .main-header img {
+        display: none;
+    }
 }

@@ -4,6 +4,7 @@
     box-sizing: border-box;
     font-family: 'Inter';
     scroll-behavior: smooth;
+    line-height: 120%;
 }
 
 body {
@@ -23,9 +24,9 @@ body {
 
 
 h1 {
-    font-size: 4rem;
+    font-size: 64px;
     font-weight: bold;
-    padding: 3rem 0 1rem 0;
+    padding: 48px 0 16px 0;
 }
 
 a {

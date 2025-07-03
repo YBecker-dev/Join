@@ -594,34 +594,56 @@ function animatedOpeningAddTask(overlayBg, overlayContent) {
 }
 
 let initEventListnerProcessTasksInformation = () => {
-  let searchInput = document.getElementById('find-task');
+  let searchInput = document.getElementById('find-Task');
+<<<<<<< HEAD
   if (searchInput) {
+=======
+  if (searchInput){
+>>>>>>> 69027afac42f8ea1c8440750de43bd44a35ddf62
     searchInput.addEventListener('input', processTasksInformation);
   }
-};
+}
 
+<<<<<<< HEAD
+let taskCollection = [];
 function processTasksInformation() {
+  taskCollection = [];
+=======
+
+let test =[]
+function processTasksInformation(){
+>>>>>>> 69027afac42f8ea1c8440750de43bd44a35ddf62
   let boardRef = document.getElementById('board');
   let boardEntries = boardRef.children;
-  for (let boardSection of boardEntries) {
-    //console.log(boardSection.children);
-    let sectionEntrie = boardSection.children;
-    for (let htmlCollection of sectionEntrie) {
-      //console.log(htmlCollection.children);
+  let taskTitle;
+  for(let boardSection of boardEntries){
+    let sectionEntrie = boardSection.children
+    for(let htmlCollection of sectionEntrie){
       let taskContainerOuter = htmlCollection.children;
       for (let taskContainerInner of taskContainerOuter) {
         let taskContent = taskContainerInner.children;
-        for (let targetDiv of taskContent) {
-          //console.log(targetDiv);
+        for(let targetDiv of taskContent){
           let taskContent = targetDiv.children;
-          for (let taskEntries of taskContent) {
-            //console.log(taskEntries);
+          for(let taskEntries of taskContent){
             let targetDiv = taskEntries.children;
+<<<<<<< HEAD
             for (let targetContent of targetDiv) {
               //console.log(targetContent);
-              if (targetContent.classList.contains('board-task-title')) {
-                let taskTitle = targetContent.innerText;
-                console.log(taskTitle);
+              let lastInstance = targetContent.children;
+              for(let instanceInfo of lastInstance){
+                //console.log(instanceInfo);
+                if (instanceInfo.classList.contains('board-task-title')) {
+                let taskTitle = instanceInfo.innerText;
+                //console.log(taskTitle);
+                taskCollection.push(taskTitle);
+                }
+=======
+            for(let targetContent of targetDiv){
+              if(targetContent.classList.contains('board-task-title')){
+                taskTitle = targetContent.innerText;
+                
+                test.push(taskTitle);
+>>>>>>> 69027afac42f8ea1c8440750de43bd44a35ddf62
               }
             }
           }
@@ -629,4 +651,51 @@ function processTasksInformation() {
       }
     }
   }
+<<<<<<< HEAD
+  showSearchResult();
 }
+
+function showSearchResult(){
+  let inputRef = document.getElementById('find-Task');
+  if(!inputRef){
+    console.log('Kein Treffer')
+    return
+  }
+  const inputValue = inputRef.value;
+  const searchResult = processTaskSearch(taskCollection,inputValue);
+  console.log('Suchbegriff', inputValue);
+  console.log('Gefundene Tasks', searchResult);
+  hideTasks(searchResult)
+}
+
+function processTaskSearch(filterTask,searchString){
+  // filterTask = taskCollection
+  // serchString == inputValue
+  const searchTerm = String(searchString).toLowerCase();
+  return filterTask.filter(singleTasks =>{
+    const singleTasksSmall = singleTasks.toLowerCase();
+    return singleTasksSmall.includes(searchTerm);
+  });
+}
+
+function hideTasks(searchResult){
+  //console.log(searchResult);
+=======
+  //console.table(test);
+  matchingSearchTask(taskTitle);
+>>>>>>> 69027afac42f8ea1c8440750de43bd44a35ddf62
+}
+function matchingSearchTask(taskTitel){
+  //console.log(taskTitel);
+  
+  let inputRef = document.getElementById('find-Task');
+  console.log(test);
+  let matchingString = test.filter(titel => {
+    return titel.toLowerCase().includes(inputRef);
+  });
+  console.log(matchingString);
+}
+//let textCompareison =()=>{
+//  let inputRef = document.getElementById('find-Task');
+//  return inputRef;
+//}
