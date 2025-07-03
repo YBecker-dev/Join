@@ -1,17 +1,24 @@
 // Contact Overview
 function getNoteTemplateContact(index) {
-  let contact = myContacts[index];
+  let user = myContacts[index];
 
   return  ` <div onclick="openDetails(${index})" class="person">
-              <p class="initial">${getInitials(contact.givenName, contact.surname)}</p>
+              <p class="initial">${getInitials(user.initials)}</p>
               <div>
-                <h4>${contact.givenName} ${contact.surname}</h4>
+                <h4>${user.name}</h4>
                 <p>
-                  <a class="mail">${contact.mail}</a>
+                  <a class="mail">${user.email}</a>
                 </p>
               </div>
             </div>`;
 }
+
+//  id: id,
+//         name: ,
+//         initials: ,
+//         email: ,
+//         phone: user.phone,
+//         color: user.color
 
 // Contact view
 function getNoteTemplateContactDetails(indexDetails) {
