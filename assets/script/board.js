@@ -258,11 +258,45 @@ function enableDragAndDropBoard(task, div) {
   }
 }
 
-async function deleteTaskFromFirebase(taskId) {
-  await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json', {
-    method: 'DELETE',
-  });
+async function deleteTaskFromFirebase(addTaskIdToDelete) {
+  let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json');
+  let tasks = await response.json();
+  if (!tasks) return;
+
+  let keys = Object.keys(tasks);
+  let deleteKey = findTaskKeyByAddTaskId(tasks, keys, addTaskIdToDelete);
+
+  if (deleteKey) {
+    await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + deleteKey + '.json', {
+      method: 'DELETE',
+    });
+  }
+  await customizeAddTaskId(tasks, keys, addTaskIdToDelete);
   await pushTasksInBoard();
+}
+
+async function customizeAddTaskId(tasks, keys, deletedAddTaskId) {
+  for (let i = 0; i < keys.length; i++) {
+    let task = tasks[keys[i]];
+    if (task.addTaskId > deletedAddTaskId) {
+      task.addTaskId = task.addTaskId - 1;
+      await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + keys[i] + '.json', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(task),
+      });
+    }
+  }
+}
+
+function findTaskKeyByAddTaskId(tasks, keys, addTaskIdToDelete) {
+  for (let i = 0; i < keys.length; i++) {
+    let task = tasks[keys[i]];
+    if (task.addTaskId == addTaskIdToDelete) {
+      return keys[i];
+    }
+  }
+  return null;
 }
 
 async function toggleBoardOverlay(taskId) {
@@ -441,7 +475,7 @@ async function editTask(taskId) {
       <div id="subtasks-container" class="subtasks-container"></div>
     </form>
     <div class="create-clear-buttons-edit">
-      <button type="submit" class="create-button" form="edit-task-form">OK <img src="../img/icon/add_task_icon/buttons/create_task.png" /></button>
+      <button type="submit" class="ok-button" form="edit-task-form">OK <img src="../img/icon/add_task_icon/buttons/create_task.png" /></button>
     </div>
   `;
 
@@ -595,55 +629,37 @@ function animatedOpeningAddTask(overlayBg, overlayContent) {
 
 let initEventListnerProcessTasksInformation = () => {
   let searchInput = document.getElementById('find-Task');
-<<<<<<< HEAD
   if (searchInput) {
-=======
-  if (searchInput){
->>>>>>> 69027afac42f8ea1c8440750de43bd44a35ddf62
     searchInput.addEventListener('input', processTasksInformation);
   }
-}
+};
 
-<<<<<<< HEAD
 let taskCollection = [];
 function processTasksInformation() {
   taskCollection = [];
-=======
-
-let test =[]
-function processTasksInformation(){
->>>>>>> 69027afac42f8ea1c8440750de43bd44a35ddf62
   let boardRef = document.getElementById('board');
   let boardEntries = boardRef.children;
   let taskTitle;
-  for(let boardSection of boardEntries){
-    let sectionEntrie = boardSection.children
-    for(let htmlCollection of sectionEntrie){
+  for (let boardSection of boardEntries) {
+    let sectionEntrie = boardSection.children;
+    for (let htmlCollection of sectionEntrie) {
       let taskContainerOuter = htmlCollection.children;
       for (let taskContainerInner of taskContainerOuter) {
         let taskContent = taskContainerInner.children;
-        for(let targetDiv of taskContent){
+        for (let targetDiv of taskContent) {
           let taskContent = targetDiv.children;
-          for(let taskEntries of taskContent){
+          for (let taskEntries of taskContent) {
             let targetDiv = taskEntries.children;
-<<<<<<< HEAD
             for (let targetContent of targetDiv) {
               //console.log(targetContent);
               let lastInstance = targetContent.children;
-              for(let instanceInfo of lastInstance){
+              for (let instanceInfo of lastInstance) {
                 //console.log(instanceInfo);
                 if (instanceInfo.classList.contains('board-task-title')) {
-                let taskTitle = instanceInfo.innerText;
-                //console.log(taskTitle);
-                taskCollection.push(taskTitle);
+                  let taskTitle = instanceInfo.innerText;
+                  //console.log(taskTitle);
+                  taskCollection.push(taskTitle);
                 }
-=======
-            for(let targetContent of targetDiv){
-              if(targetContent.classList.contains('board-task-title')){
-                taskTitle = targetContent.innerText;
-                
-                test.push(taskTitle);
->>>>>>> 69027afac42f8ea1c8440750de43bd44a35ddf62
               }
             }
           }
@@ -651,46 +667,41 @@ function processTasksInformation(){
       }
     }
   }
-<<<<<<< HEAD
   showSearchResult();
 }
 
-function showSearchResult(){
+function showSearchResult() {
   let inputRef = document.getElementById('find-Task');
-  if(!inputRef){
-    console.log('Kein Treffer')
-    return
+  if (!inputRef) {
+    console.log('Kein Treffer');
+    return;
   }
   const inputValue = inputRef.value;
-  const searchResult = processTaskSearch(taskCollection,inputValue);
+  const searchResult = processTaskSearch(taskCollection, inputValue);
   console.log('Suchbegriff', inputValue);
   console.log('Gefundene Tasks', searchResult);
-  hideTasks(searchResult)
+  hideTasks(searchResult);
 }
 
-function processTaskSearch(filterTask,searchString){
+function processTaskSearch(filterTask, searchString) {
   // filterTask = taskCollection
   // serchString == inputValue
   const searchTerm = String(searchString).toLowerCase();
-  return filterTask.filter(singleTasks =>{
+  return filterTask.filter((singleTasks) => {
     const singleTasksSmall = singleTasks.toLowerCase();
     return singleTasksSmall.includes(searchTerm);
   });
 }
 
-function hideTasks(searchResult){
+function hideTasks(searchResult) {
   //console.log(searchResult);
-=======
-  //console.table(test);
-  matchingSearchTask(taskTitle);
->>>>>>> 69027afac42f8ea1c8440750de43bd44a35ddf62
 }
-function matchingSearchTask(taskTitel){
+function matchingSearchTask(taskTitel) {
   //console.log(taskTitel);
-  
+
   let inputRef = document.getElementById('find-Task');
   console.log(test);
-  let matchingString = test.filter(titel => {
+  let matchingString = test.filter((titel) => {
     return titel.toLowerCase().includes(inputRef);
   });
   console.log(matchingString);

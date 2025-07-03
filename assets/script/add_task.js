@@ -457,30 +457,47 @@ async function saveTaskToFirebase() {
   let subtasks = [];
   document.querySelectorAll('.subtask-item').forEach((item) => {
     let text = item.querySelector('li').textContent.trim();
-    subtasks.push({
+    subtasks[subtasks.length] = {
       text: text,
       status: 'unchecked',
-    });
+    };
   });
 
   let assignedTo = [];
   for (let i = 0; i < selectedContacts.length; i++) {
-    assignedTo.push(contacts[selectedContacts[i]].id);
+    assignedTo[assignedTo.length] = contacts[selectedContacts[i]].id;
   }
 
-  // Drag and Drop id/sequence zuweisen
   let sequence = 0;
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json');
   let tasks = await response.json();
+  let usedIds = [];
   if (tasks) {
     let tasksArr = Object.values(tasks);
     for (let i = 0; i < tasksArr.length; i++) {
       let task = tasksArr[i];
-      if (task.status === 'todo' && task.sequence != null) {
+      if (task.sequence != null && task.status === 'todo') {
         if (task.sequence >= sequence) {
           sequence = task.sequence + 1;
         }
       }
+      if (task.addTaskId != null) {
+        usedIds[usedIds.length] = task.addTaskId;
+      }
+    }
+  }
+
+  let addTaskId = 0;
+  for (let i = 0; i <= usedIds.length; i++) {
+    let found = false;
+    for (let j = 0; j < usedIds.length; j++) {
+      if (usedIds[j] == i) {
+        found = true;
+      }
+    }
+    if (!found) {
+      addTaskId = i;
+      i = usedIds.length + 1;
     }
   }
 
@@ -490,6 +507,7 @@ async function saveTaskToFirebase() {
   if (document.getElementById('low')?.classList.contains('active')) priority = 'Low';
 
   let taskData = {
+    addTaskId,
     title,
     description,
     date,

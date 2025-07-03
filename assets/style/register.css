@@ -94,10 +94,12 @@
 @media (max-width: 1180px) {
     .signup-header h1 {
         font-size: 47px;
+
+        padding: 32px 0 16px 0;
     }
 
     .go-to-start {
-        top: 62px;
+        top: 42px;
         left: 24px;
     }
 
