@@ -1,4 +1,4 @@
-.headline_container{
+.headline_container {
     position: fixed;
     top: 206px;
     left: 328px;
@@ -9,28 +9,30 @@
     justify-content: center;
     align-items: center;
     gap: 30px;
-   
+
 }
-.headline_container>h1{
-    line-height: 120%;
+
+.headline_container>h1 {
     font-weight: 700;
     font-size: 61px;
     padding: 0;
 }
-.headline_container>p{
-    line-height: 120%;
+
+.headline_container>p {
     font-weight: 400;
     font-size: 27px;
     padding: 0;
 }
-.vector5{
+
+.vector5 {
     height: 59px;
     width: 3px;
     border: 3px;
     background-color: #29ABE2;
-    
+
 }
-.task-monitor{
+
+.task-monitor {
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -40,17 +42,19 @@
     width: 560px;
     height: 562px;
     transition: all 75ms ease-in-out;
-   
+
 }
-.section-one{
+
+.section-one {
     width: 560px;
     height: 168px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    
+
 }
-.content-one{
+
+.content-one {
     width: 264px;
     height: 168px;
     border-radius: 30px;
@@ -61,33 +65,36 @@
     align-items: center;
     gap: 18px;
 }
-.pen-icon{
+
+.pen-icon {
     height: 24px;
     width: 24px;
     background-image: url(/assets/img/icon/white_edit.png);
     background-position: center;
-    background-size: contain; 
+    background-size: contain;
 
 }
-.check-icon{
+
+.check-icon {
     height: 34px;
     width: 42px;
     background-image: url(/assets/img/icon/check-Vector.png);
     background-position: center;
     background-size: cover;
-    margin-right: 4px;    
+    margin-right: 4px;
 }
-.content-one-icon{
+
+.content-one-icon {
     width: 69px;
     height: 69px;
     border-radius: 50%;
     background-color: #2A3647;
     display: flex;
     justify-content: center;
-    align-items: center;  
+    align-items: center;
 }
 
-.section-two{
+.section-two {
     width: 560px;
     height: 168px;
     border-radius: 30px;
@@ -97,13 +104,15 @@
     align-items: center;
     justify-content: space-evenly;
 }
-.section-three{
+
+.section-three {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    
+
 }
-.content-three{
+
+.content-three {
     height: 168px;
     width: 168px;
     border-radius: 30px;
@@ -112,85 +121,98 @@
     justify-content: center;
     align-items: center;
 }
+
 .hover-one:hover {
     cursor: pointer;
     background-color: #2A3647;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
-    transform: scale(1.05 , 1.05);
+    transform: scale(1.05, 1.05);
     transition: 0.3s;
     color: #FFFFFF;
-   
+
 }
-.hover-one:hover .content-one-icon{
+
+.hover-one:hover .content-one-icon {
     background-color: #FFFFFF;
     border-radius: 50%;
 
 }
-.hover-one:hover .pen-icon{
+
+.hover-one:hover .pen-icon {
     height: 32px;
     width: 32px;
     background-image: url(/assets/img/icon/edit.png);
 
 }
-.hover-one:hover .check-icon{
+
+.hover-one:hover .check-icon {
     background-image: url(/assets/img/icon/iconizer-Vector.png);
     background-position: center;
     background-size: cover;
 }
-.hover-two:hover{
+
+.hover-two:hover {
     cursor: pointer;
     background-color: #2A3647;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
-    transform: scale(1.02 , 1.05);
+    transform: scale(1.02, 1.05);
     transition: 0.3s;
     color: #FFFFFF;
-     
+
 }
-.hover-three:hover{
+
+.hover-three:hover {
     cursor: pointer;
     background-color: #2A3647;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
-    transform: scale(1.06 , 1.06);
+    transform: scale(1.06, 1.06);
     transition: 0.3s;
     color: #FFFFFF;
-     
+
 }
+
 /*legt die Richtung/Punkt fest in welche die Transformation stattfindet*/
 /*Wichtiger Hover effekt*/
-.transform-left{
+.transform-left {
     transform-origin: left top;
 }
-.transform-right{
+
+.transform-right {
     transform-origin: right top;
 }
-.transform-left-center{
-    transform-origin: left bottom ;
+
+.transform-left-center {
+    transform-origin: left bottom;
 }
-.transform-right-center{
+
+.transform-right-center {
     transform-origin: right center;
 }
 
-.content-two-icon{
+.content-two-icon {
     display: flex;
 
 }
-.content-info{
+
+.content-info {
     height: 101px;
     width: 63px;
-    
+
 }
-.content-info>h1{
+
+.content-info>h1 {
     font-size: 64px;
     font-weight: 600;
     padding: 0;
 }
-.content-info>p{
+
+.content-info>p {
     font-size: 20px;
     font-weight: 400;
-    line-height: 120%;
     padding: 0;
 }
-.content-two-left{
+
+.content-two-left {
     height: 96px;
     width: 130px;
     display: flex;
@@ -198,62 +220,72 @@
     align-items: center;
     gap: 18px;
 }
-.content-info-two{
+
+.content-info-two {
     height: 96px;
     width: 52px;
 }
-.content-info-two>h1{
+
+.content-info-two>h1 {
     font-size: 64px;
     font-weight: 600;
     padding: 0;
 }
-.seperator-two{
+
+.seperator-two {
     height: 102.02px;
     width: 2px;
     border: 2px;
     background-color: #D1D1D1;
 }
-.calender{
+
+.calender {
     height: 57px;
     width: 178px;
     background-color: aqua;
 }
-.content-two-right{
+
+.content-two-right {
     height: 57px;
     width: 178px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-.content-two-right>h4{
+
+.content-two-right>h4 {
     margin: 0;
     font-size: 21px;
     font-weight: 700;
-    line-height: 120%;
 }
-.content-two-right>p{
+
+.content-two-right>p {
     margin: 0;
     font-size: 16px;
     font-weight: 400;
     text-align: start;
 }
-.content-three-info{
+
+.content-three-info {
     height: 125px;
     width: 83px;
-    
+
 }
-.content-three-info>h1{
+
+.content-three-info>h1 {
     padding: 0;
     font-size: 64px;
     font-weight: 600;
-    
+
 }
-.content-three-info>p{
+
+.content-three-info>p {
     padding: 0;
     font-size: 21px;
-    font-weight: 400;  
+    font-weight: 400;
 }
-.greeting{
+
+.greeting {
     position: fixed;
     top: 547.5px;
     left: 968px;
@@ -261,18 +293,16 @@
     min-width: 385px;
     text-align: start;
 }
-.greeting>h2{
+
+.greeting>h2 {
     padding: 0;
     font-size: 47px;
     font-weight: 500;
 }
-.greeting>h1{
+
+.greeting>h1 {
     padding: 0;
     font-size: 64px;
     font-weight: 700;
     color: #29ABE2;
 }
-
-
-
-

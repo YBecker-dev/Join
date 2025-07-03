@@ -182,7 +182,6 @@ function renderTasksInColumn(tasksInColumn, elementId) {
     );
     document.getElementById(elementId).appendChild(div);
     enableDragAndDropBoard(task, div);
-    enableTouchDrag(div, taskId); //test
   }
 }
 
@@ -594,60 +593,6 @@ function animatedOpeningAddTask(overlayBg, overlayContent) {
   }, 10);
 }
 
-//test
-function enableTouchDrag(element, taskId) {
-  let dragTimer = null;
-  let dragStarted = false;
-
-  element.addEventListener('touchstart', function (e) {
-    dragStarted = false;
-    dragTimer = setTimeout(() => {
-      dragStarted = true;
-      startDragging(taskId);
-      element.classList.add('dragging');
-    }, 400);
-  });
-
-  element.addEventListener('touchend', function (e) {
-    clearTimeout(dragTimer);
-    if (dragStarted) {
-      element.classList.remove('dragging');
-      currentDraggedTaskId = null;
-    }
-  });
-
-  element.addEventListener('touchmove', function (e) {
-    clearTimeout(dragTimer);
-  });
-}
-
-//test
-function enableTouchDrag(element, taskId) {
-  let dragTimer = null;
-  let dragStarted = false;
-
-  element.addEventListener('touchstart', function (e) {
-    dragStarted = false;
-    dragTimer = setTimeout(() => {
-      dragStarted = true;
-      startDragging(taskId);
-      element.classList.add('dragging');
-    }, 400);
-  });
-
-  element.addEventListener('touchend', function (e) {
-    clearTimeout(dragTimer);
-    if (dragStarted) {
-      element.classList.remove('dragging');
-      currentDraggedTaskId = null;
-    }
-  });
-
-  element.addEventListener('touchmove', function (e) {
-    clearTimeout(dragTimer);
-  });
-}
-
 let initEventListnerProcessTasksInformation = () => {
   let searchInput = document.getElementById('find-Task');
   if (searchInput){
@@ -665,7 +610,7 @@ function processTasksInformation(){
     let sectionEntrie = boardSection.children
     for(let htmlCollection of sectionEntrie){
       let taskContainerOuter = htmlCollection.children;
-      for(let taskContainerInner of taskContainerOuter){
+      for (let taskContainerInner of taskContainerOuter) {
         let taskContent = taskContainerInner.children;
         for(let targetDiv of taskContent){
           let taskContent = targetDiv.children;
@@ -678,7 +623,7 @@ function processTasksInformation(){
                 test.push(taskTitle);
               }
             }
-          } 
+          }
         }
       }
     }
