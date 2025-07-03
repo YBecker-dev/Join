@@ -331,7 +331,8 @@ input[type="text"] {
     justify-content: space-between;
 }
 
-.ok-button {
+.ok-button,
+.cancel-button {
     width: unset;
 }
 
