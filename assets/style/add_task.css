@@ -331,7 +331,7 @@ input[type="text"] {
 }
 
 .cancel-button {
-     width: 126px;
+    width: 126px;
 }
 
 .create-button {
@@ -720,6 +720,7 @@ input[type="text"] {
     position: absolute;
     top: 830px;
     left: 96px;
+    display: flex;
 }
 
 @media (max-width: 1173px) {
@@ -742,8 +743,6 @@ input[type="text"] {
         left: 667px;
     }
 }
-
-
 
 @media (max-width: 1008px) {
     .dividing-strips {
@@ -770,8 +769,11 @@ input[type="text"] {
         margin-top: 32px;
     }
 
+    .title_description_date .container1 {
+        width: 600px;
+    }
+
     .addtask {
-        max-width: 440px;
         margin: 0 auto;
     }
 
@@ -798,6 +800,12 @@ input[type="text"] {
     #date,
     #description {
         width: 100% !important;
+    }
+
+    .add-task input[type="text"],
+    .task-attribute,
+    .addtask {
+        max-width: 600px;
     }
 
     .add-task .date-icon {
@@ -849,6 +857,7 @@ input[type="text"] {
     }
 
     .subtask-item:hover,
+    .subtask-actions img:hover,
     .subtask-item:hover .subtask-actions,
     .category-option:hover,
     .category-option:hover .category-option-text {
