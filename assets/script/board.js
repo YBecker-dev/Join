@@ -595,24 +595,14 @@ function animatedOpeningAddTask(overlayBg, overlayContent) {
 
 let initEventListnerProcessTasksInformation = () => {
   let searchInput = document.getElementById('find-Task');
-<<<<<<< HEAD
   if (searchInput) {
-=======
-  if (searchInput){
->>>>>>> 69027afac42f8ea1c8440750de43bd44a35ddf62
     searchInput.addEventListener('input', processTasksInformation);
   }
 }
 
-<<<<<<< HEAD
 let taskCollection = [];
 function processTasksInformation() {
   taskCollection = [];
-=======
-
-let test =[]
-function processTasksInformation(){
->>>>>>> 69027afac42f8ea1c8440750de43bd44a35ddf62
   let boardRef = document.getElementById('board');
   let boardEntries = boardRef.children;
   let taskTitle;
@@ -626,7 +616,6 @@ function processTasksInformation(){
           let taskContent = targetDiv.children;
           for(let taskEntries of taskContent){
             let targetDiv = taskEntries.children;
-<<<<<<< HEAD
             for (let targetContent of targetDiv) {
               //console.log(targetContent);
               let lastInstance = targetContent.children;
@@ -637,13 +626,6 @@ function processTasksInformation(){
                 //console.log(taskTitle);
                 taskCollection.push(taskTitle);
                 }
-=======
-            for(let targetContent of targetDiv){
-              if(targetContent.classList.contains('board-task-title')){
-                taskTitle = targetContent.innerText;
-                
-                test.push(taskTitle);
->>>>>>> 69027afac42f8ea1c8440750de43bd44a35ddf62
               }
             }
           }
@@ -651,7 +633,6 @@ function processTasksInformation(){
       }
     }
   }
-<<<<<<< HEAD
   showSearchResult();
 }
 
@@ -680,10 +661,6 @@ function processTaskSearch(filterTask,searchString){
 
 function hideTasks(searchResult){
   //console.log(searchResult);
-=======
-  //console.table(test);
-  matchingSearchTask(taskTitle);
->>>>>>> 69027afac42f8ea1c8440750de43bd44a35ddf62
 }
 function matchingSearchTask(taskTitel){
   //console.log(taskTitel);
