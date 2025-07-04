@@ -170,7 +170,7 @@ function getTaskOverlay(task, taskId) {
       <div class="overlay-edit-wrapper">
         <div class="overlay-edit">
           <div class="overlay-edit-content">
-            <div class="trashImg"  onclick="deleteTaskFromFirebase('${taskId}'); toggleBoardOverlay()">
+            <div class="trashImg"  onclick="deleteTaskFromFirebase(${task.addTaskId}); toggleBoardOverlay()">
               <img src="../img/icon/trash.png" alt="trash">
               <p class="p-Tag">Delete</p>
             </div>

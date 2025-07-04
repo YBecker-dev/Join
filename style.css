@@ -271,10 +271,6 @@ textarea::placeholder {
         width: 88px;
     }
 
-    .input-group {
-        height: 50px;
-    }
-
     .login-content {
         height: 475px;
     }
@@ -288,6 +284,10 @@ textarea::placeholder {
     #start-logo.preload {
         width: 100px;
         height: 120px;
+    }
+
+    .input-privacy-policy {
+        padding : 16px 0;
     }
 }
 
