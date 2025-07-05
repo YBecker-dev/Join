@@ -2,8 +2,8 @@
 function getNoteTemplateContact(index) {
   let user = myContacts[index];
 
-  return  ` <div onclick="openDetails(${index})" class="person">
-              <p class="initial">${getInitials(user.initials)}</p>
+  return  ` <div onclick="openDetails(${index}), event.stopPropagation()" class="person">
+              <p class="initial">${user.initials}</p>
               <div>
                 <h4>${user.name}</h4>
                 <p>
@@ -14,21 +14,17 @@ function getNoteTemplateContact(index) {
 }
 
 //  id: id,
-//         name: ,
-//         initials: ,
-//         email: ,
-//         phone: user.phone,
-//         color: user.color
+//         initials: user.initials ,
 
 // Contact view
 function getNoteTemplateContactDetails(indexDetails) {
-  let contact = myContacts[indexDetails];
+  let user = myContacts[indexDetails];
 
   return  ` <div class="namesDetails">
               <div class="contactInformations">
-                <p class="initialOverlay">${getInitials(contact.givenName, contact.surname)}</p>
+                <p class="initialOverlay">${user.initials}</p>
                 <div>
-                  <h3 class="infoNames">${contact.givenName} ${contact.surname}</h3>
+                  <h3 class="infoNames">${user.name}</h3>
                   <div class="contactIcons">
                     <div id="editOverlay" onclick="openEditOverlay(${indexDetails})">
                       <img class="editIcon" src="../img/icon/edit.png" alt="pencil">
@@ -44,9 +40,9 @@ function getNoteTemplateContactDetails(indexDetails) {
               <div class="infoBlock">
                 <p>Contact Information</p>
                 <h4>Email</h4>
-                <a class="mail" href="mailto:${contact.mail}">${contact.mail}</a>
+                <a class="mail" href="mailto:${user.email}">${user.email}</a>
                 <h4>Phone</h4>
-                <a class="phone" href="tel:${contact.phone}">${contact.phone}</a>
+                <a class="phone" href="tel:${user.phone}">${user.phone}</a>
               </div>
             </div>`;
 }
@@ -86,7 +82,7 @@ function getNoteTemplateAddNewContact() {
               </div>
               <div class="accept">
                 <button onclick="closeOverlay()" class="clear-button">Cancel<img class="save-close" src="../img/icon/close.png" alt="Close-Button"></button>
-                <button onclick="saveToLocalstorage()" class="create-button">Create contact<img class="save-close" src="../img/icon/save.png" alt=""></button>
+                <button onclick="saveToLocalstorage()" class="create-button">Create contact<img class="save-close" src="../img/icon/save.png" alt="saveIcon"></button>
               </div>
             </div>
           </div>`;
@@ -108,26 +104,26 @@ function getNoteTemplateEditContact(index) {
                 </div>           
                 <div class="profilDiv">
                   <div>
-                    <img class="profileImg" src="../img/icon/profile.png" alt="profile Image">
+                    <p class="profileInitials">${contact.initials}</p>
                   </div>
                   <div>
                     <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                      <input id="editContactName" class="addNewContact" type="text" placeholder="Name" value="${contact.givenName || ''} ${contact.surname || ''}" required onclick="event.stopPropagation()">
+                      <input id="editContactName" class="addNewContact" value="${contact.name}" required onclick="event.stopPropagation()">
                       <img class="addNewContactIcon" src="../img/icon/person.png" alt="Person Icon">
                     </div> 
                     <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                      <input id="editContactMail" class="addNewContact" type="email" placeholder="Email" value="${contact.mail || ''}" required onclick="event.stopPropagation()">
+                      <input id="editContactMail" class="addNewContact" type="email" value="${contact.email}" required onclick="event.stopPropagation()">
                       <img class="addNewContactIcon" src="../img/icon/mail.png" alt="Email Icon">
                     </div> 
                     <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                      <input id="editContactPhone" class="addNewContact" type="tel" placeholder="Phone" value="${contact.phone || ''}" required onclick="event.stopPropagation()">
+                      <input id="editContactPhone" class="addNewContact" type="tel" value="${contact.phone}" required onclick="event.stopPropagation()">
                       <img class="addNewContactIcon" src="../img/icon/phone.png" alt="phone Icon">
                     </div>               
                   </div>                 
                 </div>
                 <div class="accept">
                   <button onclick="deleteContact(${index})" class="clear-button">Delete</button>
-                  <button onclick="updateContact(${index})" class="create-button">Save changes<img class="save-close" src="../img/icon/save.png" alt=""></button>
+                  <button onclick="updateContact(${index})" class="create-button">Save Changes<img class="save-close" src="../img/icon/save.png" alt="hookIcon"></button>
                 </div>
               </div> 
             </div>`;
