@@ -50,11 +50,6 @@ function renderContacts() {
     contentRef.innerHTML = html;
 }
 
-function getInitials(first, last) {
-    if (!first || !last) return '??';
-    return first[0].toUpperCase() + last[0].toUpperCase();
-}
-
 function openDetails(index) {
     let details = document.getElementById('contactDetails');
     details.innerHTML = getNoteTemplateContactDetails(index);
@@ -73,17 +68,17 @@ function toggleContactOverlay() {
 }
 
 function saveToLocalstorage() {
-    let contactName = document.getElementById('newContactName').value;
-    let contactMail = document.getElementById('newContactMail').value;
-    let contactPhone = document.getElementById('newContactPhone').value;
+    let userName = document.getElementById('newContactName').value;
+    let userMail = document.getElementById('newContactMail').value;
+    let userPhone = document.getElementById('newContactPhone').value;
 
-    if (!contactName || !contactMail || !contactPhone) {
+    if (!userName || !userMail || !userPhone) {
         alert('Bitte alle Felder ausfüllen!');
         return;
     }
 
     let nameParts = contactName.split(' ');
-    let givenName = nameParts[0] || '';
+    let givenName = nameParts[0] || ' ';
     let surname = nameParts.slice(1).join(' ') || '';
 
     let newContact = {
