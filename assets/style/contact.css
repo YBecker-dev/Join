@@ -4,7 +4,7 @@
 
 /* Contact List side */
 .contactList {
-    overflow-y: visible;
+    overflow-y: scroll;
     width: 38rem;
     height: 100%;
     background-color: #ffffff;
@@ -100,7 +100,7 @@ h2 {
 
 /* deteils view */
 .namesDetails {
-    position: absolute;
+    position: fixed;
     margin-top: 5rem;
     margin-left: 5rem;
 }

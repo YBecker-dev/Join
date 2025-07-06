@@ -158,6 +158,7 @@ async function deleteContact(index) {
         contactIds.splice(index, 1);
         
         renderContacts();
+        closeOverlay();
         document.getElementById('contactDetails').innerHTML = '';
         
         console.log('Kontakt erfolgreich gelöscht');
