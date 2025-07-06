@@ -77,15 +77,15 @@ function saveToLocalstorage() {
         return;
     }
 
-    let nameParts = contactName.split(' ');
+    let nameParts = userName.split(' ');
     let givenName = nameParts[0] || ' ';
-    let surname = nameParts.slice(1).join(' ') || '';
+    let surName = nameParts.slice(1).join(' ') || '';
 
     let newContact = {
         givenName: givenName,
-        surname: surname,
-        mail: contactMail,
-        phone: contactPhone
+        surname: surName,
+        mail: userMail,
+        phone: userPhone
     };
 
     myContacts.push(newContact);
@@ -111,6 +111,9 @@ async function saveToFirebase(contact) {
         }
 
         console.log('Kontakt erfolgreich gespeichert');
+
+        await fetchDataJson();
+        renderContacts();
         
     } catch (error) {
         console.error('Fehler beim Speichern:', error);
@@ -177,7 +180,7 @@ async function updateContact(index) {
     }
 
     let nameParts = contactName.split(' ');
-    let givenName = nameParts[0] || '';
+    let givenName = nameParts[0] || ' ';
     let surname = nameParts.slice(1).join(' ') || '';
 
     let updatedContact = {
