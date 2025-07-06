@@ -1,13 +1,13 @@
 // Contact Overview
 function getNoteTemplateContact(index) {
-  let contact = myContacts[index];
+  let contact = contacts[index];
 
-  return  ` <div onclick="openDetails(${index})" class="person">
-              <p class="initial">${getInitials(contact.givenName, contact.surname)}</p>
+  return ` <div onclick="openDetails(${index})" class="person">
+              <p class="initial" style="background-color: ${contact.color}">${contact.initials}</p>
               <div>
-                <h4>${contact.givenName} ${contact.surname}</h4>
+                <h4>${contact.name}</h4>
                 <p>
-                  <a class="mail">${contact.mail}</a>
+                  <a class="mail">${contact.email}</a>
                 </p>
               </div>
             </div>`;
@@ -15,13 +15,13 @@ function getNoteTemplateContact(index) {
 
 // Contact view
 function getNoteTemplateContactDetails(indexDetails) {
-  let contact = myContacts[indexDetails];
+  let contact = contacts[indexDetails];
 
-  return  ` <div class="namesDetails">
+  return ` <div class="namesDetails">
               <div class="contactInformations">
-                <p class="initialOverlay">${getInitials(contact.givenName, contact.surname)}</p>
+                <p class="initialOverlay" style="background-color: ${contact.color}">${contact.initials}</p>
                 <div>
-                  <h3 class="infoNames">${contact.givenName} ${contact.surname}</h3>
+                  <h3 class="infoNames">${contact.name}</h3>
                   <div class="contactIcons">
                     <div id="editOverlay" onclick="openEditOverlay(${indexDetails})">
                       <img class="editIcon" src="../img/icon/edit.png" alt="pencil">
@@ -37,16 +37,15 @@ function getNoteTemplateContactDetails(indexDetails) {
               <div class="infoBlock">
                 <p>Contact Information</p>
                 <h4>Email</h4>
-                <a class="mail" href="mailto:${contact.mail}">${contact.mail}</a>
+                <a class="mail" href="mailto:${contact.email}">${contact.email}</a>
                 <h4>Phone</h4>
                 <a class="phone" href="tel:${contact.phone}">${contact.phone}</a>
               </div>
             </div>`;
 }
 
-// add new Contact 
+// add new Contact
 function getNoteTemplateAddNewContact() {
-
   return `<div class="newContactOverlay" onclick="event.stopPropagation()">
             <div class="headDiv">
               <img class="contactLogo" src="../img/Logo/Logo_white.png" alt="Logo_white">
@@ -79,7 +78,7 @@ function getNoteTemplateAddNewContact() {
               </div>
               <div class="accept">
                 <button onclick="closeOverlay()" class="clear-button">Cancel<img class="save-close" src="../img/icon/close.png" alt="Close-Button"></button>
-                <button onclick="saveToLocalstorage()" class="create-button">Create contact<img class="save-close" src="../img/icon/save.png" alt=""></button>
+                <button onclick="saveToFirebase()" class="create-button">Create contact<img class="save-close" src="../img/icon/save.png" alt=""></button>
               </div>
             </div>
           </div>`;
@@ -87,43 +86,43 @@ function getNoteTemplateAddNewContact() {
 
 // edit Contact
 function getNoteTemplateEditContact(index) {
-  let contact = myContacts[index] || {};
+  let contact = contacts[index] || {};
 
-  return `  <div class="editContactOverlay" onclick="event.stopPropagation()">
-              <div class="headDiv">
-                <img class="contactLogo" src="../img/Logo/Logo_white.png" alt="Logo_white">
-                <p class="addHeadline">Edit contact</p>
-                <div class="line"></div>
+return `  <div class="editContactOverlay" onclick="event.stopPropagation()">
+            <div class="headDiv">
+              <img class="contactLogo" src="../img/Logo/Logo_white.png" alt="Logo_white">
+              <p class="addHeadline">Edit contact</p>
+              <div class="line"></div>
+            </div>
+            <div class="editDiv">
+              <div class="closeDiv">
+                <img onclick="closeOverlay()" class="close" src="../img/icon/close.png" alt="Close-Button">
+              </div>           
+              <div class="profilDiv">
+                <div>
+                  <img class="profileImg" src="../img/icon/profile.png" alt="profile Image">
+                </div>
+                <div>
+                  <div class="addNewContactDiv" onclick="event.stopPropagation()">
+                    <input id="editContactName" class="addNewContact" type="text" placeholder="Name" value="${contact.name || ''}" required onclick="event.stopPropagation()">
+                    <img class="addNewContactIcon" src="../img/icon/person.png" alt="Person Icon">
+                  </div> 
+                  <div class="addNewContactDiv" onclick="event.stopPropagation()">
+                    <input id="editContactMail" class="addNewContact" type="email" placeholder="Email" value="${contact.email || ''}" required onclick="event.stopPropagation()">
+                    <img class="addNewContactIcon" src="../img/icon/mail.png" alt="Email Icon">
+                  </div> 
+                  <div class="addNewContactDiv" onclick="event.stopPropagation()">
+                    <input id="editContactPhone" class="addNewContact" type="tel" placeholder="Phone" value="${contact.phone || ''}" required onclick="event.stopPropagation()">
+                    <img class="addNewContactIcon" src="../img/icon/phone.png" alt="phone Icon">
+                  </div>               
+                </div>                 
               </div>
-              <div class="editDiv">
-                <div class="closeDiv">
-                  <img onclick="closeOverlay()" class="close" src="../img/icon/close.png" alt="Close-Button">
-                </div>           
-                <div class="profilDiv">
-                  <div>
-                    <img class="profileImg" src="../img/icon/profile.png" alt="profile Image">
-                  </div>
-                  <div>
-                    <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                      <input id="editContactName" class="addNewContact" type="text" placeholder="Name" value="${contact.givenName || ''} ${contact.surname || ''}" required onclick="event.stopPropagation()">
-                      <img class="addNewContactIcon" src="../img/icon/person.png" alt="Person Icon">
-                    </div> 
-                    <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                      <input id="editContactMail" class="addNewContact" type="email" placeholder="Email" value="${contact.mail || ''}" required onclick="event.stopPropagation()">
-                      <img class="addNewContactIcon" src="../img/icon/mail.png" alt="Email Icon">
-                    </div> 
-                    <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                      <input id="editContactPhone" class="addNewContact" type="tel" placeholder="Phone" value="${contact.phone || ''}" required onclick="event.stopPropagation()">
-                      <img class="addNewContactIcon" src="../img/icon/phone.png" alt="phone Icon">
-                    </div>               
-                  </div>                 
-                </div>
-                <div class="accept">
-                  <button onclick="deleteContact(${index})" class="clear-button">Delete</button>
-                  <button onclick="updateContact(${index})" class="create-button">Save changes<img class="save-close" src="../img/icon/save.png" alt=""></button>
-                </div>
-              </div> 
-            </div>`;
+              <div class="accept">
+                <button onclick="deleteContact(${index})" class="clear-button">Delete</button>
+                <button onclick="updateContact(${index})" class="create-button">Save changes<img class="save-close" src="../img/icon/save.png" alt=""></button>
+              </div>
+            </div> 
+          </div>`;
 }
 
 function getTaskOverlay(task, taskId) {
@@ -154,7 +153,9 @@ function getTaskOverlay(task, taskId) {
       <div class="overlay-description-flex">
         <p class="p-Tag">Priority:</p>
         <div class="overlay-priority">
-          <p class="p-Tag padding-priority">${task.priority || ''} <img src="../img/icon/priority/${task.priority}.png" alt=""></p>
+          <p class="p-Tag padding-priority">${task.priority || ''} <img src="../img/icon/priority/${
+    task.priority
+  }.png" alt=""></p>
         </div>
       </div>
       <div class="assigned-to">
@@ -334,11 +335,10 @@ function assignedToDropdownHTML(contacts, i, checked) {
   `;
 }
 
-function getEmptyDragArea(noTaskText){
+function getEmptyDragArea(noTaskText) {
   return `
     <div class="empty-task-box">
       <span class="no-task-text">No task ${noTaskText}</span>
     </div>
   `;
 }
-

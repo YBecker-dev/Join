@@ -1,4 +1,3 @@
-let myContacts = [];
 let contactIds = [];
 
 async function fetchDataJson() {
@@ -14,38 +13,37 @@ async function fetchDataJson() {
     console.log('Firebase Response:', responseAsJson);
 
     if (responseAsJson) {
-      myContacts = [];
+      contacts = [];
       contactIds = [];
 
       for (let firebaseId in responseAsJson) {
-        myContacts.push(responseAsJson[firebaseId]);
+        contacts.push(responseAsJson[firebaseId]);
         contactIds.push(firebaseId);
       }
     } else {
       console.log('Keine Kontakte in der Datenbank gefunden');
-      myContacts = [];
+      contacts = [];
       contactIds = [];
     }
 
-    console.log('Geladene Kontakte:', myContacts);
+    console.log('Geladene Kontakte:', contacts);
     console.log('Firebase IDs:', contactIds);
   } catch (error) {
     console.error('Fehler beim Laden der Kontakte:', error);
-    myContacts = [];
+    contacts = [];
     contactIds = [];
   }
 }
 
 async function initContacts() {
-  await fetchDataJson();
+  await loadContacts();
   renderContacts();
 }
 
 function renderContacts() {
-  console.log('myContacts:', myContacts);
   let contentRef = document.getElementById('contactContent');
   let html = '';
-  for (let index = 0; index < myContacts.length; index++) html += getNoteTemplateContact(index);
+  for (let index = 0; index < contacts.length; index++) html += getNoteTemplateContact(index);
   contentRef.innerHTML = html;
 }
 
@@ -71,35 +69,27 @@ function toggleContactOverlay() {
   }
 }
 
-function saveToLocalstorage() {
-  let contactName = document.getElementById('newContactName').value;
-  let contactMail = document.getElementById('newContactMail').value;
-  let contactPhone = document.getElementById('newContactPhone').value;
+async function saveToFirebase() {
+  let contactName = document.getElementById('newContactName').value.trim();
+  let contactMail = document.getElementById('newContactMail').value.trim();
+  let contactPhone = document.getElementById('newContactPhone').value.trim();
 
   if (!contactName || !contactMail || !contactPhone) {
     alert('Bitte alle Felder ausfüllen!');
     return;
   }
 
-  let nameParts = contactName.split(' ');
-  let givenName = nameParts[0] || '';
-  let surname = nameParts.slice(1).join(' ') || '';
+  let initials = getInitials(contactName);
+  let color = getRandomColor();
 
   let newContact = {
-    givenName: givenName,
-    surname: surname,
-    mail: contactMail,
+    name: contactName,
+    initials: initials,
+    email: contactMail,
     phone: contactPhone,
+    color: color,
   };
 
-  myContacts.push(newContact);
-
-  saveToFirebase(newContact);
-  renderContacts();
-  closeOverlay();
-}
-
-async function saveToFirebase(contact) {
   try {
     let url = `https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/users.json`;
     let response = await fetch(url, {
@@ -107,17 +97,28 @@ async function saveToFirebase(contact) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(contact),
+      body: JSON.stringify(newContact),
     });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    console.log('Kontakt erfolgreich gespeichert');
+    await loadContacts();
+    renderContacts();
+    closeOverlay();
   } catch (error) {
     console.error('Fehler beim Speichern:', error);
   }
+}
+
+function getRandomColor() {
+  return (
+    '#' +
+    Math.floor(Math.random() * 16777215)
+      .toString(16)
+      .padStart(6, '0')
+  );
 }
 
 function closeOverlay() {
@@ -135,57 +136,42 @@ function openEditOverlay(index) {
   contentOverlayRef.innerHTML = getNoteTemplateEditContact(index);
 }
 
-async function deleteContact(index) {
-  try {
-    let firebaseId = contactIds[index];
-
-    if (!firebaseId) {
-      console.error('Firebase-ID nicht gefunden für Index:', index);
-      return false;
-    }
-
-    let url = `https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/users/${firebaseId}.json`;
-    let response = await fetch(url, {
-      method: 'DELETE',
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    myContacts.splice(index, 1);
-    contactIds.splice(index, 1);
-
-    renderContacts();
-    document.getElementById('contactDetails').innerHTML = '';
-
-    console.log('Kontakt erfolgreich gelöscht');
-    return true;
-  } catch (error) {
-    console.error('Fehler beim Löschen:', error);
+async function deleteContactById(firebaseId) {
+  if (!firebaseId) {
+    console.error('Firebase-ID fehlt!');
     return false;
   }
+  let url = `https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/users/${firebaseId}.json`;
+  let response = await fetch(url, { method: 'DELETE' });
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  await fetchDataJson();
+  renderContacts();
+  document.getElementById('contactDetails').innerHTML = '';
+
+  console.log('Kontakt erfolgreich gelöscht');
+  return true;
 }
 
 async function updateContact(index) {
-  let contactName = document.getElementById('editContactName').value;
-  let contactMail = document.getElementById('editContactMail').value;
-  let contactPhone = document.getElementById('editContactPhone').value;
+  let contactName = document.getElementById('editContactName').value.trim();
+  let contactMail = document.getElementById('editContactMail').value.trim();
+  let contactPhone = document.getElementById('editContactPhone').value.trim();
 
   if (!contactName || !contactMail || !contactPhone) {
     alert('Bitte alle Felder ausfüllen!');
     return;
   }
 
-  let nameParts = contactName.split(' ');
-  let givenName = nameParts[0] || '';
-  let surname = nameParts.slice(1).join(' ') || '';
+  let initials = getInitials(contactName);
 
   let updatedContact = {
-    givenName: givenName,
-    surname: surname,
-    mail: contactMail,
+    name: contactName,
+    initials: initials,
+    email: contactMail,
     phone: contactPhone,
+    color: contacts[index].color
   };
 
   try {
@@ -197,8 +183,6 @@ async function updateContact(index) {
       console.log('Gesuchter Index:', index);
       return;
     }
-
-    console.log('Aktualisiere Kontakt mit Firebase-ID:', firebaseId);
 
     let url = `https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/users/${firebaseId}.json`;
     let response = await fetch(url, {
@@ -213,7 +197,7 @@ async function updateContact(index) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    myContacts[index] = updatedContact;
+    contacts[index] = updatedContact;
 
     renderContacts();
     openDetails(index);

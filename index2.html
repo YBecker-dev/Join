@@ -44,8 +44,14 @@
           .join('');
       }
 
-      function generateRandomId() {
-        return Math.random().toString(36).substr(2, 9);
+      function getRandomColor() {
+        // Zufällige HEX-Farbe generieren
+        return (
+          '#' +
+          Math.floor(Math.random() * 16777215)
+            .toString(16)
+            .padStart(6, '0')
+        );
       }
 
       document.getElementById('userForm').addEventListener('submit', async function (e) {
@@ -56,25 +62,26 @@
         if (!name || !email || !phone) return;
 
         const initials = getInitials(name);
-        const id = generateRandomId();
+        const color = getRandomColor();
 
         const user = {
           name: name,
           initials: initials,
           email: email,
           phone: phone,
+          color: color, // <--- Farbe speichern
         };
 
-        // Sende an Firebase
-        const response = await fetch(FIREBASE_URL + id + '.json', {
-          method: 'PUT',
+        // LANGE Firebase-ID!
+        const response = await fetch(FIREBASE_URL + '.json', {
+          method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(user),
         });
 
         if (response.ok) {
           document.getElementById('output').textContent = 'User erfolgreich gespeichert!';
-          e.target.reset(); // Formular leeren
+          e.target.reset();
         } else {
           document.getElementById('output').textContent = 'Fehler beim Speichern!';
         }
