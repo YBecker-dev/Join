@@ -238,10 +238,11 @@ function boardHtmlTemplate(
   descriptionText,
   assignedContact,
   priorityImg,
-  progressBar
+  progressBar,
+  addTaskId
 ) {
   return `
-    <div class="board-task-container" onclick="toggleBoardOverlay('${taskId}')" ondragstart="startDragging('${taskId}')" draggable="true"> 
+    <div class="board-task-container" id="task-${addTaskId}" onclick="toggleBoardOverlay('${taskId}')" ondragstart="startDragging('${taskId}')" draggable="true"> 
       <div class="board-tasks">
     <p class="${categoryClass}">${categoryText}</p>
         <div class="board-tasks-title-description">

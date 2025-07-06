@@ -178,7 +178,8 @@ function renderTasksInColumn(tasksInColumn, elementId) {
       descriptionText,
       assignedContact,
       priorityImg,
-      progressBar
+      progressBar,
+      task.addTaskId
     );
     document.getElementById(elementId).appendChild(div);
     enableDragAndDropBoard(task, div);

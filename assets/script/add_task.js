@@ -490,8 +490,8 @@ async function saveTaskToFirebase() {
   let addTaskId = 0;
   for (let i = 0; i <= usedIds.length; i++) {
     let found = false;
-    for (let j = 0; j < usedIds.length; j++) {
-      if (usedIds[j] == i) {
+    for (let index = 0; index < usedIds.length; index++) {
+      if (usedIds[index] == i) {
         found = true;
       }
     }
