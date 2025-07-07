@@ -826,4 +826,10 @@
         overflow: auto;
         max-height: calc(100vh - 208px);
     }
+    .no-result{
+        height: 80px;
+        width: 100px;
+        border-radius: 5px;
+        z-index: 10;
+    }
 }

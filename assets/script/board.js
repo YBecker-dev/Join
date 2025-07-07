@@ -671,7 +671,7 @@ function processTasksInformation() {
       });
     }
   }
-  console.table(taskCollection); 
+  //console.table(taskCollection); 
   showSearchResult();
   
 }
@@ -693,6 +693,12 @@ function showSearchResult() {
   //console.log(taskCollection);
   console.log('Suchbegriff', inputValue);
   console.log('Gefundene Tasks', searchResult);
+  if(searchResult.length === 0){ // Looks like it works :-) 
+    console.log('Keine Ergebnisse gefunden');
+    alert('kein Ergebnis gefunden'); // overlay muss implementiert werden 
+    //let board= document.querySelector('board');
+    //board.innerHTML += noteNoTaskFounded();
+  }
   taskVisibilty(searchResult,);
 }
 
@@ -733,7 +739,7 @@ function processTaskSearch(filterTask, searchString) {
  */
 function taskVisibilty(filterTask) {
   const matchedTaskIds = new Set(filterTask.map(task => task.id)); 
-  console.log(matchedTaskIds);
+  //console.log(matchedTaskIds);
   taskCollection.forEach(taskObject =>{
     const isMatched = matchedTaskIds.has(taskObject.id);
     if(isMatched){

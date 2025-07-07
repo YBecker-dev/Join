@@ -342,3 +342,11 @@ function getEmptyDragArea(noTaskText) {
     </div>
   `;
 }
+
+function noteNoTaskFounded(){
+  return`
+    <div class="no-result">
+        <h3>Keine Ergebnisse gefunden</h3>
+    </div>
+  `
+}
