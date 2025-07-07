@@ -634,7 +634,10 @@ let initEventListnerProcessTasksInformation = () => {
     searchInput.addEventListener('input', processTasksInformation);
   }
 };
-
+/**
+ * iterate through all tasks in the DOM and save the task title, 
+ * the description, the ID and the HTML element in the taskCollection array
+ */
 let taskCollection = []; // Globales Array
 function processTasksInformation() {
   taskCollection = []; // Array zurücksetzen
@@ -674,7 +677,11 @@ function processTasksInformation() {
 }
 
 
-
+/**
+ * receive the input value and call the functions processTaskSearch() and taskVisibility()
+ *  The main idea of this function is to implement a middleware functionality
+ * @returns flase, undefined
+ */
 function showSearchResult() {
   let inputRef = document.getElementById('find-Task');
   if (!inputRef) {
@@ -689,7 +696,13 @@ function showSearchResult() {
   taskVisibilty(searchResult,);
 }
 
-
+/**
+ * take the inputValue and filter the TaskCollection array by Object -title and description. 
+ * if there are hits, create a new array filterTask width the target object and return a searchTerm = array with Objects
+ * @param {Array[Object]} filterTask 
+ * @param {Array[Object]} searchString 
+ * @returns Array if Searchstring contains object.title or description
+ */
 function processTaskSearch(filterTask, searchString) {
   // filterTask = taskCollection
   // serchString == inputValue
@@ -714,7 +727,10 @@ function processTaskSearch(filterTask, searchString) {
     return textOutput.includes(searchTerm);
   });
 }
-
+/**
+ * Controls the visibility of tasks through search input.
+ * @param {Arraa[Object]} filterTask 
+ */
 function taskVisibilty(filterTask) {
   const matchedTaskIds = new Set(filterTask.map(task => task.id)); 
   console.log(matchedTaskIds);
