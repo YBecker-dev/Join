@@ -69,10 +69,10 @@ function toggleContactOverlay() {
 
 function saveToLocalstorage() {
     let userName = document.getElementById('newContactName').value;
-    let userMail = document.getElementById('newContactMail').value;
+    let userEmail = document.getElementById('newContactMail').value;
     let userPhone = document.getElementById('newContactPhone').value;
 
-    if (!userName || !userMail || !userPhone) {
+    if (!userName || !userEmail || !userPhone) {
         alert('Bitte alle Felder ausfüllen!');
         return;
     }
@@ -82,9 +82,9 @@ function saveToLocalstorage() {
     let surName = nameParts.slice(1).join(' ') || '';
 
     let newContact = {
-        givenName: givenName,
-        surname: surName,
-        mail: userMail,
+        name: nameParts,
+        //surname: surName,
+        email: userEmail,
         phone: userPhone
     };
 
@@ -187,7 +187,7 @@ async function updateContact(index) {
     let updatedContact = {
         givenName: givenName,
         surname: surname,
-        mail: contactMail,
+        email: contactMail,
         phone: contactPhone
     };
 
