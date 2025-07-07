@@ -1,4 +1,5 @@
 .body-flex{
+    width: 1014px;
    display: flex;
    flex-direction: column;
    align-items: flex-start;
@@ -23,4 +24,9 @@
     line-height: 120%;
     letter-spacing: 0;
 
+}
+.Imprint>h3{
+    font-size: 16px;
+    font-weight: 400;
+    
 }
