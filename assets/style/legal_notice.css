@@ -1,10 +1,11 @@
 .body-flex{
-    width: 1014px;
+    
    display: flex;
    flex-direction: column;
    align-items: flex-start;
    padding-top: calc(206px - 96px);
-   padding-left: calc(328px - 232px); 
+   padding-left: calc(328px - 232px);
+   padding-right: 96px; 
 }
 .headline>h1{
     font-size: 61px;
@@ -25,8 +26,8 @@
     letter-spacing: 0;
 
 }
-.Imprint>h3{
+/*h3{
     font-size: 16px;
-    font-weight: 400;
-    
-}
+    font-weight: 900;
+
+}*/
