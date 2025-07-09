@@ -38,7 +38,7 @@ p{
     justify-content: flex-end;
     align-items: center;
     height: 73px;
-    width: 85%;
+    width: 1014px;
     margin-bottom: 20px;
     
 }
@@ -63,7 +63,7 @@ p{
 }
 .help-content{
     height: 1024px;
-    width: 85%;
+    width: 1014px;
 }
 .What-is-Join{
     display: flex;
@@ -99,26 +99,41 @@ a,.join-color{
     width: 100%;
     
 }
-@media(max-width: 1008px){
-    .content-position{
-        position: static;
+@media(max-width: 1160px){
+     .sticky-wrapper{
+        padding-left: 12px;
+        padding-right: 12px;
+       
+        
     }
     .header{
         width: 100%;
     }
+    .help-content{
+        width: 100%;
+    }
+}
+@media(max-width: 1008px){
+    .content-position{
+        position: static;
+    }
    
     .sticky-wrapper{
-        padding-left: 12px;
-        padding-right: 12px;
-        padding-top: 128px;
+        padding-top: 80px;
     }
+   
     .help-content{
         width: 95%;
+        text-align: start;
     }
     .space{
         height: 100px;
     }
     .backward{
         position: static;
+        img{
+            height: 32px;
+            width: 32px;
+        }
     }
 }
