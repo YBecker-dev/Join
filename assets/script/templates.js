@@ -16,7 +16,6 @@ function getNoteTemplateContact(index) {
 function getNoteTemplateContactDetails(indexDetails) {
   let user = myContacts[indexDetails];
 
-
   return  ` <div class="namesDetails">
               <div class="contactInformations">
                 <p class="initialOverlay">${user.color, user.initials}</p>
@@ -60,7 +59,7 @@ function getNoteTemplateAddNewContact() {
               </div>        
               <div class="profilDiv">
                 <div>
-                  <img class="profileImg" src="../img/icon/profile.png" alt="profile Image">
+                  <p id="newContactInitials" class="profileInitials"><img class="profileImg" src="../img/icon/profile.png" alt="profile Image"></p>
                 </div>
                 <div>
                   <div class="addNewContactDiv" onclick="event.stopPropagation()">
@@ -101,7 +100,7 @@ function getNoteTemplateEditContact(index) {
                 </div>           
                 <div class="profilDiv">
                   <div>
-                    <p id="newContactInitials" class="profileInitials">${user.color, user.initials}</p>
+                    <p id="editContactInitials" class="profileInitials">${user.color, user.initials}</p>
                   </div>
                   <div>
                     <div class="addNewContactDiv" onclick="event.stopPropagation()">
