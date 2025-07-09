@@ -16,7 +16,7 @@ function getNoteTemplateContact(index) {
 function getNoteTemplateContactDetails(indexDetails) {
   let user = myContacts[indexDetails];
 
-  return  ` <div class="namesDetails">
+  return ` <div class="namesDetails">
               <div class="contactInformations">
                 <p class="initialOverlay">${user.color, user.initials}</p>
                 <div>
@@ -43,9 +43,8 @@ function getNoteTemplateContactDetails(indexDetails) {
             </div>`;
 }
 
-// add new Contact 
+// add new Contact
 function getNoteTemplateAddNewContact() {
-
   return `<div class="newContactOverlay" onclick="event.stopPropagation()">
             <div class="headDiv">
               <img class="contactLogo" src="../img/Logo/Logo_white.png" alt="Logo_white">
@@ -153,7 +152,9 @@ function getTaskOverlay(task, taskId) {
       <div class="overlay-description-flex">
         <p class="p-Tag">Priority:</p>
         <div class="overlay-priority">
-          <p class="p-Tag padding-priority">${task.priority || ''} <img src="../img/icon/priority/${task.priority}.png" alt=""></p>
+          <p class="p-Tag padding-priority">${task.priority || ''} <img src="../img/icon/priority/${
+    task.priority
+  }.png" alt=""></p>
         </div>
       </div>
       <div class="assigned-to">
@@ -237,10 +238,11 @@ function boardHtmlTemplate(
   descriptionText,
   assignedContact,
   priorityImg,
-  progressBar
+  progressBar,
+  addTaskId
 ) {
   return `
-    <div class="board-task-container" onclick="toggleBoardOverlay('${taskId}')" ondragstart="startDragging('${taskId}')" draggable="true"> 
+    <div class="board-task-container" id="task-${addTaskId}" onclick="toggleBoardOverlay('${taskId}')" ondragstart="startDragging('${taskId}')" draggable="true"> 
       <div class="board-tasks">
     <p class="${categoryClass}">${categoryText}</p>
         <div class="board-tasks-title-description">
@@ -332,7 +334,7 @@ function assignedToDropdownHTML(contacts, i, checked) {
   `;
 }
 
-function getEmptyDragArea(noTaskText){
+function getEmptyDragArea(noTaskText) {
   return `
     <div class="empty-task-box">
       <span class="no-task-text">No task ${noTaskText}</span>
@@ -340,3 +342,10 @@ function getEmptyDragArea(noTaskText){
   `;
 }
 
+function noteNoTaskFounded(){
+  return`
+    <div class="no-result">
+        <h3>Keine Ergebnisse gefunden</h3>
+    </div>
+  `
+}

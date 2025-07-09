@@ -38,15 +38,14 @@ async function fetchDataJson() {
 }
 
 async function initContacts() {
-  await fetchDataJson();
+  await loadContacts();
   renderContacts();
 }
 
 function renderContacts() {
-  console.log('myContacts:', myContacts);
   let contentRef = document.getElementById('contactContent');
   let html = '';
-  for (let index = 0; index < myContacts.length; index++) html += getNoteTemplateContact(index);
+  for (let index = 0; index < contacts.length; index++) html += getNoteTemplateContact(index);
   contentRef.innerHTML = html;
 }
 
@@ -103,7 +102,7 @@ async function saveToFirebase(contact) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(contact),
+      body: JSON.stringify(newContact),
     });
 
     if (!response.ok) {
@@ -118,6 +117,15 @@ async function saveToFirebase(contact) {
     } catch (error) {
         console.error('Fehler beim Speichern:', error);
     }
+}
+
+function getRandomColor() {
+  return (
+    '#' +
+    Math.floor(Math.random() * 16777215)
+      .toString(16)
+      .padStart(6, '0')
+  );
 }
 
 function closeOverlay() {
@@ -170,9 +178,9 @@ async function deleteContact(index) {
 }
 
 async function updateContact(index) {
-  let contactName = document.getElementById('editContactName').value;
-  let contactMail = document.getElementById('editContactMail').value;
-  let contactPhone = document.getElementById('editContactPhone').value;
+  let contactName = document.getElementById('editContactName').value.trim();
+  let contactMail = document.getElementById('editContactMail').value.trim();
+  let contactPhone = document.getElementById('editContactPhone').value.trim();
 
   if (!contactName || !contactMail || !contactPhone) {
     alert('Bitte alle Felder ausfüllen!');
@@ -215,7 +223,7 @@ async function updateContact(index) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    myContacts[index] = updatedContact;
+    contacts[index] = updatedContact;
 
     renderContacts();
     openDetails(index);

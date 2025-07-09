@@ -31,6 +31,9 @@
     background-color: #29ABE2;
 
 }
+.vector5-mobil{
+    display: none;
+}
 
 .task-monitor {
     position: fixed;
@@ -305,4 +308,240 @@
     font-size: 64px;
     font-weight: 700;
     color: #29ABE2;
+}
+
+@media (max-width: 1440px){
+    .greeting{
+        display: none;
+    }
+    .contentspace-html{
+        height: calc(100vh - 160px);
+        padding-top: 128px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 80px;
+
+    }
+    /*.main-content{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }*/
+    
+    .headline_container{
+        height: 100px;
+        width: 560px;
+        position: static;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+   
+    .vector5{
+        display: none;
+    }
+    .vector5-mobil{
+        width: 90px;
+        border: 2px solid #29ABE2;
+        display: block;
+        
+    }
+    .task-monitor{
+        position: relative;
+        top: 0;
+        left: 0%;
+    }
+}
+
+@media (max-width: 590px){
+   .contentspace-html{
+    padding-top: 60px;
+    padding-bottom: 180px;
+    padding-left: 16px;
+    padding-right: 16px;
+   }
+   .headline_container{
+    width: 396px;
+   }
+    
+    .headline_container>h1{
+        font-size: 47px;
+        font-weight: 700;   
+    }
+    .headline_container>p{
+        font-size: 20px;
+        font-weight: 400;
+
+    }
+    .task-monitor{
+        height: 384px;
+        width: 396px;
+    }
+    .section-one{
+        height: 110px;
+        width: 396px;
+
+    }
+    .content-one{
+        height: 110px;
+        width: 186px;
+    }
+    .content-one-icon{
+        height: 40px;
+        width: 40px;
+    }
+    .pen-icon{
+        height: 18px;
+        width: 18px;
+    }
+    .check-icon{
+        height: 20px;
+        width: 24px;
+        margin: 0;
+    }
+    .hover-one:hover .pen-icon {
+        height: 25px;
+        width: 25px;
+    }
+    .content-info{
+        height: 73px;
+        width: 40px;
+        h1{
+            font-size: 47px;
+        }
+        p{
+            font-size: 14px;
+        }
+    }
+    .section-two{
+        height: 110px;
+        width: 396px;
+    }
+    .content-two-left{
+        height: 73px;
+        width: 108px;
+    }
+    img{
+        height: 40px;
+        width: 40px;
+    }
+    .content-info-two{
+        height: 73px;
+        width: 50px;
+        h1{
+            font-size: 47px;
+        }
+        p{
+            font-size: 14px;
+        }
+    }
+    .seperator-two{
+        height: 68px;
+    }
+    .content-two-right{
+        height: 44px;
+        width: 135px;
+        h4{
+            font-size: 16px;
+        }
+        p{
+            font-size: 14px;
+        }
+    }
+    .section-three{
+        height: 110px;
+        width: 396px;
+    }
+    .content-three{
+        height: 116px;
+        width: 116px;
+
+    }
+    .content-three-info{
+        height: 90px;
+        width: 54px;
+        h1{
+            font-size: 47px;
+        }
+        p{
+            height: 34px;
+            width: 59px;
+            font-size: 14px;
+        }
+    }
+}
+@media(max-width: 425px){
+    .contentspace-html{
+        gap: 40px;
+        padding-top: 30px;
+        
+    }
+    .headline_container{
+        width: 100%;
+    }
+    .task-monitor{
+        width: 100%;
+        align-items: center
+    }
+    .section-one{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+    .content-info{
+       h1{
+            font-size: 38px;
+        }
+        p{
+            font-size: 12px;
+        }
+    }
+    .section-two{
+        width: 100%;
+        justify-content: center;
+        gap: 15px;
+    }
+    .content-two-left{
+        gap: 10px;
+        padding-left: 16px;
+
+    }
+    .content-info-two{
+        h1{
+            font-size: 38px;
+        }
+        p{
+            font-size: 12px;
+        }
+    }
+    .content-two-right{
+        padding-right: 16px;
+        h4{
+            font-size: 14px;
+        }
+        p{
+            font-size: 12px;
+        }
+    }
+    .section-three{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+    }
+    .content-three{
+        width: 100%;
+        h1{
+            font-size: 38px;
+        }
+        p{
+            font-size: 12px;
+        }
+
+    }
+
 }

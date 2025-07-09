@@ -178,7 +178,8 @@ function renderTasksInColumn(tasksInColumn, elementId) {
       descriptionText,
       assignedContact,
       priorityImg,
-      progressBar
+      progressBar,
+      task.addTaskId
     );
     document.getElementById(elementId).appendChild(div);
     enableDragAndDropBoard(task, div);
@@ -633,43 +634,54 @@ let initEventListnerProcessTasksInformation = () => {
     searchInput.addEventListener('input', processTasksInformation);
   }
 };
-
-let taskCollection = [];
+/**
+ * iterate through all tasks in the DOM and save the task title, 
+ * the description, the ID and the HTML element in the taskCollection array
+ */
+let taskCollection = []; // Globales Array
 function processTasksInformation() {
-  taskCollection = [];
+  taskCollection = []; // Array zurücksetzen
   let boardRef = document.getElementById('board');
-  let boardEntries = boardRef.children;
-  let taskTitle;
-  for (let boardSection of boardEntries) {
-    let sectionEntrie = boardSection.children;
-    for (let htmlCollection of sectionEntrie) {
-      let taskContainerOuter = htmlCollection.children;
-      for (let taskContainerInner of taskContainerOuter) {
-        let taskContent = taskContainerInner.children;
-        for (let targetDiv of taskContent) {
-          let taskContent = targetDiv.children;
-          for (let taskEntries of taskContent) {
-            let targetDiv = taskEntries.children;
-            for (let targetContent of targetDiv) {
-              //console.log(targetContent);
-              let lastInstance = targetContent.children;
-              for (let instanceInfo of lastInstance) {
-                //console.log(instanceInfo);
-                if (instanceInfo.classList.contains('board-task-title')) {
-                  let taskTitle = instanceInfo.innerText;
-                  //console.log(taskTitle);
-                  taskCollection.push(taskTitle);
-                }
-              }
-            }
-          }
-        }
+  if (!boardRef) {
+    console.error("Element mit ID 'board' nicht gefunden.");
+    return;
+  }
+  let dragAreas = boardRef.querySelectorAll('.drag-area'); 
+  for (let dragArea of dragAreas) { 
+    let taskContainers = dragArea.querySelectorAll('.board-task-container');
+    for (let taskContainer of taskContainers) {
+      //console.log(taskContainer); 
+      let taskId = taskContainer.id;
+      //console.log(taskId); 
+      let currentTaskTitle = '';
+      let currentTaskDescription = '';
+      let titleElement = taskContainer.querySelector('.board-task-title');
+      if (titleElement) {
+        currentTaskTitle = titleElement.innerText.trim();
       }
+      let descriptionElement = taskContainer.querySelector('.board-task-description');
+      if (descriptionElement) {
+        currentTaskDescription = descriptionElement.innerText.trim();
+      }
+      taskCollection.push({
+        id: taskId,
+        title: currentTaskTitle,
+        description: currentTaskDescription,
+        element: taskContainer // Die Referenz zum HTML-Element
+      });
     }
   }
+  //console.table(taskCollection); 
   showSearchResult();
+  
 }
 
+
+/**
+ * receive the input value and call the functions processTaskSearch() and taskVisibility()
+ *  The main idea of this function is to implement a middleware functionality
+ * @returns flase, undefined
+ */
 function showSearchResult() {
   let inputRef = document.getElementById('find-Task');
   if (!inputRef) {
@@ -678,35 +690,66 @@ function showSearchResult() {
   }
   const inputValue = inputRef.value;
   const searchResult = processTaskSearch(taskCollection, inputValue);
+  //console.log(taskCollection);
   console.log('Suchbegriff', inputValue);
   console.log('Gefundene Tasks', searchResult);
-  hideTasks(searchResult);
+  if(searchResult.length === 0){ // Looks like it works :-) 
+    console.log('Keine Ergebnisse gefunden');
+    alert('kein Ergebnis gefunden'); // overlay muss implementiert werden 
+    //let board= document.querySelector('board');
+    //board.innerHTML += noteNoTaskFounded();
+  }
+  taskVisibilty(searchResult,);
 }
 
+/**
+ * take the inputValue and filter the TaskCollection array by Object -title and description. 
+ * if there are hits, create a new array filterTask width the target object and return a searchTerm = array with Objects
+ * @param {Array[Object]} filterTask 
+ * @param {Array[Object]} searchString 
+ * @returns Array if Searchstring contains object.title or description
+ */
 function processTaskSearch(filterTask, searchString) {
   // filterTask = taskCollection
   // serchString == inputValue
   const searchTerm = String(searchString).toLowerCase();
-  return filterTask.filter((singleTasks) => {
-    const singleTasksSmall = singleTasks.toLowerCase();
-    return singleTasksSmall.includes(searchTerm);
+  if(searchTerm === ''){
+    return filterTask;
+  }
+  return filterTask.filter((singleTaskObject) => {
+    let title;
+    let description;
+    if(singleTaskObject.title){
+      title = singleTaskObject.title.trim(); 
+    }else{
+      title = "";
+    }
+    if(singleTaskObject.description){
+      description = singleTaskObject.description.trim();
+    }else{
+      description = "";
+    }
+    const textOutput = (title + '' + description).toLowerCase(); 
+    return textOutput.includes(searchTerm);
   });
 }
-
-function hideTasks(searchResult) {
-  //console.log(searchResult);
+/**
+ * Controls the visibility of tasks through search input.
+ * @param {Arraa[Object]} filterTask 
+ */
+function taskVisibilty(filterTask) {
+  const matchedTaskIds = new Set(filterTask.map(task => task.id)); 
+  //console.log(matchedTaskIds);
+  taskCollection.forEach(taskObject =>{
+    const isMatched = matchedTaskIds.has(taskObject.id);
+    if(isMatched){
+      taskObject.element.classList.remove('d-none');
+    }else{
+      taskObject.element.classList.add('d-none'); 
+    } 
+  })
+ 
 }
-function matchingSearchTask(taskTitel) {
-  //console.log(taskTitel);
 
-  let inputRef = document.getElementById('find-Task');
-  console.log(test);
-  let matchingString = test.filter((titel) => {
-    return titel.toLowerCase().includes(inputRef);
-  });
-  console.log(matchingString);
-}
-//let textCompareison =()=>{
-//  let inputRef = document.getElementById('find-Task');
-//  return inputRef;
-//}
+
+
