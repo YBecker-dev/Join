@@ -1,5 +1,5 @@
 let myContacts = [];
-let contactIds = [];
+let newContacts = [];
 
 async function fetchDataJson() {
     try {
@@ -15,25 +15,25 @@ async function fetchDataJson() {
 
         if (responseAsJson) {
             myContacts = [];
-            contactIds = [];
+            newContacts = [];
             
             for (let firebaseId in responseAsJson) {
                 myContacts.push(responseAsJson[firebaseId]);
-                contactIds.push(firebaseId);
+                newContacts.push(firebaseId);
             }
         } else {
             console.log('Keine Kontakte in der Datenbank gefunden');
             myContacts = [];
-            contactIds = [];
+            newContacts = [];
         }
 
         console.log('Geladene Kontakte:', myContacts);
-        console.log('Firebase IDs:', contactIds);
+        console.log('Firebase IDs:', newContacts);
         
     } catch (error) {
         console.error('Fehler beim Laden der Kontakte:', error);
         myContacts = [];
-        contactIds = [];
+        newContacts = [];
     }
 }
 
@@ -138,7 +138,7 @@ function openEditOverlay(index) {
 
 async function deleteContact(index) {
     try {
-        let firebaseId = contactIds[index];
+        let firebaseId = newContacts[index];
         
         if (!firebaseId) {
             console.error('Firebase-ID nicht gefunden für Index:', index);
@@ -155,7 +155,7 @@ async function deleteContact(index) {
         }
         
         myContacts.splice(index, 1);
-        contactIds.splice(index, 1);
+        newContacts.splice(index, 1);
         
         renderContacts();
         closeOverlay();
@@ -192,11 +192,11 @@ async function updateContact(index) {
     };
 
     try {
-        let firebaseId = contactIds[index];
+        let firebaseId = newContacts[index];
         
         if (!firebaseId) {
             console.error('Firebase-ID nicht gefunden für Index:', index);
-            console.log('Verfügbare contactIds:', contactIds);
+            console.log('Verfügbare newContacts:', newContacts);
             console.log('Gesuchter Index:', index);
             return;
         }
