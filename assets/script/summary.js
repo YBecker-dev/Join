@@ -161,7 +161,6 @@ function checkTime(){
   let userGreeting = document.getElementById('userGreeting');
   const currentTime = new Date();
   let hours = currentTime.getHours();
-  console.log(hours);
   // 06:00 bis 11:59
   if(hours >= 6 && hours <12 ){
     userGreeting.innerText = 'Good morning,'
