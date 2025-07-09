@@ -99,3 +99,26 @@ a,.join-color{
     width: 100%;
     
 }
+@media(max-width: 1008px){
+    .content-position{
+        position: static;
+    }
+    .header{
+        width: 100%;
+    }
+   
+    .sticky-wrapper{
+        padding-left: 12px;
+        padding-right: 12px;
+        padding-top: 128px;
+    }
+    .help-content{
+        width: 95%;
+    }
+    .space{
+        height: 100px;
+    }
+    .backward{
+        position: static;
+    }
+}
