@@ -3,11 +3,11 @@ function getNoteTemplateContact(index) {
   let user = myContacts[index];
 
   return  ` <div onclick="openDetails(${index}), event.stopPropagation()" class="person">
-              <p class="initial">${user.initials}</p>
+              <p class="initial">${user.color, user.initials}</p>
               <div>
-                <h4>${user.givenName}</h4>
+                <h4>${user.name}</h4>
                 <p>
-                  <a class="mail">${user.mail}</a>
+                  <a class="mail">${user.email}</a>
                 </p>
               </div>
             </div>`;
@@ -16,12 +16,11 @@ function getNoteTemplateContact(index) {
 function getNoteTemplateContactDetails(indexDetails) {
   let user = myContacts[indexDetails];
 
-
   return  ` <div class="namesDetails">
               <div class="contactInformations">
-                <p class="initialOverlay">${user.initials}</p>
+                <p class="initialOverlay">${user.color, user.initials}</p>
                 <div>
-                  <h3 class="infoNames">${user.givenName}</h3>
+                  <h3 class="infoNames">${user.name}</h3>
                   <div class="contactIcons">
                     <div id="editOverlay" onclick="openEditOverlay(${indexDetails})">
                       <img class="editIcon" src="../img/icon/edit.png" alt="pencil">
@@ -37,7 +36,7 @@ function getNoteTemplateContactDetails(indexDetails) {
               <div class="infoBlock">
                 <p>Contact Information</p>
                 <h4>Email</h4>
-                <a class="mail" href="mailto:${user.mail}">${user.mail}</a>
+                <a class="mail" href="mailto:${user.email}">${user.email}</a>
                 <h4>Phone</h4>
                 <a class="phone" href="tel:${user.phone}">${user.phone}</a>
               </div>
@@ -60,7 +59,7 @@ function getNoteTemplateAddNewContact() {
               </div>        
               <div class="profilDiv">
                 <div>
-                  <img class="profileImg" src="../img/icon/profile.png" alt="profile Image">
+                  <p id="newContactInitials" class="profileInitials"><img class="profileImg" src="../img/icon/profile.png" alt="profile Image"></p>
                 </div>
                 <div>
                   <div class="addNewContactDiv" onclick="event.stopPropagation()">
@@ -101,7 +100,7 @@ function getNoteTemplateEditContact(index) {
                 </div>           
                 <div class="profilDiv">
                   <div>
-                    <p class="profileInitials">${user.initials}</p>
+                    <p id="editContactInitials" class="profileInitials">${user.color, user.initials}</p>
                   </div>
                   <div>
                     <div class="addNewContactDiv" onclick="event.stopPropagation()">
@@ -109,7 +108,7 @@ function getNoteTemplateEditContact(index) {
                       <img class="addNewContactIcon" src="../img/icon/person.png" alt="Person Icon">
                     </div> 
                     <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                      <input id="editContactMail" class="addNewContact" type="email" value="${user.mail}" required onclick="event.stopPropagation()">
+                      <input id="editContactMail" class="addNewContact" type="email" value="${user.email}" required onclick="event.stopPropagation()">
                       <img class="addNewContactIcon" src="../img/icon/mail.png" alt="Email Icon">
                     </div> 
                     <div class="addNewContactDiv" onclick="event.stopPropagation()">

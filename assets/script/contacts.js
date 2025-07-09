@@ -1,5 +1,5 @@
 let myContacts = [];
-let contactIds = [];
+let newContacts = [];
 
 async function fetchDataJson() {
   try {
@@ -13,27 +13,28 @@ async function fetchDataJson() {
     let responseAsJson = await response.json();
     console.log('Firebase Response:', responseAsJson);
 
-    if (responseAsJson) {
-      myContacts = [];
-      contactIds = [];
+        if (responseAsJson) {
+            myContacts = [];
+            newContacts = [];
+            
+            for (let firebaseId in responseAsJson) {
+                myContacts.push(responseAsJson[firebaseId]);
+                newContacts.push(firebaseId);
+            }
+        } else {
+            console.log('Keine Kontakte in der Datenbank gefunden');
+            myContacts = [];
+            newContacts = [];
+        }
 
-      for (let firebaseId in responseAsJson) {
-        myContacts.push(responseAsJson[firebaseId]);
-        contactIds.push(firebaseId);
-      }
-    } else {
-      console.log('Keine Kontakte in der Datenbank gefunden');
-      myContacts = [];
-      contactIds = [];
+        console.log('Geladene Kontakte:', myContacts);
+        console.log('Firebase IDs:', newContacts);
+        
+    } catch (error) {
+        console.error('Fehler beim Laden der Kontakte:', error);
+        myContacts = [];
+        newContacts = [];
     }
-
-    console.log('Geladene Kontakte:', myContacts);
-    console.log('Firebase IDs:', contactIds);
-  } catch (error) {
-    console.error('Fehler beim Laden der Kontakte:', error);
-    myContacts = [];
-    contactIds = [];
-  }
 }
 
 async function initContacts() {
@@ -68,10 +69,10 @@ function toggleContactOverlay() {
 
 function saveToLocalstorage() {
     let userName = document.getElementById('newContactName').value;
-    let userMail = document.getElementById('newContactMail').value;
+    let userEmail = document.getElementById('newContactMail').value;
     let userPhone = document.getElementById('newContactPhone').value;
 
-    if (!userName || !userMail || !userPhone) {
+    if (!userName || !userEmail || !userPhone) {
         alert('Bitte alle Felder ausfüllen!');
         return;
     }
@@ -81,9 +82,9 @@ function saveToLocalstorage() {
     let surName = nameParts.slice(1).join(' ') || '';
 
     let newContact = {
-        givenName: givenName,
-        surname: surName,
-        mail: userMail,
+        name: nameParts,
+        //surname: surName,
+        email: userEmail,
         phone: userPhone
     };
 
@@ -136,7 +137,7 @@ function openEditOverlay(index) {
 
 async function deleteContact(index) {
     try {
-        let firebaseId = contactIds[index];
+        let firebaseId = newContacts[index];
         
         if (!firebaseId) {
             console.error('Firebase-ID nicht gefunden für Index:', index);
@@ -153,7 +154,7 @@ async function deleteContact(index) {
         }
         
         myContacts.splice(index, 1);
-        contactIds.splice(index, 1);
+        newContacts.splice(index, 1);
         
         renderContacts();
         closeOverlay();
@@ -182,33 +183,33 @@ async function updateContact(index) {
     let givenName = nameParts[0] || ' ';
     let surname = nameParts.slice(1).join(' ') || '';
 
-  let updatedContact = {
-    givenName: givenName,
-    surname: surname,
-    mail: contactMail,
-    phone: contactPhone,
-  };
+    let updatedContact = {
+        givenName: givenName,
+        surname: surname,
+        email: contactMail,
+        phone: contactPhone
+    };
 
-  try {
-    let firebaseId = contactIds[index];
-
-    if (!firebaseId) {
-      console.error('Firebase-ID nicht gefunden für Index:', index);
-      console.log('Verfügbare contactIds:', contactIds);
-      console.log('Gesuchter Index:', index);
-      return;
-    }
-
-    console.log('Aktualisiere Kontakt mit Firebase-ID:', firebaseId);
-
-    let url = `https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/users/${firebaseId}.json`;
-    let response = await fetch(url, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(updatedContact),
-    });
+    try {
+        let firebaseId = newContacts[index];
+        
+        if (!firebaseId) {
+            console.error('Firebase-ID nicht gefunden für Index:', index);
+            console.log('Verfügbare newContacts:', newContacts);
+            console.log('Gesuchter Index:', index);
+            return;
+        }
+        
+        console.log('Aktualisiere Kontakt mit Firebase-ID:', firebaseId);
+        
+        let url = `https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/users/${firebaseId}.json`;
+        let response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedContact)
+        });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
