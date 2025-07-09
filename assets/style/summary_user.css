@@ -315,12 +315,12 @@
         display: none;
     }
     .contentspace-html{
-        height: 100vh;
-        padding-bottom: 180px;
+        height: calc(100vh - 160px);
+        padding-top: 180px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         gap: 80px;
 
     }
@@ -331,13 +331,13 @@
     }*/
     
     .headline_container{
+        height: 100px;
         width: 560px;
         position: static;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
-
     }
    
     .vector5{
