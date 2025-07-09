@@ -283,6 +283,10 @@ header {
     .user {
         height: 40px;
         width: 40px;
+        
+        font-size: 12px;
+        font-weight: 700;
+        
     }
 
     .logo-responsive {

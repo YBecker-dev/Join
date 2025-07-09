@@ -316,7 +316,7 @@
     }
     .contentspace-html{
         height: calc(100vh - 160px);
-        padding-top: 180px;
+        padding-top: 128px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -358,6 +358,7 @@
 
 @media (max-width: 590px){
    .contentspace-html{
+    padding-top: 60px;
     padding-bottom: 180px;
     padding-left: 16px;
     padding-right: 16px;
@@ -475,6 +476,7 @@
 @media(max-width: 425px){
     .contentspace-html{
         gap: 40px;
+        padding-top: 30px;
         
     }
     .headline_container{
