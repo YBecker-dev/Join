@@ -217,15 +217,18 @@ function overlaySubtaskHtml(subtask, subtaskIndex, taskId) {
 
 function getLogOutMenu() {
   return `
-       <div class="section1" onclick="loadContent('legal-notice.html')"  id="legalNotice">
-                    <p> Legal Notice</p>
-                </div>
-                <div class="section1" onclick="loadContent('privacy-policy.html')"  id="privacyPolicy">
-                    <p>Privacy Policy</p>
-                </div>
-                <div class="section1" onclick="handleLogOut(event)"  id="logOut">
-                    <a href="/index.html">Log out</a>
-                </div>
+      <div class="help-mobil" onclick="loadContent('help.html')" id="help-mobil">
+          <p>Help</p>
+      </div>
+      <div class="section1" onclick="loadContent('legal-notice.html')"  id="legalNotice">
+          <p> Legal Notice</p>
+      </div>
+      <div class="section1" onclick="loadContent('privacy-policy.html')"  id="privacyPolicy">
+          <p>Privacy Policy</p>
+      </div>
+      <div class="section1" onclick="handleLogOut(event)"  id="logOut">
+          <a href="/index.html">Log out</a>
+      </div>
     
     `;
 }

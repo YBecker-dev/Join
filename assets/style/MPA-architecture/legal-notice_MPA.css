@@ -1,0 +1,33 @@
+.body-flex{
+    
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   padding-top: calc(206px - 96px);
+   padding-left: calc(328px - 232px);
+   padding-right: 96px; 
+}
+.headline>h1{
+    font-size: 61px;
+    font-weight: 700;
+    line-height: 120%;
+    letter-spacing: 0;
+}
+.content{
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    gap: 24px;
+}
+.Imprint>h2{
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 120%;
+    letter-spacing: 0;
+
+}
+/*h3{
+    font-size: 16px;
+    font-weight: 900;
+
+}*/

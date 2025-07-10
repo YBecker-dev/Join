@@ -108,16 +108,6 @@ header {
     cursor: pointer;
     font-weight: 400;
 }
-
-.main-content {
-    position: fixed;
-    top: 96px;
-    left: 232px;
-    right: 0;
-    bottom: 0;
-    overflow: auto;
-}
-
 .help-icon:hover {
     cursor: pointer;
     height: 22px;
@@ -201,140 +191,112 @@ header {
     gap: 15px;
 }
 
-
-/* // responsive design */
-
-@media (max-width: 1439px) {
-    #sidebar-summary {
-        order: 1;
-    }
-
-    #sidebar-board {
-        order: 2;
-    }
-
-    #sidebar-add-task {
-        order: 3;
-    }
-
-    #sidebar-contacts {
-        order: 4;
-    }
-
-    .sidebar-legal-stuff {
-        display: none;
-    }
-
-    .sidebar-logo {
-        display: none;
-    }
-
-    .sidebar-links-container {
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 0 16px;
-    }
-
-    .sidebar {
-        height: 80px;
-        width: 100%;
-        bottom: 0;
-        left: 0;
-        padding: 0;
-        position: fixed;
-    }
-
-    .sidebar-links {
-        height: 76px;
-        padding: 0;
-        flex-direction: column;
-        justify-content: center;
-        font-size: 14px;
-        gap: 4px;
-        line-height: 120%;
-        width: 80px;
-    }
-
-    .sidebar-links.active {
-        border-radius: 15px;
-    }
-
-    header {
-        position: unset;
-    }
-
-    .header-content {
-        height: 80px;
-        padding: 16px 20px;
-        position: fixed;
-        top: 0;
-        z-index: 20;
-    }
-
-    .header-content>p {
-        display: none;
-    }
-
-    .header-user img {
-        display: none;
-    }
-
-    .header-user {
-        padding-right: 0;
-    }
-
-    .user {
-        height: 40px;
-        width: 40px;
-        
-        font-size: 12px;
-        font-weight: 700;
-        
-    }
-
-    .logo-responsive {
-        display: unset;
-        width: 32px;
-        height: 40px;
-        overflow: unset;
-    }
-
-    .main-content {
-        padding: 0 16px;
-        top: 0;
-        left: 0;
-    }
-    .logout-overlay-content{
-        height: auto;
-        top: 80px;
-    }
- 
-    .help-mobil{
-        height: 46px;
-        width: 90%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-top-left-radius: 10px;
-        p{
-            color: #FFFFFF;
-        }   
-    }
-    .help-mobil:hover{
-        cursor: pointer;
-        background-color: #102542;
-    }
-
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter';
+    scroll-behavior: smooth;
+    line-height: 120%;
 }
 
-@media (max-width: 1008px) {
-    .main-content {
-        position: unset;
-        margin-top: 80px;
-        overflow: unset;
-    }
+body {
+    background-color: #F6F7F8 !important;
+    text-align: center;
+}
 
-    .add-task-no-scroll {
-        overflow: hidden;
-    }
+@font-face {
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/assets/fonts/inter-v19-latin-regular.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+
+h1 {
+    font-size: 64px;
+    font-weight: bold;
+    padding: 48px 0 16px 0;
+}
+
+a {
+    text-decoration: none;
+    color: #BEBEBE;
+    opacity: 1;
+}
+
+a:hover {
+    color: #2AABE2;
+    font-weight: bold;
+}
+
+.d-none,
+.hidden {
+    display: none !important;
+}
+
+.input-error {
+    border: 2px solid #e74c3c !important;
+}
+
+.checkbox.input-error {
+    outline: 2px solid #e74c3c;
+    border-color: #e74c3c !important;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: none;
+    border: none;
+}
+
+textarea:focus {
+    outline: none;
+    box-shadow: none;
+    border: 1px solid #2AABE2;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    box-shadow: none;
+    border: 1px solid #2AABE2;
+}
+
+
+input[type="date"]:focus {
+    outline: none;
+    box-shadow: none;
+    border: 1px solid #2AABE2;
+}
+
+.checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    background: url('/assets/img/icon/checkbox.png') no-repeat center center;
+    background-size: contain;
+    cursor: pointer;
+}
+
+.checkbox:checked {
+    background: url('/assets/img/icon/checked_checkbox.png') no-repeat center center;
+    background-size: contain;
+}
+
+.contentspace-html {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.main-content {
+    position: fixed;
+    top: 96px;
+    left: 232px;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
 }

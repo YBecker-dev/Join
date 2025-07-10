@@ -813,9 +813,10 @@
         min-height: unset;
         width: 100%;
         overflow: auto;
-
+        
         padding: 16px 0;
     }
+    /*Muss evtl. rückgängig gemacht werden*/
     .drag-area::-webkit-scrollbar{
         display: none;
         width: 0;

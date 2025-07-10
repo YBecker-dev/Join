@@ -116,3 +116,21 @@ function logginAsGuest() {
   console.log(JSON.parse(localStorage.getItem('announcedUser')));
   window.location.href = 'assets/html/main.html';
 }
+
+// new MPA concept test
+let PrivacyPolicy = 'assets/html/MPA-architecture/privacy-policy_MPA.html';
+let LegalNotice = 'assets/html/MPA-architecture/legal-notice_MPA.html';
+function privacyPolicyMPA() {
+  let guestUser = 'Guest Guest';
+  console.log(guestUser);
+  localStorage.setItem('announcedUser', JSON.stringify(guestUser));
+  console.log(JSON.parse(localStorage.getItem('announcedUser')));
+  window.location.href = PrivacyPolicy;
+}
+function legalNoticeMPA() {
+  let guestUser = 'Guest Guest';
+  console.log(guestUser);
+  localStorage.setItem('announcedUser', JSON.stringify(guestUser));
+  console.log(JSON.parse(localStorage.getItem('announcedUser')));
+  window.location.href = LegalNotice;
+}
