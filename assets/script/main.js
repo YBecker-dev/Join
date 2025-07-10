@@ -66,23 +66,6 @@ function displayUserInitials() {
     userInitials.innerText = 'G';
   }
 }
-//Test MPA
-//function displayUserInitialsMPA() {
-//  // Sehr Fehleranfällig !!!
-//  let userInitials = document.getElementById('userInitialsMPA');
-//  let userName = JSON.parse(localStorage.getItem('announcedUser'));
-//  if (userName !== 'Guest Guest') {
-//    let firstinitial = userName.slice(0, 1);
-//    let searchposition = userName.search(' ');
-//    let secondinitial = userName.slice(searchposition + 1, searchposition + 2);
-//    let initials = firstinitial.concat(secondinitial);
-//    userInitials.innerText = initials;
-//  } else {
-//    userInitials.innerText = 'G';
-//  }
-//}
-
-
 
 function toggleLogOutOverlay() {
   let logOutRef = document.getElementById('overlay-logout');

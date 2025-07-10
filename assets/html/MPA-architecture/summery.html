@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="/assets/style/MPA-architecture/join-framework.css">
+     <link rel="stylesheet" href="/assets/style/summary_user.css">
+    <title>Summery</title>
+</head>
+<body>
+    
+    <section class="logout-overlay d-none" id="overlay-logout" onclick="toggleLogOutOverlay()">
+      <div class="logout-overlay-content" id="logout-overlay-content"></div>
+    </section>
+
+    <!--Join Strucktur-->
+    <header>
+      <div class="header-content">
+        <p>Kanban Project Management Tool</p>
+        <img class="logo-responsive" src="../img/logo/logo_dark.png" alt="" />
+        <div class="header-user">
+          <img
+            class="help-icon"
+            onclick="loadContent('help.html')"
+            src="/assets/img/icon/header_user_interface/help.png"
+            alt="help"
+          />
+          <div class="nameBtn" id="userBtn" onclick="toggleLogOutOverlay()">
+            <p class="user" id="userInitialsMPA"></p>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="sidebar">
+      <div class="sidebar-links-section">
+        <div class="sidebar-logo">
+          <img src="/assets/img/Logo/Logo_white.png" alt="Logo" />
+        </div>
+        <div class="sidebar-links-container">
+          <a
+            class="sidebar-links"
+            id="sidebar-summary"
+            href="#"
+            onclick="changeColorbyHtmlLinks(this); loadContent('summary_user.html')"
+          >
+            <img src="/assets/img/icon/tasks_icon/summary.png" alt="" />Summary
+          </a>
+          <a
+            class="sidebar-links"
+            id="sidebar-add-task"
+            href="#"
+            onclick="changeColorbyHtmlLinks(this); loadContent('add_task.html')"
+          >
+            <img src="/assets/img/icon/tasks_icon/add_task.png" alt="" />Add Task
+          </a>
+          <a
+            class="sidebar-links"
+            id="sidebar-board"
+            href="#"
+            onclick="changeColorbyHtmlLinks(this); loadContent('board.html')"
+          >
+            <img src="/assets/img/icon/tasks_icon/board.png" alt="" />Board
+          </a>
+          <a
+            class="sidebar-links"
+            id="sidebar-contacts"
+            href="#"
+            onclick="changeColorbyHtmlLinks(this); loadContent('contacts.html')"
+          >
+            <img src="/assets/img/icon/tasks_icon/contacts.png" alt="" />Contacts
+          </a>
+        </div>
+      </div>
+      <div class="sidebar-legal-stuff">
+        <a
+          class="sidebar-links privacy-legal"
+          id="sidebar-privacy-policy"
+          href="#"
+          onclick="loadContent('privacy-policy.html'); changeColorbyHtmlLinks(this);"
+          >Privacy Policy</a
+        >
+        <a
+          class="sidebar-links privacy-legal"
+          id="sidebar-legal-notice"
+          href="#"
+          onclick="loadContent('legal-notice.html'); changeColorbyHtmlLinks(this);"
+          >Legal Notice</a
+        >
+      </div>
+    </div>
+    <section class="main-content">
+            <div class="contentspace-html">
+            
+                <div class="headline_container">
+                    <h1>Join 360</h1>
+                    <div class="vector5"></div>
+                    <p>Key Metrics at a Glance</p>
+                    <div class="vector5-mobil"></div>
+                </div>
+            
+            <div class="task-monitor">
+                <div class="section-one">
+                    <div class="content-one hover-one transform-left"  onclick="loadContent('board.html')">
+                        <div class="content-one-icon">
+                            <div class="pen-icon"></div>
+                        </div>
+                        <div class="content-info">
+                            <h1 id="task_to_do"></h1>
+                            <p>To-do</p>
+                        </div>
+                    </div>
+                    <div class="content-one hover-one transform-right" onclick="loadContent('board.html')">
+                         <div class="content-one-icon">
+                            <div class="check-icon"></div>
+                        </div>
+                        <div class="content-info">
+                            <h1 id="task_done"></h1>
+                            <p>Done</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-two hover-two transform-left"  onclick="loadContent('board.html')">
+                    <div class="content-two-left">
+                        <div>
+                            <img src="../img/icon/urgent.png">
+                        </div>
+                        <div class="content-info-two">
+                            <h1 id="task_urgent"></h1>
+                            <p>Urgent</p>
+                        </div>
+                    </div>
+                    <div class="seperator-two"></div>
+                    <div class="content-two-right"> 
+                        <h4>October 16, 2022</h4>
+                        <p>Upcoming Deadline</p>
+                    </div>
+                </div>
+                <div class="section-three">
+                    <div class="content-three hover-three transform-left-center"  onclick="loadContent('board.html')">
+                        <div class="content-three-info">
+                            <h1 id="task_in_board">5</h1>
+                            <p>Tasks in Board</p>
+                        </div>  
+                    </div>
+                    <div class="content-three hover-three"  onclick="loadContent('board.html')">
+                        <div class="content-three-info">
+                            <h1 id="task_in_progress"></h1>
+                            <p>Tasks In Progress</p>
+                        </div>
+                    </div>
+                    <div class="content-three hover-three transform-right-center"  onclick="loadContent('board.html')">
+                        <div class="content-three-info">
+                            <h1 id="task_awaiting_feedback"></h1>
+                            <p>Awaiting Feedback</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="greeting">
+         <h2 id="userGreeting"></h2>
+         <h1 id="userName"></h1>
+        </div>   
+    </section>
+
+</body>
+<script src="/assets/script/summary.js"></script>
+<script src="/assets/script/board.js"></script>
+<script src="/assets/script/templates.js"></script>
+<script src="/assets/script/main.js"></script>
+<script src="/assets/script/add_task.js"></script>
+<script src="/assets/script/contacts.js"></script>   
+<script src="/assets/script.js"></script>
+
+</html>
