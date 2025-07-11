@@ -114,8 +114,8 @@ function logginAsGuest() {
   console.log(guestUser);
   localStorage.setItem('announcedUser', JSON.stringify(guestUser));
   console.log(JSON.parse(localStorage.getItem('announcedUser')));
-  window.location.href = 'assets/html/MPA-architecture/summery.html'//MPA-architecture
-  //window.location.href = 'assets/html/main.html'; //SPA-architecture
+  // window.location.href = 'assets/html/MPA-architecture/summery.html'//MPA-architecture
+  window.location.href = 'assets/html/main.html'; //SPA-architecture
 }
 //-------------------------------------------------------------------------------------
 // new MPA concept test
