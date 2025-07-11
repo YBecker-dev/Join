@@ -1,11 +1,11 @@
 function initFrameworkFunctions(){
-  displayGuestUserInitialsMPA();
+  displayUserInitials();
 }
 
 // test
-function displayGuestUserInitialsMPA() {
+function displayUserInitials() {
   // Sehr Fehleranfällig !!!
-  let userInitials = document.getElementById('userInitialsMPA');
+  let userInitials = document.getElementById('userInitials');
   let userName = JSON.parse(localStorage.getItem('announcedUser'));
   if (userName !== 'Guest Guest') {
     let firstinitial = userName.slice(0, 1);

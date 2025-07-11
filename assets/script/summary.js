@@ -1,3 +1,5 @@
+// MPA Check :-) 
+
 //const BASE_URL_TASKS_AND_USERS = 'https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/';
 
  async function initSummary() {
@@ -5,8 +7,7 @@
   await checkTasks()
   displayUserName();
   checkTime();
-  //displayUserInitialsMPA();
-
+  initFrameworkFunctions()
 }
 
 let statusArray = [];
