@@ -1,9 +1,9 @@
-function initFooterContentMPA(){
-  displayUserInitialsMPA();
+function initFrameworkFunctions(){
+  displayGuestUserInitialsMPA();
 }
 
 // test
-function displayUserInitialsMPA() {
+function displayGuestUserInitialsMPA() {
   // Sehr Fehleranfällig !!!
   let userInitials = document.getElementById('userInitialsMPA');
   let userName = JSON.parse(localStorage.getItem('announcedUser'));

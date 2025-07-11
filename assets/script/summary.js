@@ -5,6 +5,8 @@
   await checkTasks()
   displayUserName();
   checkTime();
+  //displayUserInitialsMPA();
+
 }
 
 let statusArray = [];

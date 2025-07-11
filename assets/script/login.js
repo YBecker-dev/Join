@@ -117,10 +117,11 @@ function logginAsGuest() {
   window.location.href = 'assets/html/MPA-architecture/summery.html'//MPA-architecture
   //window.location.href = 'assets/html/main.html'; //SPA-architecture
 }
-
+//-------------------------------------------------------------------------------------
 // new MPA concept test
 let PrivacyPolicy = 'assets/html/MPA-architecture/privacy-policy_MPA.html';
 let LegalNotice = 'assets/html/MPA-architecture/legal-notice_MPA.html';
+
 function privacyPolicyMPA() {
   let guestUser = 'Guest Guest';
   console.log(guestUser);
