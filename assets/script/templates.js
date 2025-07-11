@@ -103,7 +103,7 @@ function getNoteTemplateEditContact(index) {
                   </div>
                   <div>
                     <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                      <input id="editContactName" class="addNewContact" value="${user.name}" required onclick="event.stopPropagation()">
+                      <input id="editContactName" class="addNewContact" value="${user[index].name}" required onclick="event.stopPropagation()">
                       <img class="addNewContactIcon" src="../img/icon/person.png" alt="Person Icon">
                     </div> 
                     <div class="addNewContactDiv" onclick="event.stopPropagation()">
