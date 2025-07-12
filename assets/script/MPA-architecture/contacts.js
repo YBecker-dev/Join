@@ -45,7 +45,7 @@ async function fetchDataJson() {
 function renderContacts() {
   let contentRef = document.getElementById('contactContent');
   let html = '';
-  for (let index = 0; index < contacts.length; index++) html += getNoteTemplateContact(index);
+  for (let index = 0; index < myContacts.length; index++) html += getNoteTemplateContact(index);
   contentRef.innerHTML = html;
 }
 
@@ -56,7 +56,7 @@ function openDetails(index) {
 
 function toggleContactOverlay() {
   console.log('connect');
-  let overlayRef = document.getElementById('overlayContact');
+  let overlayRef = document.getElementById('addNewContactOverlay');
   if (overlayRef.classList.contains('d-none')) {
     overlayRef.classList.remove('d-none');
     overlayRef.innerHTML = getNoteTemplateAddNewContact();
@@ -129,7 +129,7 @@ function getRandomColor() {
 }
 
 function closeOverlay() {
-  let overlayRef = document.getElementById('overlayContact');
+  let overlayRef = document.getElementById('addNewContactOverlay');
   let contentOverlayRef = document.getElementById('editContactOverlay');
   overlayRef.classList.add('d-none');
   contentOverlayRef.classList.add('d-none');
