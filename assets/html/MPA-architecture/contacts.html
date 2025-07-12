@@ -3,14 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../../style/MPA-architecture/join-framework.css">
-        <link rel="stylesheet" href="../../style/MPA-architecture/contact.css">
-        <link rel="stylesheet" href="../../style/buttons.css">
         <link rel="icon" href="../../img/Logo/Logo_white.png">
-        <link rel="stylesheet" href="../../fonts/inter-v19-latin-regular.woff2">
+        <link rel="stylesheet" href="../../style/MPA-architecture/join-framework.css">
+        <link rel="stylesheet" href="../../style/buttons.css">
+        <link rel="stylesheet" href="../../style/MPA-architecture/contact.css">
         <title>Contacts</title>
-        <script src="../../script/MPA-architecture/contact-templates.js"></script>
-        <script src="../../script/contacts.js"></script>
+        
     </head>
     <body onload="initContacts()">
         <header>
@@ -32,7 +30,7 @@
                 </div>
                 <div class="sidebar-links-container">
                     <a class="sidebar-links" id="sidebar-summary" href="./summery.html" target="_blank">
-                        <img src="../../img/icon/tasks_icon/summary.png" alt="" target="_blank">Summary
+                        <img src="../../img/icon/tasks_icon/summary.png" alt="">Summary
                     </a>
                     <a class="sidebar-links" id="sidebar-add-task" href="./#">
                         <img src="../../img/icon/tasks_icon/add_task.png" alt="" target="_blank">Add Task
@@ -41,7 +39,7 @@
                         <img src="../../img/icon/tasks_icon/board.png" alt="" target="_blank">Board
                     </a>
                     <a class="sidebar-links" id="sidebar-contacts" href="./contacts.html">
-                        <img src="../../img/icon/tasks_icon/contacts.png" alt="" target="_blank">Contacts
+                        <img src="../../img/icon/tasks_icon/contacts.png" alt="">Contacts
                     </a>
                 </div>
             </div>
@@ -74,7 +72,7 @@
             </section>
 
             <section>
-                <div id="overlayContact">
+                <div id="addNewContactOverlay">
                 </div>
             </section>
             <section>
@@ -82,5 +80,8 @@
                 </div>
             </section>
         </main>
+
+        <script src="../../script/MPA-architecture/contact-templates.js"></script>
+        <script src="../../script/contacts.js"></script>
     </body>
 </html>

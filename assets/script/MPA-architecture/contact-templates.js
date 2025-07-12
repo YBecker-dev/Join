@@ -46,39 +46,39 @@ function getNoteTemplateContactDetails(indexDetails) {
 
 // add new Contact
 function getNoteTemplateAddNewContact() {
-  return `<div class="newContactOverlay" onclick="event.stopPropagation()">
+  return ` <div class="newContactOverlay" onclick="event.stopPropagation()">
             <div class="headDiv">
-              <img class="contactLogo" src="../img/Logo/Logo_white.png" alt="Logo_white">
+              <img class="contactLogo" src="../../img/Logo/Logo_white.png" alt="Logo_white">
               <p class="addHeadline">Add contact</p>
               <p class="addTastText">Tasks are better with a team!</p>
               <div class="line"></div>
             </div>
             <div class="editDiv">
               <div class="closeDiv">
-                <img onclick="closeOverlay()" class="close" src="../img/icon/close.png" alt="Close-Button">
+                <img onclick="closeOverlay()" class="close" src="../../img/icon/close.png" alt="Close-Button">
               </div>        
               <div class="profilDiv">
                 <div>
-                  <p id="newContactInitials" class="profileInitials"><img class="profileImg" src="../img/icon/profile.png" alt="profile Image"></p>
+                  <p id="newContactInitials" class="profileInitials"><img class="profileImg" src="../../img/icon/profile.png" alt="profile Image"></p>
                 </div>
                 <div>
                   <div class="addNewContactDiv" onclick="event.stopPropagation()">
                     <input id="newContactName" class="addNewContact" type="text" placeholder="Name" required onclick="event.stopPropagation()">
-                    <img class="addNewContactIcon" src="../img/icon/person.png" alt="Person Icon">
+                    <img class="addNewContactIcon" src="../../img/icon/person.png" alt="Person Icon">
                   </div> 
                   <div class="addNewContactDiv" onclick="event.stopPropagation()">
                     <input id="newContactMail" class="addNewContact" type="email" placeholder="Email" required onclick="event.stopPropagation()">
-                    <img class="addNewContactIcon" src="../img/icon/mail.png" alt="Email Icon">
+                    <img class="addNewContactIcon" src="../../img/icon/mail.png" alt="Email Icon">
                   </div> 
                   <div class="addNewContactDiv" onclick="event.stopPropagation()">
                     <input id="newContactPhone" class="addNewContact" type="tel" placeholder="Phone" required onclick="event.stopPropagation()">
-                    <img class="addNewContactIcon" src="../img/icon/phone.png" alt="phone Icon">
+                    <img class="addNewContactIcon" src="../../img/icon/phone.png" alt="phone Icon">
                   </div> 
                 </div>           
               </div>
               <div class="accept">
-                <button onclick="closeOverlay()" class="clear-button">Cancel<img class="save-close" src="../img/icon/close.png" alt="Close-Button"></button>
-                <button onclick="saveToLocalstorage()" class="create-button">Create contact<img class="save-close" src="../img/icon/save.png" alt="saveIcon"></button>
+                <button onclick="closeOverlay()" class="clear-button">Cancel<img class="save-close" src="../../img/icon/close.png" alt="Close-Button"></button>
+                <button onclick="saveToLocalstorage()" class="create-button">Create contact<img class="save-close" src="../../img/icon/save.png" alt="saveIcon"></button>
               </div>
             </div>
           </div>`;
