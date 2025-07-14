@@ -12,6 +12,7 @@ async function initAddTask() {
     handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'close');
     handleDropdown('category-dropdown-options', 'category-selected-arrow', 'close');
     clearAssignedTo();
+    initFrameworkFunctions();
   });
 }
 
