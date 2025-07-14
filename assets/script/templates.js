@@ -136,7 +136,8 @@ function getTaskOverlay(task, taskId) {
         <p class="p-Tag ${categoryClass}">${categoryText}</p>
         </div>
         <div class="close-icon" onclick="toggleBoardOverlay()">
-          <img src="../img/icon/close.png" >
+          <!--<img src="../img/icon/close.png" >-->
+          <img src="/assets/img/icon/close.png" >
         </div>                
       </div>
       <div class="overlay-titel">
@@ -171,14 +172,16 @@ function getTaskOverlay(task, taskId) {
         <div class="overlay-edit">
           <div class="overlay-edit-content">
             <div class="trashImg"  onclick="deleteTaskFromFirebase(${task.addTaskId}); toggleBoardOverlay()">
-              <img src="../img/icon/trash.png" alt="trash">
+              <!--<img src="../img/icon/trash.png" alt="trash">-->
+              <img src="/assets/img/icon/trash.png" alt="trash">
               <p class="p-Tag">Delete</p>
             </div>
           </div>
           <div class="overlay-seperator"></div>
           <div class="overlay-edit-content">
             <div class="editImg" onclick="editTask('${taskId}')">
-              <img src="../img/icon/edit.png" alt="edit">
+              <!--<img src="../img/icon/edit.png" alt="edit">-->
+              <img src="/assets/img/icon/edit.png" alt="edit">
               <p class="p-Tag">Edit</p>
             </div>
           </div>

@@ -178,3 +178,6 @@ function checkTime(){
   }
 }
 
+let loadBoard = () =>{
+  window.location.href = "/assets/html/MPA-architecture/board.html"
+}

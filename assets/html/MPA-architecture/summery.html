@@ -40,8 +40,8 @@
           <a
             class="sidebar-links"
             id="sidebar-summary"
-            href="#"
-            onclick="changeColorbyHtmlLinks(this); loadContent('summary_user.html')"
+            href="/assets/html/MPA-architecture/summery.html"
+            onclick="changeColorbyHtmlLinks(this); //loadContent('summary_user.html')"
           >
             <img src="/assets/img/icon/tasks_icon/summary.png" alt="" />Summary
           </a>
@@ -56,8 +56,8 @@
           <a
             class="sidebar-links"
             id="sidebar-board"
-            href="#"
-            onclick="changeColorbyHtmlLinks(this); loadContent('board.html')"
+            href="/assets/html/MPA-architecture/board.html"
+            onclick="changeColorbyHtmlLinks(this); //loadContent('board.html')"
           >
             <img src="/assets/img/icon/tasks_icon/board.png" alt="" />Board
           </a>
@@ -75,15 +75,15 @@
         <a
           class="sidebar-links privacy-legal"
           id="sidebar-privacy-policy"
-          href="#"
-          onclick="loadContent('privacy-policy.html'); changeColorbyHtmlLinks(this);"
+          href="/assets/html/MPA-architecture/privacy-policy_MPA.html"
+          onclick="changeColorbyHtmlLinks(this);"
           >Privacy Policy</a
         >
         <a
           class="sidebar-links privacy-legal"
           id="sidebar-legal-notice"
-          href="#"
-          onclick="loadContent('legal-notice.html'); changeColorbyHtmlLinks(this);"
+          href="/assets/html/MPA-architecture/legal-notice_MPA.html"
+          onclick="changeColorbyHtmlLinks(this);"
           >Legal Notice</a
         >
       </div>
@@ -100,7 +100,7 @@
             
             <div class="task-monitor">
                 <div class="section-one">
-                    <div class="content-one hover-one transform-left"  onclick="loadContent('board.html')">
+                    <div class="content-one hover-one transform-left"  onclick="loadBoard()">
                         <div class="content-one-icon">
                             <div class="pen-icon"></div>
                         </div>
@@ -109,7 +109,7 @@
                             <p>To-do</p>
                         </div>
                     </div>
-                    <div class="content-one hover-one transform-right" onclick="loadContent('board.html')">
+                    <div class="content-one hover-one transform-right" onclick="loadBoard()">
                          <div class="content-one-icon">
                             <div class="check-icon"></div>
                         </div>
@@ -120,7 +120,7 @@
                     </div>
                 </div>
 
-                <div class="section-two hover-two transform-left"  onclick="loadContent('board.html')">
+                <div class="section-two hover-two transform-left"  onclick="loadBoard()">
                     <div class="content-two-left">
                         <div>
                             <img src="/assets/img/icon/urgent.png">
@@ -137,19 +137,19 @@
                     </div>
                 </div>
                 <div class="section-three">
-                    <div class="content-three hover-three transform-left-center"  onclick="loadContent('board.html')">
+                    <div class="content-three hover-three transform-left-center"  onclick="loadBoard()">
                         <div class="content-three-info">
                             <h1 id="task_in_board">5</h1>
                             <p>Tasks in Board</p>
                         </div>  
                     </div>
-                    <div class="content-three hover-three"  onclick="loadContent('board.html')">
+                    <div class="content-three hover-three"  onclick="loadBoard()">
                         <div class="content-three-info">
                             <h1 id="task_in_progress"></h1>
                             <p>Tasks In Progress</p>
                         </div>
                     </div>
-                    <div class="content-three hover-three transform-right-center"  onclick="loadContent('board.html')">
+                    <div class="content-three hover-three transform-right-center"  onclick="loadBoard()">
                         <div class="content-three-info">
                             <h1 id="task_awaiting_feedback"></h1>
                             <p>Awaiting Feedback</p>

@@ -217,15 +217,16 @@ function sortTasksBySequence(tasksArray) {
     }
   }
 }
-
+// img Pfad wird entsprechend angepasst 
+// ursprünglich "../img/icon/proriority/.....png"
 function showPriorityImg(task) {
   let priorityImg = '';
   if (task.priority === 'Urgent') {
-    priorityImg = '<img src="../img/icon/priority/urgent.png" alt="Urgent" class="priority-img">';
+    priorityImg = '<img src="/assets/img/icon/priority/urgent.png" alt="Urgent" class="priority-img">';
   } else if (task.priority === 'Medium') {
-    priorityImg = '<img src="../img/icon/priority/medium.png" alt="Medium" class="priority-img">';
+    priorityImg = '<img src="/assets/img/icon/priority/medium.png" alt="Medium" class="priority-img">';
   } else if (task.priority === 'Low') {
-    priorityImg = '<img src="../img/icon/priority/low.png" alt="Low" class="priority-img">';
+    priorityImg = '<img src="/assets/img/icon/priority/low.png" alt="Low" class="priority-img">';
   }
   return priorityImg;
 }
@@ -575,9 +576,10 @@ async function toggleSubtaskDone(taskId, subtaskIndex) {
 
 async function openCreateTask() {
   selectedContacts = [];
-  let response = await fetch('../html/add_task.html');
+  //let response = await fetch('../html/add_task.html');
+  let response = await fetch('/html/add_task.html');
   let html = await response.text();
-
+  console.log(html);
   let btn = document.getElementById('addTaskBtn');
   if (!btn) return;
   if (window.innerWidth <= 1233) {
@@ -585,8 +587,8 @@ async function openCreateTask() {
     return;
   }
 
-  let tempDiv = document.createElement('div');
-  tempDiv.innerHTML = html;
+  let tempDiv = document.createElement('div');//<---Wo wird dieser div erstellt ? 
+  tempDiv.innerHTML += html;
 
   let clearBtn = tempDiv.querySelector('.clear-button');
   if (clearBtn) {
