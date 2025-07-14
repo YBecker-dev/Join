@@ -6,6 +6,7 @@ async function initBoard() {
   document.addEventListener('dragend', removeAllHighlights);
   emptyDragArea();
   initEventListnerProcessTasksInformation();
+  initFrameworkFunctions();
 }
 
 function allowDrop(ev) {

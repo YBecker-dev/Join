@@ -258,6 +258,9 @@
     align-items: center;
     justify-content: space-between;
 }
+.board-header-content>h1{
+    padding: 0;
+}
 
 .board-form {
     display: flex;
@@ -311,6 +314,7 @@
 }
 
 .input-find-Task>input {
+    font-size: 20px;
     border: #FFFFFF;
     height: 24px;
     width: 366px;

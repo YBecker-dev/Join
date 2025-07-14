@@ -17,3 +17,7 @@ function displayUserInitials() {
     userInitials.innerText = 'G';
   }
 }
+
+let loadHelp =() =>{
+  window.location.href = "/assets/html/MPA-architecture/help.html"
+}
