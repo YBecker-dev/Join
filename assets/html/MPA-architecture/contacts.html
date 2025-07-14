@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../../style/MPA-architecture/join-framework.css">
+        <link rel="stylesheet" href="../../style/MPA-architecture/contact.css">
+        <link rel="stylesheet" href="../../style/buttons.css">
+        <link rel="icon" href="../../img/Logo/Logo_white.png">
+        <link rel="stylesheet" href="../../fonts/inter-v19-latin-regular.woff2">
+        <title>Contacts</title>
+        <script src="../../script/MPA-architecture/contact-templates.js"></script>
+        <script src="../../script/contacts.js"></script>
+    </head>
+    <body onload="initContacts()">
+        <header>
+            <div class="header-content">
+                <p>Kanban Project Management Tool</p>
+                <img class="logo-responsive" src="../../img/Logo/" alt="">
+                <div class="header-user">
+                    <img class="help-icon" onclick="loadContent('help.html')"src="../../assets/img/icon/header_user_interface/help.png" alt="help">
+                    <div class="nameBtn" id="userBtn" onclick="toggleLogOutOverlay()">
+                        <p class="user" id="userInitialsMPA"></p>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <section class="sidebar">
+            <div class="sidebar-links-section">
+                <div class="sidebar-logo">
+                    <img src="../../img/Logo/Logo_white.png" alt="Logo">
+                </div>
+                <div class="sidebar-links-container">
+                    <a class="sidebar-links" id="sidebar-summary" href="./summery.html" target="_blank">
+                        <img src="../../img/icon/tasks_icon/summary.png" alt="" target="_blank">Summary
+                    </a>
+                    <a class="sidebar-links" id="sidebar-add-task" href="./#">
+                        <img src="../../img/icon/tasks_icon/add_task.png" alt="" target="_blank">Add Task
+                    </a>
+                    <a class="sidebar-links" id="sidebar-board" href="./#">
+                        <img src="../../img/icon/tasks_icon/board.png" alt="" target="_blank">Board
+                    </a>
+                    <a class="sidebar-links" id="sidebar-contacts" href="./contacts.html">
+                        <img src="../../img/icon/tasks_icon/contacts.png" alt="" target="_blank">Contacts
+                    </a>
+                </div>
+            </div>
+            <div class="sidebar-legal-stuff">
+                <a class="sidebar-links privacy-legal" id="sidebar-privacy-policy" href="./privacy-policy_MPA.html">Privacy Policy</a>
+                <a class="sidebar-links privacy-legal" id="sidebar-legal-notice" href="./legal-notice_MPA.html">Legal Notice</a>
+            </div>
+        </section>
+
+        <main class="myMain">
+            <section class="contactList">
+                <button onclick="toggleContactOverlay()" id="newContact"><!--openAddNewContactOverlay()-->
+                    <div class="btn">
+                        <p>Add new contact</p>
+                        <img class="newContact" src="../../img/icon/new-contact.png" alt="new Contact">
+                    </div> 
+                </button>
+                <div id="contactContent">
+                </div>
+            </section>
+
+            <section class="details">
+                <div class="contact-headline">
+                    <h2>Contacts</h2> 
+                    <div class="separating-line"></div> 
+                    <span class="team">Better with a team</span>
+                </div>
+                <div id="contactDetails">
+                </div>
+            </section>
+
+            <section>
+                <div id="overlayContact">
+                </div>
+            </section>
+            <section>
+                <div id="editContactOverlay">
+                </div>
+            </section>
+        </main>
+    </body>
+</html>

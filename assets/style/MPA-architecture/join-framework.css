@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'inter-v19-latin-regular.woff2';
+    src: url('../../fonts/inter-v19-latin-regular.woff2');
+}
+
 .header-content {
     display: flex;
     justify-content: space-between;
