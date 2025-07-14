@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/style/MPA-architecture/join-framework.css">
+    <link rel="stylesheet" href="/assets/style/add_task.css">
+    <link rel="stylesheet" href="/assets/style/buttons.css">
+    <title>Add Task</title>
+</head>
+<body onload="initAddTask()">
+
+        <div class="overlay d-none" id="overlayBoard" onclick="toggleBoardOverlay()">
+            <div class="overlay-content-flex">
+                <div class="overlay-content-render" id="overlay-content-loader" onclick="preventBubbling(event)"></div>
+            </div>
+        </div>
+
+        <section class="logout-overlay d-none" id="overlay-logout" onclick="toggleLogOutOverlay()">
+          <div class="logout-overlay-content" id="logout-overlay-content"></div>
+        </section>
+
+        <header>
+          <div class="header-content">
+            <p>Kanban Project Management Tool</p>
+            <img class="logo-responsive" src="../img/logo/logo_dark.png" alt="" />
+            <div class="header-user">
+              <img
+                class="help-icon"
+                onclick="loadHelp()"
+                src="/assets/img/icon/header_user_interface/help.png"
+                alt="help"
+              />
+              <div class="nameBtn" id="userBtn" onclick="toggleLogOutOverlay()">
+                <p class="user" id="userInitials"></p>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div class="sidebar">
+          <div class="sidebar-links-section">
+            <div class="sidebar-logo">
+              <img src="/assets/img/Logo/Logo_white.png" alt="Logo" />
+            </div>
+            <div class="sidebar-links-container">
+              <a
+                class="sidebar-links"
+                id="sidebar-summary"
+                href="/assets/html/MPA-architecture/summery.html"
+                onclick="changeColorbyHtmlLinks(this); //loadContent('summary_user.html')"
+              >
+                <img src="/assets/img/icon/tasks_icon/summary.png" alt="" />Summary
+              </a>
+              <a
+                class="sidebar-links"
+                id="sidebar-add-task"
+                href="#"
+                onclick="changeColorbyHtmlLinks(this); loadContent('add_task.html')"
+              >
+                <img src="/assets/img/icon/tasks_icon/add_task.png" alt="" />Add Task
+              </a>
+              <a
+                class="sidebar-links"
+                id="sidebar-board"
+                href="/assets/html/MPA-architecture/board.html"
+                onclick="changeColorbyHtmlLinks(this); //loadContent('board.html')"
+              >
+                <img src="/assets/img/icon/tasks_icon/board.png" alt="" />Board
+              </a>
+              <a
+                class="sidebar-links"
+                id="sidebar-contacts"
+                href="#"
+                onclick="changeColorbyHtmlLinks(this); //loadContent('contacts.html')"
+              >
+                <img src="/assets/img/icon/tasks_icon/contacts.png" alt="" />Contacts
+              </a>
+            </div>
+          </div>
+          <div class="sidebar-legal-stuff">
+            <a
+              class="sidebar-links privacy-legal"
+              id="sidebar-privacy-policy"
+              href="/assets/html/MPA-architecture/privacy-policy_MPA.html"
+              onclick="changeColorbyHtmlLinks(this);"
+              >Privacy Policy</a
+            >
+            <a
+              class="sidebar-links privacy-legal"
+              id="sidebar-legal-notice"
+              href="/assets/html/MPA-architecture/legal-notice_MPA.html"
+              onclick="changeColorbyHtmlLinks(this);"
+              >Legal Notice</a
+            >
+          </div>
+        </div>
+        <section class="main-content">
+
+        <section class="wrapper-create-task-section d-none" id="wrapper-create-task-section">
+            <div class="wrapper-create-task">
+            <div class="wrapper-create-task-center">
+                <p>Task added to board</p>
+                <img src="/assets/img/icon/tasks_icon/board.png" alt="" />
+            </div>
+            </div>
+        </section>
+        <div class="contentspace-html addtask">
+            <div class="headline-addtask">
+            <h1>Add Task</h1>
+            </div>
+            <div class="required"></div>
+            <form id="add-task-form" onsubmit="return validateAddTaskForm();" onkeydown="return preventEnterSubmit(event);">
+            <div class="create-clear-buttons">
+                <button type="button" class="clear-button" onclick="clearAllTaskFields();">
+                Clear <img src="/assets/img/icon/add_task_icon/buttons/clear_all.png" />
+                </button>
+                <button disabled type="submit" class="create-button" id="create-task-button">
+                Create Task <img src="/assets/img/icon/add_task_icon/buttons/create_task.png" />
+                </button>
+            </div>
+            <div class="title_description_date">
+                <div class="container1">
+                <div class="input-group add-task">
+                    <span>Title<span class="required-star">*</span></span>
+                    <input
+                    id="title"
+                    type="text"
+                    name="add-task-input1"
+                    onclick="showError('add-task-input1-warning', 'title')"
+                    oninput="showError('add-task-input1-warning', 'title'); enableCreateTaskButton();"
+                    placeholder="Enter a Title"
+                    />
+                    <span id="add-task-input1-warning" class="input-warning d-none">This field is required</span>
+                </div>
+                <div class="input-group add-task">
+                    <span>Description</span>
+                    <textarea id="description" name="add-task-textarea" placeholder="Enter a Description"></textarea>
+                    <span class="input-icon">
+                    <img src="/assets/img/icon/add_task_icon/textarea.png" alt="" />
+                    </span>
+                </div>
+                <div class="input-group add-task date">
+                    <span>Due Date<span class="required-star">*</span></span>
+                    <div class="date-input-container">
+                    <input
+                        id="date"
+                        type="date"
+                        name="add-task-input2"
+                        onclick="showError('add-task-input2-warning', 'date')"
+                        oninput="showError('add-task-input2-warning', 'date'); enableCreateTaskButton()"
+                    />
+                    <span class="date-icon">
+                        <img src="/assets/img/icon/add_task_icon/event.png" alt="" />
+                    </span>
+                    </div>
+                    <span id="add-task-input2-warning" class="input-warning d-none">This field is required</span>
+                </div>
+                </div>
+            </div>
+            <div class="dividing-strips"></div>
+            <div class="task-attribute">
+                <div class="priority">
+                <div>
+                    <span>Priority</span>
+                </div>
+                <div class="priority-buttons">
+                    <button type="button" class="add-task-button" id="urgent" onclick="togglePriority('urgent')">
+                    Urgent <img src="/assets/img/icon/priority/urgent.png" alt="" />
+                    </button>
+                    <button type="button" class="add-task-button" id="medium" onclick="togglePriority('medium')">
+                    Medium <img class="priority-button-medium-img" src="/assets/img/icon/priority/medium.png" alt="" />
+                    </button>
+                    <button type="button" class="add-task-button" id="low" onclick="togglePriority('low')">
+                    Low <img src="/assets/img/icon/priority/low.png" alt="" />
+                    </button>
+                </div>
+                </div>
+                <div class="container2">
+                <div class="add-task">
+                    <span>Assigned to</span>
+                    <div id="assigned-to-dropdown">
+                    <div id="assigned-to-dropdown-selected" onclick="eventBubbling(event)">
+                        <input
+                        id="add-task-input3"
+                        name="add-task-input3"
+                        type="text"
+                        placeholder="Select a contact"
+                        oninput="assignedToDropdown(this.value)"
+                        onclick="handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'open'); assignedToDropdown(this.value)"
+                        />
+                        <div
+                        class="assigned-arrow"
+                        onclick="handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'toggle'); assignedToDropdown(document.getElementById('add-task-input3').value);"
+                        >
+                        <img
+                            class="hover-icon"
+                            id="assigned-to-arrow"
+                            src="/assets/img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png"
+                            alt=""
+                        />
+                        </div>
+                    </div>
+                    <div
+                        id="assigned-to-dropdown-options"
+                        class="hidden custom-dropdown-options"
+                        onclick="eventBubbling(event)"
+                    ></div>
+                    <div class="show-contacts-add-task d-none" id="show-contacts-add-task"></div>
+                    </div>
+                </div>
+                <div class="add-task">
+                    <span>Category<span class="required-star">*</span></span>
+                    <div id="category-dropdown" onclick="eventBubbling(event)">
+                    <div
+                        id="category-dropdown-selected"
+                        onclick="handleDropdown('category-dropdown-options', 'category-selected-arrow', 'toggle'); showError('category-dropdown-warning', 'category-dropdown-selected', true)"
+                    >
+                        <p>Select a task category</p>
+                        <img
+                        class="hover-icon"
+                        id="category-selected-arrow"
+                        src="/assets/img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png"
+                        alt=""
+                        />
+                    </div>
+                    <ul id="category-dropdown-options" class="hidden custom-dropdown-options" onclick="eventBubbling(event)">
+                        <p
+                        class="category-option"
+                        onclick="eventBubbling(event); selectCustomOption(this); enableCreateTaskButton(); showError('category-dropdown-warning', 'category-dropdown-selected', true)"
+                        >
+                        <span class="category-option-text">Technical Task</span>
+                        </p>
+                        <p
+                        class="category-option"
+                        onclick="eventBubbling(event); selectCustomOption(this); enableCreateTaskButton(); showError('category-dropdown-warning', 'category-dropdown-selected', true)"
+                        >
+                        <span class="category-option-text">User Story</span>
+                        </p>
+                    </ul>
+                    </div>
+                    <span id="category-dropdown-warning" class="input-warning d-none">This field is required</span>
+                </div>
+                <div class="input-group add-task">
+                    <span>Subtasks</span>
+                    <input
+                    id="add-task-input4"
+                    oninput="onSubtaskInputChange()"
+                    onkeydown="onSubtaskInputKeydown(event)"
+                    name="add-task-input4"
+                    type="text"
+                    placeholder="Add new subtask"
+                    />
+                    <span class="subtasks-icon" id="subtasks-icon">
+                    <img
+                        class="hover-icon"
+                        src="/assets/img/icon/add_task_icon/plus.png"
+                        alt="Add"
+                        onclick="pushSubtaskInput(event)"
+                    />
+                    </span>
+                </div>
+                <div id="subtasks-container" class="subtasks-container"></div>
+                </div>
+            </div>
+            <p class="required-responsive"><span class="required-star">*</span>This field is required</p>
+            </form>
+        </div>
+
+    </section>
+    <script src="/assets/script/templates.js"></script>
+    <script src="/assets/script/add_task.js"></script>
+    <script src="/assets/script/MPA-architecture/framework-functions.js"></script>
+    <script src="/script.js"></script>
+    <script src="/assets/script/main.js"></script>
+    <script src="/assets/script/contacts.js"></script>
+
+</body>
+</html>
