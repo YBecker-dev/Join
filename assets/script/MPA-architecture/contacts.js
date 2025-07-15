@@ -91,7 +91,7 @@ function saveToLocalstorage() {
     let surName = nameParts.slice(1).join(' ') || '';
 
   let newContact = {
-    name: userName, // Konsistente Speicherung als String
+    name: userName,
     email: userEmail,
     phone: userPhone,
     color: getRandomColor(),
@@ -189,9 +189,9 @@ async function deleteContact(index) {
 }
 
 async function updateContact(index) {
-  let contactName = document.getElementById('editContactName').value.trim();
-  let contactMail = document.getElementById('editContactMail').value.trim();
-  let contactPhone = document.getElementById('editContactPhone').value.trim();
+  let contactName = document.getElementById('editContactName').value;
+  let contactMail = document.getElementById('editContactMail').value;
+  let contactPhone = document.getElementById('editContactPhone').value;
 
   if (!contactName || !contactMail || !contactPhone) {
     alert('Bitte alle Felder ausfüllen!');

@@ -17,18 +17,18 @@ function getNoteTemplateContact(index) {
 function getNoteTemplateContactDetails(indexDetails) {
   let user = myContacts[indexDetails];
 
-  return ` <div class="namesDetails">
+  return `  <div class="namesDetails">
               <div class="contactInformations">
                 <p class="initialOverlay" style="background-color: ${user.color}">${user.initials}</p>
                 <div>
                   <h3 class="infoNames">${user.name}</h3>
                   <div class="contactIcons">
                     <div id="editOverlay" onclick="openEditOverlay(${indexDetails})">
-                      <img class="editIcon" src="../img/icon/edit.png" alt="pencil">
+                      <img class="editIcon" src="../../img/icon/add_task_icon/subtasks/edit.png" alt="pencil">
                       <span class="editText">edit</span>
                     </div>
                     <div onclick="deleteContact(${indexDetails})">
-                      <img class="editIcon" src="../img/icon/trash.png" alt="wastebasket">
+                      <img class="editIcon" src="../../img/icon/add_task_icon/subtasks/delete.png" alt="wastebasket">
                       <span class="editText">delete</span>
                     </div>
                   </div>
@@ -90,13 +90,13 @@ function getNoteTemplateEditContact(index) {
 
   return `  <div class="editContactOverlay" onclick="event.stopPropagation()">
               <div class="headDiv">
-                <img class="contactLogo" src="../img/Logo/Logo_white.png" alt="Logo_white">
+                <img class="contactLogo" src="../../img/Logo/Logo_white.png" alt="Logo_white">
                 <p class="addHeadline">Edit contact</p>
                 <div class="line"></div>
               </div>
               <div class="editDiv">
                 <div class="closeDiv">
-                  <img onclick="closeOverlay()" class="close" src="../img/icon/close.png" alt="Close-Button">
+                  <img onclick="closeOverlay()" class="close" src="../../img/icon/close.png" alt="Close-Button">
                 </div>           
                 <div class="profilDiv">
                   <div>
@@ -105,21 +105,21 @@ function getNoteTemplateEditContact(index) {
                   <div>
                     <div class="addNewContactDiv" onclick="event.stopPropagation()">
                       <input id="editContactName" class="addNewContact" value="${user.name || ''}" required onclick="event.stopPropagation()">
-                      <img class="addNewContactIcon" src="../img/icon/person.png" alt="Person Icon">
+                      <img class="addNewContactIcon" src="../../img/icon/person.png" alt="Person Icon">
                     </div> 
                     <div class="addNewContactDiv" onclick="event.stopPropagation()">
                       <input id="editContactMail" class="addNewContact" type="email" value="${user.email || ''}" required onclick="event.stopPropagation()">
-                      <img class="addNewContactIcon" src="../img/icon/mail.png" alt="Email Icon">
+                      <img class="addNewContactIcon" src="../../img/icon/mail.png" alt="Email Icon">
                     </div> 
                     <div class="addNewContactDiv" onclick="event.stopPropagation()">
                       <input id="editContactPhone" class="addNewContact" type="tel" value="${user.phone || ''}" required onclick="event.stopPropagation()">
-                      <img class="addNewContactIcon" src="../img/icon/phone.png" alt="phone Icon">
+                      <img class="addNewContactIcon" src="../../img/icon/phone.png" alt="phone Icon">
                     </div>               
                   </div>                 
                 </div>
                 <div class="accept">
                   <button onclick="deleteContact(${index})" class="clear-button">Delete</button>
-                  <button onclick="updateContact(${index})" class="create-button">Save Changes<img class="save-close" src="../img/icon/save.png" alt="hookIcon"></button>
+                  <button onclick="updateContact(${index})" class="create-button">Save Changes<img class="save-close" src="../../img/icon/save.png" alt="hookIcon"></button>
                 </div>
               </div> 
             </div>`;
