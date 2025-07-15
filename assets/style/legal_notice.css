@@ -31,3 +31,31 @@
     font-weight: 900;
 
 }*/
+@media(max-width: 1015px){
+    .body-flex{
+        padding-top: 128px;
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 128px;
+    }
+    .headline{
+        top: 128px;
+        
+    }
+    .headline>h1{
+        padding: 0;
+        font-size: 47px;
+        font-weight: 700;
+    }
+    .content{
+        padding-top: calc(216px - 128px - 56px);
+    }
+    .Imprint>h2{
+        font-size: 27px;
+        font-weight: 700;
+    }
+    h3{
+        font-size: 20px;
+        font-weight: 700;
+    }
+}

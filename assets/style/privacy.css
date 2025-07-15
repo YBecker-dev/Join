@@ -39,5 +39,41 @@ h3{
     line-height: 120%;
     letter-spacing: 0;
 }
+@media(max-width: 1160px){
+
+  .body-flex{
+    width: 100%;
+  }
+  .subtitles>h3{
+    width: 100%;
+  }
+  .content{
+    width: 100%;
+  }
+  .subtitles{
+    width: 100%;
+  }
+}
+@media(max-width: 750px){
+    
+    .body-flex{
+        padding-left: 0;
+        padding-top: 0;
+        padding-bottom: 128px;
+       
+    }
+    .body-flex>h1{
+        
+        font-size: 47px;
+        font-weight: 700;
+    }
+    .subtitles{
+        height: auto;
+    }
+    .subtitles>h3{
+        font-size: 27px;
+        font-weight: 700;
+    }
+}
 
    
