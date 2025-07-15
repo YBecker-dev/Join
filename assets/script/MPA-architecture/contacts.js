@@ -1,12 +1,7 @@
 let myContacts = [];
 let newContacts = [];
 
-async function initContacts() {
-  await loadContacts();
-  renderContacts();
-}
-
-async function fetchDataJson() {
+async function loadContacts() {
   try {
     let url = `https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/users.json`;
     let response = await fetch(url);
@@ -42,12 +37,27 @@ async function fetchDataJson() {
     }
 }
 
+function getInitials(name) {
+  if (!name) return '??';
+  return name.split(' ')
+    .map(word => word.charAt(0).toUpperCase())
+    .join('')
+    .substring(0, 2);
+}
+
+async function initContacts() {
+  await loadContacts();
+  renderContacts();
+}
+
 function renderContacts() {
   let contentRef = document.getElementById('contactContent');
   let html = '';
   for (let index = 0; index < myContacts.length; index++) html += getNoteTemplateContact(index);
   contentRef.innerHTML = html;
 }
+
+
 
 function openDetails(index) {
   let details = document.getElementById('contactDetails');
@@ -80,12 +90,13 @@ function saveToLocalstorage() {
     let givenName = nameParts[0] || ' ';
     let surName = nameParts.slice(1).join(' ') || '';
 
-    let newContact = {
-        name: nameParts,
-        //surname: surName,
-        email: userEmail,
-        phone: userPhone
-    };
+  let newContact = {
+    name: userName, // Konsistente Speicherung als String
+    email: userEmail,
+    phone: userPhone,
+    color: getRandomColor(),
+    initials: getInitials(userName)
+  };
 
   myContacts.push(newContact);
 
@@ -192,11 +203,12 @@ async function updateContact(index) {
     let surname = nameParts.slice(1).join(' ') || '';
 
     let updatedContact = {
-        givenName: givenName,
-        surname: surname,
+        name: contactName,
         email: contactMail,
-        phone: contactPhone
-    };
+        phone: contactPhone,
+        color: myContacts[index].color,
+        initials: getInitials(contactName)
+      };
 
     try {
         let firebaseId = newContacts[index];

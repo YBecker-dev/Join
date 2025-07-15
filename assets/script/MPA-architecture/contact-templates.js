@@ -3,7 +3,7 @@ function getNoteTemplateContact(index) {
   let user = myContacts[index];
 
   return  ` <div onclick="openDetails(${index}), event.stopPropagation()" class="person">
-              <p class="initial">${user.color, user.initials}</p>
+              <p class="initial" style="background-color: ${user.color}">${user.initials}</p>
               <div>
                 <h4>${user.name}</h4>
                 <p>
@@ -19,7 +19,7 @@ function getNoteTemplateContactDetails(indexDetails) {
 
   return ` <div class="namesDetails">
               <div class="contactInformations">
-                <p class="initialOverlay">${user.color, user.initials}</p>
+                <p class="initialOverlay" style="background-color: ${user.color}">${user.initials}</p>
                 <div>
                   <h3 class="infoNames">${user.name}</h3>
                   <div class="contactIcons">
@@ -100,19 +100,19 @@ function getNoteTemplateEditContact(index) {
                 </div>           
                 <div class="profilDiv">
                   <div>
-                    <p id="editContactInitials" class="profileInitials">${user.color, user.initials}</p>
+                    <p id="editContactInitials" class="profileInitials" style="background-color: ${user.color}">${user.initials}</p>
                   </div>
                   <div>
                     <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                      <input id="editContactName" class="addNewContact" value="${user[index].name}" required onclick="event.stopPropagation()">
+                      <input id="editContactName" class="addNewContact" value="${user.name || ''}" required onclick="event.stopPropagation()">
                       <img class="addNewContactIcon" src="../img/icon/person.png" alt="Person Icon">
                     </div> 
                     <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                      <input id="editContactMail" class="addNewContact" type="email" value="${user.email}" required onclick="event.stopPropagation()">
+                      <input id="editContactMail" class="addNewContact" type="email" value="${user.email || ''}" required onclick="event.stopPropagation()">
                       <img class="addNewContactIcon" src="../img/icon/mail.png" alt="Email Icon">
                     </div> 
                     <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                      <input id="editContactPhone" class="addNewContact" type="tel" value="${user.phone}" required onclick="event.stopPropagation()">
+                      <input id="editContactPhone" class="addNewContact" type="tel" value="${user.phone || ''}" required onclick="event.stopPropagation()">
                       <img class="addNewContactIcon" src="../img/icon/phone.png" alt="phone Icon">
                     </div>               
                   </div>                 
