@@ -66,12 +66,20 @@ h3{
         
         font-size: 47px;
         font-weight: 700;
+        text-align: start;
+        width: 323px;
     }
     .subtitles{
         height: auto;
     }
     .subtitles>h3{
         font-size: 27px;
+        font-weight: 700;
+    }
+}
+@media(max-width: 380px){
+    .body-flex>h1{
+        font-size: 42px;
         font-weight: 700;
     }
 }
