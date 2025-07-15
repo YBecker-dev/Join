@@ -83,7 +83,7 @@ async function checkUser(event) {
         }
         if (findUser === true) {
           console.log('User gefunden');
-          window.location.href = 'assets/html/main.html';
+          window.location.href = 'assets/html/MPA-architecture/summery.html';
           resetForm();
         } else {
           console.log('User nicht gefunden oder Eingaben falsch');

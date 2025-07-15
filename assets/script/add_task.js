@@ -6,13 +6,14 @@ let lowButton = document.getElementById('low');
 async function initAddTask() {
   selectedContacts = [];
   await loadContacts();
+  initFrameworkFunctions();
   setPriority('medium');
   addFormValidation('add-task-form');
   document.addEventListener('click', function () {
-    handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'close');
-    handleDropdown('category-dropdown-options', 'category-selected-arrow', 'close');
-    clearAssignedTo();
-    initFrameworkFunctions();
+  handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'close');
+  handleDropdown('category-dropdown-options', 'category-selected-arrow', 'close');
+  clearAssignedTo();
+    
   });
 }
 

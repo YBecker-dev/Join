@@ -99,8 +99,17 @@ a,.join-color{
     width: 100%;
     
 }
+@media(max-width: 1439px){
+    .main-content{
+        padding: 0 !important;
+    }
+}
 @media(max-width: 1160px){
-     .sticky-wrapper{
+
+    .main-content{
+        padding: 0 !important;
+    }
+    .sticky-wrapper{
         padding-left: 12px;
         padding-right: 12px;
        
