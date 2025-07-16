@@ -131,6 +131,9 @@ function getTaskOverlay(task, taskId) {
 
   return `
     <div class="overlay-position">
+
+
+     
       <div class="overlay-header">
         <div class="task-type">
         <p class="p-Tag ${categoryClass}">${categoryText}</p>
@@ -142,6 +145,7 @@ function getTaskOverlay(task, taskId) {
       </div>
       <div class="overlay-titel">
         <h1>${task.title || ''}</h1>
+        <img class="move-to" id="move-to" onclick="toggleMoveToOverlay()" src="/assets/img/icon/move-to.png">
       </div>
       <div class="overlay-description-flex">
         <p class="p-Tag text-allign">${task.description || ''}</p>
@@ -153,7 +157,7 @@ function getTaskOverlay(task, taskId) {
       <div class="overlay-description-flex">
         <p class="p-Tag">Priority:</p>
         <div class="overlay-priority">
-          <p class="p-Tag padding-priority">${task.priority || ''} <img src="../img/icon/priority/${
+          <p class="p-Tag padding-priority">${task.priority || ''} <img src="/assets/img/icon/priority/${
     task.priority
   }.png" alt=""></p>
         </div>
@@ -189,6 +193,24 @@ function getTaskOverlay(task, taskId) {
       </div>    
     </div>
   `;
+}
+
+function getInnerTaskOverlay(){
+  return`
+        <div class="help-mobil" onclick="window.location.href='/assets/html/MPA-architecture/help.html'" id="help-mobil">
+          <p>Help</p>
+        </div>
+        <div class="section1" onclick="window.location.href='/assets/html/MPA-architecture/legal-notice_MPA.html'"  id="legalNotice">
+            <p> Legal Notice</p>
+        </div>
+        <div class="section1" onclick="window.location.href='/assets/html/MPA-architecture/privacy-policy_MPA.html'"  id="privacyPolicy">
+            <p>Privacy Policy</p>
+        </div>
+        <div class="section1" onclick="handleLogOut(event)"  id="logOut">
+            <a href="/index.html">Log out</a>
+        </div>
+  
+  `
 }
 
 function contactsOverlayTemplate(initials, name, color) {
@@ -250,7 +272,7 @@ function boardHtmlTemplate(
   return `
     <div class="board-task-container" id="task-${addTaskId}" onclick="toggleBoardOverlay('${taskId}')" ondragstart="startDragging('${taskId}')" draggable="true"> 
       <div class="board-tasks">
-    <p class="${categoryClass}">${categoryText}</p>
+        <p class="${categoryClass}">${categoryText}</p>  
         <div class="board-tasks-title-description">
           <p class="board-task-title">${titleText}</p>
           <p class="board-task-description">${descriptionText}</p>

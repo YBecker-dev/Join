@@ -19,6 +19,7 @@
 .overlay-position {
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     gap: 24px;
     padding: 48px 40px;
     max-height: 913px;
@@ -67,7 +68,12 @@
     text-align: start;
 }
 
+
 .overlay-titel {
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     word-break: break-word;
 }
 
@@ -466,6 +472,20 @@
     align-items: flex-start;
 }
 
+.board-tasks-header{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.move-to{
+    height: 24px;
+    width: 26px;
+    display: none;
+}
+
 .board-task-assigned-priority {
     display: flex;
     justify-content: space-between;
@@ -758,13 +778,37 @@
     opacity: 0.5;
 }
 
+.moveTo-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-height: 100%;
+    width: 100%;
+    z-index: 1;
+    background-color: rgb(84, 94, 97, 0);
+    
+}
+.moveTo-position{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(16, 178, 227, 0);
+    opacity: 1;
+}
+
 @media (max-width: 1439px){
-    .header-space{
-        height: 180px;
+    .main-content{
+        top: 80px !important;
     }
-    .board-position{
-        margin-top: 80px;
+    
+   
+    .move-to{
+        display: block;
+        cursor: pointer;
     }
+
 }
 
 @media (max-width: 1233px) {
@@ -774,6 +818,9 @@
 
     .board-header-content {
         position: relative;
+    }
+    .board-header-content>h1{
+        font-size: 47px;
     }
 
     .input-find-Task {
@@ -812,6 +859,10 @@
         align-items: center;
         width: 100%;
     }
+    .category-content-responsive>h4{
+        font-size: 27px;
+        font-weight: 700;
+    }
 
     .drag-area {
         min-height: unset;
@@ -828,7 +879,7 @@
     }
 
     .header-position {
-        padding-top: 80px;
+        padding-top: calc(128px - 80px)
     }
 
     .board-header {
@@ -863,5 +914,21 @@
     .overlay-content-render{
         width: 95%;
           
+    }
+}
+@media(max-width: 470px){
+    .overlay-position{
+        gap: 16px;
+    }
+    
+    .overlay-titel>h1{
+        font-size: 36px;
+        padding-top: 12px;
+    }
+    .task-type>p{
+        font-size: 16px;
+    }
+    .p-Tag{
+        font-size: 16px;
     }
 }

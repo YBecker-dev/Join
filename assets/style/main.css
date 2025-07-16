@@ -205,9 +205,9 @@ header {
 /* // responsive design */
 
 @media (max-width: 1439px) {
-    #sidebar-summary {
+    /*#sidebar-summary {
         order: 1;
-    }
+    }*/
 
     #sidebar-board {
         order: 2;
@@ -253,6 +253,10 @@ header {
         gap: 4px;
         line-height: 120%;
         width: 80px;
+    }
+    /*Test*/
+    .sidebar-links:hover{
+        cursor: pointer;
     }
 
     .sidebar-links.active {

@@ -7,11 +7,18 @@
     <link rel="stylesheet" href="/assets/style/board.css">
     <link rel="stylesheet" href="/assets/style/buttons.css">
     <link rel="stylesheet" href="/assets/style/main.css"><!--responsiv-->
+    <link rel="stylesheet" href="/assets/style/add_task.css">
    
     <title>Board</title>
 </head>
 <body onload="initBoard()">
-        
+        <!--experimentel-->
+        <div class="moveTo-overlay d-none" id="moveTo-overlay">
+          <div class="moveTo-position">
+            <div class="moveTo-content-render" id="moveTo-menu"></div>
+          </div>
+        </div>
+
         <div class="overlay d-none" id="overlayBoard" onclick="toggleBoardOverlay()">
             <div class="overlay-content-flex">
                 <div class="overlay-content-render" id="overlay-content-loader" onclick="preventBubbling(event)"></div>
@@ -32,7 +39,7 @@
         <header>
           <div class="header-content">
             <p>Kanban Project Management Tool</p>
-            <img class="logo-responsive" src="/assets/img/logo/logo_dark.png" alt="" />
+            <img class="logo-responsive" src="/assets/img/Logo/logo_dark.png" alt="" />
             <div class="header-user">
               <img
                 class="help-icon"
@@ -209,3 +216,7 @@
     <script src="/assets/script/MPA-architecture/framework-functions.js"></script>
 </body>
 </html>
+
+
+  
+        

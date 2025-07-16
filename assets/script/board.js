@@ -387,7 +387,7 @@ async function editTask(taskId) {
   overlay_content.innerHTML = `
     <div class="overlay-section">
     <div class="overlay-header-edit">
-     <img class="close-icon" src="../img/icon/close.png" alt="Close" onclick="toggleBoardOverlay('${taskId}')" />
+     <img class="close-icon" src="/assets/img/icon/close.png" alt="Close" onclick="toggleBoardOverlay('${taskId}')" />
      </div>
     <form id="edit-task-form" onsubmit="saveEditedTask(event, '${taskId}'); return false;">
       <div class="input-group edittask add-task">
@@ -403,7 +403,7 @@ async function editTask(taskId) {
           task.description || ''
         }</textarea>
         <span class="input-icon-edit">
-          <img src="../img/icon/add_task_icon/textarea.png" alt="" />
+          <img src="/assets/img/icon/add_task_icon/textarea.png" alt="" />
         </span>
       </div>
       <div class="input-group edittask add-task date">
@@ -413,7 +413,7 @@ async function editTask(taskId) {
             task.date || ''
           }"/>
           <span>
-            <img class="date-icon-edit" src="../img/icon/add_task_icon/event.png" alt="" />
+            <img class="date-icon-edit" src="/assets/img/icon/add_task_icon/event.png" alt="" />
           </span>
         </div>
         <span id="add-task-input2-warning" class="input-warning d-none">This field is required</span>
@@ -424,17 +424,17 @@ async function editTask(taskId) {
           <button type="button" id="edit-urgent" class="add-task-button${
             task.priority === 'Urgent' ? ' active urgent' : ''
           }" onclick="togglePriority('Urgent', 'edit-');">
-            Urgent <img src="../img/icon/priority/urgent.png" alt="" />
+            Urgent <img src="/assets/img/icon/priority/urgent.png" alt="" />
           </button>
           <button type="button" id="edit-medium" class="add-task-button${
             task.priority === 'Medium' ? ' active medium' : ''
           }" onclick="togglePriority('Medium', 'edit-');">
-            Medium <img src="../img/icon/priority/medium.png" alt="" />
+            Medium <img src="/assets/img/icon/priority/medium.png" alt="" />
           </button>
           <button type="button" id="edit-low" class="add-task-button${
             task.priority === 'Low' ? ' active low' : ''
           }" onclick="togglePriority('Low', 'edit-');">
-            Low <img src="../img/icon/priority/low.png" alt="" />
+            Low <img src="/assets/img/icon/priority/low.png" alt="" />
           </button>
         </div>
       </div>
@@ -447,7 +447,7 @@ async function editTask(taskId) {
           <div
             class="assigned-arrow" onclick="handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'toggle'); assignedToDropdown(document.getElementById('add-task-input3').value);">
             <img
-              class="hover-icon" id="assigned-to-arrow" src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png" alt="">
+              class="hover-icon" id="assigned-to-arrow" src="/assets/img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png" alt="">
           </div>
          </div>
          <div id="assigned-to-dropdown-options" class="hidden custom-dropdown-options custom-dropdown-options-edit" onclick="eventBubbling(event)">
@@ -469,7 +469,7 @@ async function editTask(taskId) {
         <span class="subtasks-icon" id="subtasks-icon">
           <img
             class="hover-icon"
-            src="../img/icon/add_task_icon/plus.png"
+            src="/assets/img/icon/add_task_icon/plus.png"
             alt="Add"
             onclick="pushSubtaskInput(event)"
           />
@@ -478,7 +478,7 @@ async function editTask(taskId) {
       <div id="subtasks-container" class="subtasks-container"></div>
     </form>
     <div class="create-clear-buttons-edit">
-      <button type="submit" class="ok-button" form="edit-task-form">OK <img src="../img/icon/add_task_icon/buttons/create_task.png" /></button>
+      <button type="submit" class="ok-button" form="edit-task-form">OK <img src="/assets/img/icon/add_task_icon/buttons/create_task.png" /></button>
     </div>
   `;
 
@@ -584,7 +584,7 @@ async function openCreateTask() {
   let btn = document.getElementById('addTaskBtn');
   if (!btn) return;
   if (window.innerWidth <= 1233) {
-    btn.onclick = loadContent('add_task.html');
+    btn.onclick = loadContent('add_task.html');//window.location.href ="/assets/html/MPA-architecture/add_task.html" 
     return;
   }
 
