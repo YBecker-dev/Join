@@ -309,9 +309,23 @@ h4 {
     width: 2rem;
 }
 
+.clear-button {
+    background-color: #ffffff;
+    color: #293647;
+    border: solid 1px #293647;
+    display: flex;
+    justify-content: center;
+}
+
+.create-button {
+    display: flex;
+    justify-content: center;  
+}
+
 .accept {
     display: flex;
-    margin-left: 20rem;
+    justify-content: center;
+    margin-left: 11rem;
 }
 
 .accept > .create-button {
@@ -319,5 +333,6 @@ h4 {
 }
 
 .save-close {
-    width: 2rem;
+    width: 1.5rem;
+    height: 1.5rem;
 }
