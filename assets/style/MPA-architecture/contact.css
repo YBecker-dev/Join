@@ -5,6 +5,10 @@
     left: 14.8rem;
 }
 
+.main-content {
+    display: flex;
+}
+
 /* Contact List side */
 .contactList {
     overflow-y: scroll;
