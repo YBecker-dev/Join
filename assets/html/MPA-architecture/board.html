@@ -13,11 +13,14 @@
 </head>
 <body onload="initBoard()">
         <!--experimentel-->
-        <div class="moveTo-overlay d-none" id="moveTo-overlay">
-          <div class="moveTo-position">
-            <div class="moveTo-content-render" id="moveTo-menu"></div>
-          </div>
-        </div>
+        
+        <label for="status"></label>
+        <select name="status" id="status">
+          <option value="To Do">To Do</option>
+          <option value="In Progress"> In Progress</option>
+          <option value="awaitFeedback">Await Feedback</option>
+          <option value="Done">Done</option>
+        </select>
 
         <div class="overlay d-none" id="overlayBoard" onclick="toggleBoardOverlay()">
             <div class="overlay-content-flex">
@@ -219,4 +222,4 @@
 
 
   
-        
+

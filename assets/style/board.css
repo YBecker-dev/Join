@@ -777,25 +777,20 @@
 .dragging {
     opacity: 0.5;
 }
-
-.moveTo-overlay{
-    position: fixed;
-    top: 0;
-    left: 0;
-    min-height: 100%;
-    width: 100%;
-    z-index: 1;
-    background-color: rgb(84, 94, 97, 0);
+/*Todo*/
+.selection{
+    border-radius: 5px;
+    width: 150px;
+    display: none;
+    background-color: #2A3647;
+    color: #FFFFFF;
     
 }
-.moveTo-position{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    width: 100%;
-    background-color: rgba(16, 178, 227, 0);
-    opacity: 1;
+.selection:hover{
+    cursor: pointer;
+}
+.options:hover{
+    cursor: pointer;
 }
 
 @media (max-width: 1439px){
@@ -803,10 +798,16 @@
         top: 80px !important;
     }
     
+    .selection{
+        display: block;
+    }
    
     .move-to{
         display: block;
         cursor: pointer;
+    }
+    .overlay-titel>h1{
+        padding-top: 30px;
     }
 
 }

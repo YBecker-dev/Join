@@ -131,7 +131,7 @@ function getTaskOverlay(task, taskId) {
 
   return `
     <div class="overlay-position">
-
+        
 
      
       <div class="overlay-header">
@@ -143,10 +143,19 @@ function getTaskOverlay(task, taskId) {
           <img src="/assets/img/icon/close.png" >
         </div>                
       </div>
+      <select class="selection" id="selection${taskId}" name="status">
+        <option class="options" value="To Do">To Do</option>
+        <option class="options" value="In Progress"> In Progress</option>
+        <option class="options" value="awaitFeedback">Await Feedback</option>
+        <option class="options" value="Done">Done</option>
+      </select>
+
       <div class="overlay-titel">
         <h1>${task.title || ''}</h1>
-        <img class="move-to" id="move-to" onclick="toggleMoveToOverlay()" src="/assets/img/icon/move-to.png">
       </div>
+          
+
+
       <div class="overlay-description-flex">
         <p class="p-Tag text-allign">${task.description || ''}</p>
       </div>

@@ -255,9 +255,7 @@ header {
         width: 80px;
     }
     /*Test*/
-    .sidebar-links:hover{
-        cursor: pointer;
-    }
+   
 
     .sidebar-links.active {
         border-radius: 15px;
