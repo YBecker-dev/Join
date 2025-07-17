@@ -48,12 +48,15 @@ function getInitials(name) {
 async function initContacts() {
   await loadContacts();
   renderContacts();
+  saveToLocalstorage
 }
 
 function renderContacts() {
   let contentRef = document.getElementById('contactContent');
   let html = '';
-  for (let index = 0; index < myContacts.length; index++) html += getNoteTemplateContact(index);
+
+  for (let index = 0; index < myContacts.length; index++) 
+  html += getNoteTemplateContact(index);
   contentRef.innerHTML = html;
 }
 
@@ -124,11 +127,17 @@ async function saveToFirebase(contact) {
 
         await fetchDataJson();
         renderContacts();
+        saveToFirebase();
+        saveToLocalstorage();
         
     } catch (error) {
         console.error('Fehler beim Speichern:', error);
     }
 }
+
+
+
+
 
 function getRandomColor() {
   return (
@@ -153,6 +162,8 @@ function openEditOverlay(index) {
   contentOverlayRef.classList.remove('d-none');
   contentOverlayRef.innerHTML = getNoteTemplateEditContact(index);
 }
+
+
 
 async function deleteContact(index) {
     try {
@@ -187,6 +198,105 @@ async function deleteContact(index) {
         return false;
     }
 }
+
+
+
+// async function deleteContact(index) {
+//     try {
+//         let firebaseId = newContacts[index];
+        
+//         if (!firebaseId) {
+//             console.error('Firebase-ID nicht gefunden für Index:', index);
+//             return false;
+//         }
+        
+//         let url = `https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/users.json`;
+//         let response = await fetch(url, {
+//             method: 'DELETE'
+//         });
+        
+//         if (!response.ok) {
+//             throw new Error(`HTTP error! status: ${response.status}`);
+//         }
+        
+//         myContacts.splice(index, 1);
+//         newContacts.splice(index, 1);
+        
+//         renderContacts();
+//         closeOverlay();
+//         document.getElementById('contactDetails').innerHTML = '';
+        
+//         console.log('Kontakt erfolgreich gelöscht');
+//         return true;
+        
+//     } catch (error) {
+//         console.error('Fehler beim Löschen:', error);
+//         return false;
+//     }
+// }
+
+
+
+
+async function updateContact(index) {
+  let contactName = document.getElementById('editContactName').value.trim();
+  let contactMail = document.getElementById('editContactMail').value.trim();
+  let contactPhone = document.getElementById('editContactPhone').value.trim();
+
+  if (!contactName || !contactMail || !contactPhone) {
+    alert('Bitte alle Felder ausfüllen!');
+    return;
+  }
+
+    let nameParts = contactName.split(' ');
+    let givenName = nameParts[0] || ' ';
+    let surname = nameParts.slice(1).join(' ') || '';
+
+    let updatedContact = {
+        givenName: givenName,
+        surname: surname,
+        email: contactMail,
+        phone: contactPhone
+    };
+
+    try {
+        let firebaseId = newContacts[index];
+        
+        if (!firebaseId) {
+            console.error('Firebase-ID nicht gefunden für Index:', index);
+            console.log('Verfügbare newContacts:', newContacts);
+            console.log('Gesuchter Index:', index);
+            return;
+        }
+        
+        console.log('Aktualisiere Kontakt mit Firebase-ID:', firebaseId);
+        
+        let url = `https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/users/${firebaseId}.json`;
+        let response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedContact)
+        });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    contacts[index] = updatedContact;
+
+    renderContacts();
+    openDetails(index);
+    closeOverlay();
+
+    console.log('Kontakt erfolgreich aktualisiert');
+  } catch (error) {
+    console.error('Fehler beim Aktualisieren:', error);
+    alert('Fehler beim Speichern der Änderungen!');
+  }
+}
+
 
 async function updateContact(index) {
   let contactName = document.getElementById('editContactName').value;
