@@ -143,13 +143,17 @@ function getTaskOverlay(task, taskId) {
           <img src="/assets/img/icon/close.png" >
         </div>                
       </div>
-      <select class="selection" id="selection${taskId}" name="status">
-        <option class="options" value="To Do">To Do</option>
-        <option class="options" value="In Progress"> In Progress</option>
-        <option class="options" value="awaitFeedback">Await Feedback</option>
-        <option class="options" value="Done">Done</option>
-      </select>
 
+      
+      <img src="/assets/img/icon/move-to.png" id="DropDownBtn" class="moveTo" onclick="showDropDown()">
+      <div class="task-overlay d-none" id="selection" onclick="showDropDown()">  
+        <section class="selection " onclick="preventBubbling(event)">
+          <div class="option">To Do</div>
+          <div class="option">test</div>
+          <div class="option">test</div>
+          <div class="option">test</div>
+        </section>
+      </div>
       <div class="overlay-titel">
         <h1>${task.title || ''}</h1>
       </div>

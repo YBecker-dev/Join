@@ -97,7 +97,7 @@ function changeColorbyHtmlLinks(element) {
 }
 
 function toggleMoveToOverlay(){
-  let moveToRef = document.getElementById('moveTo-overlay');
+  let moveToRef = document.getElementById('selection');
   moveToRef.classList.toggle('d-none');
   
 }

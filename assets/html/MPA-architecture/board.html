@@ -14,13 +14,7 @@
 <body onload="initBoard()">
         <!--experimentel-->
         
-        <label for="status"></label>
-        <select name="status" id="status">
-          <option value="To Do">To Do</option>
-          <option value="In Progress"> In Progress</option>
-          <option value="awaitFeedback">Await Feedback</option>
-          <option value="Done">Done</option>
-        </select>
+       
 
         <div class="overlay d-none" id="overlayBoard" onclick="toggleBoardOverlay()">
             <div class="overlay-content-flex">
@@ -217,9 +211,11 @@
     <script src="/assets/script/templates.js"></script>
     <script src="/assets/script/contacts.js"></script>
     <script src="/assets/script/MPA-architecture/framework-functions.js"></script>
+    <script src="/assets/script/board-mobil.js"></script>
 </body>
 </html>
 
 
   
 
+<img src="/assets/img/icon/move-to.png" id="move-to" class="moveTo">

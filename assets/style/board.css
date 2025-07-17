@@ -778,12 +778,24 @@
     opacity: 0.5;
 }
 /*Todo*/
+.task-overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+
+}
 .selection{
+    position: absolute;
+    top: 132px;
+    left: 40px;
     border-radius: 5px;
     width: 150px;
-    display: none;
     background-color: #2A3647;
     color: #FFFFFF;
+    display: none;
     
 }
 .selection:hover{
@@ -792,19 +804,26 @@
 .options:hover{
     cursor: pointer;
 }
+.moveTo{
+    height: 24px;
+    width: 24px;
+    display: none;
+}
+.moveTo:hover{
+    cursor: pointer;
+}
 
 @media (max-width: 1439px){
     .main-content{
         top: 80px !important;
     }
     
-    .selection{
-        display: block;
-    }
-   
-    .move-to{
+    .moveTo{
         display: block;
         cursor: pointer;
+    }
+    .selection{
+        display: block;
     }
     .overlay-titel>h1{
         padding-top: 30px;
@@ -931,5 +950,8 @@
     }
     .p-Tag{
         font-size: 16px;
+    }
+    .selection{
+        top: 114.8px;
     }
 }
