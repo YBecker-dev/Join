@@ -302,7 +302,8 @@ function findTaskKeyByAddTaskId(tasks, keys, addTaskIdToDelete) {
   return null;
 }
 
-async function toggleBoardOverlay(taskId) {
+async function toggleBoardOverlay(taskId ,trueTaskId) {
+
   let overlayRef = document.getElementById('overlayBoard');
   let overlay_content = document.getElementById('overlay-content-loader');
   toggleOverlay(overlayRef);
@@ -311,7 +312,7 @@ async function toggleBoardOverlay(taskId) {
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
   let task = await response.json();
   if (!task) return;
-  overlay_content.innerHTML = getTaskOverlay(task, taskId);
+  overlay_content.innerHTML = getTaskOverlay(task, taskId, trueTaskId);
 
   overlayRef.classList.add('visible');
   let contentRender = overlayRef.querySelector('.overlay-content-render');
@@ -753,6 +754,7 @@ function taskVisibilty(filterTask) {
   })
  
 }
+
 
 
 

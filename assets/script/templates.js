@@ -124,16 +124,13 @@ function getNoteTemplateEditContact(index) {
             </div>`;
 }
 
-function getTaskOverlay(task, taskId) {
+function getTaskOverlay(task, taskId,trueTaskId) {
   let categoryInfo = backgroundColorTitle(task);
   let categoryText = categoryInfo.categoryText;
   let categoryClass = categoryInfo.categoryClass;
 
   return `
-    <div class="overlay-position">
-        
-
-     
+    <div class="overlay-position" id="${trueTaskId}">
       <div class="overlay-header">
         <div class="task-type">
         <p class="p-Tag ${categoryClass}">${categoryText}</p>
@@ -145,13 +142,13 @@ function getTaskOverlay(task, taskId) {
       </div>
 
       
-      <img src="/assets/img/icon/move-to.png" id="DropDownBtn" class="moveTo" onclick="showDropDown()">
-      <div class="task-overlay d-none" id="selection" onclick="showDropDown()">  
+      <img src="/assets/img/icon/move-to.png" id="DropDownBtn" class="moveTo" onclick="showDropDown(${trueTaskId})">
+      <div class="task-overlay d-none" id="drop-down" onclick="showDropDown(${trueTaskId})">  
         <section class="selection " onclick="preventBubbling(event)">
-          <div class="option">To Do</div>
-          <div class="option">test</div>
-          <div class="option">test</div>
-          <div class="option">test</div>
+          <div onclick="changeTaskStatusMobilToDo(${trueTaskId})" id="todo-mobil-${trueTaskId}" class="option ">To Do</div>
+          <div id="inProgress-mobil-${trueTaskId}" class="option">In Progress</div>
+          <div id="awaitFeedback-mobil-${trueTaskId}" class="option">Await Feetback</div>
+          <div id="done-mobil-${trueTaskId}" class="option">Done</div>
         </section>
       </div>
       <div class="overlay-titel">
@@ -270,6 +267,7 @@ function getLogOutMenu() {
     
     `;
 }
+let trueTaskId;
 
 function boardHtmlTemplate(
   taskId,
@@ -280,10 +278,12 @@ function boardHtmlTemplate(
   assignedContact,
   priorityImg,
   progressBar,
-  addTaskId
+  addTaskId,
+  
 ) {
+  trueTaskId = addTaskId;
   return `
-    <div class="board-task-container" id="task-${addTaskId}" onclick="toggleBoardOverlay('${taskId}')" ondragstart="startDragging('${taskId}')" draggable="true"> 
+    <div class="board-task-container" id="task-${addTaskId}" onclick="toggleBoardOverlay('${taskId}','${trueTaskId}')" ondragstart="startDragging('${taskId}')" draggable="true"> 
       <div class="board-tasks">
         <p class="${categoryClass}">${categoryText}</p>  
         <div class="board-tasks-title-description">
