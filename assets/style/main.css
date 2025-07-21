@@ -333,7 +333,6 @@ header {
 @media (max-width: 1008px) {
     .main-content {
         position: unset;
-        margin-top: 80px;
         overflow: unset;
     }
 

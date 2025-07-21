@@ -56,8 +56,9 @@ textarea {
 .add-task .input-icon {
     position: absolute;
     right: 4px;
-    bottom: 16px;
+    bottom: 4px;
     top: unset;
+    z-index: 2;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -153,13 +154,14 @@ label {
 #medium.active,
 #low.active {
     color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 5px 15px !important;
+    box-shadow: 0px 0px 4px 0px #0000001A !important;
 }
 
 #urgent,
 #medium,
 #low {
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 5px 15px;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+
 }
 
 #urgent:hover,
@@ -243,8 +245,9 @@ input[type="text"] {
     display: flex;
     justify-content: space-between;
     height: 48px;
+    position: relative;
+    z-index: 10;
 }
-
 
 #category-dropdown-selected {
     padding: 12px 16px;
@@ -253,10 +256,9 @@ input[type="text"] {
 .custom-dropdown-options {
     font-size: 1.25rem;
     border-radius: 8px;
-    border: 1px solid #D1D1D1;
     background: #fff;
     overflow: auto;
-    max-height: 332px;
+    max-height: 305px;
     cursor: pointer;
     gap: 1px;
 }
@@ -270,6 +272,8 @@ input[type="text"] {
     opacity: 0;
     transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s;
     overflow: hidden;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+
 }
 
 #assigned-to-dropdown-options.show,
@@ -277,12 +281,25 @@ input[type="text"] {
     display: flex;
     opacity: 1;
     pointer-events: auto;
+    margin-top: -11px;
+    z-index: 5;
+    position: relative;
 }
 
 #assigned-to-dropdown-options.expanded,
 #category-dropdown-options.expanded {
-    max-height: 332px;
+    max-height: 305px;
     overflow-y: auto;
+}
+
+#assigned-to-dropdown-options.expanded::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+#assigned-to-dropdown-options.expanded::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 100, 100, 0.5);
+    border-radius: 4px;
 }
 
 #assigned-to-dropdown-options.closing,
@@ -314,6 +331,7 @@ input[type="text"] {
     cursor: pointer;
     display: flex;
     gap: 4px;
+    z-index: 10;
 }
 
 .create-button,
@@ -404,7 +422,7 @@ input[type="text"] {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 16px;
+    padding: 8px 16px;
     border-radius: 15px;
 }
 
@@ -416,6 +434,8 @@ input[type="text"] {
     outline: none;
     cursor: pointer;
     height: 48px;
+    border: solid 1px #d1d1d1;
+    z-index: 10;
 }
 
 .add-task input[name="add-task-input3"] {
@@ -431,6 +451,11 @@ input[type="text"] {
     border: none;
 }
 
+.subtask-input-container,
+.description-input-container {
+    position: relative;
+}
+
 #assigned-to-dropdown-selected:hover,
 #category-dropdown-selected:hover {
     border: 1px solid #a89a9a;
@@ -439,6 +464,8 @@ input[type="text"] {
 .title_description_date .input-group input[type="date"] {
     padding: 12px 16px;
     height: 48px;
+    border: solid 1px #d1d1d1;
+    border-radius: 8px;
 }
 
 .required {
@@ -645,18 +672,7 @@ input[type="text"] {
     color: white;
 }
 
-.assigned-contacts:hover,
-.assigned-contacts:hover .user-dropdown,
-.assigned-contacts:hover .user-name-dropdown,
-.assigned-contacts:hover .checkbox-dropdown {
-    background-color: #091931 !important;
-    color: white;
-}
 
-.assigned-contacts:hover .user-name-label {
-    background-color: #091931 !important;
-    color: white !important;
-}
 
 .wrapper-create-task-section {
     position: fixed;
@@ -725,6 +741,13 @@ input[type="text"] {
     display: flex;
 }
 
+.filllicker {
+    position: relative;
+    background: white;
+    padding: 5px;
+    top: 0;
+}
+
 @media (max-width: 1173px) {
 
     .title_description_date,
@@ -777,6 +800,7 @@ input[type="text"] {
 
     .addtask {
         margin: 0 auto;
+        margin-top: 80px;
     }
 
     .priority {
@@ -817,7 +841,6 @@ input[type="text"] {
     .headline-addtask {
         position: unset;
         height: 112px;
-        width: 440px;
         background-color: #F6F7F8;
         z-index: 10;
         top: 80px;
@@ -871,3 +894,10 @@ input[type="text"] {
         opacity: 1;
     }
 }
+
+@media (max-width: 340px) {
+    .create-button,
+    .clear-button {
+        font-size: 18px;
+    }
+}   
