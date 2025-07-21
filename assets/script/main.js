@@ -22,31 +22,31 @@ async function loadContacts() {
   }
 }
 
-// async function loadContent(page) {
-//   let response = await fetch(page);
-//   let html = await response.text();
-//   displayUserInitials();
-//   document.getElementById('main-content').innerHTML = html;
+async function loadContent(page) {
+  let response = await fetch(page);
+  let html = await response.text();
+  displayUserInitials();
+  document.getElementById('main-content').innerHTML = html;
 
-//   if (page === 'add_task.html') {
-//     await initAddTask();
-//     changeColorbyHtmlLinks(document.getElementById('sidebar-add-task'));
-//   } else if (page === 'contacts.html') {
-//     initContacts();
-//     changeColorbyHtmlLinks(document.getElementById('sidebar-contacts'));
-//   } else if (page === 'board.html') {
-//     await initBoard();
-//     changeColorbyHtmlLinks(document.getElementById('sidebar-board'));
-//   } else if (page === 'summary_user.html') {
-//     await initSummary();
-//     changeColorbyHtmlLinks(document.getElementById('sidebar-summary'));
-//   } else if (page === 'privacy-policy.html') {
-//     changeColorbyHtmlLinks(document.getElementById('sidebar-privacy-policy'));
-//   } else if (page === 'legal-notice.html') {
-//     changeColorbyHtmlLinks(document.getElementById('sidebar-legal-notice'));
-//   } else if (page === 'help.html') {
-//   }
-// }
+  if (page === 'add_task.html') {
+    await initAddTask();
+    changeColorbyHtmlLinks(document.getElementById('sidebar-add-task'));
+  } else if (page === 'contacts.html') {
+    initContacts();
+    changeColorbyHtmlLinks(document.getElementById('sidebar-contacts'));
+  } else if (page === 'board.html') {
+    await initBoard();
+    changeColorbyHtmlLinks(document.getElementById('sidebar-board'));
+  } else if (page === 'summary_user.html') {
+    await initSummary();
+    changeColorbyHtmlLinks(document.getElementById('sidebar-summary'));
+  } else if (page === 'privacy-policy.html') {
+    changeColorbyHtmlLinks(document.getElementById('sidebar-privacy-policy'));
+  } else if (page === 'legal-notice.html') {
+    changeColorbyHtmlLinks(document.getElementById('sidebar-legal-notice'));
+  } else if (page === 'help.html') {
+  }
+}
 
 /**
  * load the logged user name from local storage and precessed

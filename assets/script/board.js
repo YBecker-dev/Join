@@ -585,24 +585,19 @@ async function toggleSubtaskDone(taskId, subtaskIndex) {
 
 async function openCreateTask() {
   selectedContacts = [];
-  let response = await fetch('../add_task.html');
-  let html = await response.text();
-  let btn = document.getElementById('addTaskBtn');
-  if (!btn) return;
   if (window.innerWidth <= 1233) {
-    btn.onclick = loadContent('add_task.html'); //window.location.href ="/assets/html/MPA-architecture/add_task.html"
+    window.location.href = '/assets/html/MPA-architecture/add_task.html';
     return;
   }
-
-  let tempDiv = document.createElement('div'); //<---Wo wird dieser div erstellt ?
+  let response = await fetch('../add_task.html');
+  let html = await response.text();
+  let tempDiv = document.createElement('div'); // <- wird benötigt damit ich die HTML-Elemente manipulieren kann
   tempDiv.innerHTML += html;
-
   let clearBtn = tempDiv.querySelector('.clear-button');
   if (clearBtn) {
     let cancelBtnHtml = `<button type="button" class="cancel-button" onclick="closeCreateTask()">Cancel <img src="../img/icon/close.png" alt="" class=""></button>`;
     clearBtn.outerHTML = cancelBtnHtml;
   }
-
   let contentSpace = tempDiv.querySelector('.contentspace-html');
   if (contentSpace) {
     contentSpace.classList.add('content-add-task');

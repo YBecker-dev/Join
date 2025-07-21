@@ -800,6 +800,7 @@ input[type="text"] {
 
     .addtask {
         margin: 0 auto;
+        margin-top: 80px;
     }
 
     .priority {
@@ -840,7 +841,6 @@ input[type="text"] {
     .headline-addtask {
         position: unset;
         height: 112px;
-        width: 440px;
         background-color: #F6F7F8;
         z-index: 10;
         top: 80px;
@@ -894,3 +894,10 @@ input[type="text"] {
         opacity: 1;
     }
 }
+
+@media (max-width: 340px) {
+    .create-button,
+    .clear-button {
+        font-size: 18px;
+    }
+}   

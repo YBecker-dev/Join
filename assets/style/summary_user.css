@@ -358,7 +358,6 @@
 
 @media (max-width: 590px){
    .contentspace-html{
-    padding-top: 60px;
     padding-bottom: 180px;
     padding-left: 16px;
     padding-right: 16px;
@@ -476,7 +475,6 @@
 @media(max-width: 425px){
     .contentspace-html{
         gap: 40px;
-        padding-top: 30px;
         
     }
     .headline_container{
