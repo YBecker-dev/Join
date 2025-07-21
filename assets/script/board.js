@@ -7,6 +7,7 @@ async function initBoard() {
   emptyDragArea();
   initEventListnerProcessTasksInformation();
   initFrameworkFunctions();
+  changeColorbyHtmlLinks(document.getElementById('sidebar-board'));
 }
 
 function allowDrop(ev) {
@@ -30,7 +31,7 @@ function removeAllHighlights() {
   toggleHighlight('done', false);
 }
 
-function preventBubbling(event) {
+function eventBubbling(event) {
   event.stopPropagation();
 }
 
@@ -189,11 +190,13 @@ function renderTasksInColumn(tasksInColumn, elementId) {
 
 function getAssignedContactsHtml(task, type) {
   let html = '';
+  let hasContact = false;
   if (Array.isArray(task.assignedTo) && contacts && contacts.length > 0) {
     for (let i = 0; i < task.assignedTo.length; i++) {
       let userId = task.assignedTo[i];
       let contact = findContactById(userId);
       if (contact) {
+        hasContact = true;
         if (type === 'board') {
           html += `<span class="board-contact-name" style="background-color:${contact.color}">${contact.initials}</span>`;
         } else if (type === 'overlay') {
@@ -201,6 +204,10 @@ function getAssignedContactsHtml(task, type) {
         }
       }
     }
+  }
+  // NUR für overlay anzeigen, wenn keine Kontakte gefunden wurden
+  if (type === 'overlay' && !hasContact) {
+    html = `<div class="no-contacts">Keine Kontakte ausgewählt</div>`;
   }
   return html;
 }
@@ -218,7 +225,8 @@ function sortTasksBySequence(tasksArray) {
     }
   }
 }
-// img Pfad wird entsprechend angepasst 
+
+// img Pfad wird entsprechend angepasst
 // ursprünglich "../img/icon/proriority/.....png"
 function showPriorityImg(task) {
   let priorityImg = '';
@@ -359,7 +367,7 @@ function showSubtasksInOverlay(task, taskId) {
       html += overlaySubtaskHtml(subtasks[i], i, taskId);
     }
   } else {
-    html = '<p class="p-Tag">Keine Subtasks</p>';
+    html = '<p class="p-Tag">-</p>';
   }
   return html;
 }
@@ -577,18 +585,16 @@ async function toggleSubtaskDone(taskId, subtaskIndex) {
 
 async function openCreateTask() {
   selectedContacts = [];
-  //let response = await fetch('../html/add_task.html');
-  let response = await fetch('/html/add_task.html');
+  let response = await fetch('../add_task.html');
   let html = await response.text();
-  console.log(html);
   let btn = document.getElementById('addTaskBtn');
   if (!btn) return;
   if (window.innerWidth <= 1233) {
-    btn.onclick = loadContent('add_task.html');//window.location.href ="/assets/html/MPA-architecture/add_task.html" 
+    btn.onclick = loadContent('add_task.html'); //window.location.href ="/assets/html/MPA-architecture/add_task.html"
     return;
   }
 
-  let tempDiv = document.createElement('div');//<---Wo wird dieser div erstellt ? 
+  let tempDiv = document.createElement('div'); //<---Wo wird dieser div erstellt ?
   tempDiv.innerHTML += html;
 
   let clearBtn = tempDiv.querySelector('.clear-button');
@@ -606,6 +612,7 @@ async function openCreateTask() {
   overlayContent.innerHTML =
     `<img onclick="closeCreateTask()" src="../img/icon/close.png" alt="" class="close-overlay-x">` + tempDiv.innerHTML;
   animatedOpeningAddTask(overlayBg, overlayContent);
+  setPriority('medium');
 }
 
 function closeCreateTask() {
@@ -638,7 +645,7 @@ let initEventListnerProcessTasksInformation = () => {
   }
 };
 /**
- * iterate through all tasks in the DOM and save the task title, 
+ * iterate through all tasks in the DOM and save the task title,
  * the description, the ID and the HTML element in the taskCollection array
  */
 let taskCollection = []; // Globales Array
@@ -649,13 +656,13 @@ function processTasksInformation() {
     console.error("Element mit ID 'board' nicht gefunden.");
     return;
   }
-  let dragAreas = boardRef.querySelectorAll('.drag-area'); 
-  for (let dragArea of dragAreas) { 
+  let dragAreas = boardRef.querySelectorAll('.drag-area');
+  for (let dragArea of dragAreas) {
     let taskContainers = dragArea.querySelectorAll('.board-task-container');
     for (let taskContainer of taskContainers) {
-      //console.log(taskContainer); 
+      //console.log(taskContainer);
       let taskId = taskContainer.id;
-      //console.log(taskId); 
+      //console.log(taskId);
       let currentTaskTitle = '';
       let currentTaskDescription = '';
       let titleElement = taskContainer.querySelector('.board-task-title');
@@ -670,15 +677,13 @@ function processTasksInformation() {
         id: taskId,
         title: currentTaskTitle,
         description: currentTaskDescription,
-        element: taskContainer // Die Referenz zum HTML-Element
+        element: taskContainer, // Die Referenz zum HTML-Element
       });
     }
   }
-  //console.table(taskCollection); 
+  //console.table(taskCollection);
   showSearchResult();
-  
 }
-
 
 /**
  * receive the input value and call the functions processTaskSearch() and taskVisibility()
@@ -696,63 +701,60 @@ function showSearchResult() {
   //console.log(taskCollection);
   console.log('Suchbegriff', inputValue);
   console.log('Gefundene Tasks', searchResult);
-  if(searchResult.length === 0){ // Looks like it works :-) 
+  if (searchResult.length === 0) {
+    // Looks like it works :-)
     console.log('Keine Ergebnisse gefunden');
-    alert('kein Ergebnis gefunden'); // overlay muss implementiert werden 
+    alert('kein Ergebnis gefunden'); // overlay muss implementiert werden
     //let board= document.querySelector('board');
     //board.innerHTML += noteNoTaskFounded();
   }
-  taskVisibilty(searchResult,);
+  taskVisibilty(searchResult);
 }
 
 /**
- * take the inputValue and filter the TaskCollection array by Object -title and description. 
+ * take the inputValue and filter the TaskCollection array by Object -title and description.
  * if there are hits, create a new array filterTask width the target object and return a searchTerm = array with Objects
- * @param {Array[Object]} filterTask 
- * @param {Array[Object]} searchString 
+ * @param {Array[Object]} filterTask
+ * @param {Array[Object]} searchString
  * @returns Array if Searchstring contains object.title or description
  */
 function processTaskSearch(filterTask, searchString) {
   // filterTask = taskCollection
   // serchString == inputValue
   const searchTerm = String(searchString).toLowerCase();
-  if(searchTerm === ''){
+  if (searchTerm === '') {
     return filterTask;
   }
   return filterTask.filter((singleTaskObject) => {
     let title;
     let description;
-    if(singleTaskObject.title){
-      title = singleTaskObject.title.trim(); 
-    }else{
-      title = "";
+    if (singleTaskObject.title) {
+      title = singleTaskObject.title.trim();
+    } else {
+      title = '';
     }
-    if(singleTaskObject.description){
+    if (singleTaskObject.description) {
       description = singleTaskObject.description.trim();
-    }else{
-      description = "";
+    } else {
+      description = '';
     }
-    const textOutput = (title + '' + description).toLowerCase(); 
+    const textOutput = (title + '' + description).toLowerCase();
     return textOutput.includes(searchTerm);
   });
 }
 /**
  * Controls the visibility of tasks through search input.
- * @param {Arraa[Object]} filterTask 
+ * @param {Arraa[Object]} filterTask
  */
 function taskVisibilty(filterTask) {
-  const matchedTaskIds = new Set(filterTask.map(task => task.id)); 
+  const matchedTaskIds = new Set(filterTask.map((task) => task.id));
   //console.log(matchedTaskIds);
-  taskCollection.forEach(taskObject =>{
+  taskCollection.forEach((taskObject) => {
     const isMatched = matchedTaskIds.has(taskObject.id);
-    if(isMatched){
+    if (isMatched) {
       taskObject.element.classList.remove('d-none');
-    }else{
-      taskObject.element.classList.add('d-none'); 
-    } 
-  })
- 
+    } else {
+      taskObject.element.classList.add('d-none');
+    }
+  });
 }
-
-
-

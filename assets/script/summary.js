@@ -7,7 +7,8 @@
   await checkTasks()
   displayUserName();
   checkTime();
-  initFrameworkFunctions()
+   initFrameworkFunctions()
+     changeColorbyHtmlLinks(document.getElementById('sidebar-summary'));
 }
 
 let statusArray = [];

@@ -66,8 +66,8 @@
     font-size: 60px;
     color: #000000;
     text-align: start;
+    padding: unset;
 }
-
 
 .overlay-titel {
     display:flex;
@@ -811,6 +811,12 @@
 }
 .moveTo:hover{
     cursor: pointer;
+}
+
+.no-contacts {
+    text-align: start;
+    font-size: 18px;
+    padding-left: 8px;
 }
 
 @media (max-width: 1439px){

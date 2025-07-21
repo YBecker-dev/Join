@@ -38,10 +38,12 @@
           </div>
           <div class="input-group add-task">
             <span>Description</span>
-            <textarea id="description" name="add-task-textarea" placeholder="Enter a Description"></textarea>
-            <span class="input-icon">
-              <img src="../img/icon/add_task_icon/textarea.png" alt="" />
-            </span>
+            <div class="description-input-container">
+              <textarea id="description" name="add-task-textarea" placeholder="Enter a Description"></textarea>
+              <span class="input-icon">
+                <img src="/assets/img/icon/add_task_icon/textarea.png" alt="" />
+              </span>
+            </div>
           </div>
           <div class="input-group add-task date">
             <span>Due Date<span class="required-star">*</span></span>
@@ -146,22 +148,24 @@
           </div>
           <div class="input-group add-task">
             <span>Subtasks</span>
-            <input
-              id="add-task-input4"
-              oninput="onSubtaskInputChange()"
-              onkeydown="onSubtaskInputKeydown(event)"
-              name="add-task-input4"
-              type="text"
-              placeholder="Add new subtask"
-            />
-            <span class="subtasks-icon" id="subtasks-icon">
-              <img
-                class="hover-icon"
-                src="../img/icon/add_task_icon/plus.png"
-                alt="Add"
-                onclick="pushSubtaskInput(event)"
+            <div class="subtask-input-container">
+              <input
+                id="add-task-input4"
+                oninput="onSubtaskInputChange()"
+                onkeydown="onSubtaskInputKeydown(event)"
+                name="add-task-input4"
+                type="text"
+                placeholder="Add new subtask"
               />
-            </span>
+              <span class="subtasks-icon" id="subtasks-icon">
+                <img
+                  class="hover-icon"
+                  src="/assets/img/icon/add_task_icon/plus.png"
+                  alt="Add"
+                  onclick="pushSubtaskInput(event)"
+                />
+              </span>
+            </div>
           </div>
           <div id="subtasks-container" class="subtasks-container"></div>
         </div>

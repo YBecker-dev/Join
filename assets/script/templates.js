@@ -2,8 +2,8 @@
 function getNoteTemplateContact(index) {
   let user = myContacts[index];
 
-  return  ` <div onclick="openDetails(${index}), event.stopPropagation()" class="person">
-              <p class="initial">${user.color, user.initials}</p>
+  return ` <div onclick="openDetails(${index}), event.stopPropagation()" class="person">
+              <p class="initial">${(user.color, user.initials)}</p>
               <div>
                 <h4>${user.name}</h4>
                 <p>
@@ -18,7 +18,7 @@ function getNoteTemplateContactDetails(indexDetails) {
 
   return ` <div class="namesDetails">
               <div class="contactInformations">
-                <p class="initialOverlay">${user.color, user.initials}</p>
+                <p class="initialOverlay">${(user.color, user.initials)}</p>
                 <div>
                   <h3 class="infoNames">${user.name}</h3>
                   <div class="contactIcons">
@@ -99,19 +99,25 @@ function getNoteTemplateEditContact(index) {
                 </div>           
                 <div class="profilDiv">
                   <div>
-                    <p id="editContactInitials" class="profileInitials">${user.color, user.initials}</p>
+                    <p id="editContactInitials" class="profileInitials">${(user.color, user.initials)}</p>
                   </div>
                   <div>
                     <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                      <input id="editContactName" class="addNewContact" value="${user[index].name}" required onclick="event.stopPropagation()">
+                      <input id="editContactName" class="addNewContact" value="${
+                        user[index].name
+                      }" required onclick="event.stopPropagation()">
                       <img class="addNewContactIcon" src="../img/icon/person.png" alt="Person Icon">
                     </div> 
                     <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                      <input id="editContactMail" class="addNewContact" type="email" value="${user.email}" required onclick="event.stopPropagation()">
+                      <input id="editContactMail" class="addNewContact" type="email" value="${
+                        user.email
+                      }" required onclick="event.stopPropagation()">
                       <img class="addNewContactIcon" src="../img/icon/mail.png" alt="Email Icon">
                     </div> 
                     <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                      <input id="editContactPhone" class="addNewContact" type="tel" value="${user.phone}" required onclick="event.stopPropagation()">
+                      <input id="editContactPhone" class="addNewContact" type="tel" value="${
+                        user.phone
+                      }" required onclick="event.stopPropagation()">
                       <img class="addNewContactIcon" src="../img/icon/phone.png" alt="phone Icon">
                     </div>               
                   </div>                 
@@ -131,9 +137,6 @@ function getTaskOverlay(task, taskId) {
 
   return `
     <div class="overlay-position">
-        
-
-     
       <div class="overlay-header">
         <div class="task-type">
         <p class="p-Tag ${categoryClass}">${categoryText}</p>
@@ -143,11 +146,9 @@ function getTaskOverlay(task, taskId) {
           <img src="/assets/img/icon/close.png" >
         </div>                
       </div>
-
-      
       <img src="/assets/img/icon/move-to.png" id="DropDownBtn" class="moveTo" onclick="showDropDown()">
       <div class="task-overlay d-none" id="selection" onclick="showDropDown()">  
-        <section class="selection " onclick="preventBubbling(event)">
+        <section class="selection " onclick="eventBubbling(event)">
           <div class="option">To Do</div>
           <div class="option">test</div>
           <div class="option">test</div>
@@ -157,10 +158,7 @@ function getTaskOverlay(task, taskId) {
       <div class="overlay-titel">
         <h1>${task.title || ''}</h1>
       </div>
-          
-
-
-      <div class="overlay-description-flex">
+      <div class="overlay-description-flex${!task.description ? ' d-none' : ''}">
         <p class="p-Tag text-allign">${task.description || ''}</p>
       </div>
       <div class="overlay-description-flex">
@@ -170,9 +168,7 @@ function getTaskOverlay(task, taskId) {
       <div class="overlay-description-flex">
         <p class="p-Tag">Priority:</p>
         <div class="overlay-priority">
-          <p class="p-Tag padding-priority">${task.priority || ''} <img src="/assets/img/icon/priority/${
-    task.priority
-  }.png" alt=""></p>
+          ${overlayPriority(task)}
         </div>
       </div>
       <div class="assigned-to">
@@ -208,8 +204,8 @@ function getTaskOverlay(task, taskId) {
   `;
 }
 
-function getInnerTaskOverlay(){
-  return`
+function getInnerTaskOverlay() {
+  return `
         <div class="help-mobil" onclick="window.location.href='/assets/html/MPA-architecture/help.html'" id="help-mobil">
           <p>Help</p>
         </div>
@@ -223,7 +219,7 @@ function getInnerTaskOverlay(){
             <a href="/index.html">Log out</a>
         </div>
   
-  `
+  `;
 }
 
 function contactsOverlayTemplate(initials, name, color) {
@@ -383,10 +379,21 @@ function getEmptyDragArea(noTaskText) {
   `;
 }
 
-function noteNoTaskFounded(){
-  return`
+function noteNoTaskFounded() {
+  return `
     <div class="no-result">
         <h3>Keine Ergebnisse gefunden</h3>
     </div>
-  `
+  `;
+}
+function overlayPriority(task) {
+  if (task.priority) {
+    return `
+      <p class="p-Tag padding-priority">
+        ${task.priority} <img src="/assets/img/icon/priority/${task.priority}.png" alt="">
+      </p>
+    `;
+  } else {
+    return `<p class="p-Tag padding-priority">-</p>`;
+  }
 }

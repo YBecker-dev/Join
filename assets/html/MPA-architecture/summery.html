@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="/assets/style/MPA-architecture/join-framework.css">
-     <link rel="stylesheet" href="/assets/style/summary_user.css">
-     <link rel="stylesheet" href="/assets/style/main.css"><!--responsiv-->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/assets/style/MPA-architecture/join-framework.css" />
+    <link rel="stylesheet" href="/assets/style/summary_user.css" />
+    <link rel="stylesheet" href="/assets/style/main.css" />
+    <!--responsiv-->
     <title>Summery</title>
-</head>
-<body onload="initSummary()">
-    
+  </head>
+  <body onload="initSummary()">
     <section class="logout-overlay d-none" id="overlay-logout" onclick="toggleLogOutOverlay()">
       <div class="logout-overlay-content" id="logout-overlay-content"></div>
     </section>
@@ -38,36 +38,16 @@
           <img src="/assets/img/Logo/Logo_white.png" alt="Logo" />
         </div>
         <div class="sidebar-links-container">
-          <a
-            class="sidebar-links"
-            id="sidebar-summary"
-            href="/assets/html/MPA-architecture/summery.html"
-            onclick="changeColorbyHtmlLinks(this); //loadContent('summary_user.html')"
-          >
+          <a class="sidebar-links" id="sidebar-summary" href="/assets/html/MPA-architecture/summery.html">
             <img src="/assets/img/icon/tasks_icon/summary.png" alt="" />Summary
           </a>
-          <a
-            class="sidebar-links"
-            id="sidebar-add-task"
-            href="/assets/html/MPA-architecture/add_task.html"
-            onclick="changeColorbyHtmlLinks(this)"
-          >
+          <a class="sidebar-links" id="sidebar-add-task" href="/assets/html/MPA-architecture/add_task.html">
             <img src="/assets/img/icon/tasks_icon/add_task.png" alt="" />Add Task
           </a>
-          <a
-            class="sidebar-links"
-            id="sidebar-board"
-            href="/assets/html/MPA-architecture/board.html"
-            onclick="changeColorbyHtmlLinks(this); //loadContent('board.html')"
-          >
+          <a class="sidebar-links" id="sidebar-board" href="/assets/html/MPA-architecture/board.html">
             <img src="/assets/img/icon/tasks_icon/board.png" alt="" />Board
           </a>
-          <a
-            class="sidebar-links"
-            id="sidebar-contacts"
-            href="#"
-            onclick="changeColorbyHtmlLinks(this); loadContent('contacts.html')"
-          >
+          <a class="sidebar-links" id="sidebar-contacts" href="#">
             <img src="/assets/img/icon/tasks_icon/contacts.png" alt="" />Contacts
           </a>
         </div>
@@ -77,103 +57,98 @@
           class="sidebar-links privacy-legal"
           id="sidebar-privacy-policy"
           href="/assets/html/MPA-architecture/privacy-policy_MPA.html"
-          onclick="changeColorbyHtmlLinks(this);"
           >Privacy Policy</a
         >
         <a
           class="sidebar-links privacy-legal"
           id="sidebar-legal-notice"
           href="/assets/html/MPA-architecture/legal-notice_MPA.html"
-          onclick="changeColorbyHtmlLinks(this);"
           >Legal Notice</a
         >
       </div>
     </div>
     <section class="main-content">
-            <div class="contentspace-html">
-            
-                <div class="headline_container">
-                    <h1>Join 360</h1>
-                    <div class="vector5"></div>
-                    <p>Key Metrics at a Glance</p>
-                    <div class="vector5-mobil"></div>
-                </div>
-            
-            <div class="task-monitor">
-                <div class="section-one">
-                    <div class="content-one hover-one transform-left"  onclick="loadBoard()">
-                        <div class="content-one-icon">
-                            <div class="pen-icon"></div>
-                        </div>
-                        <div class="content-info">
-                            <h1 id="task_to_do"></h1>
-                            <p>To-do</p>
-                        </div>
-                    </div>
-                    <div class="content-one hover-one transform-right" onclick="loadBoard()">
-                         <div class="content-one-icon">
-                            <div class="check-icon"></div>
-                        </div>
-                        <div class="content-info">
-                            <h1 id="task_done"></h1>
-                            <p>Done</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="section-two hover-two transform-left"  onclick="loadBoard()">
-                    <div class="content-two-left">
-                        <div>
-                            <img src="/assets/img/icon/urgent.png">
-                        </div>
-                        <div class="content-info-two">
-                            <h1 id="task_urgent"></h1>
-                            <p>Urgent</p>
-                        </div>
-                    </div>
-                    <div class="seperator-two"></div>
-                    <div class="content-two-right"> 
-                        <h4>October 16, 2022</h4>
-                        <p>Upcoming Deadline</p>
-                    </div>
-                </div>
-                <div class="section-three">
-                    <div class="content-three hover-three transform-left-center"  onclick="loadBoard()">
-                        <div class="content-three-info">
-                            <h1 id="task_in_board">5</h1>
-                            <p>Tasks in Board</p>
-                        </div>  
-                    </div>
-                    <div class="content-three hover-three"  onclick="loadBoard()">
-                        <div class="content-three-info">
-                            <h1 id="task_in_progress"></h1>
-                            <p>Tasks In Progress</p>
-                        </div>
-                    </div>
-                    <div class="content-three hover-three transform-right-center"  onclick="loadBoard()">
-                        <div class="content-three-info">
-                            <h1 id="task_awaiting_feedback"></h1>
-                            <p>Awaiting Feedback</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="contentspace-html">
+        <div class="headline_container">
+          <h1>Join 360</h1>
+          <div class="vector5"></div>
+          <p>Key Metrics at a Glance</p>
+          <div class="vector5-mobil"></div>
         </div>
-    
-        <div class="greeting">
-         <h2 id="userGreeting"></h2>
-         <h1 id="userName"></h1>
-        </div>   
+
+        <div class="task-monitor">
+          <div class="section-one">
+            <div class="content-one hover-one transform-left" onclick="loadBoard()">
+              <div class="content-one-icon">
+                <div class="pen-icon"></div>
+              </div>
+              <div class="content-info">
+                <h1 id="task_to_do"></h1>
+                <p>To-do</p>
+              </div>
+            </div>
+            <div class="content-one hover-one transform-right" onclick="loadBoard()">
+              <div class="content-one-icon">
+                <div class="check-icon"></div>
+              </div>
+              <div class="content-info">
+                <h1 id="task_done"></h1>
+                <p>Done</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-two hover-two transform-left" onclick="loadBoard()">
+            <div class="content-two-left">
+              <div>
+                <img src="/assets/img/icon/urgent.png" />
+              </div>
+              <div class="content-info-two">
+                <h1 id="task_urgent"></h1>
+                <p>Urgent</p>
+              </div>
+            </div>
+            <div class="seperator-two"></div>
+            <div class="content-two-right">
+              <h4>October 16, 2022</h4>
+              <p>Upcoming Deadline</p>
+            </div>
+          </div>
+          <div class="section-three">
+            <div class="content-three hover-three transform-left-center" onclick="loadBoard()">
+              <div class="content-three-info">
+                <h1 id="task_in_board">5</h1>
+                <p>Tasks in Board</p>
+              </div>
+            </div>
+            <div class="content-three hover-three" onclick="loadBoard()">
+              <div class="content-three-info">
+                <h1 id="task_in_progress"></h1>
+                <p>Tasks In Progress</p>
+              </div>
+            </div>
+            <div class="content-three hover-three transform-right-center" onclick="loadBoard()">
+              <div class="content-three-info">
+                <h1 id="task_awaiting_feedback"></h1>
+                <p>Awaiting Feedback</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="greeting">
+        <h2 id="userGreeting"></h2>
+        <h1 id="userName"></h1>
+      </div>
     </section>
+  </body>
 
-</body>
-
-<script src="/assets/script/templates.js"></script>
-<script src="/assets/script/summary.js"></script>
-<script src="/assets/script/board.js"></script>
-<script src="/assets/script/main.js"></script>
-<script src="/assets/script/add_task.js"></script>
-<script src="/assets/script/contacts.js"></script>   
-<script src="/assets/script/MPA-architecture/framework-functions.js"></script>
-
+  <script src="/assets/script/templates.js"></script>
+  <script src="/assets/script/summary.js"></script>
+  <script src="/assets/script/board.js"></script>
+  <script src="/assets/script/main.js"></script>
+  <script src="/assets/script/add_task.js"></script>
+  <script src="/assets/script/contacts.js"></script>
+  <script src="/assets/script/MPA-architecture/framework-functions.js"></script>
 </html>
