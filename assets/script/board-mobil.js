@@ -116,17 +116,13 @@ async function changeFirebaseStatus(targetArea, taskId){
             }
             let targetTaskId = taskId;
             let allTasksId = Object.keys(data);
-            if(allTasksId.includes(targetTaskId)){
-                let newStatus = data[targetTaskId].status;
-                let newSequence = data[targetTaskId].sequence;
-                newStatus = targetArea.id;
-                newSequence = data[targetTaskId].sequence + 1;
-                console.log(newSequence);
-                console.log(data[targetTaskId].sequence);
+            if(allTasksId.includes(targetTaskId)){ 
+                let newStatus = targetArea.id; 
+                let newSequence = checkSequenzNr(allTasksId, data)
+                console.log(newStatus);
                 const statusUpdate = {
                     status : newStatus,
                     sequence : newSequence,
-                    
                 }
                 await updateNewStatus(statusUpdate, targetTaskId);
             }else{
@@ -135,6 +131,18 @@ async function changeFirebaseStatus(targetArea, taskId){
     }catch(error){
         console.error(error)
     }   
+}
+
+function checkSequenzNr(allTasksId, data){
+    let processingSequenz = [];
+    for(s = 0; s < allTasksId.length; s++){
+        let test = allTasksId[s];
+        processingSequenz.push(data[test].sequence);  
+    }
+    const maxCount = Math.max(...processingSequenz);
+    let newMaxCount = maxCount +1
+    processingSequenz=[];
+    return(newMaxCount)
 }
 
 async function updateNewStatus(statusUpdate, targetTaskId) {
