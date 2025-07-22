@@ -151,10 +151,10 @@ function getTaskOverlay(task, taskId,trueTaskId) {
       <img src="/assets/img/icon/move-to.png" id="DropDownBtn" class="moveTo" onclick="showDropDown(${trueTaskId})">
       <div class="task-overlay d-none" id="drop-down" onclick="showDropDown(${trueTaskId})">  
         <section class="selection " onclick="preventBubbling(event)">
-          <div onclick="changeTaskStatusMobilToDo(${trueTaskId})" id="todo-mobil-${trueTaskId}" class="option ">To Do</div>
-          <div id="inProgress-mobil-${trueTaskId}" class="option">In Progress</div>
-          <div id="awaitFeedback-mobil-${trueTaskId}" class="option">Await Feetback</div>
-          <div id="done-mobil-${trueTaskId}" class="option">Done</div>
+          <div onclick="changeTaskStatusMobilToDo(${trueTaskId}, '${taskId}')" id="todo-mobil-${trueTaskId}" class="option ">To Do</div>
+          <div onclick="changeTaskStatusMobilInProgress(${trueTaskId}, '${taskId}')" id="inProgress-mobil-${trueTaskId}" class="option">In Progress</div>
+          <div onclick="changeTaskStatusMobilAwaitFeedback(${trueTaskId}, '${taskId}')" id="awaitFeedback-mobil-${trueTaskId}" class="option">Await Feetback</div>
+          <div onclick="changeTaskStatusMobilDone(${trueTaskId}, '${taskId}')" id="done-mobil-${trueTaskId}" class="option">Done</div>
         </section>
       </div>
       <div class="overlay-titel">

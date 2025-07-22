@@ -1,6 +1,10 @@
+
 function initFrameworkFunctions(){
   displayUserInitials();
 }
+
+
+
 
 // test
 function displayUserInitials() {
