@@ -4,22 +4,33 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="../../img/Logo/Logo_white.png">
-        <link rel="stylesheet" href="../../style/MPA-architecture/join-framework.css">
+        <link rel="stylesheet" href="/assets/style/MPA-architecture/join-framework.css">
         <link rel="stylesheet" href="../../style/buttons.css">
+        <!--<link rel="stylesheet" href="../../style/MPA-architecture/contact.css">-->
+        <link rel="stylesheet" href="/assets/style/MPA-architecture/contact.css">
+        <link rel="stylesheet" href="/assets/style/main.css">
+        
         <link rel="stylesheet" href="../../style/MPA-architecture/contact.css">
         <link rel="stylesheet" href="../../style/main.css">
         <title>Contacts</title>
         
     </head>
     <body onload="initContacts()">
+
+
+        <section class="logout-overlay d-none" id="overlay-logout" onclick="toggleLogOutOverlay()">
+          <div class="logout-overlay-content" id="logout-overlay-content"></div>
+        </section>
+
+
         <header>
             <div class="header-content">
                 <p>Kanban Project Management Tool</p>
                 <img class="logo-responsive" src="../../img/Logo/" alt="">
                 <div class="header-user">
-                    <img class="help-icon" onclick="loadContent('help.html')"src="../../assets/img/icon/header_user_interface/help.png" alt="help">
+                    <img class="help-icon" onclick="loadHelp()" src="/assets/img/icon/header_user_interface/help.png" alt="help">
                     <div class="nameBtn" id="userBtn" onclick="toggleLogOutOverlay()">
-                        <p class="user" id="userInitialsMPA"></p>
+                        <p class="user" id="userInitials"></p>
                     </div>
                 </div>
             </div>
@@ -33,9 +44,11 @@
                     <a class="sidebar-links" id="sidebar-summary" href="./summery.html">
                         <img src="../../img/icon/tasks_icon/summary.png" alt="Summary">Summary
                     </a>
-                    <a class="sidebar-links" id="sidebar-add-task" href="./#">
+                    <a class="sidebar-links" id="sidebar-add-task" href="./add_task.html">
                         <img src="../../img/icon/tasks_icon/add_task.png" alt="Add Task">Add Task
                     </a>
+                    <!--<a class="sidebar-links" id="sidebar-board" href="./board.html">
+                        <img src="../../img/icon/tasks_icon/board.png" alt="" target="_blank">Board-->
                     <a class="sidebar-links" id="sidebar-board" href="./board.html">
                         <img src="../../img/icon/tasks_icon/board.png" alt="Board">Board
                     </a>
@@ -50,6 +63,8 @@
             </div>
         </section>
 
+        <main class="myMain"><!--main-content ?-->
+            <section class="contactList">
         <main class="myMain">
             <div class="main-content">
             <section class="contactList"> 
@@ -85,5 +100,9 @@
 
         <script src="../../script/MPA-architecture/contact-templates.js"></script>
         <script src="../../script/MPA-architecture/contacts.js"></script>
+        <script src="/assets/script/MPA-architecture/framework-functions.js"></script>
+        <!--Logout aktuell problematisch-->
+        <!--<script src="/assets/script/main.js"></script>-->
+        <!--<script src="/assets/script/templates.js"></script>-->
     </body>
 </html>

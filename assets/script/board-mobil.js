@@ -1,32 +1,157 @@
-function showDropDown(){
-    let dropdown_menu = document.getElementById('selection')
-    dropdown_menu.classList.toggle('d-none');
-
+function showDropDown(trueTaskId){
+    
+    findStatusArea(trueTaskId);
+    //hideActivStatus(trueTaskId);
+    let dropdown_menu = document.getElementById('drop-down')
+    dropdown_menu.classList.toggle('d-none');    
 }
 
-function dropDownMobil(){
-    checkTaskArea();
-    //let todoArea = document.getElementById('todo');
-    //let toDoRef = document.getElementById('ToDo');
-    //let tasks = document.getElementsByClassName('board-task-container');
-    ////let inProgressRef = document.getElementById('InProgress');
-    ////let awaitFeedbackRef = document.getElementById('AwaitFeedback');
-    ////let doneRef = document.getElementById('Done');
-    //let dropdown = document.getElementById('selection');
-    //let choosenValue = dropdown.value;
-    //console.log('folgendes wurde ausgewählt'+choosenValue);
+function findStatusArea(trueTaskId){
+    //let choosenTask = document.getElementById(trueTaskId);
+    let boardTaskContainer= document.getElementById('task-'+trueTaskId);
+    //console.log(choosenTask);
+    //console.log(boardTaskContainer);
+    //console.log(boardTaskContainer.parentElement)
+    let firstParent = boardTaskContainer.parentElement;
+    //console.log(firstParent.parentElement)
+    let targetParentElement = firstParent.parentElement;
+    //console.log(targetParentElement.id);
+    let statusID = targetParentElement.id
+    //console.log(statusID);
+    hideActivStatus(trueTaskId, statusID);  
 }
 
-function checkTaskArea(){
-    let todoArea = document.getElementById('todo');
-    let tasksToDo = todoArea.querySelectorAll('board-task-container');
-    let inProgressArea = document.getElementById('inProgress');
-    let awaitFeedbackArea = document.getElementById('awaitFeedback');
-    let doneArea = document.getElementById('done');
-   
-
-    if(tasksToDo){
-        console.log(tasksToDo.length);
-        return true;
+function hideActivStatus(trueTaskId, statusID){
+    //console.log(trueTaskId)
+    //let targetArea = document.getElementById('todo');
+    let targetArea = document.getElementById(statusID);
+    let todoDropDown = document.getElementById(statusID+'-mobil-'+trueTaskId)
+    //console.log(todoDropDown);
+    let sections = targetArea.getElementsByTagName('section');
+    let sectionId;
+    for(let section  of sections){
+        let sectionbodys = section.children;
+        for(let sectionbody of sectionbodys){
+            //console.log(sectionbody.parentElement);
+            let area=sectionbody.parentElement
+            //console.log(area.parentElement)
+            sectionId = sectionbody.id;
+            //console.log(sectionId)
+            let filterId = sectionId.slice(5)
+            let targetId = Number(filterId);
+            if(trueTaskId === targetId){
+                //console.log(true);
+                todoDropDown.classList.add('d-none');
+            }else{
+                //console.log(false)
+            }      
+        }
     }
+}
+
+async function changeTaskStatusMobilToDo(trueTaskId ,taskId){
+    let overlayRef = document.getElementById('overlayBoard');
+    let taskOverlayRef = document.getElementById('overlay-content-loader');
+    let originalTask = document.getElementById('task-'+trueTaskId);
+    let targetArea = document.getElementById('todo');
+    let section = document.createElement('section');
+    section.appendChild(originalTask);
+    targetArea.appendChild(section);
+    await changeFirebaseStatus(targetArea, taskId);
+
+    overlayRef.classList.toggle('visible');
+    overlayRef.classList.add('d-none');
+    taskOverlayRef.classList.toggle('show');
+}
+
+async function changeTaskStatusMobilInProgress(trueTaskId ,taskId){
+    let overlayRef = document.getElementById('overlayBoard');
+    let taskOverlayRef = document.getElementById('overlay-content-loader');
+    let originalTask = document.getElementById('task-'+trueTaskId);
+    let targetArea = document.getElementById('inProgress');
+    let section = document.createElement('section');
+    section.appendChild(originalTask);
+    targetArea.appendChild(section);
+    await changeFirebaseStatus(targetArea, taskId);
+    overlayRef.classList.toggle('visible');
+    overlayRef.classList.add('d-none');
+    taskOverlayRef.classList.toggle('show');
+}
+
+async function changeTaskStatusMobilAwaitFeedback(trueTaskId ,taskId){
+    let overlayRef = document.getElementById('overlayBoard');
+    let taskOverlayRef = document.getElementById('overlay-content-loader');
+    let originalTask = document.getElementById('task-'+trueTaskId);
+    let targetArea = document.getElementById('awaitFeedback');
+    let section = document.createElement('section');
+    section.appendChild(originalTask);
+    targetArea.appendChild(section);
+    await changeFirebaseStatus(targetArea, taskId);
+    overlayRef.classList.toggle('visible');
+    overlayRef.classList.add('d-none');
+    taskOverlayRef.classList.toggle('show');
+}
+
+async function changeTaskStatusMobilDone(trueTaskId ,taskId){
+    let overlayRef = document.getElementById('overlayBoard');
+    let taskOverlayRef = document.getElementById('overlay-content-loader');
+    let originalTask = document.getElementById('task-'+trueTaskId);
+    let targetArea = document.getElementById('done');
+    let section = document.createElement('section');
+    section.appendChild(originalTask);
+    targetArea.appendChild(section);
+    await changeFirebaseStatus(targetArea, taskId);
+    overlayRef.classList.toggle('visible');
+    overlayRef.classList.add('d-none');
+    taskOverlayRef.classList.toggle('show');
+}
+
+async function changeFirebaseStatus(targetArea, taskId){
+    try{
+            let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json');
+            let data = await response.json();
+            if(!data){
+                console.log('Probleme beim API abruf')
+                return;
+            }
+            let targetTaskId = taskId;
+            let allTasksId = Object.keys(data);
+            if(allTasksId.includes(targetTaskId)){
+                let newStatus = data[targetTaskId].status;
+                let newSequence = data[targetTaskId].sequence;
+                newStatus = targetArea.id;
+                newSequence = data[targetTaskId].sequence + 1;
+                console.log(newSequence);
+                console.log(data[targetTaskId].sequence);
+                const statusUpdate = {
+                    status : newStatus,
+                    sequence : newSequence,
+                    
+                }
+                await updateNewStatus(statusUpdate, targetTaskId);
+            }else{
+                console.log(false, "Die ID wurde nicht gefunden");
+            }
+    }catch(error){
+        console.error(error)
+    }   
+}
+
+async function updateNewStatus(statusUpdate, targetTaskId) {
+    try{
+        const update = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + targetTaskId + '.json', {
+            method: 'PATCH',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(statusUpdate),
+        });
+        if(!update.ok){
+            let errorMessage = await update.text();
+            console.error(errorMessage);
+        }else{
+            console.log("Update erfolgreich")
+        }
+    }catch(error){
+        console.error(error);
+    }
+    window.location.reload();
 }

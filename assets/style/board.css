@@ -776,8 +776,14 @@
     z-index: 10;
 
 }
+.option{
+    text-align: start;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
 
-.selection {
+.selection{
     position: absolute;
     top: 132px;
     left: 40px;
@@ -792,9 +798,11 @@
 .selection:hover {
     cursor: pointer;
 }
-
-.options:hover {
+.option:hover{
     cursor: pointer;
+    background-color: #4f688c;
+    border-radius: 5px;
+
 }
 
 .moveTo {

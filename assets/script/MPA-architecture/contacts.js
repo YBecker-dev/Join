@@ -50,6 +50,7 @@ function getInitials(name) {
 async function initContacts() {
   await loadContacts();
   renderContacts();
+  initFrameworkFunctions();
 }
 
 

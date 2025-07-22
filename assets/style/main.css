@@ -242,7 +242,7 @@ header {
         left: 0;
         padding: 0;
         position: fixed;
-        z-index: 10000;
+        z-index: 1;
     }
 
     .sidebar-links {
