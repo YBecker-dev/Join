@@ -16,6 +16,13 @@
         
     </head>
     <body onload="initContacts()">
+
+
+        <section class="logout-overlay d-none" id="overlay-logout" onclick="toggleLogOutOverlay()">
+          <div class="logout-overlay-content" id="logout-overlay-content"></div>
+        </section>
+
+
         <header>
             <div class="header-content">
                 <p>Kanban Project Management Tool</p>
@@ -94,6 +101,8 @@
         <script src="../../script/MPA-architecture/contact-templates.js"></script>
         <script src="../../script/MPA-architecture/contacts.js"></script>
         <script src="/assets/script/MPA-architecture/framework-functions.js"></script>
-        
+        <!--Logout aktuell problematisch-->
+        <!--<script src="/assets/script/main.js"></script>-->
+        <!--<script src="/assets/script/templates.js"></script>-->
     </body>
 </html>
