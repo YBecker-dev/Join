@@ -185,16 +185,14 @@ function getTaskOverlay(task, taskId) {
         <div class="overlay-edit">
           <div class="overlay-edit-content">
             <div class="trashImg"  onclick="deleteTaskFromFirebase(${task.addTaskId}); toggleBoardOverlay()">
-              <!--<img src="../img/icon/trash.png" alt="trash">-->
-              <img src="/assets/img/icon/trash.png" alt="trash">
+              <img src="../../img/icon/trash.png" alt="trash">
               <p class="p-Tag">Delete</p>
             </div>
           </div>
           <div class="overlay-seperator"></div>
           <div class="overlay-edit-content">
             <div class="editImg" onclick="editTask('${taskId}')">
-              <!--<img src="../img/icon/edit.png" alt="edit">-->
-              <img src="/assets/img/icon/edit.png" alt="edit">
+              <img src="../../img/icon/add_task_icon/subtasks/edit.png" alt="edit">
               <p class="p-Tag">Edit</p>
             </div>
           </div>
@@ -312,9 +310,9 @@ function pushSubtaskInputHTML(text) {
     <div class="subtask-item">
       <span><li>${text}</li></span>
       <div class="subtask-actions">
-        <img src="../img/icon/add_task_icon/subtasks/edit.png" onclick="editSubtask(this)" />
+        <img src="../../img/icon/add_task_icon/subtasks/edit.png" onclick="editSubtask(this)" />
         <div class="subtask-wrapper"></div>
-        <img src="../img/icon/add_task_icon/subtasks/delete.png" onclick="deleteSubtask(this)" />
+        <img src="../../img/icon/add_task_icon/subtasks/delete.png" onclick="deleteSubtask(this)" />
       </div>
     </div>
   `;
@@ -325,18 +323,18 @@ function editSubtaskInputHTML(oldText) {
 <div class="input-with-icons">
   <input id="subtask-edit-input" type="text" class="edit-subtask-input input-border-none" value="${oldText}"
          onkeydown="saveSubtaskEdit(event, this)">
-  <img class="hover-icon" onclick="deleteSubtask(this)" src="../img/icon/add_task_icon/subtasks/delete.png">
+  <img class="hover-icon" onclick="deleteSubtask(this)" src="../../img/icon/add_task_icon/subtasks/delete.png">
   <div class="subtask-wrapper-edit"></div>
-  <img class="hover-icon" onclick="saveSubtaskEdit(event, this)" src="../img/icon/add_task_icon/subtasks/check.png">
+  <img class="hover-icon" onclick="saveSubtaskEdit(event, this)" src="../../img/icon/add_task_icon/subtasks/check.png">
 </div>
   `;
 }
 
 function showSaveCancelIconsHtml() {
   return `
-      <img class="hover-icon" src="../img/icon/add_task_icon/subtasks/clear.png" onclick="clearSubtaskInput()">
+      <img class="hover-icon" src="../../img/icon/add_task_icon/subtasks/clear.png" onclick="clearSubtaskInput()">
       <div class="subtask-wrapper"></div>
-      <img class="hover-icon" id="submit-subtask" onclick="pushSubtaskInput(event)" src="../img/icon/add_task_icon/subtasks/check.png">
+      <img class="hover-icon" id="submit-subtask" onclick="pushSubtaskInput(event)" src="../../img/icon/add_task_icon/subtasks/check.png">
     `;
 }
 
@@ -344,9 +342,9 @@ function saveSubtaskEditHTML(newText) {
   return `
     <span><li>${newText}</li></span>
     <div class="subtask-actions">
-      <img src="../img/icon/add_task_icon/subtasks/edit.png" onclick="editSubtask(this)" />
+      <img src="../../img/icon/add_task_icon/subtasks/edit.png" onclick="editSubtask(this)" />
       <div class="subtask-wrapper"></div>
-      <img src="../img/icon/add_task_icon/subtasks/delete.png" onclick="deleteSubtask(this)" />
+      <img src="../../img/icon/add_task_icon/subtasks/delete.png" onclick="deleteSubtask(this)" />
     </div>
   `;
 }

@@ -3,7 +3,7 @@
     <div class="wrapper-create-task">
       <div class="wrapper-create-task-center">
         <p>Task added to board</p>
-        <img src="../img/icon/tasks_icon/board.png" alt="" />
+        <img src="../../img/icon/tasks_icon/board.png" alt="" />
       </div>
     </div>
   </section>
@@ -16,10 +16,10 @@
     <form id="add-task-form" onsubmit="return validateAddTaskForm();" onkeydown="return preventEnterSubmit(event);">
       <div class="create-clear-buttons">
         <button type="button" class="clear-button" onclick="clearAllTaskFields();">
-          Clear <img src="../img/icon/add_task_icon/buttons/clear_all.png" />
+          Clear <img src="../../img/icon/add_task_icon/buttons/clear_all.png" />
         </button>
         <button disabled type="submit" class="create-button" id="create-task-button">
-          Create Task <img src="../img/icon/add_task_icon/buttons/create_task.png" />
+          Create Task <img src="../../img/icon/add_task_icon/buttons/create_task.png" />
         </button>
       </div>
       <div class="title_description_date">
@@ -41,7 +41,7 @@
             <div class="description-input-container">
               <textarea id="description" name="add-task-textarea" placeholder="Enter a Description"></textarea>
               <span class="input-icon">
-                <img src="/assets/img/icon/add_task_icon/textarea.png" alt="" />
+                <img src="../../img/icon/add_task_icon/textarea.png" alt="" />
               </span>
             </div>
           </div>
@@ -56,7 +56,7 @@
                 oninput="showError('add-task-input2-warning', 'date'); enableCreateTaskButton()"
               />
               <span class="date-icon">
-                <img src="../img/icon/add_task_icon/event.png" alt="" />
+                <img src="../../img/icon/add_task_icon/event.png" alt="" />
               </span>
             </div>
             <span id="add-task-input2-warning" class="input-warning d-none">This field is required</span>
@@ -71,13 +71,13 @@
           </div>
           <div class="priority-buttons">
             <button type="button" class="add-task-button" id="urgent" onclick="togglePriority('urgent')">
-              Urgent <img src="../img/icon/priority/urgent.png" alt="" />
+              Urgent <img src="../../img/icon/priority/urgent.png" alt="" />
             </button>
             <button type="button" class="add-task-button" id="medium" onclick="togglePriority('medium')">
-              Medium <img class="priority-button-medium-img" src="../img/icon/priority/medium.png" alt="" />
+              Medium <img class="priority-button-medium-img" src="../../img/icon/priority/medium.png" alt="" />
             </button>
             <button type="button" class="add-task-button" id="low" onclick="togglePriority('low')">
-              Low <img src="../img/icon/priority/low.png" alt="" />
+              Low <img src="../../img/icon/priority/low.png" alt="" />
             </button>
           </div>
         </div>
@@ -101,7 +101,7 @@
                   <img
                     class="hover-icon"
                     id="assigned-to-arrow"
-                    src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png"
+                    src="../../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png"
                     alt=""
                   />
                 </div>
@@ -125,11 +125,12 @@
                 <img
                   class="hover-icon"
                   id="category-selected-arrow"
-                  src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png"
+                  src="../../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png"
                   alt=""
                 />
               </div>
               <ul id="category-dropdown-options" class="hidden custom-dropdown-options" onclick="eventBubbling(event)">
+                <p class="filllicker"></p>
                 <p
                   class="category-option"
                   onclick="eventBubbling(event); selectCustomOption(this); enableCreateTaskButton(); showError('category-dropdown-warning', 'category-dropdown-selected', true)"
@@ -160,7 +161,7 @@
               <span class="subtasks-icon" id="subtasks-icon">
                 <img
                   class="hover-icon"
-                  src="/assets/img/icon/add_task_icon/plus.png"
+                  src="../../img/icon/add_task_icon/plus.png"
                   alt="Add"
                   onclick="pushSubtaskInput(event)"
                 />

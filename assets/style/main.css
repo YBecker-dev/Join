@@ -182,7 +182,8 @@ header {
     text-decoration: none;
     color: #FFFFFF;
 }
-.help-mobil{
+
+.help-mobil {
     display: none;
 }
 
@@ -200,7 +201,6 @@ header {
     flex-direction: column;
     gap: 15px;
 }
-
 
 /* // responsive design */
 
@@ -255,8 +255,9 @@ header {
         line-height: 120%;
         width: 80px;
     }
+
     /*Test*/
-   
+
 
     .sidebar-links.active {
         border-radius: 15px;
@@ -289,10 +290,10 @@ header {
     .user {
         height: 40px;
         width: 40px;
-        
+
         font-size: 12px;
         font-weight: 700;
-        
+
     }
 
     .logo-responsive {
@@ -307,23 +308,26 @@ header {
         top: 0;
         left: 0;
     }
-    .logout-overlay-content{
+
+    .logout-overlay-content {
         height: auto;
         top: 80px;
     }
- 
-    .help-mobil{
+
+    .help-mobil {
         height: 46px;
         width: 90%;
         display: flex;
         justify-content: center;
         align-items: center;
         border-top-left-radius: 10px;
-        p{
+
+        p {
             color: #FFFFFF;
-        }   
+        }
     }
-    .help-mobil:hover{
+
+    .help-mobil:hover {
         cursor: pointer;
         background-color: #102542;
     }

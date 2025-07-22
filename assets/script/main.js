@@ -82,6 +82,7 @@ function toggleLogOutOverlay() {
 function handleLogOut(event) {
   event.preventDefault();
   resetAnnouncedUserStorage();
+  localStorage.removeItem('showGreeting');
   window.location.href = '/index.html';
 }
 
@@ -96,8 +97,7 @@ function changeColorbyHtmlLinks(element) {
   element.classList.add('active');
 }
 
-function toggleMoveToOverlay(){
+function toggleMoveToOverlay() {
   let moveToRef = document.getElementById('selection');
   moveToRef.classList.toggle('d-none');
-  
 }

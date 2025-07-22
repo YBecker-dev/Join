@@ -426,7 +426,8 @@ input[type="text"] {
     border-radius: 15px;
 }
 
-.add-task input[type="text"] {
+.add-task input[type="text"],
+#edit-date {
     width: 100%;
     max-width: 440px;
     font-size: 1.25rem;
@@ -830,8 +831,10 @@ input[type="text"] {
 
     .add-task input[type="text"],
     .task-attribute,
-    .addtask {
+    .addtask,
+    textarea {
         max-width: 600px;
+        width: 100%;
     }
 
     .add-task .date-icon {

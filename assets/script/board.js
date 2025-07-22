@@ -98,15 +98,17 @@ function getMaxSequenceForStatus(allTasks, newStatus) {
   return maxSequence;
 }
 
+function updateTaskStatusAndSequence(task, newStatus, maxSequence) {
+  task.status = newStatus;
+  task.sequence = maxSequence;
+}
+
 async function fetchTaskById(taskId) {
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
   return await response.json();
 }
 
-function updateTaskStatusAndSequence(task, newStatus, maxSequence) {
-  task.status = newStatus;
-  task.sequence = maxSequence;
-}
+
 
 async function saveTask(taskId, task) {
   await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json', {
@@ -407,12 +409,14 @@ async function editTask(taskId) {
       </div>
       <div class="input-group edittask add-task">
         <span>Description</span>
-        <textarea id="edit-description" name="add-task-textarea" placeholder="Enter a Description">${
-          task.description || ''
-        }</textarea>
-        <span class="input-icon-edit">
-          <img src="/assets/img/icon/add_task_icon/textarea.png" alt="" />
-        </span>
+        <div class="input-textarea-edit">
+          <textarea id="edit-description" name="add-task-textarea" placeholder="Enter a Description">${
+            task.description || ''
+          }</textarea>
+          <span class="input-icon-edit">
+            <img src="/assets/img/icon/add_task_icon/textarea.png" alt="" />
+          </span>
+        </div>
       </div>
       <div class="input-group edittask add-task date">
         <span>Due Date <span class="required-star">*</span></span>
@@ -465,23 +469,22 @@ async function editTask(taskId) {
       </div>
       <div class="input-group edittask add-task subtask-edit">
         <span>Subtasks</span>
-        <input class="add-task-input-edit"
-          id="add-task-input4"
-          oninput="onSubtaskInputChange()"
-          onkeydown="onSubtaskInputKeydown(event)"
-          name="add-task-input4"
-          type="text"
-          placeholder="Add new subtask"
-          value=""
-        />
-        <span class="subtasks-icon" id="subtasks-icon">
-          <img
-            class="hover-icon"
-            src="/assets/img/icon/add_task_icon/plus.png"
-            alt="Add"
-            onclick="pushSubtaskInput(event)"
-          />
-        </span>
+        <div class="subtask-edit-container">
+          <input class="add-task-input-edit"
+            id="add-task-input4"
+            oninput="onSubtaskInputChange()"
+            onkeydown="onSubtaskInputKeydown(event)"
+            name="add-task-input4"
+            type="text"
+            placeholder="Add new subtask"/>
+          <span class="subtasks-icon" id="subtasks-icon">
+            <img
+              class="hover-icon"
+              src="/assets/img/icon/add_task_icon/plus.png"
+              alt="Add"
+              onclick="pushSubtaskInput(event)"/>
+          </span>
+        </div>
       </div>
       <div id="subtasks-container" class="subtasks-container"></div>
     </form>
@@ -595,7 +598,7 @@ async function openCreateTask() {
   tempDiv.innerHTML += html;
   let clearBtn = tempDiv.querySelector('.clear-button');
   if (clearBtn) {
-    let cancelBtnHtml = `<button type="button" class="cancel-button" onclick="closeCreateTask()">Cancel <img src="../img/icon/close.png" alt="" class=""></button>`;
+    let cancelBtnHtml = `<button type="button" class="cancel-button" onclick="closeCreateTask()">Cancel <img src="../../img/icon/close.png" alt="" class=""></button>`;
     clearBtn.outerHTML = cancelBtnHtml;
   }
   let contentSpace = tempDiv.querySelector('.contentspace-html');
@@ -605,7 +608,7 @@ async function openCreateTask() {
   let overlayBg = document.getElementById('overlay-add-task');
   let overlayContent = document.getElementById('add-task-overlay-content');
   overlayContent.innerHTML =
-    `<img onclick="closeCreateTask()" src="../img/icon/close.png" alt="" class="close-overlay-x">` + tempDiv.innerHTML;
+    `<img onclick="closeCreateTask()" src="../../img/icon/close.png" alt="" class="close-overlay-x">` + tempDiv.innerHTML;
   animatedOpeningAddTask(overlayBg, overlayContent);
   setPriority('medium');
 }

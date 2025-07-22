@@ -30,28 +30,28 @@ passwordValue.addEventListener('click', function () {
 });
 
 function setLogoForWidth() {
-    if (window.innerWidth <= 1180) {
-        logo.src = 'assets/img/logo/logo_white.png';
-    } else {
-        logo.src = 'assets/img/logo/logo_dark.png';
-    }
+  if (window.innerWidth <= 1180) {
+    logo.src = 'assets/img/logo/logo_white.png';
+  } else {
+    logo.src = 'assets/img/logo/logo_dark.png';
+  }
 }
 
 function animateLogo() {
-    logo.classList.add('logo-zoom');
-    setTimeout(() => {
-        logo.classList.remove('logo-zoom');
-        logo.src = 'assets/img/logo/logo_dark.png';
-        headerLogo.classList.add('fade-out');
-    }, 900); 
+  logo.classList.add('logo-zoom');
+  setTimeout(() => {
+    logo.classList.remove('logo-zoom');
+    logo.src = 'assets/img/logo/logo_dark.png';
+    headerLogo.classList.add('fade-out');
+  }, 900);
 }
 
 function init() {
-    logo = document.getElementById('start-logo');
-    headerLogo = document.querySelector('.main-header-logo');
-    logo.classList.remove('preload');
-    setLogoForWidth();
-    animateLogo();
+  logo = document.getElementById('start-logo');
+  headerLogo = document.querySelector('.main-header-logo');
+  logo.classList.remove('preload');
+  setLogoForWidth();
+  animateLogo();
 }
 
 function loginUser(event) {
@@ -74,14 +74,16 @@ async function checkUser(event) {
           const userObjekt = userDataObject[userID];
           if (mail.value == userObjekt.mail && password.value == userObjekt.password) {
             findUser = true;
-            //console.log( 'name' , userObjekt.name ,'mail' ,userObjekt.mail );
-            const announcedUser = userObjekt.name;
-            //console.log(announcedUser);
+            let announcedUser = userObjekt.name;
+            if (userObjekt.surname && userObjekt.surname.trim() !== '') {
+              announcedUser += ' ' + userObjekt.surname;
+            }
             storeAnnoncedUserName(announcedUser);
             break;
           }
         }
         if (findUser === true) {
+          localStorage.setItem('showGreeting', 'true');
           console.log('User gefunden');
           window.location.href = 'assets/html/MPA-architecture/summery.html';
           resetForm();
@@ -97,6 +99,7 @@ async function checkUser(event) {
     console.error(error);
   }
 }
+
 let resetForm = () => document.getElementById('login-form').reset();
 
 let resetPwIcon = () => {
@@ -111,10 +114,10 @@ let storeAnnoncedUserName = (announcedUser) => {
 
 function logginAsGuest() {
   let guestUser = 'Guest Guest';
-  console.log(guestUser);
   localStorage.setItem('announcedUser', JSON.stringify(guestUser));
-  console.log(JSON.parse(localStorage.getItem('announcedUser')));
-  window.location.href = 'assets/html/MPA-architecture/board.html'//MPA-architecture
+  localStorage.setItem('showGreeting', 'true');
+  window.location.href = 'assets/html/MPA-architecture/summery.html';
+  //MPA-architecture
   //window.location.href = 'assets/html/main.html'; //SPA-architecture
 }
 //-------------------------------------------------------------------------------------
@@ -129,6 +132,7 @@ function privacyPolicyMPA() {
   console.log(JSON.parse(localStorage.getItem('announcedUser')));
   window.location.href = PrivacyPolicy;
 }
+
 function legalNoticeMPA() {
   let guestUser = 'Guest Guest';
   console.log(guestUser);
