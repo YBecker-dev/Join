@@ -62,7 +62,6 @@ button {
     height: 3.5rem;
     align-content: center;
     border-radius: 6rem;
-    background-color: orange; /* muss noch angepasst werden */
     color: white;
     font-size: 2rem;
 }
@@ -105,6 +104,10 @@ h2 {
     font-size: 24px;
 }
 
+.newContactBtn-mobile {
+    display: none;
+}
+
 /* deteils view */
 .namesDetails {
     position: fixed;
@@ -124,7 +127,6 @@ h2 {
     height: 6rem;
     align-content: center;
     border-radius: 6rem;
-    background-color: orange; /* muss noch angepasst werden */
     color: white;
     font-size: 4rem;
 }
@@ -339,4 +341,84 @@ h4 {
 .save-close {
     width: 1.5rem;
     height: 1.5rem;
+}
+
+@media (max-width: 1440px) {
+    .contactList {
+        overflow-y: scroll;
+        width: 100%;
+        height: 100%;
+        background-color: #ffffff;
+    }
+
+    .newContactBtn-mobile {
+        display: block;
+        bottom: 20px;
+        right: 12px;
+    }
+
+    .newContactOverlay,
+    .editContactOverlay {
+        top: 50%;
+        left: 50%;
+        height: 50rem;
+        width: 40rem;
+        display: flex;
+        flex-direction: column;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .contactLogo {
+        display: none;
+    }
+
+    .headDiv {
+        height: 40%;
+        width: 30rem;
+        border-top-left-radius: 1.2rem;
+        border-top-right-radius: 1.2rem;
+        border-bottom-left-radius: 0;
+    }
+
+    .editDiv {
+        height: 60%;
+        width: 30rem;
+        border-bottom-left-radius: 1.2rem;
+        border-bottom-right-radius: 1.2rem;
+        border-top-right-radius: 0;
+    }
+
+    .profilDiv {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profileInitials {
+        height: 80px;
+    }
+
+    .addNewContactDiv{
+        margin-bottom: 4px;
+    }
+
+    .clear-button {
+        display: none;
+    }
+}
+
+@media (max-width: 1440px) {
+    .details {
+        display: none;
+    }
+
+    .contact-headline {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 100px;
+    margin-left: 120px;
+}
 }
