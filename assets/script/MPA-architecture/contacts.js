@@ -12,7 +12,6 @@ async function loadContacts() {
     }
 
     let responseAsJson = await response.json();
-
     if (responseAsJson) {
       myContacts = [];
       newContacts = [];
@@ -22,13 +21,11 @@ async function loadContacts() {
         newContacts.push(firebaseId);
       }
     } else {
-      // console.log('Keine Kontakte in der Datenbank gefunden');
       myContacts = [];
       newContacts = [];
     }
 
     console.log('Geladene Kontakte:', myContacts);
-    // console.log('Firebase IDs:', newContacts);
     
   } catch (error) {
     console.error('Fehler beim Laden der Kontakte:', error);
@@ -72,6 +69,7 @@ function openDetails(index) {
 function toggleContactOverlay() {
   console.log('connect');
   let overlayRef = document.getElementById('addNewContactOverlay');
+  // let overlayRefMobile = document.getElementById('newContactMobile');
   if (overlayRef.classList.contains('d-none')) {
     overlayRef.classList.remove('d-none');
     overlayRef.innerHTML = getNoteTemplateAddNewContact();
