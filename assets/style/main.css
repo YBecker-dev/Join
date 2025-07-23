@@ -96,10 +96,22 @@ header {
     padding-left: 56px;
     height: 46px;
 }
+.sidebar-links-external{
+    display: flex;
+    align-items: center;
+    color: #a3a7ab;
+    height: 46px;
+    padding-left: 56px;
+    gap: 8px;
+}
 
 .sidebar-links img {
     width: 25px;
     height: 25px;
+}
+.loginImg{
+    width: 30px !important;
+    height: 30px !important;
 }
 
 .sidebar-links:hover {

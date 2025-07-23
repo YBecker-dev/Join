@@ -16,9 +16,10 @@ h1{
     display: flex;
     flex-direction: column;
     gap: 35px;
+    padding-bottom: 40px;
 }
 .subtitles{
-    height: 137px;
+    height: auto;
     width: 1016px;
     display: flex;
     flex-direction: column;
@@ -38,6 +39,13 @@ h3{
     font-weight: 700;
     line-height: 120%;
     letter-spacing: 0;
+}
+h4{
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 120%;
+    padding-top: 12px;
+    padding-bottom: 12px;
 }
 @media(max-width: 1160px){
 
@@ -60,6 +68,7 @@ h3{
         padding-left: 0;
         padding-top: 0;
         padding-bottom: 128px;
+        padding-top: 128px;
        
     }
     .body-flex>h1{
@@ -81,6 +90,7 @@ h3{
     .body-flex>h1{
         font-size: 42px;
         font-weight: 700;
+        width: auto;
     }
 }
 
