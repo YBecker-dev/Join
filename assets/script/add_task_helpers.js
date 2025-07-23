@@ -59,7 +59,7 @@ function showContactsAddTask() {
   let html = '';
   for (let i = 0; i < selectedContacts.length; i++) {
     const contact = contacts[selectedContacts[i]];
-    html += getContactDropdownHTML(contact);
+    html += showContactsAddTaskHtml(contact);
   }
   container.innerHTML = html;
 }
