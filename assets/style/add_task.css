@@ -67,7 +67,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .add-task .date-icon {
     position: absolute;
-    right: 16px;
+    right: 14px;
     bottom: 12px;
     height: 24px;
     width: 24px;
@@ -231,7 +231,7 @@ label {
 }
 
 input[type="text"] {
-    padding: 12px 0px 12px 16px;
+    padding: 12px 16px;
 }
 
 #category-dropdown-selected,

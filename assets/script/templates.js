@@ -400,3 +400,12 @@ function overlayPriority(task) {
     return `<p class="p-Tag padding-priority">-</p>`;
   }
 }
+
+
+function getContactDropdownHTML(contact) {
+return `
+    <div class="contact-items" style="background-color:${contact.color};">
+      <span>${contact.initials}</span>
+    </div>
+  `;
+}
