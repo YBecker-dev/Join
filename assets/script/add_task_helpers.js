@@ -106,7 +106,7 @@ function toggleWarning(warningElement, fieldIsEmpty) {
 
 async function buildTaskData() {
   return {
-    addTaskId: getNextTaskId(),
+    addTaskId: await getNextTaskId(),
     title: getInputValue('title'),
     description: getInputValue('description'),
     date: getInputValue('date'),
