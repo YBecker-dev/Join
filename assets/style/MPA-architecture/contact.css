@@ -70,6 +70,7 @@
 .person:hover {
     background-color: #c4c6ca;
     color: #ffffff;
+    cursor: pointer;
 }
 
 .person:active {
@@ -164,7 +165,9 @@ h2 {
     border-radius: 70px;
     color: white;
     font-size: 47px;
-    border: 3px solid #FFFFFF
+    border: 3px solid #FFFFFF;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+
 }
 
 .infoNames {
@@ -198,6 +201,7 @@ h2 {
     justify-content: center;
     align-items: center;
     gap: 8px;
+    cursor: pointer;
 }
 
 .editIcon {
@@ -234,7 +238,6 @@ h4 {
 .newContactOverlay,
 .editContactOverlay {
     height: 40rem;
-    width: 80rem;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -255,33 +258,42 @@ h4 {
 
 .headDiv {
     height: 100%;
-    width: 30rem;
+    width: 476px;
     border-bottom-left-radius: 1.2rem;
     border-top-left-radius: 1.2rem;
     background-color: #293647;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 64px 48px;
 }
 
 .contactLogo {
-    height: 5rem;
-    margin-top: 8rem;
-    margin-left: 3rem;
+    height: 67px;
+    width: 56px;
+    position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: left;
+    top: 174px;
+    left: 48px;
 }
 
-.addHeadline {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    margin-left: 1rem;
-    font-size: 4rem;
+.add-contact {
+    font-size: 61px;
     font-weight: bold;
     color: #ffffff;
 }
 
+.add-headline {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 8px;
+}
+
 .addTastText {
-    margin-left: 1rem;
-    font-size: 1.8rem;
+    font-size: 27px;
     color: #ffffff;
 }
 
@@ -289,8 +301,7 @@ h4 {
     height: .2rem;
     width: 7rem;
     background-color: #29abe2;
-    margin-top: 1rem;
-    margin-left: 3rem;
+    margin: 16px 0 0 0;
 }
 
 .editDiv {
@@ -299,63 +310,66 @@ h4 {
     border-bottom-right-radius: 1.2rem;
     border-top-right-radius: 1.2rem;
     background-color: #ffffff;
+    display: flex;
+}
+
+.profile-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .closeDiv {
-    margin-top: 3rem;
-    margin-right: 3rem;
-    margin-bottom: 3rem;
     display: flex;
     justify-content: end;
+    margin: 56px 0;
 }
 
 .close {
-    height: 2rem;
+    height: 24px;
+    width: 24px;
     cursor: pointer;
 }
 
 .profilDiv {
     display: flex;
-    align-items: center;
+    flex-direction: column;
 }
 
 .profileInitials {
-    font-size: 5rem;
-    font-weight: bold;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 10rem;
-    height: 10rem;
-    border-radius: 5rem;
-    margin-left: 4rem;
-    margin-right: 2rem;
-    background-color: aquamarine;
-    color: #f6f7f8;
+    padding: 0 83px 0 72px;
+    position: relative;
+    bottom: 32px;
 }
 
 .addNewContactDiv {
-    margin-top: 1rem;
-    margin-left: 3.5rem;
-    margin-bottom: 2.5rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding: 0px 21px;
     border: solid;
     border-width: 0.06rem;
     border-color: #a6adb3;
     border-radius: 0.5rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 442px;
 }
 
 .addNewContactDiv:focus-within {
     border-color: #29abe2;
 }
 
+.add-new-contact-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
 .addNewContact {
     border: 0;
     width: 20rem;
     height: 3rem;
+    cursor: pointer;
 }
 
 .addNewContact:focus {
@@ -368,33 +382,79 @@ h4 {
 }
 
 .addNewContactIcon {
-    width: 2rem;
+    height: 24px;
+    width: 24px;
 }
 
 .clear-button {
     background-color: #ffffff;
     color: #293647;
     border: solid 1px #293647;
+    font-weight: 400;
+}
+
+.create-button,
+.clear-button {
     display: flex;
     justify-content: center;
+    gap: 4px;
 }
 
 .create-button {
-    display: flex;
-    justify-content: center;
+    font-weight: 700;
+    font-size: 21px;
 }
+
 
 .accept {
     display: flex;
-    justify-content: center;
-    margin-left: 11rem;
-}
-
-.accept>.create-button {
-    margin-left: 1rem;
+    justify-content: start;
+    gap: 24px;
 }
 
 .save-close {
     width: 1.5rem;
     height: 1.5rem;
+}
+
+.agenda {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+}
+
+.agenda-category {
+    text-align: start;
+    padding: 17px 36px;
+}
+
+.agenda-line {
+    max-width: 352px;
+    width: 100%;
+    border: 1px solid #D1D1D1;
+    margin: 8px 0;
+}
+
+.edit-contact-overlay-section,
+.add-new-contact-section {
+    background-color: #00000059;
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.profileImg {
+    height: 120px;
+    width: 120px;
+}
+
+input#newContactName:focus,
+input#newContactMail:focus,
+input#newContactPhone:focus {
+    outline: none;
+    border-color: initial;
+    border: none;
 }
