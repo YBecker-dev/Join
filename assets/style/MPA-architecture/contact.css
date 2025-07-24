@@ -12,7 +12,7 @@
 /* Contact List side */
 .contactList {
     overflow-y: scroll;
-    width: 38rem;
+    width: 40rem;
     height: 100%;
     background-color: #ffffff;
 }
@@ -25,6 +25,10 @@ button {
     display: flex;
     margin-left: 2rem;
     margin-right: 2rem;
+}
+
+.newContactBtn-mobile {
+   display: none;
 }
 
 .newContact {
@@ -61,7 +65,7 @@ button {
     width: 3.5rem;
     height: 3.5rem;
     align-content: center;
-    border-radius: 6rem;
+    border-radius: 10rem;
     color: white;
     font-size: 2rem;
 }
@@ -126,7 +130,7 @@ h2 {
     width: 6rem;
     height: 6rem;
     align-content: center;
-    border-radius: 6rem;
+    border-radius: 10rem;
     color: white;
     font-size: 4rem;
 }
@@ -203,6 +207,10 @@ h4 {
     border-bottom-left-radius: 1.2rem;
     border-top-left-radius: 1.2rem;
     background-color: #293647;
+}
+
+.close-onMobile {
+    display: none;
 }
 
 .contactLogo {
@@ -303,7 +311,6 @@ h4 {
 }
 
 .addNewContact:focus {
-    outline: 2px solid #29abe2;
     border-color: #29abe2;
 }
 
@@ -346,47 +353,59 @@ h4 {
 @media (max-width: 1440px) {
     .contactList {
         overflow-y: scroll;
-        width: 100%;
+        width: 60%;
         height: 100%;
         background-color: #ffffff;
+
     }
 
     .newContactBtn-mobile {
         display: block;
-        bottom: 20px;
+        background-color: #293647;
+        position: fixed;
+        height: 60px;
+        width: 60px;
+        border-radius: 10rem;
+        bottom: 120px;
         right: 12px;
+    }
+
+    .newContact-mobile {
+        margin: auto;
+        height: 28px;
     }
 
     .newContactOverlay,
     .editContactOverlay {
-        top: 50%;
+        top: 45%;
         left: 50%;
-        height: 50rem;
-        width: 40rem;
+        height: 45rem;
+        width: 30rem;
         display: flex;
         flex-direction: column;
         margin-left: auto;
         margin-right: auto;
     }
 
+    .close-onMobile {
+    display: block;
+    }
+
+    .close {
+      display: none;
+    }
+
     .contactLogo {
         display: none;
     }
 
-    .headDiv {
-        height: 40%;
+    .headDiv,
+    .editDiv {
+        height: 50%;
         width: 30rem;
         border-top-left-radius: 1.2rem;
         border-top-right-radius: 1.2rem;
         border-bottom-left-radius: 0;
-    }
-
-    .editDiv {
-        height: 60%;
-        width: 30rem;
-        border-bottom-left-radius: 1.2rem;
-        border-bottom-right-radius: 1.2rem;
-        border-top-right-radius: 0;
     }
 
     .profilDiv {
@@ -397,6 +416,7 @@ h4 {
 
     .profileInitials {
         height: 80px;
+        width: 80px;
     }
 
     .addNewContactDiv{
@@ -406,19 +426,4 @@ h4 {
     .clear-button {
         display: none;
     }
-}
-
-@media (max-width: 1440px) {
-    .details {
-        display: none;
-    }
-
-    .contact-headline {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    margin-top: 100px;
-    margin-left: 120px;
-}
 }
