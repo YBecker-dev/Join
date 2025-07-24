@@ -23,13 +23,13 @@ function getNoteTemplateContactDetails(indexDetails) {
                 <div>
                   <h3 class="infoNames">${user.name}</h3>
                   <div class="contactIcons">
-                    <div id="editOverlay" onclick="openEditOverlay(${indexDetails})">
+                    <div class="editOverlay" id="editOverlay" onclick="openEditOverlay(${indexDetails})">
                       <img class="editIcon" src="../../img/icon/add_task_icon/subtasks/edit.png" alt="pencil">
-                      <span class="editText">edit</span>
+                      <p class="editText">Edit</p>
                     </div>
-                    <div onclick="deleteContact(${indexDetails})">
+                    <div class="editOverlay" onclick="deleteContact(${indexDetails})">
                       <img class="editIcon" src="../../img/icon/add_task_icon/subtasks/delete.png" alt="wastebasket">
-                      <span class="editText">delete</span>
+                      <p class="editText">Delete</p>
                     </div>
                   </div>
                 </div>
@@ -41,6 +41,11 @@ function getNoteTemplateContactDetails(indexDetails) {
                 <h4>Phone</h4>
                 <a class="phone" href="tel:${user.phone}">${user.phone}</a>
               </div>
+              <button onclick="openEditMobileOverlay()" class="addContactBtn">
+                        <div class="dotted"></div>
+                        <div class="dotted"></div>
+                        <div class="dotted"></div>
+              </button>
             </div>`;
 }
 
@@ -129,4 +134,20 @@ function getNoteTemplateEditContact(index) {
                 </div>
               </div> 
             </div>`;
+}
+
+function getNoteTemplateEditMobile() {
+  return `  <div class="editMobile">
+              <div class="editDivMobile" onclick="openEditOverlay(${indexDetails})">
+                <img class="editIcon" src="../../img/icon/add_task_icon/subtasks/edit.png" alt="pencil">
+                <p class="editText">Edit</p>
+              </div>
+              <div class="editDivMobile" onclick="deleteContact(${indexDetails})">
+                <img class="editIcon" src="../../img/icon/add_task_icon/subtasks/delete.png" alt="wastebasket">
+                <p class="editText">Delete</p>
+              </div>
+            </div>
+  
+  
+  `
 }

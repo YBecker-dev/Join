@@ -146,6 +146,13 @@ function closeOverlay() {
 }
 
 
+function openEditMobileOverlay(){
+  let contentRefMobile = document.getElementById('editMobileOverlay');
+  contentRefMobile.classList.remove('d-none');
+  contentRefMobile.innerHTML = getNoteTemplateEditMobile()
+}
+
+
 function openEditOverlay(index) {
   let contentOverlayRef = document.getElementById('editContactOverlay');
   contentOverlayRef.classList.remove('d-none');
