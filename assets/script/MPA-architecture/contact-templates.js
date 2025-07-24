@@ -3,7 +3,7 @@ function getNoteTemplateContact(index) {
   let user = myContacts[index];
 
   return  ` <div onclick="openDetails(${index}), event.stopPropagation()" class="person">
-              <p class="initial" style="background-color: ${user.color}">${user.initials}</p>
+              <div class="initial" style="background-color: ${user.color}">${user.initials}</div>
               <div>
                 <h4>${user.name}</h4>
                 <p>
@@ -48,6 +48,9 @@ function getNoteTemplateContactDetails(indexDetails) {
 function getNoteTemplateAddNewContact() {
   return ` <div class="newContactOverlay" onclick="event.stopPropagation()">
             <div class="headDiv">
+              <div class="closeDiv">
+                <img onclick="closeOverlay()" class="close-onMobile" src="../../img/icon/close-white.png" alt="Close-Button">
+              </div>  
               <img class="contactLogo" src="../../img/Logo/Logo_white.png" alt="Logo_white">
               <p class="addHeadline">Add contact</p>
               <p class="addTastText">Tasks are better with a team!</p>
@@ -90,6 +93,9 @@ function getNoteTemplateEditContact(index) {
 
   return `  <div class="editContactOverlay" onclick="event.stopPropagation()">
               <div class="headDiv">
+                <div class="closeDiv">
+                  <img onclick="closeOverlay()" class="close-onMobile" src="../../img/icon/close-white.png" alt="Close-Button">
+                </div>
                 <img class="contactLogo" src="../../img/Logo/Logo_white.png" alt="Logo_white">
                 <p class="addHeadline">Edit contact</p>
                 <div class="line"></div>
