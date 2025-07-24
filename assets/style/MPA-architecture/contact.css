@@ -12,38 +12,59 @@
 /* Contact List side */
 .contactList {
     overflow-y: scroll;
-    width: 38rem;
+    width: 456px;
     height: 100%;
     background-color: #ffffff;
+    padding: 0px 12px 32px 24px;
+    box-shadow: 4px 0px 6px 0px #00000014;
+    position: relative;
 }
 
-button {
-    margin-top: 1rem;
+.add-new-contact-button {
+    height: 52px;
+    max-width: 352px;
+    width: 100%;
+
 }
 
 .btn {
     display: flex;
-    margin-left: 2rem;
-    margin-right: 2rem;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    font-size: 21px;
 }
 
 .newContact {
     height: 28px;
-    padding-left: 1rem;
-    padding-right: 1rem;
+}
+
+.contact-name {
+    font-size: 20px;
+}
+
+.background-new-contact-button {
+    width: 456px;
+    height: 101px;
+    position: fixed;
+    top: 95px;
+    left: 232px;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .person {
-    margin-left: 2rem;
-    margin-right: 2rem;
-    margin-top: 40px;
-    padding: 20px;
+    padding: 15px 24px;
     background-color: #ffffff;
-    box-shadow: #f6f7f8;
     display: flex;
     justify-content: start;
-    border-radius: 0.5rem;
+    border-radius: 10px;
     align-items: center;
+    gap: 35px;
+    max-width: 352px;
+    width: 100%;
 }
 
 .person:hover {
@@ -52,29 +73,39 @@ button {
 }
 
 .person:active {
-    background-color: #293647; /* richtige Pseudoklasse suchen */
+    background-color: #293647;
+    /* richtige Pseudoklasse suchen */
     color: #ffffff;
 }
 
-.initial {
-    margin-right: 4rem;
-    width: 3.5rem;
-    height: 3.5rem;
-    align-content: center;
-    border-radius: 6rem;
-    background-color: orange; /* muss noch angepasst werden */
-    color: white;
-    font-size: 2rem;
-}
-
-.mail {
-    color: #29abe2;
+.person-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 5px;
     text-align: start;
 }
 
-/* Details side */
+.initial {
+    width: 42px;
+    height: 42px;
+    align-content: center;
+    border-radius: 45px;
+    color: white;
+    font-size: 12px;
+}
+
+.mail {
+    color: #007CEE;
+    text-align: start;
+}
+
+.phonenumber {
+    color: black;
+}
+
 .details {
-    width: 100%;
     background-color: #f6f7f8;
 }
 
@@ -83,8 +114,9 @@ button {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    margin-top: 100px;
-    margin-left: 120px;
+    margin-top: 110px;
+    margin-left: 60px;
+    padding-bottom: 32px;
 }
 
 h2 {
@@ -105,42 +137,67 @@ h2 {
     font-size: 24px;
 }
 
-/* deteils view */
 .namesDetails {
-    position: fixed;
-    margin-top: 5rem;
-    margin-left: 5rem;
+    margin-left: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
 }
 
 .contactInformations {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    gap: 52px;
+}
+
+.contact-Information {
+    text-align: start;
+    height: 74px;
+    display: flex;
     align-items: center;
 }
 
 .initialOverlay {
-    margin-right: 2rem;
-    width: 6rem;
-    height: 6rem;
+    width: 120px;
+    height: 120px;
     align-content: center;
-    border-radius: 6rem;
-    background-color: orange; /* muss noch angepasst werden */
+    border-radius: 70px;
     color: white;
-    font-size: 4rem;
+    font-size: 47px;
+    border: 3px solid #FFFFFF
 }
 
 .infoNames {
     font-size: 2.5rem;
 }
-.contactIcons{
+
+.contactIcons {
     display: flex;
     align-items: center;
     justify-content: start;
-    margin-top: 1rem;
+    gap: 24px;
+}
+
+.contactDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 8px
+}
+
+#contactContent {
+    padding: 101px 24px 0 24px;
 }
 
 .edit {
     display: flex;
+}
+
+#editOverlay,
+#deleteOverlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 }
 
 .editIcon {
@@ -149,17 +206,20 @@ h2 {
 }
 
 .editText {
-    color: #404447;
-    margin-left: 0.5rem;
-    margin-right: 1.5rem;
-    cursor: pointer;
+    color: #2A3647;
 }
 
 .infoBlock {
     display: flex;
     flex-direction: column;
     align-items: start;
-    margin-top: 3rem;
+    gap: 22px;
+}
+
+.infoBlock-details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .info {
@@ -168,8 +228,6 @@ h2 {
 
 h4 {
     text-align: start;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
 }
 
 /* edit, and add new Contact Overlay */
@@ -323,7 +381,7 @@ h4 {
 
 .create-button {
     display: flex;
-    justify-content: center;  
+    justify-content: center;
 }
 
 .accept {
@@ -332,7 +390,7 @@ h4 {
     margin-left: 11rem;
 }
 
-.accept > .create-button {
+.accept>.create-button {
     margin-left: 1rem;
 }
 

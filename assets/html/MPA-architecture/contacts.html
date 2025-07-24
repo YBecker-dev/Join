@@ -1,108 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="../../img/Logo/Logo_white.png">
-        <link rel="stylesheet" href="/assets/style/MPA-architecture/join-framework.css">
-        <link rel="stylesheet" href="../../style/buttons.css">
-        <!--<link rel="stylesheet" href="../../style/MPA-architecture/contact.css">-->
-        <!-- <link rel="stylesheet" href="/assets/style/MPA-architecture/contact.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../../img/Logo/Logo_white.png" />
+    <link rel="stylesheet" href="/assets/style/MPA-architecture/join-framework.css" />
+    <link rel="stylesheet" href="../../style/buttons.css" />
+    <!--<link rel="stylesheet" href="../../style/MPA-architecture/contact.css">-->
+    <!-- <link rel="stylesheet" href="/assets/style/MPA-architecture/contact.css">
         <link rel="stylesheet" href="/assets/style/main.css"> -->
-        
-        <link rel="stylesheet" href="../../style/MPA-architecture/contact.css">
-        <link rel="stylesheet" href="../../style/main.css">
-        <title>Contacts</title>
-        
-    </head>
-    <body onload="initContacts()">
 
+    <link rel="stylesheet" href="../../style/MPA-architecture/contact.css" />
+    <link rel="stylesheet" href="../../style/main.css" />
+    <title>Contacts</title>
+  </head>
+  <body onload="initContacts()">
+    <section class="logout-overlay d-none" id="overlay-logout" onclick="toggleLogOutOverlay()">
+      <div class="logout-overlay-content" id="logout-overlay-content"></div>
+    </section>
 
-        <section class="logout-overlay d-none" id="overlay-logout" onclick="toggleLogOutOverlay()">
-          <div class="logout-overlay-content" id="logout-overlay-content"></div>
-        </section>
-
-
-        <header>
-            <div class="header-content">
-                <p>Kanban Project Management Tool</p>
-                <img class="logo-responsive" src="../../img/Logo/" alt="">
-                <div class="header-user">
-                    <img class="help-icon" onclick="loadHelp()" src="/assets/img/icon/header_user_interface/help.png" alt="help">
-                    <div class="nameBtn" id="userBtn" onclick="toggleLogOutOverlay()">
-                        <p class="user" id="userInitials"></p>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <section class="sidebar">
-            <div class="sidebar-links-section">
-                <div class="sidebar-logo">
-                    <img src="../../img/Logo/Logo_white.png" alt="Logo">
-                </div>
-                <div class="sidebar-links-container">
-                    <a class="sidebar-links" id="sidebar-summary" href="./summery.html">
-                        <img src="../../img/icon/tasks_icon/summary.png" alt="Summary">Summary
-                    </a>
-                    <a class="sidebar-links" id="sidebar-add-task" href="./add_task.html">
-                        <img src="../../img/icon/tasks_icon/add_task.png" alt="Add Task">Add Task
-                    </a>
-                    <!--<a class="sidebar-links" id="sidebar-board" href="./board.html">
+    <header>
+      <div class="header-content">
+        <p>Kanban Project Management Tool</p>
+        <img class="logo-responsive" src="../../img/Logo/" alt="" />
+        <div class="header-user">
+          <img
+            class="help-icon"
+            onclick="loadHelp()"
+            src="/assets/img/icon/header_user_interface/help.png"
+            alt="help"
+          />
+          <div class="nameBtn" id="userBtn" onclick="toggleLogOutOverlay()">
+            <p class="user" id="userInitials"></p>
+          </div>
+        </div>
+      </div>
+    </header>
+    <section class="sidebar">
+      <div class="sidebar-links-section">
+        <div class="sidebar-logo">
+          <img src="../../img/Logo/Logo_white.png" alt="Logo" />
+        </div>
+        <div class="sidebar-links-container">
+          <a class="sidebar-links" id="sidebar-summary" href="./summery.html">
+            <img src="../../img/icon/tasks_icon/summary.png" alt="Summary" />Summary
+          </a>
+          <a class="sidebar-links" id="sidebar-add-task" href="./add_task.html">
+            <img src="../../img/icon/tasks_icon/add_task.png" alt="Add Task" />Add Task
+          </a>
+          <!--<a class="sidebar-links" id="sidebar-board" href="./board.html">
                         <img src="../../img/icon/tasks_icon/board.png" alt="" target="_blank">Board-->
-                    <a class="sidebar-links" id="sidebar-board" href="./board.html">
-                        <img src="../../img/icon/tasks_icon/board.png" alt="Board">Board
-                    </a>
-                    <a class="sidebar-links" id="sidebar-contacts" href="./contacts.html">
-                        <img src="../../img/icon/tasks_icon/contacts.png" alt="contacts">Contacts
-                    </a>
-                </div>
-            </div>
-            <div class="sidebar-legal-stuff">
-                <a class="sidebar-links privacy-legal" id="sidebar-privacy-policy" href="./privacy-policy_internal.html">Privacy Policy</a>
-                <a class="sidebar-links privacy-legal" id="sidebar-legal-notice" href="./legal-notice_internal.html">Legal Notice</a>
-            </div>
-        </section>
+          <a class="sidebar-links" id="sidebar-board" href="./board.html">
+            <img src="../../img/icon/tasks_icon/board.png" alt="Board" />Board
+          </a>
+          <a class="sidebar-links" id="sidebar-contacts" href="./contacts.html">
+            <img src="../../img/icon/tasks_icon/contacts.png" alt="contacts" />Contacts
+          </a>
+        </div>
+      </div>
+      <div class="sidebar-legal-stuff">
+        <a class="sidebar-links privacy-legal" id="sidebar-privacy-policy" href="./privacy-policy_internal.html"
+          >Privacy Policy</a
+        >
+        <a class="sidebar-links privacy-legal" id="sidebar-legal-notice" href="./legal-notice_internal.html"
+          >Legal Notice</a
+        >
+      </div>
+    </section>
 
-        <!-- <main class="myMain">main-content ?
+    <!-- <main class="myMain">main-content ?
             <section class="contactList"> -->
-        <main class="myMain">
-            <div class="main-content">
-            <section class="contactList"> 
-                <button onclick="toggleContactOverlay()" id="newContact">
-                    <div class="btn">
-                        <p>Add new contact</p>
-                        <img class="newContact" src="../../img/icon/new-contact.png" alt="new Contact">
-                    </div> 
-                </button>
-                <div id="contactContent">
-                </div>
-            </section>
-            
-            <section class="details">
-                <div class="contact-headline">
-                    <h2>Contacts</h2> 
-                    <div class="separating-line"></div> 
-                    <span class="team">Better with a team</span>
-                </div>
-                <div id="contactDetails">
-                </div>
-            </section>
-            </div>
-            <section>
-                <div id="addNewContactOverlay">
-                </div>
-            </section>
-            <section>
-                <div id="editContactOverlay">
-                </div>
-            </section>
-        </main>
 
-        <script src="../../script/MPA-architecture/contact-templates.js"></script>
-        <script src="../../script/MPA-architecture/contacts.js"></script>
-        <script src="/assets/script/MPA-architecture/framework-functions.js"></script>
-        <!--Logout aktuell problematisch-->
-        <!--<script src="/assets/script/main.js"></script>-->
-        <!--<script src="/assets/script/templates.js"></script>-->
-    </body>
+    <div class="main-content">
+      <section class="contactList">
+        <div class="background-new-contact-button">
+          <button class="add-new-contact-button" onclick="toggleContactOverlay()" id="newContact">
+            <div class="btn">
+              <p>Add new contact</p>
+              <img class="newContact" src="../../img/icon/new-contact.png" alt="new Contact" />
+            </div>
+          </button>
+        </div>
+        <div id="contactContent"></div>
+      </section>
+
+      <section class="details">
+        <div class="contact-headline">
+          <h2>Contacts</h2>
+          <div class="separating-line"></div>
+          <span class="team">Better with a team</span>
+        </div>
+        <div id="contactDetails"></div>
+      </section>
+    </div>
+    <section>
+      <div id="addNewContactOverlay"></div>
+    </section>
+    <section>
+      <div id="editContactOverlay"></div>
+    </section>
+
+    <script src="../../script/MPA-architecture/contact-templates.js"></script>
+    <script src="../../script/MPA-architecture/contacts.js"></script>
+    <script src="/assets/script/MPA-architecture/framework-functions.js"></script>
+    <!--Logout aktuell problematisch-->
+    <!--<script src="/assets/script/main.js"></script>-->
+    <!--<script src="/assets/script/templates.js"></script>-->
+  </body>
 </html>
