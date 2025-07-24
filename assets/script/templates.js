@@ -1,9 +1,8 @@
-// Contact Overview
 function getNoteTemplateContact(index) {
   let user = myContacts[index];
   return ` <div onclick="openDetails(${index}), event.stopPropagation()" class="person">
               <p class="initial">${(user.color, user.initials)}</p>
-              <div>
+              <div class="person-details">
                 <h4>${user.name}</h4>
                 <p>
                   <a class="mail">${user.email}</a>
@@ -128,7 +127,7 @@ function getNoteTemplateEditContact(index) {
             </div>`;
 }
 
-function getTaskOverlay(task, taskId,trueTaskId) {
+function getTaskOverlay(task, taskId, trueTaskId) {
   let categoryInfo = backgroundColorTitle(task);
   let categoryText = categoryInfo.categoryText;
   let categoryClass = categoryInfo.categoryClass;
@@ -275,8 +274,7 @@ function boardHtmlTemplate(
   assignedContact,
   priorityImg,
   progressBar,
-  addTaskId,
-  
+  addTaskId
 ) {
   trueTaskId = addTaskId;
   return `
@@ -399,9 +397,8 @@ function overlayPriority(task) {
   }
 }
 
-
 function showContactsAddTaskHtml(contact) {
-return `
+  return `
     <div class="contact-items" style="background-color:${contact.color};">
       <span>${contact.initials}</span>
     </div>

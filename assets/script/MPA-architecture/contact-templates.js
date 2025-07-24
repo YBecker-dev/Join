@@ -4,8 +4,8 @@ function getNoteTemplateContact(index) {
 
   return  ` <div onclick="openDetails(${index}), event.stopPropagation()" class="person">
               <p class="initial" style="background-color: ${user.color}">${user.initials}</p>
-              <div>
-                <h4>${user.name}</h4>
+              <div class="person-details">
+                <p class="contact-name">${user.name}</p>
                 <p>
                   <a class="mail">${user.email}</a>
                 </p>
@@ -20,26 +20,30 @@ function getNoteTemplateContactDetails(indexDetails) {
   return `  <div class="namesDetails">
               <div class="contactInformations">
                 <p class="initialOverlay" style="background-color: ${user.color}">${user.initials}</p>
-                <div>
+                <div class="contactDetails">
                   <h3 class="infoNames">${user.name}</h3>
                   <div class="contactIcons">
                     <div id="editOverlay" onclick="openEditOverlay(${indexDetails})">
                       <img class="editIcon" src="../../img/icon/add_task_icon/subtasks/edit.png" alt="pencil">
-                      <span class="editText">edit</span>
+                      <span class="editText">Edit</span>
                     </div>
-                    <div onclick="deleteContact(${indexDetails})">
+                    <div id="deleteOverlay" onclick="deleteContact(${indexDetails})">
                       <img class="editIcon" src="../../img/icon/add_task_icon/subtasks/delete.png" alt="wastebasket">
-                      <span class="editText">delete</span>
+                      <span class="editText">Delete</span>
                     </div>
                   </div>
                 </div>
               </div>
+              <p class="contact-Information">Contact Information</p>
               <div class="infoBlock">
-                <p>Contact Information</p>
+               <div class="infoBlock-details">
                 <h4>Email</h4>
                 <a class="mail" href="mailto:${user.email}">${user.email}</a>
+                </div>
+               <div class="infoBlock-details">
                 <h4>Phone</h4>
-                <a class="phone" href="tel:${user.phone}">${user.phone}</a>
+                <a class="phonenumber" href="tel:${user.phone}">${user.phone}</a>
+                </div>
               </div>
             </div>`;
 }
