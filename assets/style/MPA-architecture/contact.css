@@ -27,8 +27,15 @@ button {
     margin-right: 2rem;
 }
 
+.addContactBtn,
 .newContactBtn-mobile {
    display: none;
+}
+
+.editMobile {
+    width: 120px;
+    height: 120px;
+    border-color: #404447;
 }
 
 .newContact {
@@ -103,12 +110,20 @@ h2 {
     margin-right: 20px;
 }
 
+.separating-line-mobile {
+    display: none;
+}
+
 .team {
     color: #404447;
     font-size: 24px;
 }
 
 .newContactBtn-mobile {
+    display: none;
+}
+
+.showArrowMobile {
     display: none;
 }
 
@@ -143,6 +158,10 @@ h2 {
     align-items: center;
     justify-content: start;
     margin-top: 1rem;
+}
+
+.editOverlay {
+    display: flex;
 }
 
 .edit {
@@ -332,7 +351,7 @@ h4 {
 
 .create-button {
     display: flex;
-    justify-content: center;  
+    justify-content: center;
 }
 
 .accept {
@@ -356,10 +375,10 @@ h4 {
         width: 60%;
         height: 100%;
         background-color: #ffffff;
-
     }
 
-    .newContactBtn-mobile {
+    .newContactBtn-mobile,
+    .addContactBtn {
         display: block;
         background-color: #293647;
         position: fixed;
@@ -370,9 +389,70 @@ h4 {
         right: 12px;
     }
 
+    .contact-headline {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .separating-line {
+        display: none;
+    }
+    h2 {
+        margin-bottom: .5rem;
+    }
+
+    .separating-line-mobile {
+        display: block;
+        width: 7rem;
+        height: 3px;
+        margin-top: 1rem;
+        background-color: #29abe2;
+        /* margin-left: 20px;
+        margin-right: 20px; */
+    }
+
+    .showArrowMobile {
+        display: block;
+        position: fixed;
+        right: 12px;
+    }
+
     .newContact-mobile {
         margin: auto;
         height: 28px;
+    }
+
+    .dotted {
+        background-color: #ffffff;
+        width: 6px;
+        height: 6px;
+        border-radius: 2rem;
+        margin: 3px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .editMobile {
+        position: fixed;
+        display: block;
+        width: 120px;
+        height: 110px;
+        box-shadow: 1px 1px 2px -6px rgba(0,0,0,0.51);
+        -webkit-box-shadow: 1px 1px 26px -6px rgba(0,0,0,0.51);
+        -moz-box-shadow: 2px 29px 26px -6px rgba(192, 133, 133, 0.51);
+        bottom: 120px;
+        right: 120px;
+        border-top-left-radius: 1.2rem;
+        border-top-right-radius: 1.2rem;
+        border-bottom-left-radius: 1.2rem;
+    }
+
+     .editDivMobile {
+        margin-top: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;       
     }
 
     .newContactOverlay,
@@ -388,7 +468,7 @@ h4 {
     }
 
     .close-onMobile {
-    display: block;
+        display: block;
     }
 
     .close {
