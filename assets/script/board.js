@@ -192,7 +192,7 @@ function buildTaskHtml(taskId, task, categoryInfo) {
     getAssignedContactsHtml(task, 'board'),
     showPriorityImg(task),
     progressBarSubtasks(task),
-    task.addTaskId
+    taskId
   );
 }
 
