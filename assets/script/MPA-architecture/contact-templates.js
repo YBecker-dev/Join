@@ -80,11 +80,11 @@ function getNoteTemplateAddNewContact() {
                     <input id="newContactPhone" class="addNewContact" type="tel" placeholder="Phone" required onclick="event.stopPropagation()">
                     <img class="addNewContactIcon" src="../../img/icon/phone.png" alt="phone Icon">
                   </div>
-                  <div class="accept">
-                    <button onclick="closeOverlay()" class="clear-button">Cancel<img class="save-close" src="../../img/icon/close.png" alt="Close-Button"></button>
-                    <button onclick="saveToLocalstorage()" class="create-button">Create contact<img class="save-close" src="../../img/icon/save.png" alt="saveIcon"></button>
-                  </div>
-                </div>           
+                </div>
+                <div class="accept">
+                  <button onclick="closeOverlay()" class="clear-button">Cancel<img class="save-close" src="../../img/icon/close.png" alt="Close-Button"></button>
+                  <button onclick="saveToLocalstorage()" class="create-button">Create contact<img class="save-close" src="../../img/icon/save.png" alt="saveIcon"></button>
+                </div>         
               </div>
             </div>
           </div>`;

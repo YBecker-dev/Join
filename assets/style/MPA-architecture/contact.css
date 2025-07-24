@@ -68,14 +68,12 @@
 }
 
 .person:hover {
-    background-color: #c4c6ca;
-    color: #ffffff;
+    background-color: #F5F5F5;
     cursor: pointer;
 }
 
-.person:active {
+.person.active {
     background-color: #293647;
-    /* richtige Pseudoklasse suchen */
     color: #ffffff;
 }
 
@@ -91,10 +89,13 @@
 .initial {
     width: 42px;
     height: 42px;
-    align-content: center;
     border-radius: 45px;
     color: white;
     font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #FFFFFF
 }
 
 .mail {
@@ -237,7 +238,8 @@ h4 {
 /* edit, and add new Contact Overlay */
 .newContactOverlay,
 .editContactOverlay {
-    height: 40rem;
+    height: 592px;
+
     position: fixed;
     top: 50%;
     left: 50%;
@@ -258,14 +260,14 @@ h4 {
 
 .headDiv {
     height: 100%;
-    width: 476px;
+    width: 467px;
     border-bottom-left-radius: 1.2rem;
     border-top-left-radius: 1.2rem;
     background-color: #293647;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 64px 48px;
+    padding: 66px 48px;
 }
 
 .contactLogo {
@@ -275,7 +277,7 @@ h4 {
     display: flex;
     flex-direction: column;
     justify-content: left;
-    top: 174px;
+    top: 152px;
     left: 48px;
 }
 
@@ -370,6 +372,7 @@ h4 {
     width: 20rem;
     height: 3rem;
     cursor: pointer;
+    font-size: 20px;
 }
 
 .addNewContact:focus {
@@ -393,11 +396,20 @@ h4 {
     font-weight: 400;
 }
 
+.clear-button:hover {
+    border: solid 1px #29abe2;
+    background-color: white;
+    color: #29abe2;
+}
+
 .create-button,
 .clear-button {
     display: flex;
     justify-content: center;
     gap: 4px;
+    height: 56px;
+    display: flex;
+    align-items: center;
 }
 
 .create-button {
@@ -410,6 +422,7 @@ h4 {
     display: flex;
     justify-content: start;
     gap: 24px;
+    margin-top: 48px;
 }
 
 .save-close {
@@ -453,8 +466,39 @@ h4 {
 
 input#newContactName:focus,
 input#newContactMail:focus,
-input#newContactPhone:focus {
+input#newContactPhone:focus,
+input#editContactName:focus,
+input#editContactMail:focus,
+input#editContactPhone:focus {
     outline: none;
     border-color: initial;
     border: none;
+}
+
+#contactDetails {
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+    transform: translateX(100vw);
+}
+
+#contactDetails.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+#contactDetails.hide {
+    transition: none;
+    transform: translateX(100vw);
+}
+
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }

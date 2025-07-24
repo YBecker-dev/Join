@@ -1,5 +1,6 @@
 let myContacts = [];
 let newContacts = [];
+let currentSelectedIndex = null;
 
 async function loadContacts() {
   try {
@@ -44,6 +45,7 @@ async function initContacts() {
   await loadContacts();
   renderContacts();
   initFrameworkFunctions();
+  changeColorbyHtmlLinks(document.getElementById('sidebar-contacts'));
 }
 
 function renderContacts() {
@@ -83,9 +85,52 @@ function groupContactsByInitial(contacts) {
   return sortedGroups;
 }
 
+function changeContactColorIfSelected(index, isSelected) {
+  let openDetails = document.querySelector(`[onclick*="openDetails(${index})"]`);
+  if (openDetails) {
+    if (isSelected) {
+      openDetails.classList.add('active');
+    } else {
+      openDetails.classList.remove('active');
+    }
+  }
+}
+
 function openDetails(index) {
+  let allContacts = document.querySelectorAll('.person');
   let details = document.getElementById('contactDetails');
-  details.innerHTML = getNoteTemplateContactDetails(index);
+  if (currentSelectedIndex === index) {
+    closeContactDetails(allContacts, details);
+    return;
+  }
+  allContacts.forEach((contact) => contact.classList.remove('active'));
+  details.classList.remove('show');
+  details.classList.add('hide');
+  currentSelectedIndex = index;
+  setanimation(details, index);
+}
+
+function closeContactDetails(allContacts, details) {
+  allContacts.forEach((contact) => contact.classList.remove('active'));
+  details.classList.remove('show');
+  details.classList.add('hide');
+  setTimeout(() => {
+    details.innerHTML = '';
+  }, 300);
+  currentSelectedIndex = null;
+}
+
+function setanimation(details, index) {
+  setTimeout(() => {
+    details.innerHTML = getNoteTemplateContactDetails(index);
+    details.classList.remove('hide');
+    setTimeout(() => {
+      details.classList.add('show');
+      setTimeout(() => {
+        changeContactColorIfSelected(index, true);
+      }, 300);
+    }, 10);
+  }, 20);
 }
 
 function toggleContactOverlay() {
@@ -238,4 +283,3 @@ async function updateContact(index) {
     return;
   }
 }
-
