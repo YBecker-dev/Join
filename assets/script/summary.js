@@ -1,14 +1,10 @@
-// MPA Check :-)
-
-//const BASE_URL_TASKS_AND_USERS = 'https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/';
-
 async function initSummary() {
   showMainContentIfWideScreen();
   setGreetingText();
   showGreetingMessagebyLogin();
-  // Initialize summary page elements and functionality hereS
   await checkTasks();
   initFrameworkFunctions();
+  upcomingDeadline();
   changeColorbyHtmlLinks(document.getElementById('sidebar-summary'));
 }
 
@@ -34,24 +30,17 @@ async function checkTasks() {
     let response = await fetch(BASE_URL_TASKS_AND_USERS + '.json');
     if (response.ok) {
       const responseObject = await response.json();
-      //console.log(responseObject);// Objekete
       if (responseObject) {
         let dataBaseKey = Object.keys(responseObject);
-        //console.log(dataBaseKey);
         for (i = 0; i < dataBaseKey.length; i++) {
           taskID = dataBaseKey[0];
-          taskKey = Object.keys(responseObject[taskID]); //Task Keys
+          taskKey = Object.keys(responseObject[taskID]);
           taskObjekt = Object.values(responseObject[taskID]);
         }
-        //console.table(taskKey);
-        //console.table(taskObjekt);
         for (z = 0; z < taskObjekt.length; z++) {
-          //console.log(taskObjekt[z].status);
-          //console.log(taskObjekt[z].priority);
           statusArray.push(taskObjekt[z].status);
           priorityArray.push(taskObjekt[z].priority);
         }
-        //console.table(priorityArray);
         statusCount();
         processPriority();
         clearArrays();
@@ -61,13 +50,14 @@ async function checkTasks() {
     console.error(error);
   }
 }
+
 function processPriority() {
   priorityArray.forEach((element) => {
     if (element === 'Urgent') {
       urgentCount++;
     }
   });
-  includePriorityToSummery(urgentCount);
+  includePriorityToSummery(urgentCount);  
 }
 /**
  * transfer the priority status "urgent" to summery.html to dispklay an overview for
@@ -231,4 +221,19 @@ function isLocalStorageAvailable() {
   } catch (e) {
     return false;
   }
+}
+
+function upcomingDeadline(){
+  let deadline = document.getElementById('deadline');
+  const months = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","October","November","Dezember"]; 
+  const currentDate = new Date();
+  const nextDeadline = new Date(currentDate);
+  nextDeadline.setDate(16);
+  if(nextDeadline.getTime()< currentDate.getTime()){
+    nextDeadline.setMonth(nextDeadline.getMonth()+1);
+  }
+  let nextDeadlineMonth = months[nextDeadline.getMonth()];
+  let nextDeadlineYear = nextDeadline.getFullYear();
+  let deadlineInfo = nextDeadlineMonth+' 16, '+nextDeadlineYear;
+  deadline.innerText = deadlineInfo;
 }

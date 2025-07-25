@@ -1,9 +1,8 @@
-// Contact Overview
 function getNoteTemplateContact(index) {
   let user = myContacts[index];
   return ` <div onclick="openDetails(${index}), event.stopPropagation()" class="person">
               <p class="initial">${(user.color, user.initials)}</p>
-              <div>
+              <div class="person-details">
                 <h4>${user.name}</h4>
                 <p>
                   <a class="mail">${user.email}</a>
@@ -11,6 +10,8 @@ function getNoteTemplateContact(index) {
               </div>
             </div>`;
 }
+
+
 
 function getNoteTemplateContactDetails(indexDetails) {
   let user = myContacts[indexDetails];
@@ -128,7 +129,7 @@ function getNoteTemplateEditContact(index) {
             </div>`;
 }
 
-function getTaskOverlay(task, taskId,trueTaskId) {
+function getTaskOverlay(task, taskId, trueTaskId) {
   let categoryInfo = backgroundColorTitle(task);
   let categoryText = categoryInfo.categoryText;
   let categoryClass = categoryInfo.categoryClass;
@@ -144,8 +145,6 @@ function getTaskOverlay(task, taskId,trueTaskId) {
           <img src="/assets/img/icon/close.png" >
         </div>                
       </div>
-
-      
       <img src="/assets/img/icon/move-to.png" id="DropDownBtn" class="moveTo" onclick="showDropDown(${trueTaskId})">
       <div class="task-overlay d-none" id="drop-down" onclick="showDropDown(${trueTaskId})">  
         <section class="selection " onclick="preventBubbling(event)">
@@ -184,10 +183,10 @@ function getTaskOverlay(task, taskId,trueTaskId) {
       <div class="overlay-edit-wrapper">
         <div class="overlay-edit">
           <div class="overlay-edit-content">
-            <div class="trashImg"  onclick="deleteTaskFromFirebase(${task.addTaskId}); toggleBoardOverlay()">
-              <img src="../../img/icon/trash.png" alt="trash">
-              <p class="p-Tag">Delete</p>
-            </div>
+            <div class="trashImg" onclick="deleteTaskFromFirebase('${task.addTaskId}'); toggleBoardOverlay()">
+             <img src="../../img/icon/trash.png" alt="trash">
+             <p class="p-Tag">Delete</p>
+           </div>
           </div>
           <div class="overlay-seperator"></div>
           <div class="overlay-edit-content">
@@ -252,10 +251,10 @@ function getLogOutMenu() {
       <div class="help-mobil" onclick="window.location.href='/assets/html/MPA-architecture/help.html'" id="help-mobil">
           <p>Help</p>
       </div>
-      <div class="section1" onclick="window.location.href='/assets/html/MPA-architecture/legal-notice_MPA.html'"  id="legalNotice">
+      <div class="section1" onclick="window.location.href='/assets/html/MPA-architecture/legal-notice_internal.html'"  id="legalNotice">
           <p> Legal Notice</p>
       </div>
-      <div class="section1" onclick="window.location.href='/assets/html/MPA-architecture/privacy-policy_MPA.html'"  id="privacyPolicy">
+      <div class="section1" onclick="window.location.href='/assets/html/MPA-architecture/privacy-policy_internal.html'"  id="privacyPolicy">
           <p>Privacy Policy</p>
       </div>
       <div class="section1" onclick="handleLogOut(event)"  id="logOut">
@@ -275,12 +274,11 @@ function boardHtmlTemplate(
   assignedContact,
   priorityImg,
   progressBar,
-  addTaskId,
-  
+  addTaskId
 ) {
   trueTaskId = addTaskId;
   return `
-    <div class="board-task-container" id="task-${addTaskId}" onclick="toggleBoardOverlay('${taskId}','${trueTaskId}')" ondragstart="startDragging('${taskId}')" draggable="true"> 
+    <div class="board-task-container rotateTask" id="task-${addTaskId}"  onclick="toggleBoardOverlay('${taskId}','${trueTaskId}')" ondragstart="startDragging('${taskId}')" draggable="true"> 
       <div class="board-tasks">
         <p class="${categoryClass}">${categoryText}</p>  
         <div class="board-tasks-title-description">
@@ -304,6 +302,7 @@ function progressbarHtml(percent, doneCount, totalCount) {
         <div class="progress-bar" style="width: ${percent}%;"></div>
       </div>
       <span class="progress-bar-text">${doneCount}/${totalCount} Subtasks</span>
+      <span class="subtask-tooltip">${doneCount} von ${totalCount} Subtask${totalCount === 1 ? '' : 's'} erledigt</span>
     </div>
   `;
 }
@@ -399,9 +398,8 @@ function overlayPriority(task) {
   }
 }
 
-
 function showContactsAddTaskHtml(contact) {
-return `
+  return `
     <div class="contact-items" style="background-color:${contact.color};">
       <span>${contact.initials}</span>
     </div>

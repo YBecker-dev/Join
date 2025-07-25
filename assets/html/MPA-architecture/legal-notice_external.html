@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/assets/style/main.css">
     <title>Legal Notice</title>
 </head>
-<body onload="initFrameworkFunctions()">
+  <body>
 
      <section class="logout-overlay d-none" id="overlay-logout" onclick="toggleLogOutOverlay()">
       <div class="logout-overlay-content" id="logout-overlay-content"></div>
@@ -19,17 +19,6 @@
       <div class="header-content">
         <p>Kanban Project Management Tool</p>
         <img class="logo-responsive" src="../img/logo/logo_dark.png" alt="" />
-        <!--<div class="header-user" id="header_user">
-          <img
-            class="help-icon"
-            onclick="loadHelp()"
-            src="/assets/img/icon/header_user_interface/help.png"
-            alt="help"
-          />
-          <div class="nameBtn" id="userBtn" onclick="toggleLogOutOverlay()">
-            <p class="user" id="userInitials"></p>
-          </div>
-        </div>-->
       </div>
     </header>
     <div class="sidebar">
@@ -46,6 +35,24 @@
           >
             <img class="loginImg" src="/assets/img/icon/tasks_icon/logIn.png" alt="" />Log in
           </a>
+          <div class="impressum-container">
+            <a
+              class="sidebar-links p-policy no-hover"
+              id="sidebar-log-in"
+              href="/assets/html/MPA-architecture/privacy-policy_external.html"
+              onclick="changeColorbyHtmlLinks(this); //loadContent('add_task.html')"
+              >Privacy Policy
+            </a>
+
+
+            <a
+              class="sidebar-links l-notice active"
+              id="sidebar-log-in"
+              href="/assets/html/MPA-architecture/legal-notice_external.html"
+              onclick="changeColorbyHtmlLinks(this); //loadContent('add_task.html')"
+              >Leagal Notice
+            </a>
+          </div>
         </div>
       </div>
       <div class="sidebar-legal-stuff">
@@ -70,7 +77,10 @@
              <section class="body-flex">
             <section class="headline">
                 <h1>Legal Notice</h1>
+                 <div class="backward" onclick="history.back()">
+                   <img src="/assets/img/icon/Vector.png">
 
+                </div>
             </section>
             <section class="content">
                 <div class="Imprint">
@@ -163,16 +173,6 @@
         </section>
 
      </section>
-
-    
-</body>
- <script src="/assets/script/MPA-architecture/framework-functions.js"></script> <!--Wichtig-->
-  <script src="/assets/script/login.js"></script>
-  <script src="/assets/script/templates.js"></script>
-  <script src="/assets/script/main.js"></script>
-  <script src="/assets/script/add_task.js"></script>
-  <script src="/assets/script/contacts.js"></script>
-  <script src="/assets/script/board.js"></script>
-  <script src="/assets/script/summary.js"></script>
-  
+     
+  </body>
 </html>       
