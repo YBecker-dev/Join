@@ -163,54 +163,71 @@ function collectTasksForColumn(entries, status) {
 
 function renderTasksInColumn(tasksInColumn, elementId) {
   for (let taskIndex = 0; taskIndex < tasksInColumn.length; taskIndex++) {
-    let taskId = tasksInColumn[taskIndex].id;
-    let task = tasksInColumn[taskIndex].task;
-    let categoryInfo = backgroundColorTitle(task);
-    let categoryText = categoryInfo.categoryText;
-    let categoryClass = categoryInfo.categoryClass;
-    let titleText = task.title || '';
-    let descriptionText = task.description || '';
-    let assignedContact = getAssignedContactsHtml(task, 'board');
-    let priorityImg = showPriorityImg(task);
-    let progressBar = progressBarSubtasks(task);
-    let div = document.createElement('section');
-    div.innerHTML = boardHtmlTemplate(
-      taskId,
-      categoryClass,
-      categoryText,
-      titleText,
-      descriptionText,
-      assignedContact,
-      priorityImg,
-      progressBar,
-      task.addTaskId
-    );
-    document.getElementById(elementId).appendChild(div);
-    enableDragAndDropBoard(task, div);
+    renderSingleTaskInColumn(tasksInColumn[taskIndex], elementId);
   }
+}
+
+function renderSingleTaskInColumn(taskObj, elementId) {
+  let div = createTaskSection(taskObj);
+  document.getElementById(elementId).appendChild(div);
+  enableDragAndDropBoard(taskObj.task, div);
+}
+
+function createTaskSection(taskObj) {
+  let taskId = taskObj.id;
+  let task = taskObj.task;
+  let categoryInfo = backgroundColorTitle(task);
+  let div = document.createElement('section');
+  div.innerHTML = buildTaskHtml(taskId, task, categoryInfo);
+  return div;
+}
+
+function buildTaskHtml(taskId, task, categoryInfo) {
+  return boardHtmlTemplate(
+    taskId,
+    categoryInfo.categoryClass,
+    categoryInfo.categoryText,
+    task.title || '',
+    task.description || '',
+    getAssignedContactsHtml(task, 'board'),
+    showPriorityImg(task),
+    progressBarSubtasks(task),
+    task.addTaskId
+  );
 }
 
 function getAssignedContactsHtml(task, type) {
   let html = '';
   let hasContact = false;
   if (Array.isArray(task.assignedTo) && contacts && contacts.length > 0) {
-    for (let i = 0; i < task.assignedTo.length; i++) {
-      let userId = task.assignedTo[i];
-      let contact = findContactById(userId);
-      if (contact) {
-        hasContact = true;
-        if (type === 'board') {
-          html += `<span class="board-contact-name" style="background-color:${contact.color}">${contact.initials}</span>`;
-        } else if (type === 'overlay') {
-          html += contactsOverlayTemplate(contact.initials, contact.name, contact.color);
-        }
-      }
-    }
+    html = buildContactsHtml(task, type);
+    hasContact = html.length > 0;
   }
   if (type === 'overlay' && !hasContact) {
     html = `<div class="no-contacts">Keine Kontakte ausgewählt</div>`;
   }
   return html;
+}
+
+function buildContactsHtml(task, type) {
+  let html = '';
+  for (let i = 0; i < task.assignedTo.length; i++) {
+    let userId = task.assignedTo[i];
+    let contact = findContactById(userId);
+    if (contact) {
+      html += getContactHtmlByType(contact, type);
+    }
+  }
+  return html;
+}
+
+function getContactHtmlByType(contact, type) {
+  if (type === 'board') {
+    return `<span class="board-contact-name" style="background-color:${contact.color}">${contact.initials}</span>`;
+  } else if (type === 'overlay') {
+    return contactsOverlayTemplate(contact.initials, contact.name, contact.color);
+  }
+  return '';
 }
 
 function sortTasksBySequence(tasksArray) {
@@ -247,15 +264,21 @@ function progressBarSubtasks(task) {
   let progressBar = '';
   if (Array.isArray(task.subtasks)) {
     totalCount = task.subtasks.length;
-    for (let subtaskIndex = 0; subtaskIndex < task.subtasks.length; subtaskIndex++) {
-      if (task.subtasks[subtaskIndex].status === 'checked') {
-        doneCount++;
-      }
-    }
+    doneCount = countDoneSubtasks(task.subtasks);
     let percent = totalCount > 0 ? (doneCount / totalCount) * 100 : 0;
     progressBar = progressbarHtml(percent, doneCount, totalCount);
   }
   return progressBar;
+}
+
+function countDoneSubtasks(subtasks) {
+  let done = 0;
+  for (let i = 0; i < subtasks.length; i++) {
+    if (subtasks[i].status === 'checked') {
+      done++;
+    }
+  }
+  return done;
 }
 
 function enableDragAndDropBoard(task, div) {
@@ -271,13 +294,10 @@ function enableDragAndDropBoard(task, div) {
 }
 
 async function deleteTaskFromFirebase(addTaskIdToDelete) {
-  let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json');
-  let tasks = await response.json();
+  let tasks = await fetchAllTasksFromFirebase();
   if (!tasks) return;
-
   let keys = Object.keys(tasks);
   let deleteKey = findTaskKeyByAddTaskId(tasks, keys, addTaskIdToDelete);
-
   if (deleteKey) {
     await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + deleteKey + '.json', {
       method: 'DELETE',
@@ -285,6 +305,11 @@ async function deleteTaskFromFirebase(addTaskIdToDelete) {
   }
   await customizeAddTaskId(tasks, keys, addTaskIdToDelete);
   await pushTasksInBoard();
+}
+
+async function fetchAllTasksFromFirebase() {
+  let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json');
+  return await response.json();
 }
 
 async function customizeAddTaskId(tasks, keys, deletedAddTaskId) {

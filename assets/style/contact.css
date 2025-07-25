@@ -45,7 +45,8 @@ button {
 }
 
 .person:active {
-    background-color: #293647; /* richtige Pseudoklasse suchen */
+    background-color: #293647;
+    /* richtige Pseudoklasse suchen */
     color: #ffffff;
 }
 
@@ -56,7 +57,7 @@ button {
     align-content: center;
     border-radius: 6rem;
     color: white;
-    font-size: 2rem;
+    font-size: 12px;
 }
 
 .mail {
@@ -116,7 +117,8 @@ h2 {
     height: 6rem;
     align-content: center;
     border-radius: 6rem;
-    background-color: orange; /* muss noch angepasst werden */
+    background-color: orange;
+    /* muss noch angepasst werden */
     color: white;
     font-size: 4rem;
 }
@@ -124,7 +126,8 @@ h2 {
 .infoNames {
     font-size: 2.5rem;
 }
-.contactIcons{
+
+.contactIcons {
     display: flex;
     align-items: center;
     justify-content: start;
@@ -310,7 +313,7 @@ h4 {
     margin-left: 20rem;
 }
 
-.accept > .create-button {
+.accept>.create-button {
     margin-left: 1rem;
 }
 
