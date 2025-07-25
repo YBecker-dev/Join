@@ -216,6 +216,26 @@ header {
     gap: 15px;
 }
 
+.impressum-container{
+    display: none;
+}
+.l-notice{
+    width: 104px !important;
+    color: #FFFFFF;
+}
+.p-policy{
+    width: 112px !important;
+    color: #FFFFFF;
+}
+.impressum-active{
+    background-color: #091931;
+    border-radius: 5px;
+}
+.no-hover:hover{
+    cursor: pointer;
+    background-color: #2A3647;
+    color: #FFFFFF;
+}
 /* // responsive design */
 
 @media (max-width: 1439px) {
@@ -270,11 +290,19 @@ header {
         width: 80px;
     }
 
+
     /*Test*/
 
 
     .sidebar-links.active {
         border-radius: 15px;
+    }
+
+    .impressum-container{
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+
     }
 
     header {
