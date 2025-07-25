@@ -30,24 +30,17 @@ async function checkTasks() {
     let response = await fetch(BASE_URL_TASKS_AND_USERS + '.json');
     if (response.ok) {
       const responseObject = await response.json();
-      //console.log(responseObject);// Objekete
       if (responseObject) {
         let dataBaseKey = Object.keys(responseObject);
-        //console.log(dataBaseKey);
         for (i = 0; i < dataBaseKey.length; i++) {
           taskID = dataBaseKey[0];
-          taskKey = Object.keys(responseObject[taskID]); //Task Keys
+          taskKey = Object.keys(responseObject[taskID]);
           taskObjekt = Object.values(responseObject[taskID]);
         }
-        //console.table(taskKey);
-        //console.table(taskObjekt);
         for (z = 0; z < taskObjekt.length; z++) {
-          //console.log(taskObjekt[z].status);
-          //console.log(taskObjekt[z].priority);
           statusArray.push(taskObjekt[z].status);
           priorityArray.push(taskObjekt[z].priority);
         }
-        //console.table(priorityArray);
         statusCount();
         processPriority();
         clearArrays();
@@ -57,14 +50,14 @@ async function checkTasks() {
     console.error(error);
   }
 }
+
 function processPriority() {
   priorityArray.forEach((element) => {
     if (element === 'Urgent') {
       urgentCount++;
     }
   });
-  includePriorityToSummery(urgentCount);
-  
+  includePriorityToSummery(urgentCount);  
 }
 /**
  * transfer the priority status "urgent" to summery.html to dispklay an overview for
@@ -241,9 +234,6 @@ function upcomingDeadline(){
   }
   let nextDeadlineMonth = months[nextDeadline.getMonth()];
   let nextDeadlineYear = nextDeadline.getFullYear();
-  console.log(nextDeadline.getDate());
-  console.log('nächste Dedline endet am '+nextDeadlineMonth +' 16, '+nextDeadlineYear);
   let deadlineInfo = nextDeadlineMonth+' 16, '+nextDeadlineYear;
-  console.log(deadlineInfo)
   deadline.innerText = deadlineInfo;
 }
