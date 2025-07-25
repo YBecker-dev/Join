@@ -2,59 +2,68 @@
 function getNoteTemplateContact(index) {
   let user = myContacts[index];
 
-  return  ` <div onclick="openDetails(${index}), event.stopPropagation()" class="person">
-              <div class="initial" style="background-color: ${user.color}">${user.initials}</div>
-              <div>
-                <h4>${user.name}</h4>
-                <p>
-                  <a class="mail">${user.email}</a>
-                </p>
-              </div>
-            </div>`;
+  return  `<div onclick="openDetails(${index}), event.stopPropagation()" class="person">
+            <div class="initial" style="background-color: ${user.color}">${user.initials}</div>
+            <div>
+              <h4>${user.name}</h4>
+              <p>
+                <a class="mail">${user.email}</a>
+              </p>
+            </div>
+          </div>`;
 }
 
 // view Contact
 function getNoteTemplateContactDetails(indexDetails) {
   let user = myContacts[indexDetails];
 
-  return `  <div class="namesDetails">
-              <div class="contactInformations">
-                <p class="initialOverlay" style="background-color: ${user.color}">${user.initials}</p>
-                <div>
-                  <h3 class="infoNames">${user.name}</h3>
-                  <div class="contactIcons">
-                    <div class="editOverlay" id="editOverlay" onclick="openEditOverlay(${indexDetails})">
-                      <img class="editIcon" src="../../img/icon/add_task_icon/subtasks/edit.png" alt="pencil">
-                      <p class="editText">Edit</p>
-                    </div>
-                    <div class="editOverlay" onclick="deleteContact(${indexDetails})">
-                      <img class="editIcon" src="../../img/icon/add_task_icon/subtasks/delete.png" alt="wastebasket">
-                      <p class="editText">Delete</p>
-                    </div>
+  return  `<div class="namesDetails">
+
+                <div class="contact-headline-mobile">
+                    <h2>Contacts</h2>  
+                    <span class="team">Better with a team</span>
+                    <div class="separating-line-mobile"></div>
+                    <img src="../../img/icon/Vector.png" alt="arrow back" class="showArrowMobile">
+                </div>
+
+            <div class="contactInformations">
+              <p class="initialOverlay" style="background-color: ${user.color}">${user.initials}</p>
+              <div>
+                <h3 class="infoNames">${user.name}</h3>
+                <div class="contactIcons">
+                  <div class="editOverlay" id="editOverlay" onclick="openEditOverlay(${indexDetails})">
+                    <img class="editIcon" src="../../img/icon/add_task_icon/subtasks/edit.png" alt="pencil">
+                    <p class="editText">Edit</p>
+                  </div>
+                  <div class="editOverlay" onclick="deleteContact(${indexDetails})">
+                    <img class="editIcon" src="../../img/icon/add_task_icon/subtasks/delete.png" alt="wastebasket">
+                    <p class="editText">Delete</p>
                   </div>
                 </div>
               </div>
-              <div class="infoBlock">
-                <p>Contact Information</p>
-                <h4>Email</h4>
-                <a class="mail" href="mailto:${user.email}">${user.email}</a>
-                <h4>Phone</h4>
-                <a class="phone" href="tel:${user.phone}">${user.phone}</a>
-              </div>
-              <button onclick="openEditMobileOverlay()" class="addContactBtn">
-                        <div class="dotted"></div>
-                        <div class="dotted"></div>
-                        <div class="dotted"></div>
-              </button>
-            </div>`;
+            </div>
+            <div class="infoBlock">
+              <p class="info">Contact Information</p>
+              <h4>Email</h4>
+              <a class="mail" href="mailto:${user.email}">${user.email}</a>
+              <h4>Phone</h4>
+              <a class="phone" href="tel:${user.phone}">${user.phone}</a>
+            </div>
+            <button onclick="showEditOverlayMobile()" id="editContactBtn-mobile" class="editContactBtn-mobile">
+              <div class="dotted"></div>
+              <div class="dotted"></div>
+              <div class="dotted"></div>
+            </button>
+          </div>`;
 }
 
 // add new Contact
 function getNoteTemplateAddNewContact() {
-  return ` <div class="newContactOverlay" onclick="event.stopPropagation()">
+
+  return  `<div class="newContactOverlay" onclick="event.stopPropagation()">
             <div class="headDiv">
               <div class="closeDiv">
-                <img onclick="closeOverlay()" class="close-onMobile" src="../../img/icon/close-white.png" alt="Close-Button">
+                <img onclick="closeOverlay()" class="closeMobile" src="../../img/icon/close-white.png" alt="Close-Button">
               </div>  
               <img class="contactLogo" src="../../img/Logo/Logo_white.png" alt="Logo_white">
               <p class="addHeadline">Add contact</p>
@@ -85,7 +94,7 @@ function getNoteTemplateAddNewContact() {
                 </div>           
               </div>
               <div class="accept">
-                <button onclick="closeOverlay()" class="clear-button">Cancel<img class="save-close" src="../../img/icon/close.png" alt="Close-Button"></button>
+                <button onclick="closeOverlay()" class="clear-button cancel-button">Cancel<img class="save-close" src="../../img/icon/close.png" alt="Close-Button"></button>
                 <button onclick="saveToLocalstorage()" class="create-button">Create contact<img class="save-close" src="../../img/icon/save.png" alt="saveIcon"></button>
               </div>
             </div>
@@ -96,58 +105,55 @@ function getNoteTemplateAddNewContact() {
 function getNoteTemplateEditContact(index) {
   let user = myContacts[index] || {};
 
-  return `  <div class="editContactOverlay" onclick="event.stopPropagation()">
-              <div class="headDiv">
-                <div class="closeDiv">
-                  <img onclick="closeOverlay()" class="close-onMobile" src="../../img/icon/close-white.png" alt="Close-Button">
-                </div>
-                <img class="contactLogo" src="../../img/Logo/Logo_white.png" alt="Logo_white">
-                <p class="addHeadline">Edit contact</p>
-                <div class="line"></div>
+  return  `<div class="editContactOverlay" onclick="event.stopPropagation()">
+            <div class="headDiv">
+              <div class="closeDiv">
+                <img onclick="closeOverlay()" class="closeMobile" src="../../img/icon/close-white.png" alt="Close-Button">
               </div>
-              <div class="editDiv">
-                <div class="closeDiv">
-                  <img onclick="closeOverlay()" class="close" src="../../img/icon/close.png" alt="Close-Button">
-                </div>           
-                <div class="profilDiv">
-                  <div>
-                    <p id="editContactInitials" class="profileInitials" style="background-color: ${user.color}">${user.initials}</p>
-                  </div>
-                  <div>
-                    <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                      <input id="editContactName" class="addNewContact" value="${user.name || ''}" required onclick="event.stopPropagation()">
-                      <img class="addNewContactIcon" src="../../img/icon/person.png" alt="Person Icon">
-                    </div> 
-                    <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                      <input id="editContactMail" class="addNewContact" type="email" value="${user.email || ''}" required onclick="event.stopPropagation()">
-                      <img class="addNewContactIcon" src="../../img/icon/mail.png" alt="Email Icon">
-                    </div> 
-                    <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                      <input id="editContactPhone" class="addNewContact" type="tel" value="${user.phone || ''}" required onclick="event.stopPropagation()">
-                      <img class="addNewContactIcon" src="../../img/icon/phone.png" alt="phone Icon">
-                    </div>               
-                  </div>                 
+              <img class="contactLogo" src="../../img/Logo/Logo_white.png" alt="Logo_white">
+              <p class="addHeadline">Edit contact</p>
+              <div class="line"></div>
+            </div>
+            <div class="editDiv">
+              <div class="closeDiv">
+                <img onclick="closeOverlay()" class="close" src="../../img/icon/close.png" alt="Close-Button">
+              </div>           
+              <div class="profilDiv">
+                <div>
+                  <p id="editContactInitials" class="profileInitials" style="background-color: ${user.color}">${user.initials}</p>
                 </div>
-                <div class="accept">
-                  <button onclick="deleteContact(${index})" class="clear-button">Delete</button>
-                  <button onclick="updateContact(${index})" class="create-button">Save Changes<img class="save-close" src="../../img/icon/save.png" alt="hookIcon"></button>
-                </div>
-              </div> 
-            </div>`;
+                <div>
+                  <div class="addNewContactDiv" onclick="event.stopPropagation()">
+                    <input id="editContactName" class="addNewContact" value="${user.name || ''}" required onclick="event.stopPropagation()">
+                    <img class="addNewContactIcon" src="../../img/icon/person.png" alt="Person Icon">
+                  </div> 
+                  <div class="addNewContactDiv" onclick="event.stopPropagation()">
+                    <input id="editContactMail" class="addNewContact" type="email" value="${user.email || ''}" required onclick="event.stopPropagation()">
+                    <img class="addNewContactIcon" src="../../img/icon/mail.png" alt="Email Icon">
+                  </div> 
+                  <div class="addNewContactDiv" onclick="event.stopPropagation()">
+                    <input id="editContactPhone" class="addNewContact" type="tel" value="${user.phone || ''}" required onclick="event.stopPropagation()">
+                    <img class="addNewContactIcon" src="../../img/icon/phone.png" alt="phone Icon">
+                  </div>               
+                </div>                 
+              </div>
+              <div class="accept">
+                <button onclick="deleteContact(${index})" class="clear-button">Delete</button>
+                <button onclick="updateContact(${index})" class="create-button">Save Changes<img class="save-close" src="../../img/icon/save.png" alt="hookIcon"></button>
+              </div>
+            </div> 
+          </div>`;
 }
 
 function getNoteTemplateEditMobile() {
-  return `  <div class="editMobile">
-              <div class="editDivMobile" onclick="openEditOverlay(${indexDetails})">
-                <img class="editIcon" src="../../img/icon/add_task_icon/subtasks/edit.png" alt="pencil">
-                <p class="editText">Edit</p>
-              </div>
-              <div class="editDivMobile" onclick="deleteContact(${indexDetails})">
-                <img class="editIcon" src="../../img/icon/add_task_icon/subtasks/delete.png" alt="wastebasket">
-                <p class="editText">Delete</p>
-              </div>
+  return  `<div class="editMobile">
+            <div class="editDivMobile" onclick="openEditOverlay(${indexDetails})">
+              <img class="editIcon" src="../../img/icon/add_task_icon/subtasks/edit.png" alt="pencil">
+              <p class="editText">Edit</p>
             </div>
-  
-  
-  `
+            <div class="editDivMobile" onclick="deleteContact(${indexDetails})">
+              <img class="editIcon" src="../../img/icon/add_task_icon/subtasks/delete.png" alt="wastebasket">
+              <p class="editText">Delete</p>
+            </div>
+          </div>`;
 }
