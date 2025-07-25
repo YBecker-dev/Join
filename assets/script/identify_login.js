@@ -1,5 +1,5 @@
 function checkAuth() {
-  const user = localStorage.getItem('announcedUser');
+  let user = localStorage.getItem('announcedUser');
   if (!user) {
     window.location.href = '/index.html';
   }
@@ -7,6 +7,7 @@ function checkAuth() {
 checkAuth();
 
 let logoutTimer;
+
 function resetLogoutTimer() {
   clearTimeout(logoutTimer);
   logoutTimer = setTimeout(() => {
