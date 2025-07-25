@@ -278,7 +278,7 @@ function boardHtmlTemplate(
 ) {
   trueTaskId = addTaskId;
   return `
-    <div class="board-task-container" id="task-${addTaskId}" onclick="toggleBoardOverlay('${taskId}','${trueTaskId}')" ondragstart="startDragging('${taskId}')" draggable="true"> 
+    <div class="board-task-container rotateTask" id="task-${addTaskId}"  onclick="toggleBoardOverlay('${taskId}','${trueTaskId}')" ondragstart="startDragging('${taskId}')" draggable="true"> 
       <div class="board-tasks">
         <p class="${categoryClass}">${categoryText}</p>  
         <div class="board-tasks-title-description">
