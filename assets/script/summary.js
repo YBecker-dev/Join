@@ -1,12 +1,7 @@
-// MPA Check :-)
-
-//const BASE_URL_TASKS_AND_USERS = 'https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/';
-
 async function initSummary() {
   showMainContentIfWideScreen();
   setGreetingText();
   showGreetingMessagebyLogin();
-  // Initialize summary page elements and functionality hereS
   await checkTasks();
   initFrameworkFunctions();
   changeColorbyHtmlLinks(document.getElementById('sidebar-summary'));
