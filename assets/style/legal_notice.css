@@ -33,6 +33,10 @@
     letter-spacing: 0;
 
 }
+.join-color{
+    color: #29abe2;
+    text-decoration: none;
+}
 .backward{
    display: none;
 }
