@@ -11,6 +11,8 @@ function getNoteTemplateContact(index) {
             </div>`;
 }
 
+
+
 function getNoteTemplateContactDetails(indexDetails) {
   let user = myContacts[indexDetails];
   return ` <div class="namesDetails">
@@ -143,8 +145,6 @@ function getTaskOverlay(task, taskId, trueTaskId) {
           <img src="/assets/img/icon/close.png" >
         </div>                
       </div>
-
-      
       <img src="/assets/img/icon/move-to.png" id="DropDownBtn" class="moveTo" onclick="showDropDown(${trueTaskId})">
       <div class="task-overlay d-none" id="drop-down" onclick="showDropDown(${trueTaskId})">  
         <section class="selection " onclick="preventBubbling(event)">
@@ -183,10 +183,10 @@ function getTaskOverlay(task, taskId, trueTaskId) {
       <div class="overlay-edit-wrapper">
         <div class="overlay-edit">
           <div class="overlay-edit-content">
-            <div class="trashImg"  onclick="deleteTaskFromFirebase(${task.addTaskId}); toggleBoardOverlay()">
-              <img src="../../img/icon/trash.png" alt="trash">
-              <p class="p-Tag">Delete</p>
-            </div>
+            <div class="trashImg" onclick="deleteTaskFromFirebase('${task.addTaskId}'); toggleBoardOverlay()">
+             <img src="../../img/icon/trash.png" alt="trash">
+             <p class="p-Tag">Delete</p>
+           </div>
           </div>
           <div class="overlay-seperator"></div>
           <div class="overlay-edit-content">
@@ -302,6 +302,7 @@ function progressbarHtml(percent, doneCount, totalCount) {
         <div class="progress-bar" style="width: ${percent}%;"></div>
       </div>
       <span class="progress-bar-text">${doneCount}/${totalCount} Subtasks</span>
+      <span class="subtask-tooltip">${doneCount} von ${totalCount} Subtask${totalCount === 1 ? '' : 's'} erledigt</span>
     </div>
   `;
 }

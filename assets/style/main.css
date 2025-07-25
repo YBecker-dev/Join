@@ -386,3 +386,9 @@ header {
         overflow: hidden;
     }
 }
+
+@media (max-width: 340px) {
+    .sidebar-links-container {
+        padding: 0 12px;
+    }
+}
