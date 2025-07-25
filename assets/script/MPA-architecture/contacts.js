@@ -69,7 +69,6 @@ function openDetails(index) {
 function toggleContactOverlay() {
   console.log('connect');
   let overlayRef = document.getElementById('addNewContactOverlay');
-  // let overlayRefMobile = document.getElementById('newContactMobile');
   if (overlayRef.classList.contains('d-none')) {
     overlayRef.classList.remove('d-none');
     overlayRef.innerHTML = getNoteTemplateAddNewContact();
@@ -146,12 +145,28 @@ function closeOverlay() {
 }
 
 
-function openEditMobileOverlay(){
-  let contentRefMobile = document.getElementById('editMobileOverlay');
-  contentRefMobile.classList.remove('d-none');
-  contentRefMobile.innerHTML = getNoteTemplateEditMobile()
+function toggleEditOverlayMobile() {
+  let overlayMobile = document.getElementById('editMobileOverlay');
+  if (overlayMobile.classList.contains('d-none')) {
+    overlayMobile.classList.remove('d-none');
+    overlayMobile.innerHTML = getNoteTemplateEditMobile();
+  } else {
+    overlayMobile.classList.add('d-none');
+    overlayMobile.innerHTML = '';
+  }
+  
 }
 
+
+// function showEditOverlayMobile() {
+//   const overlayMobile = document.getElementById('editContactBtn-mobile');
+//   overlayMobile.style.display = 'block';
+// }
+
+// function hideEditOverlayMobile() {
+//   const overlayMobile = document.getElementById('editContactBtn-mobile');
+//   overlayMobile.style.display = 'none';
+// }
 
 function openEditOverlay(index) {
   let contentOverlayRef = document.getElementById('editContactOverlay');
