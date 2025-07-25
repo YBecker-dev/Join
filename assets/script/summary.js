@@ -4,6 +4,7 @@ async function initSummary() {
   showGreetingMessagebyLogin();
   await checkTasks();
   initFrameworkFunctions();
+  upcomingDeadline();
   changeColorbyHtmlLinks(document.getElementById('sidebar-summary'));
 }
 
@@ -63,6 +64,7 @@ function processPriority() {
     }
   });
   includePriorityToSummery(urgentCount);
+  
 }
 /**
  * transfer the priority status "urgent" to summery.html to dispklay an overview for
@@ -226,4 +228,22 @@ function isLocalStorageAvailable() {
   } catch (e) {
     return false;
   }
+}
+
+function upcomingDeadline(){
+  let deadline = document.getElementById('deadline');
+  const months = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","October","November","Dezember"]; 
+  const currentDate = new Date();
+  const nextDeadline = new Date(currentDate);
+  nextDeadline.setDate(16);
+  if(nextDeadline.getTime()< currentDate.getTime()){
+    nextDeadline.setMonth(nextDeadline.getMonth()+1);
+  }
+  let nextDeadlineMonth = months[nextDeadline.getMonth()];
+  let nextDeadlineYear = nextDeadline.getFullYear();
+  console.log(nextDeadline.getDate());
+  console.log('nächste Dedline endet am '+nextDeadlineMonth +' 16, '+nextDeadlineYear);
+  let deadlineInfo = nextDeadlineMonth+' 16, '+nextDeadlineYear;
+  console.log(deadlineInfo)
+  deadline.innerText = deadlineInfo;
 }
