@@ -830,6 +830,33 @@
     margin: unset !important;
 }
 
+.board-task-subtasks-row {
+    position: relative;
+}
+
+.subtask-tooltip {
+    position: absolute;
+    top: -35px;
+    left: 0;
+    background: #2A3647;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    white-space: nowrap;
+    z-index: 10;
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none; /* verhindert Klicks, wenn unsichtbar */
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.board-task-subtasks-row:hover .subtask-tooltip {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
 @media (max-width: 1439px) {
     .main-content {
         top: 80px !important;

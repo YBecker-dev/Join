@@ -302,6 +302,7 @@ function progressbarHtml(percent, doneCount, totalCount) {
         <div class="progress-bar" style="width: ${percent}%;"></div>
       </div>
       <span class="progress-bar-text">${doneCount}/${totalCount} Subtasks</span>
+      <span class="subtask-tooltip">${doneCount} von ${totalCount} Subtask${totalCount === 1 ? '' : 's'} erledigt</span>
     </div>
   `;
 }
