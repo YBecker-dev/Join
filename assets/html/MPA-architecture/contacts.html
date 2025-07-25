@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="../../style/MPA-architecture/contact.css">
         <link rel="stylesheet" href="../../style/main.css">
         <title>Contacts</title>
-        
+
     </head>
     <body onload="initContacts()">
         <header>
@@ -52,35 +52,33 @@
 
         <main class="myMain">
             <div class="main-content">
-            <section class="contactList"> 
+            <section class="contactList">
                 <button onclick="toggleContactOverlay()" id="newContact">
                     <div class="btn">
                         <p>Add new contact</p>
                         <img class="newContact" src="../../img/icon/new-contact.png" alt="new Contact">
-                    </div> 
+                    </div>
                 </button>
 
-                <button onclick="toggleContactOverlay()" id="newContactMobile" class="newContactBtn-mobile">
-                        <img class="newContact-mobile" src="../../img/icon/new-contact.png" alt="new Contact"> 
+                <button onclick="toggleContactOverlay()" id="newContactMobile" class="addContactBtn-mobile">
+                        <img class="newContact-mobile" src="../../img/icon/new-contact.png" alt="new Contact">
                 </button>
 
                 <div id="contactContent">
                 </div>
             </section>
-            
+
             <section class="details">
                 <div class="contact-headline">
-                    <h2>Contacts</h2> 
-                    <div class="separating-line"></div> 
+                    <h2>Contacts</h2>
+                    <div class="separating-line"></div>
                     <span class="team">Better with a team</span>
-                    <div class="separating-line-mobile"></div>
-                    <img src="../../img/icon/Vector.png" alt="arrow back" class="showArrowMobile">
                 </div>
                 <div id="contactDetails">
                 </div>
             </section>
             </div>
-            <section>
+            <section class="overlayBackground">
                 <div id="addNewContactOverlay">
                 </div>
             </section>
@@ -90,17 +88,16 @@
 
                 <div id="editMobileOverlay">
                 </div>
-                    <!-- 
-                    <div class="editMobile">
-                        <div class="editDivMobile" onclick="openEditOverlay(${indexDetails})">
-                            <img class="editIcon" src="../../img/icon/add_task_icon/subtasks/edit.png" alt="pencil">
-                            <p class="editText">Edit</p>
-                        </div>
-                        <div class="editDivMobile" onclick="deleteContact(${indexDetails})">
-                            <img class="editIcon" src="../../img/icon/add_task_icon/subtasks/delete.png" alt="wastebasket">
-                            <p class="editText">Delete</p>
-                        </div>
-                    </div> -->
+                    <!-- <div class="editMobile">
+            <div class="editDivMobile" onclick="openEditOverlay(${indexDetails})">
+              <img class="editIcon" src="../../img/icon/add_task_icon/subtasks/edit.png" alt="pencil">
+              <p class="editText">Edit</p>
+            </div>
+            <div class="editDivMobile" onclick="deleteContact(${indexDetails})">
+              <img class="editIcon" src="../../img/icon/add_task_icon/subtasks/delete.png" alt="wastebasket">
+              <p class="editText">Delete</p>
+            </div>
+          </div> -->
             </section>
         </main>
 

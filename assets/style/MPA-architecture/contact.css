@@ -27,8 +27,10 @@ button {
     margin-right: 2rem;
 }
 
-.addContactBtn,
-.newContactBtn-mobile {
+.addContactBtn-mobile,
+.editContactBtn-mobile,
+.contact-headline-mobile,
+.closeMobile  {
    display: none;
 }
 
@@ -63,7 +65,7 @@ button {
 }
 
 .person:active {
-    background-color: #293647; /* richtige Pseudoklasse suchen */
+    background-color: #293647;
     color: #ffffff;
 }
 
@@ -102,6 +104,7 @@ h2 {
     font-weight: bolder;
 }
 
+
 .separating-line {
     width: 2px;
     height: 4rem;
@@ -110,21 +113,9 @@ h2 {
     margin-right: 20px;
 }
 
-.separating-line-mobile {
-    display: none;
-}
-
 .team {
     color: #404447;
     font-size: 24px;
-}
-
-.newContactBtn-mobile {
-    display: none;
-}
-
-.showArrowMobile {
-    display: none;
 }
 
 /* deteils view */
@@ -162,10 +153,7 @@ h2 {
 
 .editOverlay {
     display: flex;
-}
-
-.edit {
-    display: flex;
+    align-items: center;
 }
 
 .editIcon {
@@ -188,13 +176,17 @@ h2 {
 }
 
 .info {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 h4 {
     text-align: start;
     margin-top: 1rem;
     margin-bottom: 1rem;
+}
+
+.phone {
+    color: #000000;
 }
 
 /* edit, and add new Contact Overlay */
@@ -226,10 +218,6 @@ h4 {
     border-bottom-left-radius: 1.2rem;
     border-top-left-radius: 1.2rem;
     background-color: #293647;
-}
-
-.close-onMobile {
-    display: none;
 }
 
 .contactLogo {
@@ -290,6 +278,8 @@ h4 {
     align-items: center;
 }
 
+
+.profileImg,
 .profileInitials {
     font-size: 5rem;
     font-weight: bold;
@@ -301,7 +291,6 @@ h4 {
     border-radius: 5rem;
     margin-left: 4rem;
     margin-right: 2rem;
-    background-color: aquamarine;
     color: #f6f7f8;
 }
 
@@ -329,11 +318,7 @@ h4 {
     height: 3rem;
 }
 
-.addNewContact:focus {
-    border-color: #29abe2;
-}
-
-.addNewContactDiv:focus-within {
+.addNewContact:hover {
     border-color: #29abe2;
 }
 
@@ -345,10 +330,9 @@ h4 {
     background-color: #ffffff;
     color: #293647;
     border: solid 1px #293647;
-    display: flex;
-    justify-content: center;
 }
 
+.clear-button,
 .create-button {
     display: flex;
     justify-content: center;
@@ -371,14 +355,12 @@ h4 {
 
 @media (max-width: 1440px) {
     .contactList {
-        overflow-y: scroll;
         width: 60%;
         height: 100%;
-        background-color: #ffffff;
     }
 
-    .newContactBtn-mobile,
-    .addContactBtn {
+    .addContactBtn-mobile,
+    .editContactBtn-mobile{ 
         display: block;
         background-color: #293647;
         position: fixed;
@@ -389,33 +371,35 @@ h4 {
         right: 12px;
     }
 
-    .contact-headline {
-        display: flex;
+    .contact-headline-mobile {
+        display: flex;   
         flex-direction: column;
+        justify-content: flex-start;
         align-items: flex-start;
+        margin-top: 50px;
+        margin-left: 20px;
     }
 
-    .separating-line {
+    .contact-headline {
         display: none;
     }
+
     h2 {
-        margin-bottom: .5rem;
+        margin-bottom: 1rem;
     }
 
     .separating-line-mobile {
-        display: block;
         width: 7rem;
         height: 3px;
         margin-top: 1rem;
+        margin-bottom: 3rem;
         background-color: #29abe2;
-        /* margin-left: 20px;
-        margin-right: 20px; */
     }
 
     .showArrowMobile {
         display: block;
         position: fixed;
-        right: 12px;
+        right: 24px;
     }
 
     .newContact-mobile {
@@ -452,22 +436,22 @@ h4 {
         margin-top: 16px;
         display: flex;
         align-items: center;
-        justify-content: center;       
+        justify-content: center;
     }
 
     .newContactOverlay,
     .editContactOverlay {
-        top: 45%;
+        top: 50%;
         left: 50%;
-        height: 45rem;
-        width: 30rem;
+        height: 50rem;
+        width: 100%;
         display: flex;
         flex-direction: column;
         margin-left: auto;
         margin-right: auto;
     }
 
-    .close-onMobile {
+    .closeMobile {
         display: block;
     }
 
@@ -479,31 +463,53 @@ h4 {
         display: none;
     }
 
-    .headDiv,
-    .editDiv {
-        height: 50%;
+    .headDiv {
+        /* height: 50%; */
         width: 30rem;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
         border-top-left-radius: 1.2rem;
         border-top-right-radius: 1.2rem;
         border-bottom-left-radius: 0;
     }
 
+    .editDiv {
+        width: 30rem;
+        margin-left: auto;
+        margin-right: auto;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 1.2rem;
+        border-bottom-left-radius: 1.2rem;
+        background-color: aquamarine;
+    }
+
     .profilDiv {
         display: flex;
         flex-direction: column;
-        align-items: center;
     }
 
-    .profileInitials {
-        height: 80px;
-        width: 80px;
+    .profileImg,
+    .profileInitials,
+    .addNewContactDiv {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .profileImg {
+        margin-top: 0;
     }
 
     .addNewContactDiv{
         margin-bottom: 4px;
     }
 
-    .clear-button {
+    .cancel-button {
         display: none;
     }
+}
+
+@media (max-width: 1008px) {
+  
+
 }
