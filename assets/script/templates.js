@@ -275,6 +275,7 @@ function boardHtmlTemplate(
   priorityImg,
   progressBar,
   addTaskId
+  
 ) {
   trueTaskId = addTaskId;
   return `

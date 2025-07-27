@@ -1,6 +1,6 @@
 function showDropDown(trueTaskId){
     
-    findStatusArea(trueTaskId);
+    //findStatusArea(trueTaskId);
     //hideActivStatus(trueTaskId);
     let dropdown_menu = document.getElementById('drop-down')
     dropdown_menu.classList.toggle('d-none');    
@@ -9,9 +9,6 @@ function showDropDown(trueTaskId){
 function findStatusArea(trueTaskId){
     //let choosenTask = document.getElementById(trueTaskId);
     let boardTaskContainer= document.getElementById('task-'+trueTaskId);
-    //console.log(choosenTask);
-    //console.log(boardTaskContainer);
-    //console.log(boardTaskContainer.parentElement)
     let firstParent = boardTaskContainer.parentElement;
     //console.log(firstParent.parentElement)
     let targetParentElement = firstParent.parentElement;
