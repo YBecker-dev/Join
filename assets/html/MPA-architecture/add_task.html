@@ -130,6 +130,8 @@
                   <input
                     id="date"
                     type="date"
+                    min=""
+                    max="2035-12-31"
                     name="add-task-input2"
                     onclick="showError('add-task-input2-warning', 'date')"
                     oninput="showError('add-task-input2-warning', 'date'); enableCreateTaskButton()"
@@ -214,16 +216,10 @@
                     onclick="eventBubbling(event)"
                   >
                     <p class="filllicker"></p>
-                    <p
-                      class="category-option"
-                      onclick="handleCategoryOptionClick(event, this)"
-                    >
+                    <p class="category-option" onclick="handleCategoryOptionClick(event, this)">
                       <span class="category-option-text">Technical Task</span>
                     </p>
-                    <p
-                      class="category-option"
-                      onclick="handleCategoryOptionClick(event, this)"
-                    >
+                    <p class="category-option" onclick="handleCategoryOptionClick(event, this)">
                       <span class="category-option-text">User Story</span>
                     </p>
                   </ul>

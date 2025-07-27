@@ -15,6 +15,17 @@ async function initAddTask() {
     clearAssignedTo();
   });
   changeColorbyHtmlLinks(document.getElementById('sidebar-add-task'));
+  dateInputMinDate();
+}
+function dateInputMinDate() {
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const dd = String(today.getDate()).padStart(2, '0');
+  const minDate = `${yyyy}-${mm}-${dd}`;
+  const dateInput = document.getElementById('date');
+  dateInput.setAttribute('min', minDate);
+  dateInput.value = minDate;
 }
 
 function handleDropdown(dropdownId, arrowId, action = 'toggle') {
@@ -115,7 +126,7 @@ function addFormValidation(formId) {
     }
   });
 }
- 
+
 function areAllInputsFilled(form) {
   let inputs = form.querySelectorAll('input:not([name="add-task-input3"]):not([type="checkbox"]), textarea');
   return checkInputsFilled(inputs);
