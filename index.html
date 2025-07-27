@@ -61,8 +61,8 @@
         </div>
         <div class="login-footer">
           <!--Angepasst-->
-          <a href="/assets/html/MPA-architecture/privacy-policy_external.html" onclick="//privacyPolicyMPA()">Prvacy Police</a>
-          <a href="/assets/html/MPA-architecture/legal-notice_external.html" onclick="//legalNoticeMPA()">Legal Notice</a>
+          <a href="assets/html/privacy-policy_external.html" onclick="//privacyPolicyMPA()">Prvacy Police</a>
+          <a href="assets/html/legal-notice_external.html" onclick="//legalNoticeMPA()">Legal Notice</a>
         </div>
       </div>
     </main>
@@ -71,3 +71,15 @@
     <!--<script src="/assets/script/main.js"></script>-->
   </body>
 </html>
+<script>
+  function init() {
+    // Initialize any necessary components or variables
+    console.log('Login page initialized');
+  }
+
+  function logginAsGuest() {
+    // Function to handle guest login
+    localStorage.setItem('announcedUser', JSON.stringify('Guest Guest'));
+    localStorage.setItem('showGreeting', 'true');
+    window.location.href = 'assets/html/summery.html';
+  }
