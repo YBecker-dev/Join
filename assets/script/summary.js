@@ -142,7 +142,9 @@ function setGreetingText() {
     if (userName) userName.innerText = loggedUser;
   }
 }
-
+/**
+ * load Board.html if the User clicks a Task  
+ */
 let loadBoard = () => {
   window.location.href = '/assets/html/MPA-architecture/board.html';
 };
@@ -170,7 +172,10 @@ function showGreetingMessagebyLogin() {
     if (mainContent) mainContent.classList.remove('d-none');
   }
 }
-
+/**
+ * display Username Or Guest at the Greeting Message at Desktpot Version 
+ * @returns logged User name
+ */
 function showGreetingMessage() {
   if (window.innerWidth >= 1440) return;
   let loggedUser = JSON.parse(localStorage.getItem('announcedUser'));
@@ -212,7 +217,10 @@ function getGreetingTextByHour(punctuation = ',') {
   if (hour >= 12 && hour < 18) return `Good afternoon${punctuation}`;
   return `Good evening${punctuation}`;
 }
-
+/**
+ * checks the availabilty of the local storage
+ * @returns flase 
+ */
 function isLocalStorageAvailable() {
   try {
     localStorage.setItem('test', 'test');
@@ -222,7 +230,9 @@ function isLocalStorageAvailable() {
     return false;
   }
 }
-
+/**
+ * Sets a monthly interval on the 16th day
+ */
 function upcomingDeadline(){
   let deadline = document.getElementById('deadline');
   const months = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","October","November","Dezember"]; 

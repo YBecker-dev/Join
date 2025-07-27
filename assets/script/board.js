@@ -81,7 +81,6 @@ async function fetchAllTasks() {
   return await response.json();
 }
 
-// sucht höchste id/sequence beim Drag and Drop
 function getMaxSequenceForStatus(allTasks, newStatus) {
   let maxSequence = 0;
   if (allTasks) {
@@ -108,8 +107,6 @@ async function fetchTaskById(taskId) {
   return await response.json();
 }
 
-
-
 async function saveTask(taskId, task) {
   await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json', {
     method: 'PUT',
@@ -121,6 +118,7 @@ async function saveTask(taskId, task) {
 async function pushTasksInBoard() {
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json');
   let data = await response.json();
+  console.table(data)
   if (!data) return;
   clearAllColumns();
   let entries = Object.entries(data);
@@ -183,6 +181,7 @@ function createTaskSection(taskObj) {
 }
 
 function buildTaskHtml(taskId, task, categoryInfo) {
+  console.log(taskId , task)
   return boardHtmlTemplate(
     taskId,
     categoryInfo.categoryClass,
@@ -244,8 +243,6 @@ function sortTasksBySequence(tasksArray) {
   }
 }
 
-// img Pfad wird entsprechend angepasst
-// ursprünglich "../img/icon/proriority/.....png"
 function showPriorityImg(task) {
   let priorityImg = '';
   if (task.priority === 'Urgent') {
@@ -337,17 +334,16 @@ function findTaskKeyByAddTaskId(tasks, keys, addTaskIdToDelete) {
 }
 
 async function toggleBoardOverlay(taskId ,trueTaskId) {
-
   let overlayRef = document.getElementById('overlayBoard');
   let overlay_content = document.getElementById('overlay-content-loader');
   toggleOverlay(overlayRef);
-
   overlayRef.classList.remove('d-none');
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
   let task = await response.json();
   if (!task) return;
+  // Test 
+  console.log(taskId, trueTaskId);
   overlay_content.innerHTML = getTaskOverlay(task, taskId, trueTaskId);
-
   overlayRef.classList.add('visible');
   let contentRender = overlayRef.querySelector('.overlay-content-render');
   if (contentRender) {
@@ -418,9 +414,7 @@ async function editTask(taskId) {
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
   let task = await response.json();
   if (!task) return;
-
   overlay_content.innerHTML = editTaskHtml(task, taskId);
-
   let subtasksContainer = document.getElementById('subtasks-container');
   subtasksContainer.innerHTML = '';
   if (task.subtasks && Array.isArray(task.subtasks)) {
@@ -430,7 +424,6 @@ async function editTask(taskId) {
       subtasksContainer.innerHTML += pushSubtaskInputHTML(text, checked);
     });
   }
-
   selectedContacts = [];
   if (task.assignedTo && Array.isArray(task.assignedTo)) {
     for (let i = 0; i < contacts.length; i++) {

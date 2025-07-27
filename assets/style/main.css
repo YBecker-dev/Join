@@ -184,6 +184,7 @@ header {
 .section1:hover {
     cursor: pointer;
     background-color: #102542;
+    border-radius: 10px;
 }
 
 .section1>a {
