@@ -118,7 +118,6 @@ async function saveTask(taskId, task) {
 async function pushTasksInBoard() {
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json');
   let data = await response.json();
-  console.table(data)
   if (!data) return;
   clearAllColumns();
   let entries = Object.entries(data);
@@ -181,7 +180,6 @@ function createTaskSection(taskObj) {
 }
 
 function buildTaskHtml(taskId, task, categoryInfo) {
-  console.log(taskId , task)
   return boardHtmlTemplate(
     taskId,
     categoryInfo.categoryClass,
@@ -341,8 +339,6 @@ async function toggleBoardOverlay(taskId ,trueTaskId) {
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
   let task = await response.json();
   if (!task) return;
-  // Test 
-  console.log(taskId, trueTaskId);
   overlay_content.innerHTML = getTaskOverlay(task, taskId, trueTaskId);
   overlayRef.classList.add('visible');
   let contentRender = overlayRef.querySelector('.overlay-content-render');
@@ -511,16 +507,16 @@ async function toggleSubtaskDone(taskId, subtaskIndex) {
 async function openCreateTask() {
   selectedContacts = [];
   if (window.innerWidth <= 1233) {
-    window.location.href = '/assets/html/MPA-architecture/add_task.html';
+    window.location.href = '/assets/html/add_task.html';
     return;
   }
-  let response = await fetch('../add_task.html');
+  let response = await fetch('../html/add_task_board.html');
   let html = await response.text();
   let tempDiv = document.createElement('div'); // <- wird benötigt damit ich die HTML-Elemente manipulieren kann
   tempDiv.innerHTML += html;
   let clearBtn = tempDiv.querySelector('.clear-button');
   if (clearBtn) {
-    let cancelBtnHtml = `<button type="button" class="cancel-button" onclick="closeCreateTask()">Cancel <img src="../../img/icon/close.png" alt="" class=""></button>`;
+    let cancelBtnHtml = `<button type="button" class="cancel-button" onclick="closeCreateTask()">Cancel <img src="../img/icon/close.png" alt="" class=""></button>`;
     clearBtn.outerHTML = cancelBtnHtml;
   }
   let contentSpace = tempDiv.querySelector('.contentspace-html');
@@ -530,7 +526,7 @@ async function openCreateTask() {
   let overlayBg = document.getElementById('overlay-add-task');
   let overlayContent = document.getElementById('add-task-overlay-content');
   overlayContent.innerHTML =
-    `<img onclick="closeCreateTask()" src="../../img/icon/close.png" alt="" class="close-overlay-x">` + tempDiv.innerHTML;
+    `<img onclick="closeCreateTask()" src="../img/icon/close.png" alt="" class="close-overlay-x">` + tempDiv.innerHTML;
   animatedOpeningAddTask(overlayBg, overlayContent);
   setPriority('medium');
 }

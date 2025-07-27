@@ -6,7 +6,7 @@
     background-color: white;
     position: fixed;
     height: 96px;
-    box-shadow: 0px 4px 4px 0px #0000001A;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 5px 15px;
 }
 
 .logo-responsive {
@@ -35,11 +35,9 @@
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    border: 3px solid #2A3647;
-    font-size: 1.25rem;
+    border: 3px solid #2A3647; font-size: 1.25rem;
     background: white;
     color: #2aabe2;
-    font-weight: 700;
 }
 
 .user:hover {
@@ -98,23 +96,9 @@ header {
     height: 46px;
 }
 
-.sidebar-links-external {
-    display: flex;
-    align-items: center;
-    color: #a3a7ab;
-    height: 46px;
-    padding-left: 56px;
-    gap: 8px;
-}
-
 .sidebar-links img {
     width: 25px;
     height: 25px;
-}
-
-.loginImg {
-    width: 30px !important;
-    height: 30px !important;
 }
 
 .sidebar-links:hover {
@@ -122,15 +106,6 @@ header {
     color: #a3a7ab;
     cursor: pointer;
     font-weight: 400;
-}
-
-.main-content {
-    position: fixed;
-    top: 96px;
-    left: 232px;
-    right: 0;
-    bottom: 0;
-    overflow: auto;
 }
 
 .help-icon:hover {
@@ -184,7 +159,6 @@ header {
 .section1:hover {
     cursor: pointer;
     background-color: #102542;
-    border-radius: 10px;
 }
 
 .section1>a {
@@ -218,27 +192,116 @@ header {
     gap: 15px;
 }
 
-.impressum-container{
-    display: none;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter';
+    scroll-behavior: smooth;
+    line-height: 120%;
 }
-.l-notice{
-    width: 104px !important;
-    color: #FFFFFF;
+
+body {
+    background-color: #F6F7F8 !important;
+    text-align: center;
 }
-.p-policy{
-    width: 112px !important;
-    color: #FFFFFF;
+
+@font-face {
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../../fonts/inter-v19-latin-regular.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-.impressum-active{
-    background-color: #091931;
-    border-radius: 5px;
+
+
+h1 {
+    font-size: 64px;
+    font-weight: bold;
+    padding: 48px 0 16px 0;
 }
-.no-hover:hover{
+
+a {
+    text-decoration: none;
+    color: #BEBEBE;
+    opacity: 1;
+}
+
+a:hover {
+    color: #2AABE2;
+    font-weight: bold;
+}
+
+.d-none,
+.hidden {
+    display: none !important;
+}
+
+.input-error {
+    border: 2px solid #e74c3c !important;
+}
+
+.checkbox.input-error {
+    outline: 2px solid #e74c3c;
+    border-color: #e74c3c !important;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: none;
+    border: none;
+}
+
+textarea:focus {
+    outline: none;
+    box-shadow: none;
+    border: 1px solid #2AABE2;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    box-shadow: none;
+    border: 1px solid #2AABE2;
+}
+
+
+input[type="date"]:focus {
+    outline: none;
+    box-shadow: none;
+    border: 1px solid #2AABE2;
+}
+
+.checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    background: url('/assets/img/icon/checkbox.png') no-repeat center center;
+    background-size: contain;
     cursor: pointer;
-    background-color: #2A3647;
-    color: #FFFFFF;
 }
-/* // responsive design */
+
+.checkbox:checked {
+    background: url('/assets/img/icon/checked_checkbox.png') no-repeat center center;
+    background-size: contain;
+}
+
+.contentspace-html {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.main-content {
+    position: fixed;
+    top: 96px;
+    left: 232px;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+}
 
 @media (max-width: 1439px) {
     /*#sidebar-summary {

@@ -1,47 +1,108 @@
-<body>
-        <div class="myMain">
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/assets/img/Logo/Logo_white.png" />
+    <link rel="stylesheet" href="/assets/style/main.css" />
+    <link rel="stylesheet" href="/assets/style/buttons.css" />
+    <link rel="stylesheet" href="/assets/style/contact.css" />
+    <link rel="stylesheet" href="/assets/style/standart.css" />
 
-            <section class="contactList">
+    <title>Contacts</title>
+  </head>
+  <body onload="initContacts()">
+    <section class="logout-overlay d-none" id="overlay-logout" onclick="toggleLogOutOverlay()">
+      <div class="logout-overlay-content" id="logout-overlay-content"></div>
+    </section>
 
-                <button onclick="toggleContactOverlay()" id="newContact"><!--openAddNewContactOverlay()-->
-                    <div class="btn">
-                        <p>Add new contact</p>
-                        <img class="newContact" src="../img/icon/new-contact.png" alt="new Contact">
-                    </div> 
-                </button>
-
-                <div id="contactContent">
-                </div>
-
-            </section>
-
-            <section class="details">
-
-                <div class="contact-headline">
-                    <h2>Contacts</h2> 
-                    <div class="separating-line"></div> 
-                    <span class="team">Better with a team</span>
-                </div>
-
-                <div id="contactDetails">
-                </div>
-
-            </section>
-
-            <section>
-
-                <div id="overlayContact">
-                </div>
-
-            </section>
-
-            <section>
-
-                <div id="editContactOverlay">
-                </div>
-
-            </section>
-
+    <header>
+      <div class="header-content">
+        <p>Kanban Project Management Tool</p>
+        <img class="logo-responsive" src="/assets/img/logo/logo_dark.png" alt="" />
+        <div class="header-user">
+          <img
+            class="help-icon"
+            onclick="loadHelp()"
+            src="/assets/img/icon/header_user_interface/help.png"
+            alt="help"
+          />
+          <div class="nameBtn" id="userBtn" onclick="toggleLogOutOverlay()">
+            <p class="user" id="userInitials"></p>
+          </div>
         </div>
-        
-</body>
+      </div>
+    </header>
+    <div class="sidebar">
+      <div class="sidebar-links-section">
+        <div class="sidebar-logo">
+          <img src="/assets/img/Logo/Logo_white.png" alt="Logo" />
+        </div>
+        <div class="sidebar-links-container">
+          <a class="sidebar-links" id="sidebar-summary" href="/assets/html/summery.html">
+            <img src="/assets/img/icon/tasks_icon/summary.png" alt="" />Summary
+          </a>
+          <a class="sidebar-links" id="sidebar-add-task" href="/assets/html/add_task.html">
+            <img src="/assets/img/icon/tasks_icon/add_task.png" alt="" />Add Task
+          </a>
+          <a class="sidebar-links" id="sidebar-board" href="/assets/html/board.html">
+            <img src="/assets/img/icon/tasks_icon/board.png" alt="" />Board
+          </a>
+          <a class="sidebar-links" id="sidebar-contacts" href="/assets/html/contacts.html">
+            <img src="/assets/img/icon/tasks_icon/contacts.png" alt="" />Contacts
+          </a>
+        </div>
+      </div>
+      <div class="sidebar-legal-stuff">
+        <a
+          class="sidebar-links privacy-legal"
+          id="sidebar-privacy-policy"
+          href="/assets/html/privacy-policy_internal.html"
+          >Privacy Policy</a
+        >
+        <a class="sidebar-links privacy-legal" id="sidebar-legal-notice" href="/assets/html/legal-notice_internal.html"
+          >Legal Notice</a
+        >
+      </div>
+    </div>
+
+    <!-- <main class="myMain">main-content ?
+            <section class="contactList"> -->
+
+    <div class="main-content">
+      <section class="contactList">
+        <div class="background-new-contact-button">
+          <button class="add-new-contact-button" onclick="toggleContactOverlay()" id="newContact">
+            <div class="btn">
+              <p>Add new contact</p>
+              <img class="newContact" src="/assets/img/icon/new-contact.png" alt="new Contact" />
+            </div>
+          </button>
+        </div>
+        <div id="contactContent"></div>
+      </section>
+
+      <section class="details">
+        <div class="contact-headline">
+          <h2>Contacts</h2>
+          <div class="separating-line"></div>
+          <span class="team">Better with a team</span>
+        </div>
+        <div id="contactDetails"></div>
+      </section>
+    </div>
+
+    <section class="add-new-contact-section d-none" id="add-new-contact" onclick="closeOverlay()">
+      <div id="addNewContactOverlay"></div>
+    </section>
+
+    <section class="edit-contact-overlay-section d-none" id="edit-contact" onclick="closeOverlay()">
+      <div id="editContactOverlay"></div>
+    </section>
+
+    <script src="/assets/script/templates.js"></script>
+    <script src="/assets/script/contact-templates.js"></script>
+    <script src="/assets/script/main.js"></script>
+    <script src="/assets/script/contacts.js"></script>
+  </body>
+</html>
