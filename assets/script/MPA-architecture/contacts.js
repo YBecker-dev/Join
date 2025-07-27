@@ -50,6 +50,8 @@ async function initContacts() {
 
 function renderContacts() {
   let contentRef = document.getElementById('contactContent');
+  if (!contentRef) return;
+
   let groupedContacts = groupContactsByInitial(myContacts);
   let html = '';
   let initials = Object.keys(groupedContacts).sort();
@@ -199,16 +201,14 @@ function getRandomColor() {
 function closeOverlay() {
   let overlayRef = document.getElementById('add-new-contact');
   let contentOverlayRef = document.getElementById('edit-contact');
-  overlayRef.classList.add('d-none');
-  contentOverlayRef.classList.add('d-none');
-  overlayRef.innerHTML = '';
-  contentOverlayRef.innerHTML = '';
-}
-
-function openEditOverlay(index) {
-  let contentOverlayRef = document.getElementById('edit-contact');
-  contentOverlayRef.classList.remove('d-none');
-  contentOverlayRef.innerHTML = getNoteTemplateEditContact(index);
+  if (overlayRef) {
+    overlayRef.classList.add('d-none');
+    overlayRef.innerHTML = '';
+  }
+  if (contentOverlayRef) {
+    contentOverlayRef.classList.add('d-none');
+    contentOverlayRef.innerHTML = '';
+  }
 }
 
 async function deleteContact(index) {
@@ -282,4 +282,11 @@ async function updateContact(index) {
   } catch (error) {
     return;
   }
+}
+
+
+function openEditOverlay(index) {
+  let contentOverlayRef = document.getElementById('edit-contact');
+  contentOverlayRef.classList.remove('d-none');
+  contentOverlayRef.innerHTML = getNoteTemplateEditContact(index);
 }

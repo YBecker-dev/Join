@@ -60,12 +60,9 @@ function init() {}
 
 function successRegister(event) {
   if (allFieldsFilledCorrect(event)) {
-    console.log('hier fetchen ? ');
     checkUserOnRegistration(event);
-    //
   } else {
     checkAllFields();
-    console.log('Formular ist nicht korrekt ausgefüllt!');
   }
 }
 
@@ -102,19 +99,31 @@ async function checkUserOnRegistration(event) {
 }
 
 async function addUser() {
-  let user = {
-    name: nameInput.value,
+  // Login-Daten (Mail & Passwort)
+  let loginData = {
     mail: emailInput.value,
     password: passwordInput.value,
+    name: nameInput.value
   };
+  // User-Daten (Name)
+  let userData = {
+    name: nameInput.value,
+    email: emailInput.value,
+    phone: "-",
+    color: getRandomColor(),
+    initials: getInitials(nameInput.value)
+  };
+
   try {
-    let response = await fetch(BASE_URL + 'login' + '.json', {
+    let loginResponse = await fetch(BASE_URL + 'login.json', {
       method: 'POST',
-      headers: { 'content-Type': 'application/json' },
-      body: JSON.stringify(user),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(loginData),
     });
-    if (response.ok) {
-      console.log('Daten wurden verschickt');
+
+    await saveToFirebase(userData);
+
+    if (loginResponse.ok) {
       showSuccessMessage();
       resetForm();
     } else {
