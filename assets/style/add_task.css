@@ -467,6 +467,7 @@ input[type="text"] {
     height: 48px;
     border: solid 1px #d1d1d1;
     border-radius: 8px;
+    cursor: text;
 }
 
 .required {
