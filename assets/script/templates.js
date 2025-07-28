@@ -117,19 +117,18 @@ function overlaySubtaskHtml(subtask, subtaskIndex, taskId) {
 
 function getLogOutMenu() {
   return `
-      <div class="help-mobil" onclick="window.location.href='/assets/html/MPA-architecture/help.html'" id="help-mobil">
+      <div class="help-mobil" onclick="window.location.href='/assets/html/help.html'" id="help-mobil">
           <p>Help</p>
       </div>
-      <div class="section1" onclick="window.location.href='/assets/html/MPA-architecture/legal-notice_internal.html'"  id="legalNotice">
+      <div class="section1" onclick="window.location.href='/assets/html/legal-notice_internal.html'"  id="legalNotice">
           <p> Legal Notice</p>
       </div>
-      <div class="section1" onclick="window.location.href='/assets/html/MPA-architecture/privacy-policy_internal.html'"  id="privacyPolicy">
+      <div class="section1" onclick="window.location.href='/assets/html/privacy-policy_internal.html'"  id="privacyPolicy">
           <p>Privacy Policy</p>
       </div>
       <div class="section1" onclick="handleLogOut(event)"  id="logOut">
           <a href="/index.html">Log out</a>
       </div>
-    
     `;
 }
 let trueTaskId;
@@ -144,7 +143,6 @@ function boardHtmlTemplate(
   priorityImg,
   progressBar,
   addTaskId
-  
 ) {
   trueTaskId = addTaskId;
   return `
