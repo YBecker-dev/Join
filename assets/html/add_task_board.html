@@ -7,7 +7,6 @@
       </div>
     </div>
   </section>
-
   <div class="contentspace-html addtask">
     <div class="headline-addtask">
       <h1>Add Task</h1>
@@ -51,10 +50,11 @@
               <input
                 id="date"
                 type="date"
+                min=""
+                max="2035-12-31"
                 name="add-task-input2"
                 onclick="showError('add-task-input2-warning', 'date')"
-                oninput="showError('add-task-input2-warning', 'date'); enableCreateTaskButton()"
-              />
+                oninput="showError('add-task-input2-warning', 'date'); enableCreateTaskButton()"/>
               <span class="date-icon">
                 <img src="/assets/img/icon/add_task_icon/event.png" alt="" />
               </span>

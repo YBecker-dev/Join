@@ -17,6 +17,7 @@ async function initAddTask() {
   changeColorbyHtmlLinks(document.getElementById('sidebar-add-task'));
   dateInputMinDate();
 }
+
 function dateInputMinDate() {
   const today = new Date();
   const yyyy = today.getFullYear();
@@ -65,6 +66,10 @@ function assignedToDropdown(searchTerm = '') {
   if (!contactsRef || !Array.isArray(contacts)) return;
   let html = getDropdownHTML(searchTerm);
   contactsRef.innerHTML = html;
+  let filllicker = contactsRef.querySelector('.filllicker');
+  if (filllicker) {
+    filllicker.style.padding = contactsRef.classList.contains('show') ? '5px' : '0';
+  }
   animatedSearch(contactsRef, searchTerm);
 }
 
@@ -85,21 +90,6 @@ function getContactDropdownHTML(i, lowerSearch) {
     return assignedToDropdownHTML(contacts, i, checked);
   }
   return '';
-}
-
-function animatedSearch(contactsRef, searchTerm) {
-  if (!contactsRef.classList.contains('show')) return;
-  contactsRef.classList.remove('expanded');
-  let maxDropdownHeight = 305;
-  let contentHeight = contactsRef.scrollHeight;
-  if (searchTerm.trim() !== '' && contentHeight < maxDropdownHeight) {
-    contactsRef.style.maxHeight = contentHeight + 'px';
-    contactsRef.style.overflowY = 'hidden';
-  } else {
-    contactsRef.style.maxHeight = maxDropdownHeight + 'px';
-    contactsRef.style.overflowY = 'auto';
-  }
-  contactsRef.classList.add('expanded');
 }
 
 function onContactCheckboxClick(i, checkbox) {
@@ -357,11 +347,26 @@ function animateDropdown(animateDropdownId, open = true) {
   }
 }
 
+function animatedSearch(contactsRef, searchTerm) {
+  if (!contactsRef.classList.contains('show')) return;
+  contactsRef.classList.remove('expanded');
+  let maxDropdownHeight = 305;
+  let contentHeight = contactsRef.scrollHeight;
+  if (searchTerm.trim() !== '' && contentHeight < maxDropdownHeight) {
+    contactsRef.style.maxHeight = contentHeight + 'px';
+    contactsRef.style.overflowY = 'hidden';
+  } else {
+    contactsRef.style.maxHeight = maxDropdownHeight + 'px';
+    contactsRef.style.overflowY = 'auto';
+  }
+  contactsRef.classList.add('expanded');
+}
+
 function openDropdownWithAnimation(animateDropdownId) {
   let dropdown = document.getElementById(animateDropdownId);
   if (!dropdown) return;
   if (dropdown.classList.contains('show') && dropdown.style.maxHeight === '305px') return;
-  dropdown.classList.add('show');
+  dropdown.classList.add('show', 'expanded');
   dropdown.classList.remove('hidden');
   dropdown.style.maxHeight = '0';
   dropdown.style.opacity = '0';
@@ -375,10 +380,10 @@ function closeDropdownWithAnimation(animateDropdownId) {
   let dropdown = document.getElementById(animateDropdownId);
   if (!dropdown) return;
   if (!dropdown.classList.contains('show') && !dropdown.classList.contains('expanded')) return;
-  dropdown.classList.remove('expanded', 'show', 'hidden');
+  dropdown.classList.remove('show', 'hidden');
   dropdown.classList.add('closing');
   setTimeout(() => {
-    dropdown.classList.remove('closing');
+    dropdown.classList.remove('closing', 'expanded');
     dropdown.classList.add('hidden');
     dropdown.style.maxHeight = '';
     dropdown.style.opacity = '';

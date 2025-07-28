@@ -248,29 +248,11 @@ a:hover {
     border-color: #e74c3c !important;
 }
 
-input:focus {
+input:focus,
+input#add-task-input3:focus   {
     outline: none;
     box-shadow: none;
-    border: none;
-}
-
-textarea:focus {
-    outline: none;
-    box-shadow: none;
-    border: 1px solid #2AABE2;
-}
-
-input[type="text"]:focus {
-    outline: none;
-    box-shadow: none;
-    border: 1px solid #2AABE2;
-}
-
-
-input[type="date"]:focus {
-    outline: none;
-    box-shadow: none;
-    border: 1px solid #2AABE2;
+    border: none !important;
 }
 
 .checkbox {

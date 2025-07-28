@@ -331,7 +331,7 @@ function findTaskKeyByAddTaskId(tasks, keys, addTaskIdToDelete) {
   return null;
 }
 
-async function toggleBoardOverlay(taskId ,trueTaskId) {
+async function toggleBoardOverlay(taskId, trueTaskId) {
   let overlayRef = document.getElementById('overlayBoard');
   let overlay_content = document.getElementById('overlay-content-loader');
   toggleOverlay(overlayRef);
@@ -529,6 +529,7 @@ async function openCreateTask() {
     `<img onclick="closeCreateTask()" src="../img/icon/close.png" alt="" class="close-overlay-x">` + tempDiv.innerHTML;
   animatedOpeningAddTask(overlayBg, overlayContent);
   setPriority('medium');
+  await initAddTask();
 }
 
 function closeCreateTask() {
@@ -674,7 +675,3 @@ function taskVisibilty(filterTask) {
     }
   });
 }
-
-
-
-

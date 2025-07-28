@@ -290,6 +290,8 @@ input[type="text"] {
 #category-dropdown-options.expanded {
     max-height: 305px;
     overflow-y: auto;
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: rgba(100, 100, 100, 0.5) #f0f0f0; /* For Firefox */
 }
 
 #assigned-to-dropdown-options.expanded::-webkit-scrollbar {
@@ -320,8 +322,11 @@ input[type="text"] {
     background: #f0f0f0;
 }
 
-#assigned-to-dropdown-selected img {
+#assigned-to-dropdown-selected img,
+#category-selected-arrow {
     object-fit: scale-down;
+    height: 24px;
+    width: 24px;
 }
 
 .subtasks-icon {
@@ -742,10 +747,8 @@ input[type="text"] {
 }
 
 .filllicker {
-    position: relative;
     background: white;
-    padding: 5px;
-    top: 0;
+    padding: 0;
 }
 
 @media (max-width: 1173px) {
@@ -898,8 +901,9 @@ input[type="text"] {
 }
 
 @media (max-width: 340px) {
+
     .create-button,
     .clear-button {
         font-size: 18px;
     }
-}   
+}
