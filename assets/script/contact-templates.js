@@ -1,6 +1,6 @@
 // Contact Overview
 function getNoteTemplateContact(index) {
-  let user = myContacts[index];
+  let user = contacts[index];
 
   return ` <div onclick="openDetails(${index}), event.stopPropagation()" class="person">
               <p class="initial" style="background-color: ${user.color}">${user.initials}</p>
@@ -15,7 +15,7 @@ function getNoteTemplateContact(index) {
 
 // view Contact
 function getNoteTemplateContactDetails(indexDetails) {
-  let user = myContacts[indexDetails];
+  let user = contacts[indexDetails];
 
   return `  <div class="namesDetails">
               <div class="contactInformations">
@@ -92,7 +92,7 @@ function getNoteTemplateAddNewContact() {
 
 // edit Contact
 function getNoteTemplateEditContact(index) {
-  let user = myContacts[index] || {};
+  let user = contacts[index] || {};
 
   return ` <div class="newContactOverlay" onclick="event.stopPropagation()">
             <div class="headDiv">
