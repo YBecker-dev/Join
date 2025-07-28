@@ -65,7 +65,7 @@ function assignedToDropdown(searchTerm = '') {
   if (!contactsRef || !Array.isArray(contacts)) return;
   let html = getDropdownHTML(searchTerm);
   contactsRef.innerHTML = html;
-  let filllicker = contactsRef.querySelector('.filllicker');
+  let filllicker = contactsRef.querySelector('.filllicker-assigned-to');
   if (filllicker) {
     filllicker.style.padding = contactsRef.classList.contains('show') ? '5px' : '0';
   }
@@ -73,7 +73,7 @@ function assignedToDropdown(searchTerm = '') {
 }
 
 function getDropdownHTML(searchTerm) {
-  let html = `<div class="filllicker"></div>`;
+  let html = `<div class="filllicker-assigned-to"></div>`;
   let lowerSearch = searchTerm.trim().toLowerCase();
   for (let i = 0; i < contacts.length; i++) {
     html += getContactDropdownHTML(i, lowerSearch);
@@ -364,6 +364,10 @@ function animatedSearch(contactsRef, searchTerm) {
 function openDropdownWithAnimation(animateDropdownId) {
   let dropdown = document.getElementById(animateDropdownId);
   if (!dropdown) return;
+  let filllickerCategory = dropdown.querySelector('.filllicker-category');
+  if (filllickerCategory) {
+    filllickerCategory.style.padding = '5px';
+  }
   if (dropdown.classList.contains('show') && dropdown.style.maxHeight === '305px') return;
   dropdown.classList.add('show', 'expanded');
   dropdown.classList.remove('hidden');
@@ -378,6 +382,14 @@ function openDropdownWithAnimation(animateDropdownId) {
 function closeDropdownWithAnimation(animateDropdownId) {
   let dropdown = document.getElementById(animateDropdownId);
   if (!dropdown) return;
+  let filllickerCategory = dropdown.querySelector('.filllicker-category');
+  if (filllickerCategory) {
+    filllickerCategory.style.padding = '0';
+  }
+  let filllickerAssignedTo = dropdown.querySelector('.filllicker-assigned-to');
+  if (filllickerAssignedTo) {
+    filllickerAssignedTo.style.padding = '0';
+  }
   if (!dropdown.classList.contains('show') && !dropdown.classList.contains('expanded')) return;
   dropdown.classList.remove('show', 'hidden');
   dropdown.classList.add('closing');
