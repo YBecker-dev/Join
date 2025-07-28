@@ -14,7 +14,6 @@ async function initAddTask() {
     handleDropdown('category-dropdown-options', 'category-selected-arrow', 'close');
     clearAssignedTo();
   });
-  changeColorbyHtmlLinks(document.getElementById('sidebar-add-task'));
   dateInputMinDate();
 }
 

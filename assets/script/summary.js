@@ -5,7 +5,6 @@ async function initSummary() {
   await checkTasks();
   initFrameworkFunctions();
   upcomingDeadline();
-  changeColorbyHtmlLinks(document.getElementById('sidebar-summary'));
 }
 
 let statusArray = [];

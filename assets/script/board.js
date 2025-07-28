@@ -7,7 +7,6 @@ async function initBoard() {
   emptyDragArea();
   initEventListnerProcessTasksInformation();
   initFrameworkFunctions();
-  changeColorbyHtmlLinks(document.getElementById('sidebar-board'));
 }
 
 function allowDrop(ev) {

@@ -2,35 +2,13 @@ let myContacts = [];
 let newContacts = [];
 let currentSelectedIndex = null;
 
-async function loadContacts() {
-  try {
-    let url = `https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/users.json`;
-    let response = await fetch(url);
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    let responseAsJson = await response.json();
-
-    if (responseAsJson) {
-      myContacts = [];
-      newContacts = [];
-
-      for (let firebaseId in responseAsJson) {
-        myContacts.push(responseAsJson[firebaseId]);
-        newContacts.push(firebaseId);
-      }
-    } else {
-      myContacts = [];
-      newContacts = [];
-    }
-  } catch (error) {
-    console.error('Fehler beim Laden der Kontakte:', error);
-    myContacts = [];
-    newContacts = [];
-  }
+async function initContacts() {
+  await loadContacts();
+  renderContacts();
+  initFrameworkFunctions();
 }
+
+
 
 function getInitials(name) {
   if (!name) return '??';
@@ -41,12 +19,7 @@ function getInitials(name) {
     .substring(0, 2);
 }
 
-async function initContacts() {
-  await loadContacts();
-  renderContacts();
-  initFrameworkFunctions();
-  changeColorbyHtmlLinks(document.getElementById('sidebar-contacts'));
-}
+
 
 function renderContacts() {
   let contentRef = document.getElementById('contactContent');
