@@ -22,7 +22,7 @@
 
     <section id="overlay-add-task" class="overlay overlay-add-task d-none">
       <div class="add-task-overlay-content" id="add-task-overlay-content">
-        <img onclick="closeCreateTask()" src="../../img/icon/close.png" alt="" />
+        <img onclick="closeCreateTask()" src="../img/icon/close.png" alt="" />
       </div>
     </section>
 
@@ -43,6 +43,7 @@
         </div>
       </div>
     </header>
+
     <div class="sidebar">
       <div class="sidebar-links-section">
         <div class="sidebar-logo">
@@ -75,6 +76,7 @@
         >
       </div>
     </div>
+
     <section class="main-content">
       <section class="wrapper-create-task-section d-none" id="wrapper-create-task-section">
         <div class="wrapper-create-task">
@@ -212,7 +214,7 @@
                     class="hidden custom-dropdown-options"
                     onclick="eventBubbling(event)"
                   >
-                    <p class="filllicker"></p>
+                    <p class="filllicker" id="filllicker"></p>
                     <p class="category-option" onclick="handleCategoryOptionClick(event, this)">
                       <span class="category-option-text">Technical Task</span>
                     </p>
@@ -253,10 +255,8 @@
     </section>
     <script src="/assets/script/templates.js"></script>
     <script src="/assets/script/add_task_helpers.js"></script>
-    <script src="/assets/script/add_task.js"></script>
-    <script src="/assets/script/board.js"></script>
-    <script src="/script.js"></script>
     <script src="/assets/script/main.js"></script>
-    <script src="/assets/script/contacts.js"></script>
+    <script src="/assets/script/add_task.js"></script>
+    <script src="/script.js"></script>
   </body>
 </html>

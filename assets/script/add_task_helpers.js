@@ -1,14 +1,14 @@
+function toggleDropdown(dropdown, dropdownId, arrow) {
+  let isOpen = dropdown.classList.contains('show');
+  setDropdownState(dropdownId, arrow, !isOpen);
+}
+
 function setDropdownState(dropdownId, arrow, open) {
   animateDropdown(dropdownId, open);
   toggleArrowRotation(arrow, open);
   if (open) {
     clearAssignedTo();
   }
-}
-
-function toggleDropdown(dropdown, dropdownId, arrow) {
-  let isOpen = dropdown.classList.contains('show');
-  setDropdownState(dropdownId, arrow, !isOpen);
 }
 
 function toggleArrowRotation(arrow, isOpen) {
