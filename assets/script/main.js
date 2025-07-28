@@ -22,13 +22,13 @@ async function loadContacts() {
   }
 }
 
-function initFrameworkFunctions(){
+function initFrameworkFunctions() {
   displayUserInitials();
 }
 
 function displayUserInitials() {
   // Sehr Fehleranfällig !!!
-  try{
+  try {
     let userInitials = document.getElementById('userInitials');
     let userName = JSON.parse(localStorage.getItem('announcedUser'));
     if (userName !== 'Guest Guest') {
@@ -40,24 +40,23 @@ function displayUserInitials() {
     } else {
       userInitials.innerText = 'G';
     }
-  }catch(error){
-    if(error instanceof TypeError && error.message.includes("Cannot read properties of null (reading 'slice')")){
+  } catch (error) {
+    if (error instanceof TypeError && error.message.includes("Cannot read properties of null (reading 'slice')")) {
       console.warn('Unautorisierter Zugriff oder fehlende Nutzerdaten erfasst. Leite zum Login um');
       redirectLogin();
-    }else{
+    } else {
       throw error;
     }
   }
-  
 }
 
-let loadHelp =() =>{
-  window.location.href = "/assets/html/MPA-architecture/help.html"
-}
+let loadHelp = () => {
+  window.location.href = '/assets/html/MPA-architecture/help.html';
+};
 
-function redirectLogin(){
+function redirectLogin() {
   let timeout;
-  timeout = setTimeout(window.location.href = "/index.html", 2000);
+  timeout = setTimeout((window.location.href = '/index.html'), 2000);
 }
 
 function toggleLogOutOverlay() {
@@ -83,12 +82,6 @@ let resetAnnouncedUserStorage = () => {
   localStorage.removeItem('announcedUser');
 };
 
-function changeColorbyHtmlLinks(element) {
-  document.querySelectorAll('.sidebar-links').forEach((sidebarLink) => {
-    sidebarLink.classList.remove('active');
-  });
-  element.classList.add('active');
-}
 
 function toggleMoveToOverlay() {
   let moveToRef = document.getElementById('selection');
