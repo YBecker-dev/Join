@@ -510,6 +510,8 @@ h4 {
 }
 
 @media (max-width: 1008px) {
-  
+  .main-content {
+    display: flex !important;
+  }
 
 }
