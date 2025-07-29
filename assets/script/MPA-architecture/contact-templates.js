@@ -49,7 +49,7 @@ function getNoteTemplateContactDetails(indexDetails) {
               <h4>Phone</h4>
               <a class="phone" href="tel:${user.phone}">${user.phone}</a>
             </div>
-            <button onclick="showEditOverlayMobile()" id="editContactBtn-mobile" class="editContactBtn-mobile">
+            <button onclick="showEditOverlayMobile()" id="editContactBtnMobile" class="editContactBtn-mobile">
               <div class="dotted"></div>
               <div class="dotted"></div>
               <div class="dotted"></div>
@@ -74,28 +74,28 @@ function getNoteTemplateAddNewContact() {
               <div class="closeDiv">
                 <img onclick="closeOverlay()" class="close" src="../../img/icon/close.png" alt="Close-Button">
               </div>        
-              <div class="profilDiv">
+              <form action="" class="profilDiv">
                 <div>
                   <p id="newContactInitials" class="profileInitials"><img class="profileImg" src="../../img/icon/profile.png" alt="profile Image"></p>
                 </div>
                 <div>
                   <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                    <input id="newContactName" class="addNewContact" type="text" placeholder="Name" required onclick="event.stopPropagation()">
+                    <input type="" value="" placeholder="Name" required id="newContactName" class="addNewContact" onclick="event.stopPropagation()">
                     <img class="addNewContactIcon" src="../../img/icon/person.png" alt="Person Icon">
                   </div> 
                   <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                    <input id="newContactMail" class="addNewContact" type="email" placeholder="Email" required onclick="event.stopPropagation()">
+                    <input type="email" value="" placeholder="E-Mail" name="email" required id="newContactMail" class="addNewContact" onclick="event.stopPropagation()">
                     <img class="addNewContactIcon" src="../../img/icon/mail.png" alt="Email Icon">
                   </div> 
                   <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                    <input id="newContactPhone" class="addNewContact" type="tel" placeholder="Phone" required onclick="event.stopPropagation()">
+                    <input type="tel" value="" placeholder="Phone" required id="newContactPhone" class="addNewContact" onclick="event.stopPropagation()">
                     <img class="addNewContactIcon" src="../../img/icon/phone.png" alt="phone Icon">
                   </div> 
                 </div>           
-              </div>
+              </form>
               <div class="accept">
                 <button onclick="closeOverlay()" class="clear-button cancel-button">Cancel<img class="save-close" src="../../img/icon/close.png" alt="Close-Button"></button>
-                <button onclick="saveToLocalstorage()" class="create-button">Create contact<img class="save-close" src="../../img/icon/save.png" alt="saveIcon"></button>
+                <button type="submit" onclick="saveToLocalstorage()" class="create-button">Create contact<img class="save-close" src="../../img/icon/save.png" alt="saveIcon"></button>
               </div>
             </div>
           </div>`;
