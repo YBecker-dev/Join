@@ -85,7 +85,7 @@ async function checkUser(event) {
         if (findUser === true) {
           localStorage.setItem('showGreeting', 'true');
           console.log('User gefunden');
-          window.location.href = 'assets/html/MPA-architecture/summery.html';
+          window.location.href = '/assets/html/summery.html';
           resetForm();
         } else {
           console.log('User nicht gefunden oder Eingaben falsch');
@@ -116,14 +116,11 @@ function logginAsGuest() {
   let guestUser = 'Guest Guest';
   localStorage.setItem('announcedUser', JSON.stringify(guestUser));
   localStorage.setItem('showGreeting', 'true');
-  window.location.href = 'assets/html/MPA-architecture/summery.html';
-  //MPA-architecture
-  //window.location.href = 'assets/html/main.html'; //SPA-architecture
+  window.location.href = 'assets/html/summery.html';
 }
-//-------------------------------------------------------------------------------------
-// new MPA concept test
-let PrivacyPolicy = 'assets/html/MPA-architecture/privacy-policy_MPA.html';
-let LegalNotice = 'assets/html/MPA-architecture/legal-notice_MPA.html';
+
+let PrivacyPolicy = '/assets/html/privacy-policy_external.html';
+let LegalNotice = '/assets/html/legal-notice_external.html';
 
 function privacyPolicyMPA() {
   let guestUser = 'Guest Guest';
