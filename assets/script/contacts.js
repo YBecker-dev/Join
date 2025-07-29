@@ -145,7 +145,6 @@ function closeOverlay() {
   contentOverlayRef.innerHTML = '';
 }
 
-
 function toggleEditOverlayMobile() {
   let overlayMobile = document.getElementById('editMobileOverlay');
   if (overlayMobile.classList.contains('d-none')) {

@@ -42,6 +42,9 @@ p{
     margin-bottom: 20px;
     
 }
+.welcome-content{
+    text-align: start;
+}
 .headline{
     flex-grow: 1;
     text-align: start;
@@ -64,6 +67,7 @@ p{
 .help-content{
     height: 1024px;
     width: 1014px;
+    
 }
 .What-is-Join{
     display: flex;
@@ -103,6 +107,9 @@ a,.join-color{
     .main-content{
         padding: 0 !important;
     }
+    .backward{
+        position: static;
+    }
 }
 @media(max-width: 1160px){
 
@@ -120,6 +127,9 @@ a,.join-color{
     }
     .help-content{
         width: 100%;
+    }
+    .space{
+        height: 100px;
     }
 }
 @media(max-width: 1008px){
@@ -140,6 +150,7 @@ a,.join-color{
     }
     .backward{
         position: static;
+        z-index: 0;
         img{
             height: 32px;
             width: 32px;

@@ -35,7 +35,7 @@
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    border: 2px solid black;
+    border: 3px solid #2A3647;
     font-size: 1.25rem;
     background: white;
     color: #2aabe2;
@@ -88,13 +88,19 @@ header {
     color: #2aabe2 !important;
 }
 
-.sidebar-links {
+.sidebar-links,
+.siderbar-legal-stuff-links {
     display: flex;
     gap: 8px;
     align-items: center;
     color: #a3a7ab;
-    padding-left: 56px;
     height: 46px;
+    transition: transform 0.2s;
+}
+
+.siderbar-legal-stuff-links:hover {
+    transform: scale(1.02);
+    font-weight: 700;
 }
 
 .sidebar-links img {
@@ -109,13 +115,18 @@ header {
     font-weight: 400;
 }
 
-.main-content {
-    position: fixed;
-    top: 96px;
-    left: 232px;
-    right: 0;
-    bottom: 0;
-    overflow: auto;
+.sidebar-links-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s;
+    width: 100%;
+    height: 100%;
+    padding-left: 56px;
+}
+
+.sidebar-links-content:hover {
+    transform: translateX(2px);
 }
 
 .help-icon:hover {
@@ -182,13 +193,19 @@ header {
     text-decoration: none;
     color: #FFFFFF;
 }
-.help-mobil{
+
+.help-mobil {
     display: none;
 }
 
-.sidebar-links.active {
+.sidebar-links.active,
+.siderbar-legal-stuff-links.active {
     background-color: #091931;
     color: #fff;
+}
+
+.siderbar-legal-stuff-links {
+    padding-left: 56px;
 }
 
 .sidebar-links.active img {
@@ -201,13 +218,110 @@ header {
     gap: 15px;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter';
+    scroll-behavior: smooth;
+    line-height: 120%;
+}
 
-/* // responsive design */
+body {
+    background-color: #F6F7F8 !important;
+    text-align: center;
+}
+
+@font-face {
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../../fonts/inter-v19-latin-regular.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+
+h1 {
+    font-size: 64px;
+    font-weight: bold;
+    padding: 48px 0 16px 0;
+}
+
+a {
+    text-decoration: none;
+    color: #BEBEBE;
+    opacity: 1;
+}
+
+a:hover {
+    color: #2AABE2;
+    font-weight: bold;
+}
+
+.d-none,
+.hidden {
+    display: none !important;
+}
+
+.input-error {
+    border: 2px solid #e74c3c !important;
+}
+
+.checkbox.input-error {
+    outline: 2px solid #e74c3c;
+    border-color: #e74c3c !important;
+}
+
+input:focus,
+input#add-task-input3:focus {
+    outline: none;
+    box-shadow: none;
+    border: none !important;
+}
+
+.checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    background: url('/assets/img/icon/checkbox.png') no-repeat center center;
+    background-size: contain;
+    cursor: pointer;
+}
+
+.checkbox:checked {
+    background: url('/assets/img/icon/checked_checkbox.png') no-repeat center center;
+    background-size: contain;
+}
+
+.contentspace-html {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.main-content {
+    position: fixed;
+    top: 96px;
+    left: 232px;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+}
 
 @media (max-width: 1439px) {
-    /*#sidebar-summary {
-        order: 1;
-    }*/
+
+    .sidebar-links-content {
+        padding: unset;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .sidebar-links-content:hover {
+        transform: translateY(-2px);
+    }
 
     #sidebar-board {
         order: 2;
@@ -233,6 +347,7 @@ header {
         flex-direction: row;
         justify-content: space-between;
         padding: 0 16px;
+        gap: unset;
     }
 
     .sidebar {
@@ -242,7 +357,7 @@ header {
         left: 0;
         padding: 0;
         position: fixed;
-        z-index: 10000;
+        z-index: 1;
     }
 
     .sidebar-links {
@@ -255,11 +370,16 @@ header {
         line-height: 120%;
         width: 80px;
     }
-    /*Test*/
-   
 
     .sidebar-links.active {
         border-radius: 15px;
+    }
+
+    .impressum-container {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+
     }
 
     header {
@@ -289,10 +409,10 @@ header {
     .user {
         height: 40px;
         width: 40px;
-        
+
         font-size: 12px;
         font-weight: 700;
-        
+
     }
 
     .logo-responsive {
@@ -307,23 +427,26 @@ header {
         top: 0;
         left: 0;
     }
-    .logout-overlay-content{
+
+    .logout-overlay-content {
         height: auto;
         top: 80px;
     }
- 
-    .help-mobil{
+
+    .help-mobil {
         height: 46px;
         width: 90%;
         display: flex;
         justify-content: center;
         align-items: center;
         border-top-left-radius: 10px;
-        p{
+
+        p {
             color: #FFFFFF;
-        }   
+        }
     }
-    .help-mobil:hover{
+
+    .help-mobil:hover {
         cursor: pointer;
         background-color: #102542;
     }
@@ -338,5 +461,11 @@ header {
 
     .add-task-no-scroll {
         overflow: hidden;
+    }
+}
+
+@media (max-width: 340px) {
+    .sidebar-links-container {
+        padding: 0 12px;
     }
 }

@@ -7,7 +7,6 @@ async function initBoard() {
   emptyDragArea();
   initEventListnerProcessTasksInformation();
   initFrameworkFunctions();
-  changeColorbyHtmlLinks(document.getElementById('sidebar-board'));
 }
 
 function allowDrop(ev) {
@@ -81,7 +80,6 @@ async function fetchAllTasks() {
   return await response.json();
 }
 
-// sucht höchste id/sequence beim Drag and Drop
 function getMaxSequenceForStatus(allTasks, newStatus) {
   let maxSequence = 0;
   if (allTasks) {
@@ -98,14 +96,14 @@ function getMaxSequenceForStatus(allTasks, newStatus) {
   return maxSequence;
 }
 
-async function fetchTaskById(taskId) {
-  let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
-  return await response.json();
-}
-
 function updateTaskStatusAndSequence(task, newStatus, maxSequence) {
   task.status = newStatus;
   task.sequence = maxSequence;
+}
+
+async function fetchTaskById(taskId) {
+  let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
+  return await response.json();
 }
 
 async function saveTask(taskId, task) {
@@ -161,55 +159,71 @@ function collectTasksForColumn(entries, status) {
 
 function renderTasksInColumn(tasksInColumn, elementId) {
   for (let taskIndex = 0; taskIndex < tasksInColumn.length; taskIndex++) {
-    let taskId = tasksInColumn[taskIndex].id;
-    let task = tasksInColumn[taskIndex].task;
-    let categoryInfo = backgroundColorTitle(task);
-    let categoryText = categoryInfo.categoryText;
-    let categoryClass = categoryInfo.categoryClass;
-    let titleText = task.title || '';
-    let descriptionText = task.description || '';
-    let assignedContact = getAssignedContactsHtml(task, 'board');
-    let priorityImg = showPriorityImg(task);
-    let progressBar = progressBarSubtasks(task);
-    let div = document.createElement('section');
-    div.innerHTML = boardHtmlTemplate(
-      taskId,
-      categoryClass,
-      categoryText,
-      titleText,
-      descriptionText,
-      assignedContact,
-      priorityImg,
-      progressBar,
-      task.addTaskId
-    );
-    document.getElementById(elementId).appendChild(div);
-    enableDragAndDropBoard(task, div);
+    renderSingleTaskInColumn(tasksInColumn[taskIndex], elementId);
   }
+}
+
+function renderSingleTaskInColumn(taskObj, elementId) {
+  let div = createTaskSection(taskObj);
+  document.getElementById(elementId).appendChild(div);
+  enableDragAndDropBoard(taskObj.task, div);
+}
+
+function createTaskSection(taskObj) {
+  let taskId = taskObj.id;
+  let task = taskObj.task;
+  let categoryInfo = backgroundColorTitle(task);
+  let div = document.createElement('section');
+  div.innerHTML = buildTaskHtml(taskId, task, categoryInfo);
+  return div;
+}
+
+function buildTaskHtml(taskId, task, categoryInfo) {
+  return boardHtmlTemplate(
+    taskId,
+    categoryInfo.categoryClass,
+    categoryInfo.categoryText,
+    task.title || '',
+    task.description || '',
+    getAssignedContactsHtml(task, 'board'),
+    showPriorityImg(task),
+    progressBarSubtasks(task),
+    task.addTaskId
+  );
 }
 
 function getAssignedContactsHtml(task, type) {
   let html = '';
   let hasContact = false;
   if (Array.isArray(task.assignedTo) && contacts && contacts.length > 0) {
-    for (let i = 0; i < task.assignedTo.length; i++) {
-      let userId = task.assignedTo[i];
-      let contact = findContactById(userId);
-      if (contact) {
-        hasContact = true;
-        if (type === 'board') {
-          html += `<span class="board-contact-name" style="background-color:${contact.color}">${contact.initials}</span>`;
-        } else if (type === 'overlay') {
-          html += contactsOverlayTemplate(contact.initials, contact.name, contact.color);
-        }
-      }
-    }
+    html = buildContactsHtml(task, type);
+    hasContact = html.length > 0;
   }
-  // NUR für overlay anzeigen, wenn keine Kontakte gefunden wurden
   if (type === 'overlay' && !hasContact) {
     html = `<div class="no-contacts">Keine Kontakte ausgewählt</div>`;
   }
   return html;
+}
+
+function buildContactsHtml(task, type) {
+  let html = '';
+  for (let i = 0; i < task.assignedTo.length; i++) {
+    let userId = task.assignedTo[i];
+    let contact = findContactById(userId);
+    if (contact) {
+      html += getContactHtmlByType(contact, type);
+    }
+  }
+  return html;
+}
+
+function getContactHtmlByType(contact, type) {
+  if (type === 'board') {
+    return `<span class="board-contact-name" style="background-color:${contact.color}">${contact.initials}</span>`;
+  } else if (type === 'overlay') {
+    return contactsOverlayTemplate(contact.initials, contact.name, contact.color);
+  }
+  return '';
 }
 
 function sortTasksBySequence(tasksArray) {
@@ -226,16 +240,14 @@ function sortTasksBySequence(tasksArray) {
   }
 }
 
-// img Pfad wird entsprechend angepasst
-// ursprünglich "../img/icon/proriority/.....png"
 function showPriorityImg(task) {
   let priorityImg = '';
   if (task.priority === 'Urgent') {
-    priorityImg = '<img src="/assets/img/icon/priority/urgent.png" alt="Urgent" class="priority-img">';
+    priorityImg = '<img src="../img/icon/priority/urgent.png" alt="Urgent" class="priority-img">';
   } else if (task.priority === 'Medium') {
-    priorityImg = '<img src="/assets/img/icon/priority/medium.png" alt="Medium" class="priority-img">';
+    priorityImg = '<img src="../img/icon/priority/medium.png" alt="Medium" class="priority-img">';
   } else if (task.priority === 'Low') {
-    priorityImg = '<img src="/assets/img/icon/priority/low.png" alt="Low" class="priority-img">';
+    priorityImg = '<img src="../img/icon/priority/low.png" alt="Low" class="priority-img">';
   }
   return priorityImg;
 }
@@ -246,15 +258,21 @@ function progressBarSubtasks(task) {
   let progressBar = '';
   if (Array.isArray(task.subtasks)) {
     totalCount = task.subtasks.length;
-    for (let subtaskIndex = 0; subtaskIndex < task.subtasks.length; subtaskIndex++) {
-      if (task.subtasks[subtaskIndex].status === 'checked') {
-        doneCount++;
-      }
-    }
+    doneCount = countDoneSubtasks(task.subtasks);
     let percent = totalCount > 0 ? (doneCount / totalCount) * 100 : 0;
     progressBar = progressbarHtml(percent, doneCount, totalCount);
   }
   return progressBar;
+}
+
+function countDoneSubtasks(subtasks) {
+  let done = 0;
+  for (let i = 0; i < subtasks.length; i++) {
+    if (subtasks[i].status === 'checked') {
+      done++;
+    }
+  }
+  return done;
 }
 
 function enableDragAndDropBoard(task, div) {
@@ -270,13 +288,10 @@ function enableDragAndDropBoard(task, div) {
 }
 
 async function deleteTaskFromFirebase(addTaskIdToDelete) {
-  let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json');
-  let tasks = await response.json();
+  let tasks = await fetchAllTasksFromFirebase();
   if (!tasks) return;
-
   let keys = Object.keys(tasks);
   let deleteKey = findTaskKeyByAddTaskId(tasks, keys, addTaskIdToDelete);
-
   if (deleteKey) {
     await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + deleteKey + '.json', {
       method: 'DELETE',
@@ -284,6 +299,11 @@ async function deleteTaskFromFirebase(addTaskIdToDelete) {
   }
   await customizeAddTaskId(tasks, keys, addTaskIdToDelete);
   await pushTasksInBoard();
+}
+
+async function fetchAllTasksFromFirebase() {
+  let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json');
+  return await response.json();
 }
 
 async function customizeAddTaskId(tasks, keys, deletedAddTaskId) {
@@ -310,17 +330,15 @@ function findTaskKeyByAddTaskId(tasks, keys, addTaskIdToDelete) {
   return null;
 }
 
-async function toggleBoardOverlay(taskId) {
+async function toggleBoardOverlay(taskId, trueTaskId) {
   let overlayRef = document.getElementById('overlayBoard');
   let overlay_content = document.getElementById('overlay-content-loader');
   toggleOverlay(overlayRef);
-
   overlayRef.classList.remove('d-none');
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
   let task = await response.json();
   if (!task) return;
-  overlay_content.innerHTML = getTaskOverlay(task, taskId);
-
+  overlay_content.innerHTML = getTaskOverlay(task, taskId, trueTaskId);
   overlayRef.classList.add('visible');
   let contentRender = overlayRef.querySelector('.overlay-content-render');
   if (contentRender) {
@@ -391,105 +409,7 @@ async function editTask(taskId) {
   let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json');
   let task = await response.json();
   if (!task) return;
-
-  overlay_content.innerHTML = `
-    <div class="overlay-section">
-    <div class="overlay-header-edit">
-     <img class="close-icon" src="/assets/img/icon/close.png" alt="Close" onclick="toggleBoardOverlay('${taskId}')" />
-     </div>
-    <form id="edit-task-form" onsubmit="saveEditedTask(event, '${taskId}'); return false;">
-      <div class="input-group edittask add-task">
-        <span>Title</span>
-        <input onclick="showError('add-task-input1-warning', 'edit-title')" oninput="showError('add-task-input1-warning', 'edit-title');" id="edit-title" type="text" value="${
-          task.title || ''
-        }" required>
-        <span id="add-task-input1-warning" class="input-warning d-none">This field is required</span>
-      </div>
-      <div class="input-group edittask add-task">
-        <span>Description</span>
-        <textarea id="edit-description" name="add-task-textarea" placeholder="Enter a Description">${
-          task.description || ''
-        }</textarea>
-        <span class="input-icon-edit">
-          <img src="/assets/img/icon/add_task_icon/textarea.png" alt="" />
-        </span>
-      </div>
-      <div class="input-group edittask add-task date">
-        <span>Due Date <span class="required-star">*</span></span>
-        <div class="date-input-container date-input-edit">
-          <input onclick="showError('add-task-input2-warning', 'edit-date')" oninput="showError('add-task-input2-warning', 'edit-date');" id="edit-date" type="date" value="${
-            task.date || ''
-          }"/>
-          <span>
-            <img class="date-icon-edit" src="/assets/img/icon/add_task_icon/event.png" alt="" />
-          </span>
-        </div>
-        <span id="add-task-input2-warning" class="input-warning d-none">This field is required</span>
-      </div>
-      <div class="priority priority-edit">
-        <span>Priority</span>
-        <div class="priority-buttons priority-buttons-edit">
-          <button type="button" id="edit-urgent" class="add-task-button${
-            task.priority === 'Urgent' ? ' active urgent' : ''
-          }" onclick="togglePriority('Urgent', 'edit-');">
-            Urgent <img src="/assets/img/icon/priority/urgent.png" alt="" />
-          </button>
-          <button type="button" id="edit-medium" class="add-task-button${
-            task.priority === 'Medium' ? ' active medium' : ''
-          }" onclick="togglePriority('Medium', 'edit-');">
-            Medium <img src="/assets/img/icon/priority/medium.png" alt="" />
-          </button>
-          <button type="button" id="edit-low" class="add-task-button${
-            task.priority === 'Low' ? ' active low' : ''
-          }" onclick="togglePriority('Low', 'edit-');">
-            Low <img src="/assets/img/icon/priority/low.png" alt="" />
-          </button>
-        </div>
-      </div>
-      <div class="add-task">
-       <span>Assigned to</span>
-       <div id="assigned-to-dropdown">
-        <div id="assigned-to-dropdown-selected" onclick="eventBubbling(event)">
-          <input
-            id="add-task-input3" name="add-task-input3" type="text" placeholder="Select a contact"  oninput="assignedToDropdown(this.value)" onclick="handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'open'); assignedToDropdown(this.value)">
-          <div
-            class="assigned-arrow" onclick="handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'toggle'); assignedToDropdown(document.getElementById('add-task-input3').value);">
-            <img
-              class="hover-icon" id="assigned-to-arrow" src="/assets/img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png" alt="">
-          </div>
-         </div>
-         <div id="assigned-to-dropdown-options" class="hidden custom-dropdown-options custom-dropdown-options-edit" onclick="eventBubbling(event)">
-         </div>
-         <div class="show-contacts-add-task show-contacts-add-task-edit" id="show-contacts-add-task"></div>
-       </div>
-      </div>
-      <div class="input-group edittask add-task subtask-edit">
-        <span>Subtasks</span>
-        <input class="add-task-input-edit"
-          id="add-task-input4"
-          oninput="onSubtaskInputChange()"
-          onkeydown="onSubtaskInputKeydown(event)"
-          name="add-task-input4"
-          type="text"
-          placeholder="Add new subtask"
-          value=""
-        />
-        <span class="subtasks-icon" id="subtasks-icon">
-          <img
-            class="hover-icon"
-            src="/assets/img/icon/add_task_icon/plus.png"
-            alt="Add"
-            onclick="pushSubtaskInput(event)"
-          />
-        </span>
-      </div>
-      <div id="subtasks-container" class="subtasks-container"></div>
-    </form>
-    <div class="create-clear-buttons-edit">
-      <button type="submit" class="ok-button" form="edit-task-form">OK <img src="/assets/img/icon/add_task_icon/buttons/create_task.png" /></button>
-    </div>
-  `;
-
+  overlay_content.innerHTML = editTaskHtml(task, taskId);
   let subtasksContainer = document.getElementById('subtasks-container');
   subtasksContainer.innerHTML = '';
   if (task.subtasks && Array.isArray(task.subtasks)) {
@@ -499,7 +419,6 @@ async function editTask(taskId) {
       subtasksContainer.innerHTML += pushSubtaskInputHTML(text, checked);
     });
   }
-
   selectedContacts = [];
   if (task.assignedTo && Array.isArray(task.assignedTo)) {
     for (let i = 0; i < contacts.length; i++) {
@@ -508,9 +427,10 @@ async function editTask(taskId) {
       }
     }
   }
-  showContactsAddTask();
+  loadContacts();
   let input = document.getElementById('add-task-input3');
   if (input) input.value = '';
+  showContactsAddTask();
 }
 
 async function saveEditedTask(event, taskId) {
@@ -552,6 +472,8 @@ async function saveEditedTask(event, taskId) {
     subtasks,
     status,
     category,
+    addTaskId: oldTask.addTaskId,
+    sequence: oldTask.sequence
   };
 
   await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json', {
@@ -586,10 +508,10 @@ async function toggleSubtaskDone(taskId, subtaskIndex) {
 async function openCreateTask() {
   selectedContacts = [];
   if (window.innerWidth <= 1233) {
-    window.location.href = '/assets/html/MPA-architecture/add_task.html';
+    window.location.href = 'add_task.html';
     return;
   }
-  let response = await fetch('../add_task.html');
+  let response = await fetch('../html/add_task_board.html');
   let html = await response.text();
   let tempDiv = document.createElement('div'); // <- wird benötigt damit ich die HTML-Elemente manipulieren kann
   tempDiv.innerHTML += html;
@@ -608,6 +530,7 @@ async function openCreateTask() {
     `<img onclick="closeCreateTask()" src="../img/icon/close.png" alt="" class="close-overlay-x">` + tempDiv.innerHTML;
   animatedOpeningAddTask(overlayBg, overlayContent);
   setPriority('medium');
+  await initAddTask();
 }
 
 function closeCreateTask() {
