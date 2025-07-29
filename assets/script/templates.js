@@ -269,7 +269,7 @@ function overlayPriority(task) {
 function showContactsAddTaskHtml(contact) {
   return `
     <div class="contact-items" style="background-color:${contact.color};">
-      <span>${contact.initials}</span>
+      <span class="initials-span">${contact.initials}</span>
     </div>
   `;
 }
@@ -302,9 +302,8 @@ function editTaskHtml(task, taskId) {
       <div class="input-group edittask add-task date">
         <span>Due Date <span class="required-star">*</span></span>
         <div class="date-input-container date-input-edit">
-          <input onclick="showError('add-task-input2-warning', 'edit-date')" oninput="showError('add-task-input2-warning', 'edit-date');" id="edit-date" type="date" value="${
-            task.date || ''
-          }"/>
+          <input id="edit-date" type="text" placeholder="DD/MM/YYYY" min="" max="31/12/2035" name="add-task-input2" onclick="showError('add-task-input2-warning', 'edit-date')" oninput="showError('add-task-input2-warning', 'edit-date'); sanitizeAndValidateDate(this)"
+            value="${task.date || ''}"/>
           <span>
             <img class="date-icon-edit" src="/assets/img/icon/add_task_icon/event.png" alt="" />
           </span>

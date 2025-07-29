@@ -82,7 +82,6 @@ header {
 
 .sidebar-legal-stuff {
     gap: 4px;
-    padding-left: 56px;
 }
 
 .privacy-legal:hover {
@@ -199,9 +198,14 @@ header {
     display: none;
 }
 
-.sidebar-links.active {
+.sidebar-links.active,
+.siderbar-legal-stuff-links.active {
     background-color: #091931;
     color: #fff;
+}
+
+.siderbar-legal-stuff-links {
+    padding-left: 56px;
 }
 
 .sidebar-links.active img {
@@ -308,9 +312,16 @@ input#add-task-input3:focus {
 }
 
 @media (max-width: 1439px) {
-    /*#sidebar-summary {
-        order: 1;
-    }*/
+
+    .sidebar-links-content {
+        padding: unset;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .sidebar-links-content:hover {
+        transform: translateY(-2px);
+    }
 
     #sidebar-board {
         order: 2;
@@ -336,6 +347,7 @@ input#add-task-input3:focus {
         flex-direction: row;
         justify-content: space-between;
         padding: 0 16px;
+        gap: unset;
     }
 
     .sidebar {
@@ -358,10 +370,6 @@ input#add-task-input3:focus {
         line-height: 120%;
         width: 80px;
     }
-
-
-    /*Test*/
-
 
     .sidebar-links.active {
         border-radius: 15px;

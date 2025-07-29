@@ -43,6 +43,10 @@
     text-align: start;
 }
 
+.initials-span {
+    font-size: 12px !important;
+}
+
 textarea {
     width: 440px;
     font-size: 1.25rem;
@@ -74,6 +78,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 10;
 }
 
 .dividing-strips {
@@ -327,10 +332,6 @@ input[type="text"] {
     height: 24px;
     width: 24px;
 }
-
-/* #assigned-contact-0 {
-    margin-top: 11px
-} */
 
 .subtasks-icon {
     position: absolute;

@@ -7,6 +7,7 @@
 
 .main-content {
     display: flex;
+    overflow: hidden;
 }
 
 /* Contact List side */
@@ -185,7 +186,8 @@ h2 {
 .contactDetails {
     display: flex;
     flex-direction: column;
-    gap: 8px
+    gap: 8px;
+    overflow: hidden;
 }
 
 #contactContent {

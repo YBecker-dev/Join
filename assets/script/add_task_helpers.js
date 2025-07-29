@@ -231,3 +231,158 @@ function preventEnterSubmit(event) {
     return false;
   }
 }
+
+function handleFirstSlash(value, date) {
+  if (value.length > lastDateLength && /^\d{2}$/.test(value)) {
+    value += '/';
+    date.value = value;
+  }
+  return value;
+}
+
+function handleSecondSlash(value, date) {
+  if (value.length > lastDateLength && /^\d{2}\/\d{2}$/.test(value)) {
+    value += '/';
+    date.value = value;
+  }
+  return value;
+}
+
+function handleDayCorrection(parts, date) {
+  if (parts.length >= 1 && parts[0].length === 2) {
+    let year = parts.length > 2 ? Number(String(parts[2]).slice(0, 4)) : new Date().getFullYear();
+    let month = parts.length > 1 ? Number(String(parts[1]).slice(0, 2)) : new Date().getMonth() + 1;
+    let maxDay = new Date(year, month, 0).getDate();
+    let day = Number(parts[0]);
+    if (day > maxDay) {
+      parts[0] = String(maxDay).padStart(2, '0');
+      date.value = parts.join('/');
+    }
+  }
+}
+
+function handleMonthCorrection(parts, date) {
+  if (parts.length >= 2 && parts[1].length === 2) {
+    let month = Number(parts[1]);
+    if (month > 12) {
+      parts[1] = '12';
+      date.value = parts.join('/');
+    }
+  }
+}
+
+function getLimitedDateParts(value) {
+  let parts = value.split('/');
+  let day = Number(String(parts[0]).slice(0, 2));
+  let month = Number(String(parts[1]).slice(0, 2));
+  let year = Number(String(parts[2]).slice(0, 4));
+  return [day, month, year];
+}
+
+function splitDate(val) {
+  let parts = val.split('/');
+  let day = Number(parts[0]);
+  let month = Number(parts[1]);
+  let year = Number(parts[2]);
+  return [day, month, year];
+}
+
+function correctDay(day, month, year) {
+  let maxDay = new Date(year, month, 0).getDate();
+  let correctedDay = Math.max(1, Math.min(maxDay, day));
+  return correctedDay;
+}
+
+function correctDateLimits(day, month, year) {
+  let inputDate = new Date(year, month - 1, day);
+  let today = new Date();
+  today.setHours(0, 0, 0, 0);
+  let maxDate = new Date(2035, 11, 31);
+  if (inputDate < today) {
+    day = today.getDate();
+    month = today.getMonth() + 1;
+    year = today.getFullYear();
+  } else if (inputDate > maxDate) {
+    day = 31;
+    month = 12;
+    year = 2035;
+  }
+  return [day, month, year];
+}
+
+function buildDateString(day, month, year) {
+  let d = String(day).padStart(2, '0');
+  let m = String(month).padStart(2, '0');
+  let y = year;
+  let result = `${d}/${m}/${y}`;
+  return result;
+}
+
+function autoInsertSlashes(date) {
+  let value = date.value.replace(/[^\d\/]/g, '');
+  value = handleFirstSlash(value, date);
+  value = handleSecondSlash(value, date);
+  lastDateLength = value.length;
+  let parts = value.split('/');
+  handleDayCorrection(parts, date);
+  handleMonthCorrection(parts, date);
+}
+
+function validateAndCorrectDate(date) {
+  let value = date.value.replace(/[^\d\/]/g, '');
+  if (/^\d{2,}\/\d{2,}\/\d{4,}$/.test(value)) {
+    let [day, month, year] = getLimitedDateParts(value);
+    day = correctDay(day, month, year);
+    month = Math.max(1, Math.min(12, month));
+    year = Math.max(1900, Math.min(2035, year));
+    let corrected = correctDateLimits(day, month, year);
+    date.value = buildDateString(corrected[0], corrected[1], corrected[2]);
+  }
+}
+
+function openDropdownWithAnimation(animateDropdownId) {
+  let dropdown = document.getElementById(animateDropdownId);
+  if (!dropdown) return;
+  setDropdownPadding(dropdown, true);
+  if (dropdown.classList.contains('show') && dropdown.style.maxHeight === '305px') return;
+  openDropdownAnimation(dropdown);
+}
+
+function closeDropdownWithAnimation(animateDropdownId) {
+  let dropdown = document.getElementById(animateDropdownId);
+  if (!dropdown) return;
+  setDropdownPadding(dropdown, false);
+  if (!dropdown.classList.contains('show') && !dropdown.classList.contains('expanded')) return;
+  closeDropdownAnimation(dropdown);
+}
+
+function closeDropdownAnimation(dropdown) {
+  dropdown.classList.remove('show', 'hidden');
+  dropdown.classList.add('closing');
+  setTimeout(() => {
+    dropdown.classList.remove('closing', 'expanded');
+    dropdown.classList.add('hidden');
+    dropdown.style.maxHeight = '';
+    dropdown.style.opacity = '';
+  }, 300);
+}
+
+function openDropdownAnimation(dropdown) {
+  dropdown.classList.add('show', 'expanded');
+  dropdown.classList.remove('hidden');
+  dropdown.style.maxHeight = '0';
+  dropdown.style.opacity = '0';
+  setTimeout(() => {
+    dropdown.style.maxHeight = '305px';
+    dropdown.style.opacity = '1';
+  }, 50);
+}
+
+function setDropdownPadding(dropdown, open) {
+  let filllickerCategory = dropdown.querySelector('.filllicker-category');
+  if (filllickerCategory) filllickerCategory.style.padding = open ? '5px' : '0';
+  if (!open) {
+    let filllickerAssignedTo = dropdown.querySelector('.filllicker-assigned-to');
+    if (filllickerAssignedTo) filllickerAssignedTo.style.padding = '0';
+  }
+}

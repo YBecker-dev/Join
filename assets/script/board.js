@@ -472,6 +472,8 @@ async function saveEditedTask(event, taskId) {
     subtasks,
     status,
     category,
+    addTaskId: oldTask.addTaskId,
+    sequence: oldTask.sequence
   };
 
   await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json', {
