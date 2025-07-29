@@ -4,8 +4,7 @@ async function initSummary() {
   showGreetingMessagebyLogin();
   await checkTasks();
   initFrameworkFunctions();
-  upcomingDeadline();
-  changeColorbyHtmlLinks(document.getElementById('sidebar-summary'));
+  await upcomingDeadline();
 }
 
 let statusArray = [];
@@ -57,7 +56,7 @@ function processPriority() {
       urgentCount++;
     }
   });
-  includePriorityToSummery(urgentCount);  
+  includePriorityToSummery(urgentCount);
 }
 /**
  * transfer the priority status "urgent" to summery.html to dispklay an overview for
@@ -143,7 +142,7 @@ function setGreetingText() {
   }
 }
 /**
- * load Board.html if the User clicks a Task  
+ * load Board.html if the User clicks a Task
  */
 let loadBoard = () => {
   window.location.href = '/assets/html/board.html';
@@ -173,7 +172,7 @@ function showGreetingMessagebyLogin() {
   }
 }
 /**
- * display Username Or Guest at the Greeting Message at Desktpot Version 
+ * display Username Or Guest at the Greeting Message at Desktpot Version
  * @returns logged User name
  */
 function showGreetingMessage() {
@@ -219,7 +218,7 @@ function getGreetingTextByHour(punctuation = ',') {
 }
 /**
  * checks the availabilty of the local storage
- * @returns flase 
+ * @returns flase
  */
 function isLocalStorageAvailable() {
   try {
@@ -233,17 +232,48 @@ function isLocalStorageAvailable() {
 /**
  * Sets a monthly interval on the 16th day
  */
-function upcomingDeadline(){
-  let deadline = document.getElementById('deadline');
-  const months = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","October","November","Dezember"]; 
-  const currentDate = new Date();
-  const nextDeadline = new Date(currentDate);
-  nextDeadline.setDate(16);
-  if(nextDeadline.getTime()< currentDate.getTime()){
-    nextDeadline.setMonth(nextDeadline.getMonth()+1);
+function parseCustomDate(dateStr) {
+  let parts = dateStr.split('/');
+  if (parts.length === 3) {
+    return new Date(parts[2], parts[1] - 1, parts[0]);
   }
-  let nextDeadlineMonth = months[nextDeadline.getMonth()];
-  let nextDeadlineYear = nextDeadline.getFullYear();
-  let deadlineInfo = nextDeadlineMonth+' 16, '+nextDeadlineYear;
-  deadline.innerText = deadlineInfo;
+  return null;
+}
+
+async function upcomingDeadline() {
+  let deadlineElement = document.getElementById('deadline');
+  let response = await fetch(BASE_URL_TASKS_AND_USERS + 'tasks.json');
+  let tasks = await response.json();
+  let urgentTasks = [];
+  let today = new Date();
+  today.setHours(0, 0, 0, 0);
+  findTasksInSummary(tasks, urgentTasks, today);
+  if (urgentTasks.length > 0) {
+    showUrgentDate(urgentTasks, deadlineElement);
+  } else {
+    deadlineElement.innerText = 'No deadline';
+  }
+}
+
+function findTasksInSummary(tasks, urgentTasks, today) {
+  if (tasks) {
+    let keys = Object.keys(tasks);
+    for (let i = 0; i < keys.length; i++) {
+      let task = tasks[keys[i]];
+      if (task.priority === 'Urgent' && task.date) {
+        let taskDate = parseCustomDate(task.date);
+        if (!taskDate) taskDate.setHours(0, 0, 0, 0);
+        if (taskDate >= today) {
+          urgentTasks.push(taskDate);
+        }
+      }
+    }
+  }
+}
+
+function showUrgentDate(urgentTasks, deadlineElement) {
+  urgentTasks.sort((a, b) => a - b);
+  let nextDeadline = urgentTasks[0];
+  let options = { year: 'numeric', month: 'long', day: 'numeric' };
+  deadlineElement.innerText = nextDeadline.toLocaleDateString('en-US', options);
 }

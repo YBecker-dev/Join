@@ -43,6 +43,10 @@
     text-align: start;
 }
 
+.initials-span {
+    font-size: 12px !important;
+}
+
 textarea {
     width: 440px;
     font-size: 1.25rem;
@@ -74,6 +78,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 10;
 }
 
 .dividing-strips {
@@ -273,7 +278,6 @@ input[type="text"] {
     transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s;
     overflow: hidden;
     box-shadow: 0px 0px 4px 0px #0000001A;
-
 }
 
 #assigned-to-dropdown-options.show,
@@ -290,6 +294,8 @@ input[type="text"] {
 #category-dropdown-options.expanded {
     max-height: 305px;
     overflow-y: auto;
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: rgba(100, 100, 100, 0.5) #f0f0f0; /* For Firefox */
 }
 
 #assigned-to-dropdown-options.expanded::-webkit-scrollbar {
@@ -320,8 +326,11 @@ input[type="text"] {
     background: #f0f0f0;
 }
 
-#assigned-to-dropdown-selected img {
+#assigned-to-dropdown-selected img,
+#category-selected-arrow {
     object-fit: scale-down;
+    height: 24px;
+    width: 24px;
 }
 
 .subtasks-icon {
@@ -741,11 +750,14 @@ input[type="text"] {
     display: flex;
 }
 
-.filllicker {
-    position: relative;
+.filllicker-assigned-to {
     background: white;
-    padding: 5px;
-    top: 0;
+    padding: 0;
+}
+
+.filllicker-category {
+    background: white;
+    padding: 0;
 }
 
 @media (max-width: 1173px) {
@@ -898,8 +910,9 @@ input[type="text"] {
 }
 
 @media (max-width: 340px) {
+
     .create-button,
     .clear-button {
         font-size: 18px;
     }
-}   
+}

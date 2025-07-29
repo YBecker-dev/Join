@@ -1,4 +1,6 @@
 selectedContacts = [];
+let lastValidDate = '';
+let lastDateLength = 0;
 let urgentButton = document.getElementById('urgent');
 let mediumButton = document.getElementById('medium');
 let lowButton = document.getElementById('low');
@@ -14,15 +16,15 @@ async function initAddTask() {
     handleDropdown('category-dropdown-options', 'category-selected-arrow', 'close');
     clearAssignedTo();
   });
-  changeColorbyHtmlLinks(document.getElementById('sidebar-add-task'));
   dateInputMinDate();
 }
+
 function dateInputMinDate() {
   const today = new Date();
   const yyyy = today.getFullYear();
   const mm = String(today.getMonth() + 1).padStart(2, '0');
   const dd = String(today.getDate()).padStart(2, '0');
-  const minDate = `${yyyy}-${mm}-${dd}`;
+  const minDate = `${dd}/${mm}/${yyyy}`;
   const dateInput = document.getElementById('date');
   dateInput.setAttribute('min', minDate);
   dateInput.value = minDate;
@@ -65,11 +67,15 @@ function assignedToDropdown(searchTerm = '') {
   if (!contactsRef || !Array.isArray(contacts)) return;
   let html = getDropdownHTML(searchTerm);
   contactsRef.innerHTML = html;
+  let filllicker = contactsRef.querySelector('.filllicker-assigned-to');
+  if (filllicker) {
+    filllicker.style.padding = contactsRef.classList.contains('show') ? '5px' : '0';
+  }
   animatedSearch(contactsRef, searchTerm);
 }
 
 function getDropdownHTML(searchTerm) {
-  let html = `<div class="filllicker"></div>`;
+  let html = `<div class="filllicker-assigned-to"></div>`;
   let lowerSearch = searchTerm.trim().toLowerCase();
   for (let i = 0; i < contacts.length; i++) {
     html += getContactDropdownHTML(i, lowerSearch);
@@ -85,21 +91,6 @@ function getContactDropdownHTML(i, lowerSearch) {
     return assignedToDropdownHTML(contacts, i, checked);
   }
   return '';
-}
-
-function animatedSearch(contactsRef, searchTerm) {
-  if (!contactsRef.classList.contains('show')) return;
-  contactsRef.classList.remove('expanded');
-  let maxDropdownHeight = 305;
-  let contentHeight = contactsRef.scrollHeight;
-  if (searchTerm.trim() !== '' && contentHeight < maxDropdownHeight) {
-    contactsRef.style.maxHeight = contentHeight + 'px';
-    contactsRef.style.overflowY = 'hidden';
-  } else {
-    contactsRef.style.maxHeight = maxDropdownHeight + 'px';
-    contactsRef.style.overflowY = 'auto';
-  }
-  contactsRef.classList.add('expanded');
 }
 
 function onContactCheckboxClick(i, checkbox) {
@@ -177,6 +168,26 @@ function checkDate() {
     if (input2Warning) input2Warning.classList.remove('d-none');
     return false;
   }
+
+  // Prüfe Format DD/MM/YYYY
+  const value = input2.value.trim();
+  if (!/^\d{2}\/\d{2}\/\d{4}$/.test(value)) {
+    input2.classList.add('input-error');
+    if (input2Warning) input2Warning.classList.remove('d-none');
+    return false;
+  }
+
+  // Prüfe, ob es ein echtes Datum ist
+  const [day, month, year] = value.split('/').map(Number);
+  const dateObj = new Date(year, month - 1, day);
+  if (dateObj.getFullYear() !== year || dateObj.getMonth() + 1 !== month || dateObj.getDate() !== day) {
+    input2.classList.add('input-error');
+    if (input2Warning) input2Warning.classList.remove('d-none');
+    return false;
+  }
+
+  input2.classList.remove('input-error');
+  if (input2Warning) input2Warning.classList.add('d-none');
   return true;
 }
 
@@ -333,15 +344,22 @@ function onSubtaskInputKeydown(event) {
   }
 }
 
-function enableCreateTaskButton() {
+function enableCreateTaskButton(dateInput) {
   let title = document.getElementById('title');
-  let date = document.getElementById('date');
+  let date = dateInput || document.getElementById('date') 
   let categorySelected = document.getElementById('category-dropdown-selected');
   let button = document.getElementById('create-task-button');
   if (!title || !date || !categorySelected || !button) return;
+  sanitizeAndValidateDate(date);
   let categoryText = getCategoryTextFromSelected(categorySelected);
   let allFilled = areAllFieldsFilled(title, date, categoryText);
   button.disabled = !allFilled;
+}
+
+function sanitizeAndValidateDate(date) {
+  date.value = date.value.replace(/[A-Za-z]/g, '');
+  autoInsertSlashes(date);
+  validateAndCorrectDate(date);
 }
 
 async function saveTaskToFirebase() {
@@ -357,32 +375,19 @@ function animateDropdown(animateDropdownId, open = true) {
   }
 }
 
-function openDropdownWithAnimation(animateDropdownId) {
-  let dropdown = document.getElementById(animateDropdownId);
-  if (!dropdown) return;
-  if (dropdown.classList.contains('show') && dropdown.style.maxHeight === '305px') return;
-  dropdown.classList.add('show');
-  dropdown.classList.remove('hidden');
-  dropdown.style.maxHeight = '0';
-  dropdown.style.opacity = '0';
-  setTimeout(() => {
-    dropdown.style.maxHeight = '305px';
-    dropdown.style.opacity = '1';
-  }, 50);
-}
-
-function closeDropdownWithAnimation(animateDropdownId) {
-  let dropdown = document.getElementById(animateDropdownId);
-  if (!dropdown) return;
-  if (!dropdown.classList.contains('show') && !dropdown.classList.contains('expanded')) return;
-  dropdown.classList.remove('expanded', 'show', 'hidden');
-  dropdown.classList.add('closing');
-  setTimeout(() => {
-    dropdown.classList.remove('closing');
-    dropdown.classList.add('hidden');
-    dropdown.style.maxHeight = '';
-    dropdown.style.opacity = '';
-  }, 300);
+function animatedSearch(contactsRef, searchTerm) {
+  if (!contactsRef.classList.contains('show')) return;
+  contactsRef.classList.remove('expanded');
+  let maxDropdownHeight = 305;
+  let contentHeight = contactsRef.scrollHeight;
+  if (searchTerm.trim() !== '' && contentHeight < maxDropdownHeight) {
+    contactsRef.style.maxHeight = contentHeight + 'px';
+    contactsRef.style.overflowY = 'hidden';
+  } else {
+    contactsRef.style.maxHeight = maxDropdownHeight + 'px';
+    contactsRef.style.overflowY = 'auto';
+  }
+  contactsRef.classList.add('expanded');
 }
 
 function handleCategoryOptionClick(event, optionElement) {

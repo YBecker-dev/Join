@@ -117,19 +117,18 @@ function overlaySubtaskHtml(subtask, subtaskIndex, taskId) {
 
 function getLogOutMenu() {
   return `
-      <div class="help-mobil" onclick="window.location.href='/assets/html/MPA-architecture/help.html'" id="help-mobil">
+      <div class="help-mobil" onclick="window.location.href='/assets/html/help.html'" id="help-mobil">
           <p>Help</p>
       </div>
-      <div class="section1" onclick="window.location.href='/assets/html/MPA-architecture/legal-notice_internal.html'"  id="legalNotice">
+      <div class="section1" onclick="window.location.href='/assets/html/legal-notice_internal.html'"  id="legalNotice">
           <p> Legal Notice</p>
       </div>
-      <div class="section1" onclick="window.location.href='/assets/html/MPA-architecture/privacy-policy_internal.html'"  id="privacyPolicy">
+      <div class="section1" onclick="window.location.href='/assets/html/privacy-policy_internal.html'"  id="privacyPolicy">
           <p>Privacy Policy</p>
       </div>
       <div class="section1" onclick="handleLogOut(event)"  id="logOut">
           <a href="/index.html">Log out</a>
       </div>
-    
     `;
 }
 let trueTaskId;
@@ -144,7 +143,6 @@ function boardHtmlTemplate(
   priorityImg,
   progressBar,
   addTaskId
-  
 ) {
   trueTaskId = addTaskId;
   return `
@@ -271,7 +269,7 @@ function overlayPriority(task) {
 function showContactsAddTaskHtml(contact) {
   return `
     <div class="contact-items" style="background-color:${contact.color};">
-      <span>${contact.initials}</span>
+      <span class="initials-span">${contact.initials}</span>
     </div>
   `;
 }
@@ -304,9 +302,8 @@ function editTaskHtml(task, taskId) {
       <div class="input-group edittask add-task date">
         <span>Due Date <span class="required-star">*</span></span>
         <div class="date-input-container date-input-edit">
-          <input onclick="showError('add-task-input2-warning', 'edit-date')" oninput="showError('add-task-input2-warning', 'edit-date');" id="edit-date" type="date" value="${
-            task.date || ''
-          }"/>
+          <input id="edit-date" type="text" placeholder="DD/MM/YYYY" min="" max="31/12/2035" name="add-task-input2" onclick="showError('add-task-input2-warning', 'edit-date')" oninput="showError('add-task-input2-warning', 'edit-date'); sanitizeAndValidateDate(this)"
+            value="${task.date || ''}"/>
           <span>
             <img class="date-icon-edit" src="/assets/img/icon/add_task_icon/event.png" alt="" />
           </span>

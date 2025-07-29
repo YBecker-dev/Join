@@ -7,7 +7,6 @@ async function initBoard() {
   emptyDragArea();
   initEventListnerProcessTasksInformation();
   initFrameworkFunctions();
-  changeColorbyHtmlLinks(document.getElementById('sidebar-board'));
 }
 
 function allowDrop(ev) {
@@ -331,7 +330,7 @@ function findTaskKeyByAddTaskId(tasks, keys, addTaskIdToDelete) {
   return null;
 }
 
-async function toggleBoardOverlay(taskId ,trueTaskId) {
+async function toggleBoardOverlay(taskId, trueTaskId) {
   let overlayRef = document.getElementById('overlayBoard');
   let overlay_content = document.getElementById('overlay-content-loader');
   toggleOverlay(overlayRef);
@@ -473,6 +472,8 @@ async function saveEditedTask(event, taskId) {
     subtasks,
     status,
     category,
+    addTaskId: oldTask.addTaskId,
+    sequence: oldTask.sequence
   };
 
   await fetch(BASE_URL_TASKS_AND_USERS + 'tasks/' + taskId + '.json', {
@@ -529,6 +530,7 @@ async function openCreateTask() {
     `<img onclick="closeCreateTask()" src="../img/icon/close.png" alt="" class="close-overlay-x">` + tempDiv.innerHTML;
   animatedOpeningAddTask(overlayBg, overlayContent);
   setPriority('medium');
+  await initAddTask();
 }
 
 function closeCreateTask() {
@@ -674,7 +676,3 @@ function taskVisibilty(filterTask) {
     }
   });
 }
-
-
-
-

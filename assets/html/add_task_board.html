@@ -7,7 +7,6 @@
       </div>
     </div>
   </section>
-
   <div class="contentspace-html addtask">
     <div class="headline-addtask">
       <h1>Add Task</h1>
@@ -50,10 +49,13 @@
             <div class="date-input-container">
               <input
                 id="date"
-                type="date"
+                type="text"
+                placeholder="DD/MM/YYYY"
+                min=""
+                max="31/12/2035"
                 name="add-task-input2"
                 onclick="showError('add-task-input2-warning', 'date')"
-                oninput="showError('add-task-input2-warning', 'date'); enableCreateTaskButton()"
+                oninput="showError('add-task-input2-warning', 'date'); enableCreateTaskButton(this)"
               />
               <span class="date-icon">
                 <img src="/assets/img/icon/add_task_icon/event.png" alt="" />
@@ -130,7 +132,7 @@
                 />
               </div>
               <ul id="category-dropdown-options" class="hidden custom-dropdown-options" onclick="eventBubbling(event)">
-                <p class="filllicker"></p>
+                <p class="filllicker-category"></p>
                 <p class="category-option" onclick="handleCategoryOptionClick(event, this)">
                   <span class="category-option-text">Technical Task</span>
                 </p>

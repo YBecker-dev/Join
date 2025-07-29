@@ -35,7 +35,8 @@
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    border: 3px solid #2A3647; font-size: 1.25rem;
+    border: 3px solid #2A3647;
+    font-size: 1.25rem;
     background: white;
     color: #2aabe2;
 }
@@ -87,13 +88,19 @@ header {
     color: #2aabe2 !important;
 }
 
-.sidebar-links {
+.sidebar-links,
+.siderbar-legal-stuff-links {
     display: flex;
     gap: 8px;
     align-items: center;
     color: #a3a7ab;
-    padding-left: 56px;
     height: 46px;
+    transition: transform 0.2s;
+}
+
+.siderbar-legal-stuff-links:hover {
+    transform: scale(1.02);
+    font-weight: 700;
 }
 
 .sidebar-links img {
@@ -106,6 +113,20 @@ header {
     color: #a3a7ab;
     cursor: pointer;
     font-weight: 400;
+}
+
+.sidebar-links-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s;
+    width: 100%;
+    height: 100%;
+    padding-left: 56px;
+}
+
+.sidebar-links-content:hover {
+    transform: translateX(2px);
 }
 
 .help-icon:hover {
@@ -177,9 +198,14 @@ header {
     display: none;
 }
 
-.sidebar-links.active {
+.sidebar-links.active,
+.siderbar-legal-stuff-links.active {
     background-color: #091931;
     color: #fff;
+}
+
+.siderbar-legal-stuff-links {
+    padding-left: 56px;
 }
 
 .sidebar-links.active img {
@@ -248,29 +274,11 @@ a:hover {
     border-color: #e74c3c !important;
 }
 
-input:focus {
+input:focus,
+input#add-task-input3:focus {
     outline: none;
     box-shadow: none;
-    border: none;
-}
-
-textarea:focus {
-    outline: none;
-    box-shadow: none;
-    border: 1px solid #2AABE2;
-}
-
-input[type="text"]:focus {
-    outline: none;
-    box-shadow: none;
-    border: 1px solid #2AABE2;
-}
-
-
-input[type="date"]:focus {
-    outline: none;
-    box-shadow: none;
-    border: 1px solid #2AABE2;
+    border: none !important;
 }
 
 .checkbox {
@@ -304,9 +312,16 @@ input[type="date"]:focus {
 }
 
 @media (max-width: 1439px) {
-    /*#sidebar-summary {
-        order: 1;
-    }*/
+
+    .sidebar-links-content {
+        padding: unset;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .sidebar-links-content:hover {
+        transform: translateY(-2px);
+    }
 
     #sidebar-board {
         order: 2;
@@ -332,6 +347,7 @@ input[type="date"]:focus {
         flex-direction: row;
         justify-content: space-between;
         padding: 0 16px;
+        gap: unset;
     }
 
     .sidebar {
@@ -355,15 +371,11 @@ input[type="date"]:focus {
         width: 80px;
     }
 
-
-    /*Test*/
-
-
     .sidebar-links.active {
         border-radius: 15px;
     }
 
-    .impressum-container{
+    .impressum-container {
         display: flex;
         flex-direction: row;
         gap: 10px;
