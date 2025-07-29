@@ -1,4 +1,6 @@
 selectedContacts = [];
+let lastValidDate = '';
+let lastDateLength = 0;
 let urgentButton = document.getElementById('urgent');
 let mediumButton = document.getElementById('medium');
 let lowButton = document.getElementById('low');
@@ -22,7 +24,7 @@ function dateInputMinDate() {
   const yyyy = today.getFullYear();
   const mm = String(today.getMonth() + 1).padStart(2, '0');
   const dd = String(today.getDate()).padStart(2, '0');
-  const minDate = `${yyyy}-${mm}-${dd}`;
+  const minDate = `${dd}/${mm}/${yyyy}`;
   const dateInput = document.getElementById('date');
   dateInput.setAttribute('min', minDate);
   dateInput.value = minDate;
@@ -166,6 +168,26 @@ function checkDate() {
     if (input2Warning) input2Warning.classList.remove('d-none');
     return false;
   }
+
+  // Prüfe Format DD/MM/YYYY
+  const value = input2.value.trim();
+  if (!/^\d{2}\/\d{2}\/\d{4}$/.test(value)) {
+    input2.classList.add('input-error');
+    if (input2Warning) input2Warning.classList.remove('d-none');
+    return false;
+  }
+
+  // Prüfe, ob es ein echtes Datum ist
+  const [day, month, year] = value.split('/').map(Number);
+  const dateObj = new Date(year, month - 1, day);
+  if (dateObj.getFullYear() !== year || dateObj.getMonth() + 1 !== month || dateObj.getDate() !== day) {
+    input2.classList.add('input-error');
+    if (input2Warning) input2Warning.classList.remove('d-none');
+    return false;
+  }
+
+  input2.classList.remove('input-error');
+  if (input2Warning) input2Warning.classList.add('d-none');
   return true;
 }
 
@@ -322,15 +344,22 @@ function onSubtaskInputKeydown(event) {
   }
 }
 
-function enableCreateTaskButton() {
+function enableCreateTaskButton(dateInput) {
   let title = document.getElementById('title');
-  let date = document.getElementById('date');
+  let date = dateInput || document.getElementById('date') 
   let categorySelected = document.getElementById('category-dropdown-selected');
   let button = document.getElementById('create-task-button');
   if (!title || !date || !categorySelected || !button) return;
+  sanitizeAndValidateDate(date);
   let categoryText = getCategoryTextFromSelected(categorySelected);
   let allFilled = areAllFieldsFilled(title, date, categoryText);
   button.disabled = !allFilled;
+}
+
+function sanitizeAndValidateDate(date) {
+  date.value = date.value.replace(/[A-Za-z]/g, '');
+  autoInsertSlashes(date);
+  validateAndCorrectDate(date);
 }
 
 async function saveTaskToFirebase() {
@@ -359,46 +388,6 @@ function animatedSearch(contactsRef, searchTerm) {
     contactsRef.style.overflowY = 'auto';
   }
   contactsRef.classList.add('expanded');
-}
-
-function openDropdownWithAnimation(animateDropdownId) {
-  let dropdown = document.getElementById(animateDropdownId);
-  if (!dropdown) return;
-  let filllickerCategory = dropdown.querySelector('.filllicker-category');
-  if (filllickerCategory) {
-    filllickerCategory.style.padding = '5px';
-  }
-  if (dropdown.classList.contains('show') && dropdown.style.maxHeight === '305px') return;
-  dropdown.classList.add('show', 'expanded');
-  dropdown.classList.remove('hidden');
-  dropdown.style.maxHeight = '0';
-  dropdown.style.opacity = '0';
-  setTimeout(() => {
-    dropdown.style.maxHeight = '305px';
-    dropdown.style.opacity = '1';
-  }, 50);
-}
-
-function closeDropdownWithAnimation(animateDropdownId) {
-  let dropdown = document.getElementById(animateDropdownId);
-  if (!dropdown) return;
-  let filllickerCategory = dropdown.querySelector('.filllicker-category');
-  if (filllickerCategory) {
-    filllickerCategory.style.padding = '0';
-  }
-  let filllickerAssignedTo = dropdown.querySelector('.filllicker-assigned-to');
-  if (filllickerAssignedTo) {
-    filllickerAssignedTo.style.padding = '0';
-  }
-  if (!dropdown.classList.contains('show') && !dropdown.classList.contains('expanded')) return;
-  dropdown.classList.remove('show', 'hidden');
-  dropdown.classList.add('closing');
-  setTimeout(() => {
-    dropdown.classList.remove('closing', 'expanded');
-    dropdown.classList.add('hidden');
-    dropdown.style.maxHeight = '';
-    dropdown.style.opacity = '';
-  }, 300);
 }
 
 function handleCategoryOptionClick(event, optionElement) {

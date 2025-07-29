@@ -45,9 +45,7 @@
 .close-icon {
     height: 24px;
     width: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-right: 32px;
 }
 
 .close-icon>img {
@@ -597,13 +595,12 @@
     flex-direction: column;
     width: 100%;
     gap: 32px;
-    max-height: 730px;
+    max-height: 715px;
     overflow-y: auto;
     overflow-x: hidden;
     padding-right: 12px;
-    padding-top: 16px;
+    margin-top: 16px;
 }
-
 
 .input-icon-edit {
     position: absolute;
