@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/assets/img/Logo/Logo_white.png" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="assets/style/standart.css" />
     <link rel="stylesheet" href="assets/style/buttons.css" />
@@ -61,8 +62,8 @@
         </div>
         <div class="login-footer">
           <!--Angepasst-->
-          <a href="#" onclick="privacyPolicyMPA()">Prvacy Police</a>
-          <a href="#" onclick="legalNoticeMPA()">Legal Notice</a>
+          <a href="assets/html/privacy-policy_external.html" onclick="//privacyPolicyMPA()">Prvacy Police</a>
+          <a href="assets/html/legal-notice_external.html" onclick="//legalNoticeMPA()">Legal Notice</a>
         </div>
       </div>
     </main>
@@ -71,3 +72,15 @@
     <!--<script src="/assets/script/main.js"></script>-->
   </body>
 </html>
+<script>
+  function init() {
+    // Initialize any necessary components or variables
+    console.log('Login page initialized');
+  }
+
+  function logginAsGuest() {
+    // Function to handle guest login
+    localStorage.setItem('announcedUser', JSON.stringify('Guest Guest'));
+    localStorage.setItem('showGreeting', 'true');
+    window.location.href = 'assets/html/summery.html';
+  }

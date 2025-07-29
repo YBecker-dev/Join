@@ -22,50 +22,42 @@ async function loadContacts() {
   }
 }
 
-async function loadContent(page) {
-  let response = await fetch(page);
-  let html = await response.text();
+function initFrameworkFunctions() {
   displayUserInitials();
-  document.getElementById('main-content').innerHTML = html;
+}
 
-  if (page === 'add_task.html') {
-    await initAddTask();
-    changeColorbyHtmlLinks(document.getElementById('sidebar-add-task'));
-  } else if (page === 'contacts.html') {
-    initContacts();
-    changeColorbyHtmlLinks(document.getElementById('sidebar-contacts'));
-  } else if (page === 'board.html') {
-    await initBoard();
-    changeColorbyHtmlLinks(document.getElementById('sidebar-board'));
-  } else if (page === 'summary_user.html') {
-    await initSummary();
-    changeColorbyHtmlLinks(document.getElementById('sidebar-summary'));
-  } else if (page === 'privacy-policy.html') {
-    changeColorbyHtmlLinks(document.getElementById('sidebar-privacy-policy'));
-  } else if (page === 'legal-notice.html') {
-    changeColorbyHtmlLinks(document.getElementById('sidebar-legal-notice'));
-  } else if (page === 'help.html') {
+function displayUserInitials() {
+  // Sehr Fehleranfällig !!!
+  try {
+    let userInitials = document.getElementById('userInitials');
+    let userName = JSON.parse(localStorage.getItem('announcedUser'));
+    if (userName !== 'Guest Guest') {
+      let firstinitial = userName.slice(0, 1);
+      let searchposition = userName.search(' ');
+      let secondinitial = userName.slice(searchposition + 1, searchposition + 2);
+      let initials = firstinitial.concat(secondinitial);
+      userInitials.innerText = initials;
+    } else {
+      userInitials.innerText = 'G';
+    }
+  } catch (error) {
+    if (error instanceof TypeError && error.message.includes("Cannot read properties of null (reading 'slice')")) {
+      console.warn('Unautorisierter Zugriff oder fehlende Nutzerdaten erfasst. Leite zum Login um');
+      redirectLogin();
+    } else {
+      throw error;
+    }
   }
 }
 
-/**
- * load the logged user name from local storage and precessed
- * the string to the Initials
- */
-//function displayUserInitials() {
-//  // Sehr Fehleranfällig !!!
-//  let userInitials = document.getElementById('userInitials');
-//  let userName = JSON.parse(localStorage.getItem('announcedUser'));
-//  if (userName !== 'Guest Guest') {
-//    let firstinitial = userName.slice(0, 1);
-//    let searchposition = userName.search(' ');
-//    let secondinitial = userName.slice(searchposition + 1, searchposition + 2);
-//    let initials = firstinitial.concat(secondinitial);
-//    userInitials.innerText = initials;
-//  } else {
-//    userInitials.innerText = 'G';
-//  }
-//}
+let loadHelp = () => {
+  window.location.href = '../html/help.html';
+};
+
+function redirectLogin() {
+  let timeout;
+  timeout = setTimeout((window.location.href = '/index.html'), 2000);
+}
 
 function toggleLogOutOverlay() {
   let logOutRef = document.getElementById('overlay-logout');
@@ -82,6 +74,7 @@ function toggleLogOutOverlay() {
 function handleLogOut(event) {
   event.preventDefault();
   resetAnnouncedUserStorage();
+  localStorage.removeItem('showGreeting');
   window.location.href = '/index.html';
 }
 
@@ -89,15 +82,8 @@ let resetAnnouncedUserStorage = () => {
   localStorage.removeItem('announcedUser');
 };
 
-function changeColorbyHtmlLinks(element) {
-  document.querySelectorAll('.sidebar-links').forEach((sidebarLink) => {
-    sidebarLink.classList.remove('active');
-  });
-  element.classList.add('active');
-}
 
-function toggleMoveToOverlay(){
+function toggleMoveToOverlay() {
   let moveToRef = document.getElementById('selection');
   moveToRef.classList.toggle('d-none');
-  
 }

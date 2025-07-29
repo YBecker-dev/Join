@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../img/Logo/Logo_white.png" />
     <link rel="stylesheet" href="../../style.css" />
     <link rel="stylesheet" href="../style/standart.css" />
     <link rel="stylesheet" href="../style/register.css" />
@@ -25,7 +26,6 @@
             <div class="login-underline"></div>
           </div>
 
-
           <form id="register-form" onsubmit="return successRegister(event)">
             <div class="input-group">
               <input id="name" type="text" placeholder="Name" required minlength="3" />
@@ -43,10 +43,12 @@
             </div>
             <div class="input-group">
               <input id="password" type="password" placeholder="Password" required />
-              <span class="input-icon" >
+              <span class="input-icon">
                 <img src="../img/icon/lock.png" id="password-icon" />
               </span>
-              <div id="password-warning" class="d-none warning">Das Passwort muss mindestens 8 Zeichen besitzen und ein Großbuchstabe!</div>
+              <div id="password-warning" class="d-none warning">
+                Das Passwort muss mindestens 8 Zeichen besitzen und ein Großbuchstabe!
+              </div>
             </div>
             <div class="input-group">
               <input id="password-confirm" type="password" placeholder="Confirm Password" required />
@@ -67,12 +69,10 @@
               <button id="signup-btn">Sign up</button>
             </div>
           </form>
-
-
         </div>
         <div class="login-footer">
-          <a href="./assets/html/privacy-policy.html">Prvacy Police</a>
-          <a href="./assets/html/legal-notice.html">Legal Notice</a>
+          <a href="privacy-policy_external.html">Prvacy Police</a>
+          <a href="legal-notice_external.html">Legal Notice</a>
         </div>
       </div>
     </main>
@@ -88,6 +88,8 @@
     </div>
 
     <script src="/script.js"></script>
-    <script src="/assets/script/register.js"></script>
+    <script src="../script/contacts.js"></script>
+    <script src="../script/contact-templates.js"></script>
+    <script src="../script/register.js"></script>
   </body>
 </html>

@@ -9,10 +9,10 @@ let headerLogo;
 passwordInput.addEventListener('input', function () {
   let inputValue = this.value.trim();
   if (inputValue === '') {
-    passwordValue.src = './assets/img/icon/lock.png';
+    passwordValue.src = '../img/icon/lock.png';
     passwordValue.classList.remove('eye-icon');
   } else {
-    passwordValue.src = './assets/img/icon/hidden.png';
+    passwordValue.src = '../img/icon/hidden.png';
     passwordValue.classList.add('eye-icon');
   }
 });
@@ -20,38 +20,38 @@ passwordInput.addEventListener('input', function () {
 passwordValue.addEventListener('click', function () {
   if (passwordValue.classList.contains('eye-icon')) {
     if (passwordInput.type == 'password') {
-      passwordValue.src = './assets/img/icon/show.png';
+      passwordValue.src = '../img/icon/show.png';
       passwordInput.type = 'text';
     } else {
-      passwordValue.src = './assets/img/icon/hidden.png';
+      passwordValue.src = '../img/icon/hidden.png';
       passwordInput.type = 'password';
     }
   }
 });
 
 function setLogoForWidth() {
-    if (window.innerWidth <= 1180) {
-        logo.src = 'assets/img/logo/logo_white.png';
-    } else {
-        logo.src = 'assets/img/logo/logo_dark.png';
-    }
+  if (window.innerWidth <= 1180) {
+    logo.src = '../img/logo/logo_white.png';
+  } else {
+    logo.src = '../img/logo/logo_dark.png';
+  }
 }
 
 function animateLogo() {
-    logo.classList.add('logo-zoom');
-    setTimeout(() => {
-        logo.classList.remove('logo-zoom');
-        logo.src = 'assets/img/logo/logo_dark.png';
-        headerLogo.classList.add('fade-out');
-    }, 900); 
+  logo.classList.add('logo-zoom');
+  setTimeout(() => {
+    logo.classList.remove('logo-zoom');
+    logo.src = '../img/logo/logo_dark.png';
+    headerLogo.classList.add('fade-out');
+  }, 900);
 }
 
 function init() {
-    logo = document.getElementById('start-logo');
-    headerLogo = document.querySelector('.main-header-logo');
-    logo.classList.remove('preload');
-    setLogoForWidth();
-    animateLogo();
+  logo = document.getElementById('start-logo');
+  headerLogo = document.querySelector('.main-header-logo');
+  logo.classList.remove('preload');
+  setLogoForWidth();
+  animateLogo();
 }
 
 function loginUser(event) {
@@ -74,16 +74,18 @@ async function checkUser(event) {
           const userObjekt = userDataObject[userID];
           if (mail.value == userObjekt.mail && password.value == userObjekt.password) {
             findUser = true;
-            //console.log( 'name' , userObjekt.name ,'mail' ,userObjekt.mail );
-            const announcedUser = userObjekt.name;
-            //console.log(announcedUser);
+            let announcedUser = userObjekt.name;
+            if (userObjekt.surname && userObjekt.surname.trim() !== '') {
+              announcedUser += ' ' + userObjekt.surname;
+            }
             storeAnnoncedUserName(announcedUser);
             break;
           }
         }
         if (findUser === true) {
+          localStorage.setItem('showGreeting', 'true');
           console.log('User gefunden');
-          window.location.href = 'assets/html/MPA-architecture/summery.html';
+          window.location.href = './html/summery.html';
           resetForm();
         } else {
           console.log('User nicht gefunden oder Eingaben falsch');
@@ -97,10 +99,11 @@ async function checkUser(event) {
     console.error(error);
   }
 }
+
 let resetForm = () => document.getElementById('login-form').reset();
 
 let resetPwIcon = () => {
-  passwordValue.src = './assets/img/icon/lock.png';
+  passwordValue.src = './img/icon/lock.png';
   passwordInput.type = 'password';
   passwordValue.classList.remove('eye-icon');
 };
@@ -111,16 +114,13 @@ let storeAnnoncedUserName = (announcedUser) => {
 
 function logginAsGuest() {
   let guestUser = 'Guest Guest';
-  console.log(guestUser);
   localStorage.setItem('announcedUser', JSON.stringify(guestUser));
-  console.log(JSON.parse(localStorage.getItem('announcedUser')));
-  window.location.href = 'assets/html/MPA-architecture/board.html'//MPA-architecture
-  //window.location.href = 'assets/html/main.html'; //SPA-architecture
+  localStorage.setItem('showGreeting', 'true');
+  window.location.href = '../html/summery.html';
 }
-//-------------------------------------------------------------------------------------
-// new MPA concept test
-let PrivacyPolicy = 'assets/html/MPA-architecture/privacy-policy_MPA.html';
-let LegalNotice = 'assets/html/MPA-architecture/legal-notice_MPA.html';
+
+let PrivacyPolicy = '../html/privacy-policy_external.html';
+let LegalNotice = '../html/legal-notice_external.html';
 
 function privacyPolicyMPA() {
   let guestUser = 'Guest Guest';
@@ -129,6 +129,7 @@ function privacyPolicyMPA() {
   console.log(JSON.parse(localStorage.getItem('announcedUser')));
   window.location.href = PrivacyPolicy;
 }
+
 function legalNoticeMPA() {
   let guestUser = 'Guest Guest';
   console.log(guestUser);

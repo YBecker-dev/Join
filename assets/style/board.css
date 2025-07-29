@@ -45,9 +45,7 @@
 .close-icon {
     height: 24px;
     width: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-right: 32px;
 }
 
 .close-icon>img {
@@ -309,7 +307,6 @@
 }
 
 .input-find-Task {
-    height: 48px;
     max-width: 312px;
     background-color: #FFFFFF;
     border-radius: 10px;
@@ -323,9 +320,9 @@
 .input-find-Task>input {
     font-size: 20px;
     border: #FFFFFF;
-    height: 24px;
+    height: 48px;
     width: 366px;
-    padding: 12px 0px 12px 16px;
+    border-radius: 10px;
 }
 
 .search-icon {
@@ -410,17 +407,20 @@
 
 .drag-area {
     min-height: 71vh;
+    height: auto;
     width: 252px;
     display: flex;
     flex-direction: column;
-    gap: 16px
+    gap: 16px;
+    padding-bottom: 100px;
+    
 }
 
 .drag-area-highlight {
     background-color: rgba(0, 0, 0, 0.2);
     border: 1px dashed #000000;
     width: 252px;
-    height: auto;
+    height: 250px;
 }
 
 .empty-task-box {
@@ -594,18 +594,17 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 4px;
-    max-height: 730px;
+    gap: 32px;
+    max-height: 715px;
     overflow-y: auto;
     overflow-x: hidden;
     padding-right: 12px;
-    padding-top: 16px;
+    margin-top: 16px;
 }
-
 
 .input-icon-edit {
     position: absolute;
-    right: 16px;
+    right: 8px;
     cursor: pointer;
     bottom: 4px;
 }
@@ -623,13 +622,15 @@
 .date-icon-edit {
     position: absolute;
     right: 16px;
-    bottom: 15px;
+    bottom: 22px;
+    z-index: 10;
 }
 
 #edit-urgent,
 #edit-medium,
 #edit-low {
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 5px 15px;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+
 }
 
 #edit-urgent:hover,
@@ -653,19 +654,6 @@
 .overlay-section {
     padding: 48px 15px 48px 40px;
     max-height: 931px;
-}
-
-.show-contacts-add-task-edit {
-    margin-bottom: 32px;
-}
-
-#edit-description,
-#edit-title,
-#edit-subtasks,
-.assigned-to-dropdown-selected-edit,
-.custom-dropdown-options-edit,
-.add-task-input-edit {
-    width: unset !important;
 }
 
 .subtask-edit {
@@ -784,8 +772,14 @@
     z-index: 10;
 
 }
+.option{
+    text-align: start;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
 
-.selection {
+.selection{
     position: absolute;
     top: 132px;
     left: 40px;
@@ -800,9 +794,11 @@
 .selection:hover {
     cursor: pointer;
 }
-
-.options:hover {
+.option:hover{
     cursor: pointer;
+    background-color: #4f688c;
+    border-radius: 5px;
+
 }
 
 .moveTo {
@@ -819,6 +815,51 @@
     text-align: start;
     font-size: 18px;
     padding-left: 8px;
+}
+
+.subtask-edit-container,
+.input-textarea-edit {
+    position: relative;
+}
+
+#edit-date {
+    padding: 12px 16px;
+}
+
+.priority-buttons-edit {
+    margin: unset !important;
+}
+
+.board-task-subtasks-row {
+    position: relative;
+}
+
+.subtask-tooltip {
+    position: absolute;
+    top: -35px;
+    left: 0;
+    background: #2A3647;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    white-space: nowrap;
+    z-index: 10;
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none; /* verhindert Klicks, wenn unsichtbar */
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.board-task-subtasks-row:hover .subtask-tooltip {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.rotateTask:active{
+    transform: rotate(5deg);
+    transition: 0.5s;
 }
 
 @media (max-width: 1439px) {

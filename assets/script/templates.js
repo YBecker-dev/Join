@@ -1,158 +1,26 @@
-// Contact Overview
-function getNoteTemplateContact(index) {
-  let user = myContacts[index];
-
-  return ` <div onclick="openDetails(${index}), event.stopPropagation()" class="person">
-              <p class="initial">${(user.color, user.initials)}</p>
-              <div>
-                <h4>${user.name}</h4>
-                <p>
-                  <a class="mail">${user.email}</a>
-                </p>
-              </div>
-            </div>`;
-}
-
-function getNoteTemplateContactDetails(indexDetails) {
-  let user = myContacts[indexDetails];
-
-  return ` <div class="namesDetails">
-              <div class="contactInformations">
-                <p class="initialOverlay">${(user.color, user.initials)}</p>
-                <div>
-                  <h3 class="infoNames">${user.name}</h3>
-                  <div class="contactIcons">
-                    <div id="editOverlay" onclick="openEditOverlay(${indexDetails})">
-                      <img class="editIcon" src="../img/icon/edit.png" alt="pencil">
-                      <span class="editText">edit</span>
-                    </div>
-                    <div onclick="deleteContact(${indexDetails})">
-                      <img class="editIcon" src="../img/icon/trash.png" alt="wastebasket">
-                      <span class="editText">delete</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="infoBlock">
-                <p>Contact Information</p>
-                <h4>Email</h4>
-                <a class="mail" href="mailto:${user.email}">${user.email}</a>
-                <h4>Phone</h4>
-                <a class="phone" href="tel:${user.phone}">${user.phone}</a>
-              </div>
-            </div>`;
-}
-
-// add new Contact
-function getNoteTemplateAddNewContact() {
-  return `<div class="newContactOverlay" onclick="event.stopPropagation()">
-            <div class="headDiv">
-              <img class="contactLogo" src="../img/Logo/Logo_white.png" alt="Logo_white">
-              <p class="addHeadline">Add contact</p>
-              <p class="addTastText">Tasks are better with a team!</p>
-              <div class="line"></div>
-            </div>
-            <div class="editDiv">
-              <div class="closeDiv">
-                <img onclick="closeOverlay()" class="close" src="../img/icon/close.png" alt="Close-Button">
-              </div>        
-              <div class="profilDiv">
-                <div>
-                  <p id="newContactInitials" class="profileInitials"><img class="profileImg" src="../img/icon/profile.png" alt="profile Image"></p>
-                </div>
-                <div>
-                  <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                    <input id="newContactName" class="addNewContact" type="text" placeholder="Name" required onclick="event.stopPropagation()">
-                    <img class="addNewContactIcon" src="../img/icon/person.png" alt="Person Icon">
-                  </div> 
-                  <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                    <input id="newContactMail" class="addNewContact" type="email" placeholder="Email" required onclick="event.stopPropagation()">
-                    <img class="addNewContactIcon" src="../img/icon/mail.png" alt="Email Icon">
-                  </div> 
-                  <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                    <input id="newContactPhone" class="addNewContact" type="tel" placeholder="Phone" required onclick="event.stopPropagation()">
-                    <img class="addNewContactIcon" src="../img/icon/phone.png" alt="phone Icon">
-                  </div> 
-                </div>           
-              </div>
-              <div class="accept">
-                <button onclick="closeOverlay()" class="clear-button">Cancel<img class="save-close" src="../img/icon/close.png" alt="Close-Button"></button>
-                <button onclick="saveToLocalstorage()" class="create-button">Create contact<img class="save-close" src="../img/icon/save.png" alt="saveIcon"></button>
-              </div>
-            </div>
-          </div>`;
-}
-
-// edit Contact
-function getNoteTemplateEditContact(index) {
-  let user = myContacts[index] || {};
-
-  return `  <div class="editContactOverlay" onclick="event.stopPropagation()">
-              <div class="headDiv">
-                <img class="contactLogo" src="../img/Logo/Logo_white.png" alt="Logo_white">
-                <p class="addHeadline">Edit contact</p>
-                <div class="line"></div>
-              </div>
-              <div class="editDiv">
-                <div class="closeDiv">
-                  <img onclick="closeOverlay()" class="close" src="../img/icon/close.png" alt="Close-Button">
-                </div>           
-                <div class="profilDiv">
-                  <div>
-                    <p id="editContactInitials" class="profileInitials">${(user.color, user.initials)}</p>
-                  </div>
-                  <div>
-                    <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                      <input id="editContactName" class="addNewContact" value="${
-                        user[index].name
-                      }" required onclick="event.stopPropagation()">
-                      <img class="addNewContactIcon" src="../img/icon/person.png" alt="Person Icon">
-                    </div> 
-                    <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                      <input id="editContactMail" class="addNewContact" type="email" value="${
-                        user.email
-                      }" required onclick="event.stopPropagation()">
-                      <img class="addNewContactIcon" src="../img/icon/mail.png" alt="Email Icon">
-                    </div> 
-                    <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                      <input id="editContactPhone" class="addNewContact" type="tel" value="${
-                        user.phone
-                      }" required onclick="event.stopPropagation()">
-                      <img class="addNewContactIcon" src="../img/icon/phone.png" alt="phone Icon">
-                    </div>               
-                  </div>                 
-                </div>
-                <div class="accept">
-                  <button onclick="deleteContact(${index})" class="clear-button">Delete</button>
-                  <button onclick="updateContact(${index})" class="create-button">Save Changes<img class="save-close" src="../img/icon/save.png" alt="hookIcon"></button>
-                </div>
-              </div> 
-            </div>`;
-}
-
-function getTaskOverlay(task, taskId) {
+function getTaskOverlay(task, taskId, trueTaskId) {
   let categoryInfo = backgroundColorTitle(task);
   let categoryText = categoryInfo.categoryText;
   let categoryClass = categoryInfo.categoryClass;
 
   return `
-    <div class="overlay-position">
+    <div class="overlay-position" id="${trueTaskId}">
       <div class="overlay-header">
         <div class="task-type">
         <p class="p-Tag ${categoryClass}">${categoryText}</p>
         </div>
         <div class="close-icon" onclick="toggleBoardOverlay()">
           <!--<img src="../img/icon/close.png" >-->
-          <img src="/assets/img/icon/close.png" >
+          <img src="../img/icon/close.png" >
         </div>                
       </div>
-      <img src="/assets/img/icon/move-to.png" id="DropDownBtn" class="moveTo" onclick="showDropDown()">
-      <div class="task-overlay d-none" id="selection" onclick="showDropDown()">  
-        <section class="selection " onclick="eventBubbling(event)">
-          <div class="option">To Do</div>
-          <div class="option">test</div>
-          <div class="option">test</div>
-          <div class="option">test</div>
+      <img src="../img/icon/move-to.png" id="DropDownBtn" class="moveTo" onclick="showDropDown(${trueTaskId})">
+      <div class="task-overlay d-none" id="drop-down" onclick="showDropDown(${trueTaskId})">  
+        <section class="selection " onclick="preventBubbling(event)">
+          <div onclick="changeTaskStatusMobilToDo(${trueTaskId}, '${taskId}')" id="todo-mobil-${trueTaskId}" class="option ">To Do</div>
+          <div onclick="changeTaskStatusMobilInProgress(${trueTaskId}, '${taskId}')" id="inProgress-mobil-${trueTaskId}" class="option">In Progress</div>
+          <div onclick="changeTaskStatusMobilAwaitFeedback(${trueTaskId}, '${taskId}')" id="awaitFeedback-mobil-${trueTaskId}" class="option">Await Feetback</div>
+          <div onclick="changeTaskStatusMobilDone(${trueTaskId}, '${taskId}')" id="done-mobil-${trueTaskId}" class="option">Done</div>
         </section>
       </div>
       <div class="overlay-titel">
@@ -184,17 +52,15 @@ function getTaskOverlay(task, taskId) {
       <div class="overlay-edit-wrapper">
         <div class="overlay-edit">
           <div class="overlay-edit-content">
-            <div class="trashImg"  onclick="deleteTaskFromFirebase(${task.addTaskId}); toggleBoardOverlay()">
-              <!--<img src="../img/icon/trash.png" alt="trash">-->
-              <img src="/assets/img/icon/trash.png" alt="trash">
-              <p class="p-Tag">Delete</p>
-            </div>
+            <div class="trashImg" onclick="deleteTaskFromFirebase('${task.addTaskId}'); toggleBoardOverlay()">
+             <img src="../img/icon/trash.png" alt="trash">
+             <p class="p-Tag">Delete</p>
+           </div>
           </div>
           <div class="overlay-seperator"></div>
           <div class="overlay-edit-content">
             <div class="editImg" onclick="editTask('${taskId}')">
-              <!--<img src="../img/icon/edit.png" alt="edit">-->
-              <img src="/assets/img/icon/edit.png" alt="edit">
+              <img src="../img/icon/add_task_icon/subtasks/edit.png" alt="edit">
               <p class="p-Tag">Edit</p>
             </div>
           </div>
@@ -206,13 +72,13 @@ function getTaskOverlay(task, taskId) {
 
 function getInnerTaskOverlay() {
   return `
-        <div class="help-mobil" onclick="window.location.href='/assets/html/MPA-architecture/help.html'" id="help-mobil">
+        <div class="help-mobil" onclick="window.location.href='../html/help.html'" id="help-mobil">
           <p>Help</p>
         </div>
-        <div class="section1" onclick="window.location.href='/assets/html/MPA-architecture/legal-notice_MPA.html'"  id="legalNotice">
+        <div class="section1" onclick="window.location.href='../html/legal-notice_MPA.html'"  id="legalNotice">
             <p> Legal Notice</p>
         </div>
-        <div class="section1" onclick="window.location.href='/assets/html/MPA-architecture/privacy-policy_MPA.html'"  id="privacyPolicy">
+        <div class="section1" onclick="window.location.href='../html/privacy-policy_MPA.html'"  id="privacyPolicy">
             <p>Privacy Policy</p>
         </div>
         <div class="section1" onclick="handleLogOut(event)"  id="logOut">
@@ -251,21 +117,21 @@ function overlaySubtaskHtml(subtask, subtaskIndex, taskId) {
 
 function getLogOutMenu() {
   return `
-      <div class="help-mobil" onclick="window.location.href='/assets/html/MPA-architecture/help.html'" id="help-mobil">
+      <div class="help-mobil" onclick="window.location.href='../html/help.html'" id="help-mobil">
           <p>Help</p>
       </div>
-      <div class="section1" onclick="window.location.href='/assets/html/MPA-architecture/legal-notice_MPA.html'"  id="legalNotice">
+      <div class="section1" onclick="window.location.href='../html/legal-notice_internal.html'"  id="legalNotice">
           <p> Legal Notice</p>
       </div>
-      <div class="section1" onclick="window.location.href='/assets/html/MPA-architecture/privacy-policy_MPA.html'"  id="privacyPolicy">
+      <div class="section1" onclick="window.location.href='../html/privacy-policy_internal.html'"  id="privacyPolicy">
           <p>Privacy Policy</p>
       </div>
       <div class="section1" onclick="handleLogOut(event)"  id="logOut">
           <a href="/index.html">Log out</a>
       </div>
-    
     `;
 }
+let trueTaskId;
 
 function boardHtmlTemplate(
   taskId,
@@ -278,8 +144,9 @@ function boardHtmlTemplate(
   progressBar,
   addTaskId
 ) {
+  trueTaskId = addTaskId;
   return `
-    <div class="board-task-container" id="task-${addTaskId}" onclick="toggleBoardOverlay('${taskId}')" ondragstart="startDragging('${taskId}')" draggable="true"> 
+    <div class="board-task-container rotateTask" id="task-${addTaskId}"  onclick="toggleBoardOverlay('${taskId}','${trueTaskId}')" ondragstart="startDragging('${taskId}')" draggable="true"> 
       <div class="board-tasks">
         <p class="${categoryClass}">${categoryText}</p>  
         <div class="board-tasks-title-description">
@@ -303,6 +170,7 @@ function progressbarHtml(percent, doneCount, totalCount) {
         <div class="progress-bar" style="width: ${percent}%;"></div>
       </div>
       <span class="progress-bar-text">${doneCount}/${totalCount} Subtasks</span>
+      <span class="subtask-tooltip">${doneCount} von ${totalCount} Subtask${totalCount === 1 ? '' : 's'} erledigt</span>
     </div>
   `;
 }
@@ -390,10 +258,118 @@ function overlayPriority(task) {
   if (task.priority) {
     return `
       <p class="p-Tag padding-priority">
-        ${task.priority} <img src="/assets/img/icon/priority/${task.priority}.png" alt="">
+        ${task.priority} <img src="../img/icon/priority/${task.priority}.png" alt="">
       </p>
     `;
   } else {
     return `<p class="p-Tag padding-priority">-</p>`;
   }
+}
+
+function showContactsAddTaskHtml(contact) {
+  return `
+    <div class="contact-items" style="background-color:${contact.color};">
+      <span class="initials-span">${contact.initials}</span>
+    </div>
+  `;
+}
+
+function editTaskHtml(task, taskId) {
+  return `
+    <div class="overlay-section">
+    <div class="overlay-header-edit">
+     <img class="close-icon" src="../img/icon/close.png" alt="Close" onclick="toggleBoardOverlay('${taskId}')" />
+     </div>
+    <form id="edit-task-form" onsubmit="saveEditedTask(event, '${taskId}'); return false;">
+      <div class="input-group edittask add-task">
+        <span>Title</span>
+        <input onclick="showError('add-task-input1-warning', 'edit-title')" oninput="showError('add-task-input1-warning', 'edit-title');" id="edit-title" type="text" value="${
+          task.title || ''
+        }" required>
+        <span id="add-task-input1-warning" class="input-warning d-none">This field is required</span>
+      </div>
+      <div class="input-group edittask add-task">
+        <span>Description</span>
+        <div class="input-textarea-edit">
+          <textarea id="edit-description" name="add-task-textarea" placeholder="Enter a Description">${
+            task.description || ''
+          }</textarea>
+          <span class="input-icon-edit">
+            <img src="../img/icon/add_task_icon/textarea.png" alt="" />
+          </span>
+        </div>
+      </div>
+      <div class="input-group edittask add-task date">
+        <span>Due Date <span class="required-star">*</span></span>
+        <div class="date-input-container date-input-edit">
+          <input id="edit-date" type="text" placeholder="DD/MM/YYYY" min="" max="31/12/2035" name="add-task-input2" onclick="showError('add-task-input2-warning', 'edit-date')" oninput="showError('add-task-input2-warning', 'edit-date'); sanitizeAndValidateDate(this)"
+            value="${task.date || ''}"/>
+          <span>
+            <img class="date-icon-edit" src="../img/icon/add_task_icon/event.png" alt="" />
+          </span>
+        </div>
+        <span id="add-task-input2-warning" class="input-warning d-none">This field is required</span>
+      </div>
+      <div class="priority priority-edit">
+        <span>Priority</span>
+        <div class="priority-buttons priority-buttons-edit">
+          <button type="button" id="edit-urgent" class="add-task-button${
+            task.priority === 'Urgent' ? ' active urgent' : ''
+          }" onclick="togglePriority('Urgent', 'edit-');">
+            Urgent <img src="../img/icon/priority/urgent.png" alt="" />
+          </button>
+          <button type="button" id="edit-medium" class="add-task-button${
+            task.priority === 'Medium' ? ' active medium' : ''
+          }" onclick="togglePriority('Medium', 'edit-');">
+            Medium <img src="../img/icon/priority/medium.png" alt="" />
+          </button>
+          <button type="button" id="edit-low" class="add-task-button${
+            task.priority === 'Low' ? ' active low' : ''
+          }" onclick="togglePriority('Low', 'edit-');">
+            Low <img src="../img/icon/priority/low.png" alt="" />
+          </button>
+        </div>
+      </div>
+      <div class="add-task">
+       <span>Assigned to</span>
+       <div id="assigned-to-dropdown">
+        <div id="assigned-to-dropdown-selected" onclick="eventBubbling(event)">
+          <input
+            id="add-task-input3" name="add-task-input3" type="text" placeholder="Select a contact"  oninput="assignedToDropdown(this.value)" onclick="handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'open'); assignedToDropdown(this.value)">
+          <div
+            class="assigned-arrow" onclick="handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'toggle'); assignedToDropdown(document.getElementById('add-task-input3').value);">
+            <img
+              class="hover-icon" id="assigned-to-arrow" src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png" alt="">
+          </div>
+         </div>
+         <div id="assigned-to-dropdown-options" class="hidden custom-dropdown-options custom-dropdown-options-edit" onclick="eventBubbling(event)">
+         </div>
+         <div class="show-contacts-add-task" id="show-contacts-add-task"></div>
+       </div>
+      </div>
+      <div class="input-group edittask add-task subtask-edit">
+        <span>Subtasks</span>
+        <div class="subtask-edit-container">
+          <input class="add-task-input-edit"
+            id="add-task-input4"
+            oninput="onSubtaskInputChange()"
+            onkeydown="onSubtaskInputKeydown(event)"
+            name="add-task-input4"
+            type="text"
+            placeholder="Add new subtask"/>
+          <span class="subtasks-icon" id="subtasks-icon">
+            <img
+              class="hover-icon"
+              src="../img/icon/add_task_icon/plus.png"
+              alt="Add"
+              onclick="pushSubtaskInput(event)"/>
+          </span>
+        </div>
+      </div>
+      <div id="subtasks-container" class="subtasks-container"></div>
+    </form>
+    <div class="create-clear-buttons-edit">
+      <button type="submit" class="ok-button" form="edit-task-form">OK <img src="../img/icon/add_task_icon/buttons/create_task.png" /></button>
+    </div>
+  `;
 }

@@ -5,6 +5,13 @@
     padding-top: calc(206px - 96px);
     padding-left: calc(328px - 232px);
 }
+.headline{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
 h1{
     font-size: 61px;
     font-weight: 700;
@@ -16,9 +23,10 @@ h1{
     display: flex;
     flex-direction: column;
     gap: 35px;
+    padding-bottom: 40px;
 }
 .subtitles{
-    height: 137px;
+    height: auto;
     width: 1016px;
     display: flex;
     flex-direction: column;
@@ -39,10 +47,36 @@ h3{
     line-height: 120%;
     letter-spacing: 0;
 }
+h4{
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 120%;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+.backward{
+    display: none;
+}
+@media (max-width: 1439px) {
+    .backward{
+        
+        height: 37px;
+        width: 37px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+    }
+    .backward:hover{
+        cursor: pointer;
+        
+    }   
+}
 @media(max-width: 1160px){
 
   .body-flex{
     width: 100%;
+    padding-left: 0;
   }
   .subtitles>h3{
     width: 100%;
@@ -60,6 +94,7 @@ h3{
         padding-left: 0;
         padding-top: 0;
         padding-bottom: 128px;
+        padding-top: 128px;
        
     }
     .body-flex>h1{
@@ -77,10 +112,24 @@ h3{
         font-weight: 700;
     }
 }
-@media(max-width: 380px){
-    .body-flex>h1{
+@media(max-width: 485px){
+    h1{
         font-size: 42px;
+    }
+}
+@media(max-width: 380px){
+    h1{
+        font-size: 32px;
         font-weight: 700;
+        width: auto;
+    }
+    .body-flex>h1{
+        font-size: 32px;
+        font-weight: 700;
+        width: auto;
+    }
+    .subtitles>h3{
+        font-size: 20px;
     }
 }
 
