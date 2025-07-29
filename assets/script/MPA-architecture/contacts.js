@@ -20,6 +20,7 @@ async function loadContacts() {
         myContacts.push(responseAsJson[firebaseId]);
         newContacts.push(firebaseId);
       }
+
     } else {
       myContacts = [];
       newContacts = [];
@@ -154,19 +155,20 @@ function toggleEditOverlayMobile() {
     overlayMobile.classList.add('d-none');
     overlayMobile.innerHTML = '';
   }
-  
 }
 
 
-// function showEditOverlayMobile() {
-//   const overlayMobile = document.getElementById('editContactBtn-mobile');
-//   overlayMobile.style.display = 'block';
-// }
+function showEditOverlayMobile() {
+  const overlayMobile = document.querySelector('.editContactBtn-mobile');
+  overlayMobile.style.display = 'block';
+}
 
-// function hideEditOverlayMobile() {
-//   const overlayMobile = document.getElementById('editContactBtn-mobile');
-//   overlayMobile.style.display = 'none';
-// }
+function hideEditOverlayMobile() {
+  const overlayMobile = document.querySelector('.editContactBtn-mobile');
+  overlayMobile.style.display = 'none';
+}
+
+
 
 function openEditOverlay(index) {
   let contentOverlayRef = document.getElementById('editContactOverlay');
@@ -184,7 +186,6 @@ async function deleteContact(index) {
       return false;
     }
         
-    // let url = `https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/users.json`;
     let url = `https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/users/${firebaseId}.json`;
     let response = await fetch(url, {
       method: 'DELETE'
