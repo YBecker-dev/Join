@@ -270,7 +270,7 @@ function showPlusIcon() {
   let iconSpan = document.getElementById('subtasks-icon');
   if (iconSpan) {
     iconSpan.innerHTML = `
-      <img src="/assets/img/icon/add_task_icon/plus.png" alt="Add" onclick="pushSubtaskInput(event)">
+      <img src="../img/icon/add_task_icon/plus.png" alt="Add" onclick="pushSubtaskInput(event)">
     `;
   }
 }

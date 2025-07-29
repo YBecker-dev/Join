@@ -51,7 +51,7 @@ function displayUserInitials() {
 }
 
 let loadHelp = () => {
-  window.location.href = '/assets/html/help.html';
+  window.location.href = '../html/help.html';
 };
 
 function redirectLogin() {

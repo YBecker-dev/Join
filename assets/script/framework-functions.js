@@ -19,5 +19,5 @@ function displayUserInitials() {
 }
 
 let loadHelp =() =>{
-  window.location.href = "/assets/html/MPA-architecture/help.html"
+  window.location.href = "../html/help.html"
 }
