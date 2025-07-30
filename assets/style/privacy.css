@@ -57,6 +57,14 @@ h4{
 .backward{
     display: none;
 }
+.sidebar-links-section{
+    height: 100%;
+}
+.sidebar-links-container{
+    height: 100%;
+    justify-content: space-between;
+}
+
 @media (max-width: 1439px) {
     .backward{
         
@@ -70,6 +78,9 @@ h4{
     .backward:hover{
         cursor: pointer;
         
+    }
+    .sidebar-links{
+        width: 104px;
     }   
 }
 @media(max-width: 1160px){
@@ -116,6 +127,7 @@ h4{
     h1{
         font-size: 42px;
     }
+
 }
 @media(max-width: 380px){
     h1{
@@ -130,6 +142,9 @@ h4{
     }
     .subtitles>h3{
         font-size: 20px;
+    }
+    .sidebar-links{
+        width: 80px;
     }
 }
 

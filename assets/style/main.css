@@ -91,6 +91,7 @@ header {
 .sidebar-links,
 .siderbar-legal-stuff-links {
     display: flex;
+    justify-content: center;
     gap: 8px;
     align-items: center;
     color: #a3a7ab;
@@ -170,6 +171,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 10px;
 }
 
 .section1>p {
@@ -435,11 +437,11 @@ input#add-task-input3:focus {
 
     .help-mobil {
         height: 46px;
-        width: 90%;
+        width: 99%;
         display: flex;
         justify-content: center;
         align-items: center;
-        border-top-left-radius: 10px;
+        border-radius: 20px;
 
         p {
             color: #FFFFFF;

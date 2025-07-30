@@ -40,6 +40,13 @@
 .backward{
    display: none;
 }
+.sidebar-links-section{
+    height: 100%;
+}
+.sidebar-links-container{
+    height: 100%;
+    justify-content: space-between;
+}
 /*h3{
     font-size: 16px;
     font-weight: 900;
@@ -58,7 +65,10 @@
     .backward:hover{
         cursor: pointer;
         
-    }   
+    }
+    .sidebar-links{
+        width: 104px;
+    } 
 }
 @media(max-width: 1015px){
     .body-flex{
@@ -97,4 +107,7 @@
         font-weight: 700;
         width: 286px;
     }
-}
+    .sidebar-links{
+        width: 80px;
+    }
+}   
