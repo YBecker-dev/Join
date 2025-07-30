@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/assets/img/Logo/Logo_white.png" />
-    <link rel="stylesheet" href="/assets/style/main.css" />
-    <link rel="stylesheet" href="/assets/style/add_task.css" />
-    <link rel="stylesheet" href="/assets/style/buttons.css" />
-    <link rel="stylesheet" href="/assets/style/standart.css" />
+    <link rel="icon" href="../img/Logo/Logo_white.png" />
+    <link rel="stylesheet" href="../style/main.css" />
+    <link rel="stylesheet" href="../style/add_task.css" />
+    <link rel="stylesheet" href="../style/buttons.css" />
+    <link rel="stylesheet" href="../style/standart.css" />
     <title>Add Task</title>
   </head>
   <body onload="initAddTask()">
@@ -30,12 +30,12 @@
     <header>
       <div class="header-content">
         <p>Kanban Project Management Tool</p>
-        <img class="logo-responsive" src="/assets/img/Logo/logo_dark.png" alt="" />
+        <img class="logo-responsive" src="../img/Logo/logo_dark.png" alt="" />
         <div class="header-user">
           <img
             class="help-icon"
             onclick="loadHelp()"
-            src="/assets/img/icon/header_user_interface/help.png"
+            src="../img/icon/header_user_interface/help.png"
             alt="help"
           />
           <div class="nameBtn" id="userBtn" onclick="toggleLogOutOverlay()">
@@ -48,30 +48,30 @@
     <div class="sidebar">
       <div class="sidebar-links-section">
         <div class="sidebar-logo">
-          <img src="/assets/img/Logo/Logo_white.png" alt="Logo" />
+          <img src="../img/Logo/Logo_white.png" alt="Logo" />
         </div>
         <div class="sidebar-links-container">
-          <a class="sidebar-links" id="sidebar-summary" href="/assets/html/summery.html">
+          <a class="sidebar-links" id="sidebar-summary" href="summery.html">
             <div class="sidebar-links-content">
-              <img src="/assets/img/icon/tasks_icon/summary.png" alt="" />
+              <img src="../img/icon/tasks_icon/summary.png" alt="" />
               <p>Summary</p>
             </div>
           </a>
-          <a class="sidebar-links active" id="sidebar-add-task" href="/assets/html/add_task.html">
+          <a class="sidebar-links active" id="sidebar-add-task" href="add_task.html">
             <div class="sidebar-links-content">
-              <img src="/assets/img/icon/tasks_icon/add_task.png" alt="" />
+              <img src="../img/icon/tasks_icon/add_task.png" alt="" />
               <p>Add Task</p>
             </div>
           </a>
-          <a class="sidebar-links" id="sidebar-board" href="/assets/html/board.html">
+          <a class="sidebar-links" id="sidebar-board" href="board.html">
             <div class="sidebar-links-content">
-              <img src="/assets/img/icon/tasks_icon/board.png" alt="" />
+              <img src="../img/icon/tasks_icon/board.png" alt="" />
               <p>Board</p>
             </div>
           </a>
-          <a class="sidebar-links" id="sidebar-contacts" href="/assets/html/contacts.html">
+          <a class="sidebar-links" id="sidebar-contacts" href="contacts.html">
             <div class="sidebar-links-content">
-              <img src="/assets/img/icon/tasks_icon/contacts.png" alt="" />
+              <img src="../img/icon/tasks_icon/contacts.png" alt="" />
               <p>Contacts</p>
             </div>
           </a>
@@ -81,10 +81,10 @@
         <a
           class="siderbar-legal-stuff-links privacy-legal"
           id="sidebar-privacy-policy"
-          href="/assets/html/privacy-policy_internal.html"
+          href="privacy-policy_internal.html"
           >Privacy Policy</a
         >
-        <a class="siderbar-legal-stuff-links" id="sidebar-legal-notice" href="/assets/html/legal-notice_internal.html"
+        <a class="siderbar-legal-stuff-links" id="sidebar-legal-notice" href="legal-notice_internal.html"
           >Legal Notice</a
         >
       </div>
@@ -95,7 +95,7 @@
         <div class="wrapper-create-task">
           <div class="wrapper-create-task-center">
             <p>Task added to board</p>
-            <img src="/assets/img/icon/tasks_icon/board.png" alt="" />
+            <img src="../img/icon/tasks_icon/board.png" alt="" />
           </div>
         </div>
       </section>
@@ -107,10 +107,10 @@
         <form id="add-task-form" onsubmit="return validateAddTaskForm();" onkeydown="return preventEnterSubmit(event);">
           <div class="create-clear-buttons">
             <button type="button" class="clear-button" onclick="clearAllTaskFields();">
-              Clear <img src="/assets/img/icon/add_task_icon/buttons/clear_all.png" />
+              Clear <img src="../img/icon/add_task_icon/buttons/clear_all.png" />
             </button>
             <button disabled type="submit" class="create-button" id="create-task-button">
-              Create Task <img src="/assets/img/icon/add_task_icon/buttons/create_task.png" />
+              Create Task <img src="../img/icon/add_task_icon/buttons/create_task.png" />
             </button>
           </div>
           <div class="title_description_date">
@@ -132,7 +132,7 @@
                 <div class="description-input-container">
                   <textarea id="description" name="add-task-textarea" placeholder="Enter a Description"></textarea>
                   <span class="input-icon">
-                    <img src="/assets/img/icon/add_task_icon/textarea.png" alt="" />
+                    <img src="../img/icon/add_task_icon/textarea.png" alt="" />
                   </span>
                 </div>
               </div>
@@ -150,7 +150,7 @@
                     oninput="showError('add-task-input2-warning', 'date'); enableCreateTaskButton(this)"
                   />
                   <span class="date-icon">
-                    <img src="/assets/img/icon/add_task_icon/event.png" alt="" />
+                    <img src="..img/icon/add_task_icon/event.png" alt="" />
                   </span>
                 </div>
                 <span id="add-task-input2-warning" class="input-warning d-none">This field is required</span>
@@ -165,13 +165,13 @@
               </div>
               <div class="priority-buttons">
                 <button type="button" class="add-task-button" id="urgent" onclick="togglePriority('urgent')">
-                  Urgent <img src="/assets/img/icon/priority/urgent.png" alt="" />
+                  Urgent <img src="../img/icon/priority/urgent.png" alt="" />
                 </button>
                 <button type="button" class="add-task-button" id="medium" onclick="togglePriority('medium')">
-                  Medium <img class="priority-button-medium-img" src="/assets/img/icon/priority/medium.png" alt="" />
+                  Medium <img class="priority-button-medium-img" src="../img/icon/priority/medium.png" alt="" />
                 </button>
                 <button type="button" class="add-task-button" id="low" onclick="togglePriority('low')">
-                  Low <img src="/assets/img/icon/priority/low.png" alt="" />
+                  Low <img src="../img/icon/priority/low.png" alt="" />
                 </button>
               </div>
             </div>
@@ -195,7 +195,7 @@
                       <img
                         class="hover-icon"
                         id="assigned-to-arrow"
-                        src="/assets/img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png"
+                        src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png"
                         alt=""
                       />
                     </div>
@@ -219,7 +219,7 @@
                     <img
                       class="hover-icon"
                       id="category-selected-arrow"
-                      src="/assets/img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png"
+                      src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png"
                       alt=""
                     />
                   </div>
@@ -253,7 +253,7 @@
                   <span class="subtasks-icon" id="subtasks-icon">
                     <img
                       class="hover-icon"
-                      src="/assets/img/icon/add_task_icon/plus.png"
+                      src="../img/icon/add_task_icon/plus.png"
                       alt="Add"
                       onclick="pushSubtaskInput(event)"
                     />
@@ -267,11 +267,11 @@
         </form>
       </div>
     </section>
-    <script src="/assets/script/templates.js"></script>
-    <script src="/assets/script/add_task_helpers.js"></script>
-    <script src="/assets/script/main.js"></script>
-    <script src="/assets/script/board.js"></script>
-    <script src="/assets/script/add_task.js"></script>
-    <script src="/script.js"></script>
+    <script src="../script/templates.js"></script>
+    <script src="../script/add_task_helpers.js"></script>
+    <script src="../script/main.js"></script>
+    <script src="../script/board.js"></script>
+    <script src="../script/add_task.js"></script>
+    <script src="../../script.js"></script>
   </body>
 </html>

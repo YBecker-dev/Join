@@ -1,118 +1,109 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/assets/img/Logo/Logo_white.png" />
-    <link rel="stylesheet" href="/assets/style/main.css" />
-    <link rel="stylesheet" href="/assets/style/buttons.css" />
-    <link rel="stylesheet" href="/assets/style/contact.css" />
-    <link rel="stylesheet" href="/assets/style/standart.css" />
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="../img/Logo/Logo_white.png">
+        <link rel="stylesheet" href="../style/standart.css">
+        <link rel="stylesheet" href="../style/contact.css">
+        <link rel="stylesheet" href="../style/buttons.css">
+        <link rel="stylesheet" href="../style/join-framework.css">
+        <link rel="stylesheet" href="../style/main.css">
+        <title>Contacts</title>
 
-    <title>Contacts</title>
-  </head>
-  <body onload="initContacts()">
-    <section class="logout-overlay d-none" id="overlay-logout" onclick="toggleLogOutOverlay()">
-      <div class="logout-overlay-content" id="logout-overlay-content"></div>
-    </section>
-
-    <header>
-      <div class="header-content">
-        <p>Kanban Project Management Tool</p>
-        <img class="logo-responsive" src="/assets/img/logo/logo_dark.png" alt="" />
-        <div class="header-user">
-          <img
-            class="help-icon"
-            onclick="loadHelp()"
-            src="/assets/img/icon/header_user_interface/help.png"
-            alt="help"
-          />
-          <div class="nameBtn" id="userBtn" onclick="toggleLogOutOverlay()">
-            <p class="user" id="userInitials"></p>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <div class="sidebar">
-      <div class="sidebar-links-section">
-        <div class="sidebar-logo">
-          <img src="/assets/img/Logo/Logo_white.png" alt="Logo" />
-        </div>
-        <div class="sidebar-links-container">
-          <a class="sidebar-links" id="sidebar-summary" href="/assets/html/summery.html">
-            <div class="sidebar-links-content">
-              <img src="/assets/img/icon/tasks_icon/summary.png" alt="" />
-              <p>Summary</p>
+    </head>
+    <body onload="initContacts()">
+        <header>
+            <div class="header-content">
+                <p>Kanban Project Management Tool</p>
+                <img class="logo-responsive" src="../img/Logo/" alt="">
+                <div class="header-user">
+                    <img class="help-icon" onclick="loadContent('help.html')"src="../img/icon/header_user_interface/help.png" alt="help">
+                    <div class="nameBtn" id="userBtn" onclick="toggleLogOutOverlay()">
+                        <p class="user" id="userInitialsMPA"></p>
+                    </div>
+                </div>
             </div>
-          </a>
-          <a class="sidebar-links" id="sidebar-add-task" href="/assets/html/add_task.html">
-            <div class="sidebar-links-content">
-              <img src="/assets/img/icon/tasks_icon/add_task.png" alt="" />
-              <p>Add Task</p>
+        </header>
+        <section class="sidebar">
+            <div class="sidebar-links-section">
+                <div class="sidebar-logo">
+                    <img src="../img/Logo/Logo_white.png" alt="Logo">
+                </div>
+                <div class="sidebar-links-container">
+                    <a class="sidebar-links" id="sidebar-summary" href="./summery.html">
+                        <img src="../img/icon/tasks_icon/summary.png" alt="Summary">Summary
+                    </a>
+                    <a class="sidebar-links" id="sidebar-add-task" href="./add_task.html">
+                        <img src="../img/icon/tasks_icon/add_task.png" alt="Add Task">Add Task
+                    </a>
+                    <a class="sidebar-links" id="sidebar-board" href="./board.html">
+                        <img src="../img/icon/tasks_icon/board.png" alt="Board">Board
+                    </a>
+                    <a class="sidebar-links" id="sidebar-contacts" href="./contacts.html">
+                        <img src="../img/icon/tasks_icon/contacts.png" alt="contacts">Contacts
+                    </a>
+                </div>
             </div>
-          </a>
-          <a class="sidebar-links" id="sidebar-board" href="/assets/html/board.html">
-            <div class="sidebar-links-content">
-              <img src="/assets/img/icon/tasks_icon/board.png" alt="" />
-              <p>Board</p>
+            <div class="sidebar-legal-stuff">
+                <a class="sidebar-links privacy-legal" id="sidebar-privacy-policy" href="./privacy-policy.html">Privacy Policy</a>
+                <a class="sidebar-links privacy-legal" id="sidebar-legal-notice" href="./legal-notice.html">Legal Notice</a>
             </div>
-          </a>
-          <a class="sidebar-links active" id="sidebar-contacts" href="/assets/html/contacts.html">
-            <div class="sidebar-links-content">
-              <img src="/assets/img/icon/tasks_icon/contacts.png" alt="" />
-              <p>Contacts</p>
+        </section>
+
+        <main class="myMain">
+            <div class="main-content">
+            <section class="contactList">
+                <button onclick="toggleContactOverlay()" id="newContact">
+                    <div class="btn">
+                        <p>Add new contact</p>
+                        <img class="newContact" src="../img/icon/new-contact.png" alt="new Contact">
+                    </div>
+                </button>
+
+                <button onclick="toggleContactOverlay()" id="newContactMobile" class="addContactBtn-mobile">
+                        <img class="newContact-mobile" src="../img/icon/new-contact.png" alt="new Contact">
+                </button>
+
+                <div id="contactContent">
+                </div>
+            </section>
+
+            <section class="details">
+                <div class="contact-headline">
+                    <h2>Contacts</h2>
+                    <div class="separating-line"></div>
+                    <span class="team">Better with a team</span>
+                </div>
+                <div id="contactDetails">
+                </div>
+            </section>
             </div>
-          </a>
-        </div>
-      </div>
-      <div class="sidebar-legal-stuff">
-        <a
-          class="siderbar-legal-stuff-links privacy-legal"
-          id="sidebar-privacy-policy"
-          href="/assets/html/privacy-policy_internal.html"
-          >Privacy Policy</a
-        >
-        <a class="siderbar-legal-stuff-links" id="sidebar-legal-notice" href="/assets/html/legal-notice_internal.html"
-          >Legal Notice</a
-        >
-      </div>
-    </div>
+            <section class="overlayBackground">
+                <div id="addNewContactOverlay">
+                </div>
+            </section>
+            <section>
+                <div id="editContactOverlay">
+                </div>
 
-    <div class="main-content">
-      <section class="contactList">
-        <div class="background-new-contact-button">
-          <button class="add-new-contact-button" onclick="toggleContactOverlay()" id="newContact">
-            <div class="btn">
-              <p>Add new contact</p>
-              <img class="newContact" src="/assets/img/icon/new-contact.png" alt="new Contact" />
+                <div id="editMobileOverlay">
+                </div>
+                    <!-- <div class="editMobile">
+            <div class="editDivMobile" onclick="openEditOverlay(${indexDetails})">
+              <img class="editIcon" src="../img/icon/add_task_icon/subtasks/edit.png" alt="pencil">
+              <p class="editText">Edit</p>
             </div>
-          </button>
-        </div>
-        <div id="contactContent"></div>
-      </section>
+            <div class="editDivMobile" onclick="deleteContact(${indexDetails})">
+              <img class="editIcon" src="../img/icon/add_task_icon/subtasks/delete.png" alt="wastebasket">
+              <p class="editText">Delete</p>
+            </div>
+          </div> -->
+            </section>
+            <form action=""></form>
+        </main>
 
-      <section class="details">
-        <div class="contact-headline">
-          <h2>Contacts</h2>
-          <div class="separating-line"></div>
-          <span class="team">Better with a team</span>
-        </div>
-        <div id="contactDetails"></div>
-      </section>
-    </div>
-
-    <section class="add-new-contact-section d-none" id="add-new-contact" onclick="closeOverlay()">
-      <div id="addNewContactOverlay"></div>
-    </section>
-
-    <section class="edit-contact-overlay-section d-none" id="edit-contact" onclick="closeOverlay()">
-      <div id="editContactOverlay"></div>
-    </section>
-
-    <script src="/assets/script/templates.js"></script>
-    <script src="/assets/script/contact-templates.js"></script>
-    <script src="/assets/script/main.js"></script>
-    <script src="/assets/script/contacts.js"></script>
-  </body>
+        <script src="../script/contact-templates.js"></script>
+        <script src="../script/contacts.js"></script>
+    </body>
 </html>
