@@ -68,16 +68,16 @@ function getNoteTemplateAddNewContact() {
                 <img onclick="closeOverlay()" class="close" src="../img/icon/close.png" alt="Close-Button">
               </div>
                 <div class="add-new-contact-inputs">
-                  <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                    <input id="newContactName" class="addNewContact" type="text" placeholder="Name" required onclick="event.stopPropagation()">
+                  <div class="addNewContactDiv" onclick="event.stopPropagation(), clearInputError()" id="addNewContactInput">
+                    <input id="newContactName" class="addNewContact" type="text" placeholder="Name" required onclick="event.stopPropagation()" oninput="validateNameInput(this)">
                     <img class="addNewContactIcon" src="../img/icon/person.png" alt="Person Icon">
                   </div> 
-                  <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                    <input id="newContactMail" class="addNewContact" type="email" placeholder="Email" required onclick="event.stopPropagation()">
+                  <div class="addNewContactDiv" onclick="event.stopPropagation()" id="addNewContactEmailDiv">
+                    <input id="newContactMail" class="addNewContact" type="email" placeholder="Email" required onclick="event.stopPropagation()" oninput="validateEmailInput(this)">
                     <img class="addNewContactIcon" src="../img/icon/mail.png" alt="Email Icon">
                   </div> 
-                  <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                    <input id="newContactPhone" class="addNewContact" type="tel" placeholder="Phone" required onclick="event.stopPropagation()">
+                  <div class="addNewContactDiv" onclick="event.stopPropagation()" >
+                    <input id="newContactPhone" class="addNewContact" type="tel" placeholder="Phone" required onclick="event.stopPropagation()" oninput="validatePhoneInput(this)" value="">
                     <img class="addNewContactIcon" src="../img/icon/phone.png" alt="phone Icon">
                   </div>
                 </div>
@@ -94,7 +94,7 @@ function getNoteTemplateAddNewContact() {
 function getNoteTemplateEditContact(index) {
   let user = contacts[index] || {};
 
-  return ` <div class="newContactOverlay" onclick="event.stopPropagation()">
+  return ` <div class="newContactOverlay" onclick="eventBubbling(event)">
             <div class="headDiv">
               <img class="contactLogo" src="../img/Logo/Logo_white.png" alt="Logo_white">
               <div class="add-headline">
@@ -104,23 +104,31 @@ function getNoteTemplateEditContact(index) {
             </div>
             <div class="editDiv">
               <div class="profile-img profileInitials">
-                <p id="newContactInitials" class="initialOverlay" style="background-color: ${user.color}">${user.initials}</p>
+                <p id="newContactInitials" class="initialOverlay" style="background-color: ${user.color}">${
+    user.initials
+  }</p>
               </div>        
               <div class="profilDiv">
               <div class="closeDiv">
                 <img onclick="closeOverlay()" class="close" src="../img/icon/close.png" alt="Close-Button">
               </div>
                 <div class="add-new-contact-inputs">
-                  <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                    <input id="editContactName" class="addNewContact" type="text" placeholder="Name" required onclick="event.stopPropagation()" value="${user.name || ''}">
+                  <div class="addNewContactDiv" onclick="eventBubbling(event)" id="addNewContactInput">
+                    <input id="editContactName" class="addNewContact" type="text" placeholder="Name" required onclick="eventBubbling(event)" value="${
+                      user.name || ''
+                    }" oninput="validateNameInput(this)">
                     <img class="addNewContactIcon" src="../img/icon/person.png" alt="Person Icon">
                   </div> 
-                  <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                    <input id="editContactMail" class="addNewContact" type="email" placeholder="Email" required onclick="event.stopPropagation()" value="${user.email || ''}">
+                  <div class="addNewContactDiv" onclick="eventBubbling(event)" id="editContactEmailDiv">
+                    <input id="editContactMail" class="addNewContact" type="email" placeholder="Email" required onclick="eventBubbling(event)" value="${
+                      user.email || ''
+                    }" oninput="validateEmailInput(this)">
                     <img class="addNewContactIcon" src="../img/icon/mail.png" alt="Email Icon">
                   </div> 
-                  <div class="addNewContactDiv" onclick="event.stopPropagation()">
-                    <input id="editContactPhone" class="addNewContact" type="tel" placeholder="Phone" required onclick="event.stopPropagation()" value="${user.phone || ''}">
+                  <div class="addNewContactDiv" onclick="eventBubbling(event)" id="editContactPhoneDiv">
+                    <input id="editContactPhone" class="addNewContact" type="tel" minlength="10" placeholder="Phone" required onclick="eventBubbling(event)" value="${
+                      user.phone || ''
+                    }" oninput="validatePhoneInput(this)">
                     <img class="addNewContactIcon" src="../img/icon/phone.png" alt="phone Icon">
                   </div>
                 <div class="accept">
@@ -130,3 +138,5 @@ function getNoteTemplateEditContact(index) {
               </div> 
             </div>`;
 }
+
+

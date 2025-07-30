@@ -466,17 +466,6 @@ h4 {
     width: 120px;
 }
 
-input#newContactName:focus,
-input#newContactMail:focus,
-input#newContactPhone:focus,
-input#editContactName:focus,
-input#editContactMail:focus,
-input#editContactPhone:focus {
-    outline: none;
-    border-color: initial;
-    border: none;
-}
-
 #contactDetails {
     transition: all 0.3s ease-in-out;
     opacity: 0;
@@ -503,4 +492,34 @@ input#editContactPhone:focus {
         opacity: 1;
         transform: translateX(0);
     }
+}
+
+.shake {
+    animation: shake 0.3s;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.input-error {
+    border: 2px solid #e74c3c;
 }
