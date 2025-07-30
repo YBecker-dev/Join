@@ -198,8 +198,8 @@ function getRandomColor() {
 }
 
 function closeOverlay() {
-  let overlayRef = document.getElementById('add-new-contact');
-  let contentOverlayRef = document.getElementById('edit-contact');
+  let overlayRef = document.getElementById('addNewContactOverlay');
+  let contentOverlayRef = document.getElementById('editContactOverlay');
   overlayRef.classList.add('d-none');
   contentOverlayRef.classList.add('d-none');
   overlayRef.innerHTML = '';
@@ -219,20 +219,20 @@ function toggleEditOverlayMobile() {
 }
 
 
-function showEditOverlayMobile() {
-  const overlayMobile = document.querySelector('.editContactBtn-mobile');
-  overlayMobile.style.display = 'block';
-}
+// function showEditOverlayMobile() {
+//   const overlayMobile = document.querySelector('.editContactBtn-mobile');
+//   overlayMobile.style.display = 'block';
+// }
 
-function hideEditOverlayMobile() {
-  const overlayMobile = document.querySelector('.editContactBtn-mobile');
-  overlayMobile.style.display = 'none';
-}
+// function hideEditOverlayMobile() {
+//   const overlayMobile = document.querySelector('.editContactBtn-mobile');
+//   overlayMobile.style.display = 'none';
+// }
 
 
 
 function openEditOverlay(index) {
-  let contentOverlayRef = document.getElementById('edit-contact');
+  let contentOverlayRef = document.getElementById('editContactOverlay');
   contentOverlayRef.classList.remove('d-none');
   contentOverlayRef.innerHTML = getNoteTemplateEditContact(index);
 }
