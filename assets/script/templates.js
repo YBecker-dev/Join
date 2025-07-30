@@ -258,7 +258,11 @@ function overlayPriority(task) {
   if (task.priority) {
     return `
       <p class="p-Tag padding-priority">
+<<<<<<< HEAD
         ${task.priority} <img src="../img/icon/priority/${task.priority}.png" alt="">
+=======
+        <img src="/assets/img/icon/priority/${task.priority.toLowerCase()}.png" alt="">
+>>>>>>> 02a6441e3c60965837813f45023fea79d9ebc4bb
       </p>
     `;
   } else {

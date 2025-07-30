@@ -450,10 +450,67 @@ h4 {
     height: 1.5rem;
 }
 
+<<<<<<< HEAD
 @media (max-width: 1440px) {
     .contactList {
         width: 60%;
         height: 100%;
+=======
+.agenda {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+}
+
+.agenda-category {
+    text-align: start;
+    padding: 17px 36px;
+}
+
+.agenda-line {
+    max-width: 352px;
+    width: 100%;
+    border: 1px solid #D1D1D1;
+    margin: 8px 0;
+}
+
+.edit-contact-overlay-section,
+.add-new-contact-section {
+    background-color: #00000059;
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.profileImg {
+    height: 120px;
+    width: 120px;
+}
+
+#contactDetails {
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+    transform: translateX(100vw);
+}
+
+#contactDetails.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+#contactDetails.hide {
+    transition: none;
+    transform: translateX(100vw);
+}
+
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+>>>>>>> 02a6441e3c60965837813f45023fea79d9ebc4bb
     }
 
     .addContactBtn-mobile,
@@ -467,6 +524,7 @@ h4 {
         bottom: 120px;
         right: 12px;
     }
+<<<<<<< HEAD
 
     .contact-headline-mobile {
         display: flex;   
@@ -611,4 +669,36 @@ h4 {
     display: flex !important;
   }
 
+=======
+}
+
+.shake {
+    animation: shake 0.3s;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.input-error {
+    border: 2px solid #e74c3c;
+>>>>>>> 02a6441e3c60965837813f45023fea79d9ebc4bb
 }
