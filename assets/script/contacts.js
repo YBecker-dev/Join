@@ -113,26 +113,6 @@ function toggleContactOverlay() {
   }
 }
 
-async function saveToLocalstorage() {
-  let userName = document.getElementById('newContactName').value;
-  let userEmail = document.getElementById('newContactMail').value;
-  let userPhone = document.getElementById('newContactPhone').value;
-
-  if (!userName || !userEmail || !userPhone) {
-    alert('Bitte alle Felder ausfüllen!');
-    return;
-  }
-
-  let newContact = {
-    name: userName,
-    email: userEmail,
-    phone: userPhone,
-    color: getRandomColor(),
-    initials: getInitials(userName),
-  };
-  await saveToFirebase(newContact);
-}
-
 async function saveToFirebase(contact) {
   try {
     let url = `https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/users.json`;
@@ -202,21 +182,20 @@ async function deleteContact(index) {
 }
 
 async function updateContact(index) {
-  let contactName = document.getElementById('editContactName').value.trim();
-  let contactMail = document.getElementById('editContactMail').value.trim();
-  let contactPhone = document.getElementById('editContactPhone').value.trim();
+  let userName = document.getElementById('editContactName').value.trim();
+  let userEmail = document.getElementById('editContactMail').value.trim();
+  let userPhone = document.getElementById('editContactPhone').value.trim();
 
-  if (!contactName || !contactMail || !contactPhone) {
-    console.error('Bitte alle Felder ausfüllen!');
+  if (!checkContactInputs(userName, userEmail, userPhone)) {
     return;
   }
 
   let updatedContact = {
-    name: contactName,
-    email: contactMail,
-    phone: contactPhone,
+    name: userName,
+    email: userEmail,
+    phone: userPhone,
     color: contacts[index].color,
-    initials: getInitials(contactName),
+    initials: getInitials(userName),
   };
 
   let firebaseId = contacts[index].id;
@@ -240,8 +219,122 @@ async function updateContact(index) {
   closeOverlay();
 }
 
+async function saveToLocalstorage() {
+  let userName = document.getElementById('newContactName').value;
+  let userEmail = document.getElementById('newContactMail').value;
+  let userPhone = document.getElementById('newContactPhone').value;
+
+  if (!checkContactInputs(userName, userEmail, userPhone)) {
+    return;
+  }
+
+  let newContact = {
+    name: userName,
+    email: userEmail,
+    phone: userPhone,
+    color: getRandomColor(),
+    initials: getInitials(userName),
+  };
+  await saveToFirebase(newContact);
+}
+
 function openEditOverlay(index) {
   let contentOverlayRef = document.getElementById('edit-contact');
   contentOverlayRef.classList.remove('d-none');
   contentOverlayRef.innerHTML = getNoteTemplateEditContact(index);
+}
+
+function checkContactInputs(userName, userEmail, userPhone) {
+  let nameInput = document.getElementById('editContactName') || document.getElementById('newContactName');
+  let mailInput = document.getElementById('editContactMail') || document.getElementById('newContactMail');
+
+  let valid = true;
+
+  if (!userName || userName.trim().length < 2) {
+    shakeInput(nameInput, 'Bitte einen gültigen Namen eingeben!');
+    valid = false;
+  }
+
+  if (!userEmail || !/^.+@.+\.[a-zA-Z]{2,4}$/.test(userEmail)) {
+    shakeInput(mailInput, 'Bitte eine gültige E-Mail-Adresse eingeben!');
+    valid = false;
+  }
+
+  if (!userPhone || userPhone.trim() === '') {
+    userPhone = '-';
+  }
+
+  return valid;
+}
+
+function validatePhoneInput(input) {
+  let value = input.value.replace(/[^+\d]/g, '');
+  value = value.replace(/(?!^)\+/g, '');
+
+  if (value.length > 0 && value[0] !== '0' && value[0] !== '+') {
+    value = value.slice(1);
+  }
+
+  if (value.startsWith('0')) {
+    value = '+49 ' + value.slice(1);
+  }
+
+  let prefix = value.slice(0, 3);
+  let rest = value.slice(3).replace(/^\s*/, '');
+
+  let firstBlock = rest.slice(0, 3);
+  let secondBlock = rest.slice(3);
+
+  let formatted = prefix;
+  if (rest.length > 0) formatted += ' ' + firstBlock;
+  if (secondBlock.length > 0) formatted += ' ' + secondBlock;
+  formatted = formatted.slice(0, 17);
+
+  input.value = formatted;
+  clearInputError(input);
+}
+
+function validateEmailInput(input) {
+  input.value = input.value.replace(/[^a-zA-Z0-9@._%+-]/g, '');
+  clearInputError(input);
+  input.setCustomValidity('');
+}
+
+function shakeInput(input, message) {
+  input.classList.add('shake');
+  input.setCustomValidity(message);
+  input.reportValidity();
+  let parentDiv = input.closest('.addNewContactDiv');
+  if (parentDiv) parentDiv.classList.add('input-error');
+  setTimeout(() => {
+    input.classList.remove('shake');
+  }, 300);
+}
+
+function clearInputError(input) {
+  input.setCustomValidity('');
+  input.classList.remove('input-error');
+  let parentDiv = input.closest('.addNewContactDiv');
+  if (parentDiv) parentDiv.classList.remove('input-error');
+}
+
+function validateNameInput(input) {
+  if (input.value.endsWith(' ')) {
+    clearInputError(input);
+    return;
+  }
+  let cleaned = input.value
+    .replace(/[^a-zA-ZäöüÄÖÜß\- ]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  let words = cleaned.split(' ').slice(0, 3);
+  let capitalized = [];
+  for (let i = 0; i < words.length; i++) {
+    let word = words[i];
+    if (word.length > 0) {
+      capitalized.push(word.charAt(0).toUpperCase() + word.slice(1));
+    }
+  }
+  input.value = capitalized.join(' ');
+  clearInputError(input);
 }

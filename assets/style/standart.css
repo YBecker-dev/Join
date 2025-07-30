@@ -67,11 +67,21 @@ input#password:focus,
 input#title:focus,
 input#date:focus,
 input[type="date"]:focus,
-input[type="text"]:focus,
-input#editContactName:focus {
+input[type="text"]:focus {
     outline: none;
     box-shadow: none;
     border: 1px solid #2AABE2 !important
+}
+
+input#newContactName:focus,
+input#newContactMail:focus,
+input#newContactPhone:focus,
+input#editContactName:focus,
+input#editContactMail:focus,
+input#editContactPhone:focus {
+    outline: none;
+    border-color: initial;
+    border: none !important;
 }
 
 .checkbox {
