@@ -199,15 +199,15 @@ function toggleEditOverlayMobile() {
 }
 
 
-function showEditOverlayMobile() {
-  const overlayMobile = document.querySelector('.editContactBtn-mobile');
-  overlayMobile.style.display = 'block';
-}
+// function showEditOverlayMobile() {
+//   const overlayMobile = document.querySelector('.editContactBtn-mobile');
+//   overlayMobile.style.display = 'block';
+// }
 
-function hideEditOverlayMobile() {
-  const overlayMobile = document.querySelector('.editContactBtn-mobile');
-  overlayMobile.style.display = 'none';
-}
+// function hideEditOverlayMobile() {
+//   const overlayMobile = document.querySelector('.editContactBtn-mobile');
+//   overlayMobile.style.display = 'none';
+// }
 
 
 
@@ -251,6 +251,7 @@ async function updateContact(index) {
   let userEmail = document.getElementById('editContactMail').value.trim();
   let userPhone = document.getElementById('editContactPhone').value.trim();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
   if (!contactName || !contactMail || !contactPhone) {
 =======
@@ -316,6 +317,56 @@ async function saveToLocalstorage() {
   if (!checkContactInputs(userName, userEmail, userPhone)) {
     return;
   }
+=======
+  if (!checkContactInputs(userName, userEmail, userPhone)) {
+    return;
+  }
+
+    if (!userPhone) {
+    userPhone = '-';
+  }
+
+  let updatedContact = {
+    name: userName,
+    email: userEmail,
+    phone: userPhone,
+    color: contacts[index].color,
+    initials: getInitials(userName),
+  };
+  try {
+    let firebaseId = newContacts[index];
+    if (!firebaseId) {
+      return;
+    }
+
+    let url = `https://join-tasks-4a707-default-rtdb.europe-west1.firebasedatabase.app/users/${firebaseId}.json`;
+    let response = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedContact),
+    });
+
+    if (!response.ok) {
+      return;
+    }
+
+  await loadContacts();
+  renderContacts();
+  openDetails(index);
+  closeOverlay();
+}
+
+async function saveToLocalstorage() {
+  let userName = document.getElementById('newContactName').value;
+  let userEmail = document.getElementById('newContactMail').value;
+  let userPhone = document.getElementById('newContactPhone').value;
+
+  if (!checkContactInputs(userName, userEmail, userPhone)) {
+    return;
+  }
+>>>>>>> 1917d83e444f49407d85bf700c89cc4fc6cf6135
 
   let newContact = {
     name: userName,
@@ -331,7 +382,10 @@ function openEditOverlay(index) {
   let contentOverlayRef = document.getElementById('edit-contact');
   contentOverlayRef.classList.remove('d-none');
   contentOverlayRef.innerHTML = getNoteTemplateEditContact(index);
+<<<<<<< HEAD
 >>>>>>> 02a6441e3c60965837813f45023fea79d9ebc4bb
+=======
+>>>>>>> 1917d83e444f49407d85bf700c89cc4fc6cf6135
 }
 
 function checkContactInputs(userName, userEmail, userPhone) {

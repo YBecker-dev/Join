@@ -1,6 +1,6 @@
 .myMain {
     display: flex;
-    position: absolute;
+    /* position: absolute; */
     top: 6rem;
     left: 14.8rem;
 }
@@ -17,6 +17,7 @@
     background-color: #ffffff;
     padding: 0px 12px 32px 24px;
     box-shadow: 4px 0px 6px 0px #00000014;
+<<<<<<< HEAD
     position: relative;
 }
 
@@ -25,12 +26,21 @@
     max-width: 352px;
     width: 100%;
 
+=======
+    /* position: relative; */
+}
+
+.newContactBtn  {
+    position: sticky;
+    height: 52px;  
+>>>>>>> 1917d83e444f49407d85bf700c89cc4fc6cf6135
 }
 
 .btn {
     display: flex;
     margin-left: 2rem;
     margin-right: 2rem;
+   
 }
 
 .addContactBtn-mobile,
@@ -73,8 +83,13 @@
     justify-content: start;
     border-radius: 10px;
     align-items: center;
+<<<<<<< HEAD
     gap: 35px;
     max-width: 352px;
+=======
+    gap: 20px;
+    /* max-width: 352px; */
+>>>>>>> 1917d83e444f49407d85bf700c89cc4fc6cf6135
     width: 100%;
 }
 
@@ -116,8 +131,24 @@
     color: black;
 }
 
+<<<<<<< HEAD
+=======
+.mail:hover,
+.phonenumber:hover {
+    font-weight: 400;
+}
+
+.mail:hover {
+    color: #007CEE;
+}
+
+>>>>>>> 1917d83e444f49407d85bf700c89cc4fc6cf6135
 .details {
     background-color: #f6f7f8;
+}
+
+.phonenumber:hover {
+    color: unset !important;
 }
 
 .contact-headline {
@@ -189,6 +220,10 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: start;
+<<<<<<< HEAD
+=======
+    margin-top: 12px;
+>>>>>>> 1917d83e444f49407d85bf700c89cc4fc6cf6135
     gap: 24px;
 }
 
@@ -204,8 +239,10 @@ h2 {
 }
 
 .editOverlay {
+    padding: 0;
     display: flex;
     align-items: center;
+<<<<<<< HEAD
     gap: 8px;
     cursor: pointer;
 }
@@ -222,15 +259,27 @@ h2 {
 #editOverlay:hover .editIcon,
 #deleteOverlay:hover .editIcon {
     filter: brightness(0) saturate(100%) invert(48%) sepia(83%) saturate(416%) hue-rotate(152deg) brightness(102%) contrast(97%)
+=======
+    background-color:#F5F5F5;
+    cursor: pointer;
+>>>>>>> 1917d83e444f49407d85bf700c89cc4fc6cf6135
 }
 
 .editIcon {
-    height: 1.5rem;
-    cursor: pointer;
+    /* height: 1.5rem; */
+    margin-right: 8px;
+    /* cursor: pointer; */
 }
 
 .editText {
     color: #2A3647;
+<<<<<<< HEAD
+=======
+}
+
+.editText:hover {
+    font-size: 20px;
+>>>>>>> 1917d83e444f49407d85bf700c89cc4fc6cf6135
 }
 
 .infoBlock {
@@ -312,7 +361,14 @@ h4 {
     color: #ffffff;
 }
 
+<<<<<<< HEAD
 .add-headline {
+=======
+.addHeadline {
+    font-size: 56px;
+    font-weight: bold;
+    color: #FFFFFF;
+>>>>>>> 1917d83e444f49407d85bf700c89cc4fc6cf6135
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -337,7 +393,11 @@ h4 {
     border-bottom-right-radius: 1.2rem;
     border-top-right-radius: 1.2rem;
     background-color: #ffffff;
+<<<<<<< HEAD
     display: flex;
+=======
+    /* display: flex; */
+>>>>>>> 1917d83e444f49407d85bf700c89cc4fc6cf6135
 }
 
 .profile-img {
@@ -349,18 +409,35 @@ h4 {
 .closeDiv {
     display: flex;
     justify-content: end;
+<<<<<<< HEAD
     margin: 56px 0;
 }
 
 .close {
     height: 24px;
     width: 24px;
+=======
+    margin-right: 24px;
+    margin-top: 24px;
+}
+
+.close {
+    height: 36px;
+    width: 36px;
+>>>>>>> 1917d83e444f49407d85bf700c89cc4fc6cf6135
     cursor: pointer;
 }
 
 .profilDiv {
+    margin-top: 80px;
+    margin-bottom: 20px;
     display: flex;
+<<<<<<< HEAD
     flex-direction: column;
+=======
+    justify-content: flex-start;
+    align-items: center;
+>>>>>>> 1917d83e444f49407d85bf700c89cc4fc6cf6135
 }
 
 
@@ -369,15 +446,20 @@ h4 {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 10rem;
-    height: 10rem;
+    width: 6rem;
+    height: 6rem;
     border-radius: 5rem;
     margin-left: 4rem;
     margin-right: 2rem;
     color: #f6f7f8;
+    font-size: 40px;
 }
 
 .addNewContactDiv {
+<<<<<<< HEAD
+=======
+    margin-top: 24px;
+>>>>>>> 1917d83e444f49407d85bf700c89cc4fc6cf6135
     padding: 0px 21px;
     border: solid;
     border-width: 0.06rem;
@@ -421,12 +503,21 @@ h4 {
     color: #293647;
     border: solid 1px #293647;
     font-weight: 400;
+<<<<<<< HEAD
 }
 
 .clear-button:hover {
     border: solid 1px #29abe2;
     background-color: white;
     color: #29abe2;
+=======
+    transition: border 0.1s, color 0.1s, transform 0.1s;
+}
+
+.clear-button:hover .save-close {
+    filter: brightness(0) saturate(100%) invert(48%) sepia(83%) saturate(416%) hue-rotate(152deg) brightness(102%) contrast(97%);
+    transition: filter 0.1s;
+>>>>>>> 1917d83e444f49407d85bf700c89cc4fc6cf6135
 }
 
 .create-button,
@@ -459,8 +550,8 @@ h4 {
 
 .accept {
     display: flex;
-    justify-content: center;
-    margin-left: 11rem;
+    justify-content: flex-start;
+    margin-left: 12rem;
 }
 
 .accept > .create-button {
@@ -536,7 +627,7 @@ h4 {
     }
 
     .addContactBtn-mobile,
-    .editContactBtn-mobile{ 
+    .editContactBtn-mobile{
         display: block;
         background-color: #293647;
         position: fixed;
@@ -549,7 +640,7 @@ h4 {
 <<<<<<< HEAD
 
     .contact-headline-mobile {
-        display: flex;   
+        display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
@@ -618,72 +709,72 @@ h4 {
 
     .newContactOverlay,
     .editContactOverlay {
-        top: 50%;
-        left: 50%;
         height: 50rem;
-        width: 100%;
+        /* width: 100%; */
         display: flex;
+        align-items: center;
         flex-direction: column;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .closeMobile {
-        display: block;
-    }
-
-    .close {
-      display: none;
-    }
-
-    .contactLogo {
-        display: none;
     }
 
     .headDiv {
-        /* height: 50%; */
-        width: 30rem;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: left;
+        margin-top: 0;
+        display: flex;
+        justify-content: start;
         border-top-left-radius: 1.2rem;
         border-top-right-radius: 1.2rem;
         border-bottom-left-radius: 0;
     }
 
+    .closeMobile {
+        width: 16px;
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 100px;
+    }
+
+    .close,
+    .contactLogo {
+        display: none;
+        margin: 0;
+    }
+
     .editDiv {
-        width: 30rem;
-        margin-left: auto;
-        margin-right: auto;
+        width: 29rem;
+        /* margin-left: auto;
+        margin-right: auto; */
         border-top-right-radius: 0;
         border-bottom-right-radius: 1.2rem;
         border-bottom-left-radius: 1.2rem;
         background-color: aquamarine;
     }
 
+    
     .profilDiv {
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        margin: 0;
     }
 
-    .profileImg,
     .profileInitials,
-    .addNewContactDiv {
+    .profileImg {
+        position: relative;
+        top: -32px;
+        display: flex;
+        align-items: center;
         margin-left: auto;
         margin-right: auto;
     }
 
-    .profileImg {
-        margin-top: 0;
-    }
-
     .addNewContactDiv{
-        margin-bottom: 4px;
+        margin-bottom: 8px;
     }
 
-    .cancel-button {
-        display: none;
+    to {
+        opacity: 1;
+        transform: translateX(0);
     }
+<<<<<<< HEAD
 }
 
 @media (max-width: 1008px) {
@@ -723,4 +814,6 @@ h4 {
 .input-error {
     border: 2px solid #e74c3c;
 >>>>>>> 02a6441e3c60965837813f45023fea79d9ebc4bb
+=======
+>>>>>>> 1917d83e444f49407d85bf700c89cc4fc6cf6135
 }

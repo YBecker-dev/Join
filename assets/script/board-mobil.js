@@ -1,6 +1,6 @@
 function showDropDown(trueTaskId){
     
-    findStatusArea(trueTaskId);
+    //findStatusArea(trueTaskId);
     //hideActivStatus(trueTaskId);
     let dropdown_menu = document.getElementById('drop-down')
     dropdown_menu.classList.toggle('d-none');    

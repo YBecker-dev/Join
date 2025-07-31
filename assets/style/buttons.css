@@ -26,3 +26,17 @@ button:hover {
     gap: 8px;
     position: relative;
 }
+
+.create-button:hover {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+    background-color: #2AABE2;
+    transform: translateY(1px);
+}
+
+.clear-button:hover {
+    border: solid 1px #29abe2;
+    background-color: white;
+    color: #29abe2;
+    transform: translateY(1px);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+}

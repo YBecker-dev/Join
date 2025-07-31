@@ -40,6 +40,7 @@
 .backward{
    display: none;
 }
+<<<<<<< HEAD
 .sidebar-links-section{
     height: 100%;
 }
@@ -47,6 +48,8 @@
     height: 100%;
     justify-content: space-between;
 }
+=======
+>>>>>>> 1917d83e444f49407d85bf700c89cc4fc6cf6135
 /*h3{
     font-size: 16px;
     font-weight: 900;
@@ -65,10 +68,14 @@
     .backward:hover{
         cursor: pointer;
         
+<<<<<<< HEAD
     }
     .sidebar-links{
         width: 104px;
     } 
+=======
+    }   
+>>>>>>> 1917d83e444f49407d85bf700c89cc4fc6cf6135
 }
 @media(max-width: 1015px){
     .body-flex{

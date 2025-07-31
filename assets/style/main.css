@@ -89,7 +89,11 @@ header {
 }
 
 .sidebar-links,
+<<<<<<< HEAD
 .siderbar-legal-stuff-links {
+=======
+.sidebar-legal-stuff-links {
+>>>>>>> 1917d83e444f49407d85bf700c89cc4fc6cf6135
     display: flex;
     justify-content: center;
     gap: 8px;
@@ -99,8 +103,13 @@ header {
     transition: transform 0.2s;
 }
 
+<<<<<<< HEAD
 .siderbar-legal-stuff-links:hover {
     transform: scale(1.02);
+=======
+.sidebar-legal-stuff-links:hover {
+    transform: translateX(2px);
+>>>>>>> 1917d83e444f49407d85bf700c89cc4fc6cf6135
     font-weight: 700;
 }
 
@@ -201,12 +210,20 @@ header {
 }
 
 .sidebar-links.active,
+<<<<<<< HEAD
 .siderbar-legal-stuff-links.active {
+=======
+.sidebar-legal-stuff-container.active {
+>>>>>>> 1917d83e444f49407d85bf700c89cc4fc6cf6135
     background-color: #091931;
     color: #fff;
 }
 
+<<<<<<< HEAD
 .siderbar-legal-stuff-links {
+=======
+.sidebar-legal-stuff-links {
+>>>>>>> 1917d83e444f49407d85bf700c89cc4fc6cf6135
     padding-left: 56px;
 }
 
