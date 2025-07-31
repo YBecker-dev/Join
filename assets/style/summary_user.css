@@ -144,12 +144,12 @@
 .hover-one:hover .pen-icon {
     height: 32px;
     width: 32px;
-    background-image: url(/assets/img/icon/add_task_icon/subtasks/edit.png);
+    background-image: url(/img/icon/add_task_icon/subtasks/edit.png);
 
 }
 
 .hover-one:hover .check-icon {
-    background-image: url(/assets/img/icon/iconizer-Vector.png);
+    background-image: url(/img/icon/iconizer-Vector.png);
     background-position: center;
     background-size: cover;
 }

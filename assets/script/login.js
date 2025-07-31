@@ -9,10 +9,10 @@ let headerLogo;
 passwordInput.addEventListener('input', function () {
   let inputValue = this.value.trim();
   if (inputValue === '') {
-    passwordValue.src = './assets/img/icon/lock.png';
+    passwordValue.src = '../img/icon/lock.png';
     passwordValue.classList.remove('eye-icon');
   } else {
-    passwordValue.src = './assets/img/icon/hidden.png';
+    passwordValue.src = '../img/icon/hidden.png';
     passwordValue.classList.add('eye-icon');
   }
 });
@@ -20,10 +20,10 @@ passwordInput.addEventListener('input', function () {
 passwordValue.addEventListener('click', function () {
   if (passwordValue.classList.contains('eye-icon')) {
     if (passwordInput.type == 'password') {
-      passwordValue.src = './assets/img/icon/show.png';
+      passwordValue.src = '../img/icon/show.png';
       passwordInput.type = 'text';
     } else {
-      passwordValue.src = './assets/img/icon/hidden.png';
+      passwordValue.src = '../img/icon/hidden.png';
       passwordInput.type = 'password';
     }
   }
@@ -31,9 +31,9 @@ passwordValue.addEventListener('click', function () {
 
 function setLogoForWidth() {
   if (window.innerWidth <= 1180) {
-    logo.src = 'assets/img/logo/logo_white.png';
+    logo.src = '../img/logo/logo_white.png';
   } else {
-    logo.src = 'assets/img/logo/logo_dark.png';
+    logo.src = '../img/logo/logo_dark.png';
   }
 }
 
@@ -41,7 +41,7 @@ function animateLogo() {
   logo.classList.add('logo-zoom');
   setTimeout(() => {
     logo.classList.remove('logo-zoom');
-    logo.src = 'assets/img/logo/logo_dark.png';
+    logo.src = '../img/logo/logo_dark.png';
     headerLogo.classList.add('fade-out');
   }, 900);
 }
@@ -85,7 +85,7 @@ async function checkUser(event) {
         if (findUser === true) {
           localStorage.setItem('showGreeting', 'true');
           console.log('User gefunden');
-          window.location.href = '/assets/html/summery.html';
+          window.location.href = './html/summery.html';
           resetForm();
         } else {
           console.log('User nicht gefunden oder Eingaben falsch');
@@ -103,7 +103,7 @@ async function checkUser(event) {
 let resetForm = () => document.getElementById('login-form').reset();
 
 let resetPwIcon = () => {
-  passwordValue.src = './assets/img/icon/lock.png';
+  passwordValue.src = './img/icon/lock.png';
   passwordInput.type = 'password';
   passwordValue.classList.remove('eye-icon');
 };
@@ -116,11 +116,11 @@ function logginAsGuest() {
   let guestUser = 'Guest Guest';
   localStorage.setItem('announcedUser', JSON.stringify(guestUser));
   localStorage.setItem('showGreeting', 'true');
-  window.location.href = 'assets/html/summery.html';
+  window.location.href = '../html/summery.html';
 }
 
-let PrivacyPolicy = '/assets/html/privacy-policy_external.html';
-let LegalNotice = '/assets/html/legal-notice_external.html';
+let PrivacyPolicy = '../html/privacy-policy_external.html';
+let LegalNotice = '../html/legal-notice_external.html';
 
 function privacyPolicyMPA() {
   let guestUser = 'Guest Guest';

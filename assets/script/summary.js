@@ -145,7 +145,7 @@ function setGreetingText() {
  * load Board.html if the User clicks a Task
  */
 let loadBoard = () => {
-  window.location.href = '/assets/html/board.html';
+  window.location.href = '../html/board.html';
 };
 
 function showMainContentIfWideScreen() {

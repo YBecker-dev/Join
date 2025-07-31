@@ -11,10 +11,10 @@ function getTaskOverlay(task, taskId, trueTaskId) {
         </div>
         <div class="close-icon" onclick="toggleBoardOverlay()">
           <!--<img src="../img/icon/close.png" >-->
-          <img src="/assets/img/icon/close.png" >
+          <img src="../img/icon/close.png" >
         </div>                
       </div>
-      <img src="/assets/img/icon/move-to.png" id="DropDownBtn" class="moveTo" onclick="showDropDown(${trueTaskId})">
+      <img src="../img/icon/move-to.png" id="DropDownBtn" class="moveTo" onclick="showDropDown(${trueTaskId})">
       <div class="task-overlay d-none" id="drop-down" onclick="showDropDown(${trueTaskId})">  
         <section class="selection " onclick="preventBubbling(event)">
           <div onclick="changeTaskStatusMobilToDo(${trueTaskId}, '${taskId}')" id="todo-mobil-${trueTaskId}" class="option ">To Do</div>
@@ -72,13 +72,13 @@ function getTaskOverlay(task, taskId, trueTaskId) {
 
 function getInnerTaskOverlay() {
   return `
-        <div class="help-mobil" onclick="window.location.href='/assets/html/MPA-architecture/help.html'" id="help-mobil">
+        <div class="help-mobil" onclick="window.location.href='../html/help.html'" id="help-mobil">
           <p>Help</p>
         </div>
-        <div class="section1" onclick="window.location.href='/assets/html/MPA-architecture/legal-notice_MPA.html'"  id="legalNotice">
+        <div class="section1" onclick="window.location.href='../html/legal-notice_MPA.html'"  id="legalNotice">
             <p> Legal Notice</p>
         </div>
-        <div class="section1" onclick="window.location.href='/assets/html/MPA-architecture/privacy-policy_MPA.html'"  id="privacyPolicy">
+        <div class="section1" onclick="window.location.href='../html/privacy-policy_MPA.html'"  id="privacyPolicy">
             <p>Privacy Policy</p>
         </div>
         <div class="section1" onclick="handleLogOut(event)"  id="logOut">
@@ -117,13 +117,13 @@ function overlaySubtaskHtml(subtask, subtaskIndex, taskId) {
 
 function getLogOutMenu() {
   return `
-      <div class="help-mobil" onclick="window.location.href='/assets/html/help.html'" id="help-mobil">
+      <div class="help-mobil" onclick="window.location.href='../html/help.html'" id="help-mobil">
           <p>Help</p>
       </div>
-      <div class="section1" onclick="window.location.href='/assets/html/legal-notice_internal.html'"  id="legalNotice">
+      <div class="section1" onclick="window.location.href='../html/legal-notice_internal.html'"  id="legalNotice">
           <p> Legal Notice</p>
       </div>
-      <div class="section1" onclick="window.location.href='/assets/html/privacy-policy_internal.html'"  id="privacyPolicy">
+      <div class="section1" onclick="window.location.href='../html/privacy-policy_internal.html'"  id="privacyPolicy">
           <p>Privacy Policy</p>
       </div>
       <div class="section1" onclick="handleLogOut(event)"  id="logOut">
@@ -258,7 +258,7 @@ function overlayPriority(task) {
   if (task.priority) {
     return `
       <p class="p-Tag padding-priority">
-        <img src="/assets/img/icon/priority/${task.priority.toLowerCase()}.png" alt="">
+        ${task.priority} <img src="../img/icon/priority/${task.priority}.png" alt="">
       </p>
     `;
   } else {
@@ -278,7 +278,7 @@ function editTaskHtml(task, taskId) {
   return `
     <div class="overlay-section">
     <div class="overlay-header-edit">
-     <img class="close-icon" src="/assets/img/icon/close.png" alt="Close" onclick="toggleBoardOverlay('${taskId}')" />
+     <img class="close-icon" src="../img/icon/close.png" alt="Close" onclick="toggleBoardOverlay('${taskId}')" />
      </div>
     <form id="edit-task-form" onsubmit="saveEditedTask(event, '${taskId}'); return false;">
       <div class="input-group edittask add-task">
@@ -295,7 +295,7 @@ function editTaskHtml(task, taskId) {
             task.description || ''
           }</textarea>
           <span class="input-icon-edit">
-            <img src="/assets/img/icon/add_task_icon/textarea.png" alt="" />
+            <img src="../img/icon/add_task_icon/textarea.png" alt="" />
           </span>
         </div>
       </div>
@@ -305,7 +305,7 @@ function editTaskHtml(task, taskId) {
           <input id="edit-date" type="text" placeholder="DD/MM/YYYY" min="" max="31/12/2035" name="add-task-input2" onclick="showError('add-task-input2-warning', 'edit-date')" oninput="showError('add-task-input2-warning', 'edit-date'); sanitizeAndValidateDate(this)"
             value="${task.date || ''}"/>
           <span>
-            <img class="date-icon-edit" src="/assets/img/icon/add_task_icon/event.png" alt="" />
+            <img class="date-icon-edit" src="../img/icon/add_task_icon/event.png" alt="" />
           </span>
         </div>
         <span id="add-task-input2-warning" class="input-warning d-none">This field is required</span>
@@ -316,17 +316,17 @@ function editTaskHtml(task, taskId) {
           <button type="button" id="edit-urgent" class="add-task-button${
             task.priority === 'Urgent' ? ' active urgent' : ''
           }" onclick="togglePriority('Urgent', 'edit-');">
-            Urgent <img src="/assets/img/icon/priority/urgent.png" alt="" />
+            Urgent <img src="../img/icon/priority/urgent.png" alt="" />
           </button>
           <button type="button" id="edit-medium" class="add-task-button${
             task.priority === 'Medium' ? ' active medium' : ''
           }" onclick="togglePriority('Medium', 'edit-');">
-            Medium <img src="/assets/img/icon/priority/medium.png" alt="" />
+            Medium <img src="../img/icon/priority/medium.png" alt="" />
           </button>
           <button type="button" id="edit-low" class="add-task-button${
             task.priority === 'Low' ? ' active low' : ''
           }" onclick="togglePriority('Low', 'edit-');">
-            Low <img src="/assets/img/icon/priority/low.png" alt="" />
+            Low <img src="../img/icon/priority/low.png" alt="" />
           </button>
         </div>
       </div>
@@ -339,7 +339,7 @@ function editTaskHtml(task, taskId) {
           <div
             class="assigned-arrow" onclick="handleDropdown('assigned-to-dropdown-options', 'assigned-to-arrow', 'toggle'); assignedToDropdown(document.getElementById('add-task-input3').value);">
             <img
-              class="hover-icon" id="assigned-to-arrow" src="/assets/img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png" alt="">
+              class="hover-icon" id="assigned-to-arrow" src="../img/icon/add_task_icon/dropdown_menu/arrow_drop_downaa.png" alt="">
           </div>
          </div>
          <div id="assigned-to-dropdown-options" class="hidden custom-dropdown-options custom-dropdown-options-edit" onclick="eventBubbling(event)">
@@ -360,7 +360,7 @@ function editTaskHtml(task, taskId) {
           <span class="subtasks-icon" id="subtasks-icon">
             <img
               class="hover-icon"
-              src="/assets/img/icon/add_task_icon/plus.png"
+              src="../img/icon/add_task_icon/plus.png"
               alt="Add"
               onclick="pushSubtaskInput(event)"/>
           </span>
@@ -369,7 +369,7 @@ function editTaskHtml(task, taskId) {
       <div id="subtasks-container" class="subtasks-container"></div>
     </form>
     <div class="create-clear-buttons-edit">
-      <button type="submit" class="ok-button" form="edit-task-form">OK <img src="/assets/img/icon/add_task_icon/buttons/create_task.png" /></button>
+      <button type="submit" class="ok-button" form="edit-task-form">OK <img src="../img/icon/add_task_icon/buttons/create_task.png" /></button>
     </div>
   `;
 }

@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/assets/img/Logo/Logo_white.png" />
-    <link rel="stylesheet" href="/assets/style/main.css" />
-    <link rel="stylesheet" href="/assets/style/legal_notice.css" />
-    <link rel="stylesheet" href="/assets/style/standart.css" />
+    <link rel="icon" href="../img/Logo/Logo_white.png" />
+    <link rel="stylesheet" href="../style/main.css" />
+    <link rel="stylesheet" href="../style/legal_notice.css" />
+    <link rel="stylesheet" href="../style/standart.css" />
     <title>Legal Notice</title>
   </head>
   <body onload="initFrameworkFunctions()">
@@ -17,12 +17,12 @@
     <header>
       <div class="header-content">
         <p>Kanban Project Management Tool</p>
-        <img class="logo-responsive" src="/assets/img/Logo/logo_dark.png" alt="" />
+        <img class="logo-responsive" src="../img/Logo/logo_dark.png" alt="" />
         <div class="header-user">
           <img
             class="help-icon"
             onclick="loadHelp()"
-            src="/assets/img/icon/header_user_interface/help.png"
+            src="../img/icon/header_user_interface/help.png"
             alt="help"
           />
           <div class="nameBtn" id="userBtn" onclick="toggleLogOutOverlay()">
@@ -35,49 +35,45 @@
     <div class="sidebar">
       <div class="sidebar-links-section">
         <div class="sidebar-logo">
-          <img src="/assets/img/Logo/Logo_white.png" alt="Logo" />
+          <img src="../img/Logo/Logo_white.png" alt="Logo" />
         </div>
         <div class="sidebar-links-container">
-          <a class="sidebar-links" id="sidebar-summary" href="/assets/html/summery.html">
+          <a class="sidebar-links" id="sidebar-summary" href="../html/summery.html">
             <div class="sidebar-links-content">
-              <img src="/assets/img/icon/tasks_icon/summary.png" alt="" />
+              <img src="../img/icon/tasks_icon/summary.png" alt="" />
               <p>Summary</p>
             </div>
           </a>
-          <a class="sidebar-links" id="sidebar-add-task" href="/assets/html/add_task.html">
+          <a class="sidebar-links" id="sidebar-add-task" href="../html/add_task.html">
             <div class="sidebar-links-content">
-              <img src="/assets/img/icon/tasks_icon/add_task.png" alt="" />
+              <img src="../img/icon/tasks_icon/add_task.png" alt="" />
               <p>Add Task</p>
             </div>
           </a>
-          <a class="sidebar-links" id="sidebar-board" href="/assets/html/board.html">
+          <a class="sidebar-links" id="sidebar-board" href="../html/board.html">
             <div class="sidebar-links-content">
-              <img src="/assets/img/icon/tasks_icon/board.png" alt="" />
+              <img src="../img/icon/tasks_icon/board.png" alt="" />
               <p>Board</p>
             </div>
           </a>
-          <a class="sidebar-links" id="sidebar-contacts" href="/assets/html/contacts.html">
+          <a class="sidebar-links" id="sidebar-contacts" href="../html/contacts.html">
             <div class="sidebar-links-content">
-              <img src="/assets/img/icon/tasks_icon/contacts.png" alt="" />
+              <img src="../img/icon/tasks_icon/contacts.png" alt="" />
               <p>Contacts</p>
             </div>
           </a>
         </div>
       </div>
       <div class="sidebar-legal-stuff">
-        <div class="sidebar-legal-stuff-container">
-          <a
-            class="sidebar-legal-stuff-links"
-            id="sidebar-privacy-policy"
-            href="/assets/html/privacy-policy_internal.html"
-            >Privacy Policy</a
-          >
-        </div>
-        <div class="sidebar-legal-stuff-container active">
-          <a class="sidebar-legal-stuff-links" id="sidebar-legal-notice" href="/assets/html/legal-notice_internal.html"
-            >Legal Notice</a
-          >
-        </div>
+        <a
+          class="siderbar-legal-stuff-links privacy-legal"
+          id="sidebar-privacy-policy"
+          href="privacy-policy_internal.html"
+          >Privacy Policy</a
+        >
+        <a class="siderbar-legal-stuff-links active" id="sidebar-legal-notice" href="legal-notice_internal.html"
+          >Legal Notice</a
+        >
       </div>
     </div>
 
@@ -86,7 +82,7 @@
         <section class="headline">
           <h1>Legal Notice</h1>
           <div class="backward" onclick="history.back()">
-            <img src="/assets/img/icon/Vector.png" />
+            <img src="../img/icon/Vector.png" />
           </div>
         </section>
         <section class="content">
@@ -169,6 +165,6 @@
       </section>
     </section>
   </body>
-  <script src="/assets/script/templates.js"></script>
-  <script src="/assets/script/main.js"></script>
+  <script src="../script/templates.js"></script>
+  <script src="../script/main.js"></script>
 </html>

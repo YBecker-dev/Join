@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="../style/MPA-architecture/join-framework.css">
+    <link rel="stylesheet" href="../style/privacy.css">
+    <link rel="stylesheet" href="../style/main.css">
+
+    <title>Help</title>
+</head>
+<body onload="initFrameworkFunctions()"> 
+    <!--Logout Overlay-->
+     <section class="logout-overlay d-none" id="overlay-logout" onclick="toggleLogOutOverlay()">
+      <div class="logout-overlay-content" id="logout-overlay-content"></div>
+    </section>
+
+    <!--Join Strucktur-->
+     <header>
+      <div class="header-content">
+        <p>Kanban Project Management Tool</p>
+        <img class="logo-responsive" src="../img/logo/logo_dark.png" alt="" />
+        <div class="header-user">
+          <img
+            class="help-icon"
+            onclick="loadHelp()"
+            src="../img/icon/header_user_interface/help.png"
+            alt="help"
+          />
+          <div class="nameBtn" id="userBtn" onclick="toggleLogOutOverlay()">
+            <p class="user" id="userInitials"></p>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="sidebar">
+      <div class="sidebar-links-section">
+        <div class="sidebar-logo">
+          <img src="../img/Logo/Logo_white.png" alt="Logo" />
+        </div>
+        <div class="sidebar-links-container">
+          <a
+            class="sidebar-links"
+            id="sidebar-summary"
+            href="../html/MPA-architecture/summery.html"
+            onclick="changeColorbyHtmlLinks(this); //loadContent('summary_user.html')"
+          >
+            <img src="../img/icon/tasks_icon/summary.png" alt="" />Summary
+          </a>
+          <a
+            class="sidebar-links"
+            id="sidebar-add-task"
+            href="add_task.html"
+            onclick="changeColorbyHtmlLinks(this); //loadContent('add_task.html')"
+          >
+            <img src="../img/icon/tasks_icon/add_task.png" alt="" />Add Task
+          </a>
+          <a
+            class="sidebar-links"
+            id="sidebar-board"
+            href="board.html"
+            onclick="changeColorbyHtmlLinks(this); //loadContent('board.html')"
+          >
+            <img src="../img/icon/tasks_icon/board.png" alt="" />Board
+          </a>
+          <a
+            class="sidebar-links"
+            id="sidebar-contacts"
+            href="#"
+            onclick="changeColorbyHtmlLinks(this); //loadContent('contacts.html')"
+          >
+            <img src="../img/icon/tasks_icon/contacts.png" alt="" />Contacts
+          </a>
+        </div>
+      </div>
+      <div class="sidebar-legal-stuff">
+        <a
+          class="sidebar-links privacy-legal"
+          id="sidebar-privacy-policy"
+          href="privacy-policy_MPA.html"
+          onclick="changeColorbyHtmlLinks(this);"
+          >Privacy Policy</a
+        >
+        <a
+          class="sidebar-links privacy-legal"
+          id="sidebar-legal-notice"
+          href="legal-notice_MPA.html"
+          onclick="changeColorbyHtmlLinks(this);"
+          >Legal Notice</a
+        >
+      </div>
+    </div>
+     <section class="main-content">
+      <!--Content-->
+        <section class="body-flex">
+        <h1>Privacy Policy</h1>
+        <div class="policy-content">
+             <div class="subtitles">
+                <h3>Subtitels</h3>
+                <div class="content"><p>Lorem ipsum dolor sit amet, 
+                    consectetur adipisicing elit. Asperiores minus 
+                    blanditiis provident dolore aliquid dignissimos sit!
+                    Dolorum maiores ut distinctio quibusdam, tempore quo 
+                    cum pariatur iusto maxime quidem, ea voluptas? Lorem
+                    ipsum dolor, sit amet consectetur adipisicing elit. 
+                    Nesciunt harum voluptatibus maiores provident itaque, 
+                    nisi ipsum quos, inventore, corrupti earum quaerat aliquid 
+                    accusamus quas pariatur magnam tempore expedita exercitationem et?</p>
+                </div>
+            </div>
+            <div class="subtitles">
+                <h3>Subtitels</h3>
+                <div class="content"><p>Lorem ipsum dolor sit amet, 
+                    consectetur adipisicing elit. Asperiores minus 
+                    blanditiis provident dolore aliquid dignissimos sit!
+                    Dolorum maiores ut distinctio quibusdam, tempore quo 
+                    cum pariatur iusto maxime quidem, ea voluptas? Lorem
+                    ipsum dolor, sit amet consectetur adipisicing elit. 
+                    Nesciunt harum voluptatibus maiores provident itaque, 
+                    nisi ipsum quos, inventore, corrupti earum quaerat aliquid 
+                    accusamus quas pariatur magnam tempore expedita exercitationem et?</p>
+                </div>
+            </div>
+        </div>
+           
+    </section>
+
+     </section>
+    <!--Content-->
+   
+  </body>
+  <script src="../script/MPA-architecture/framework-functions.js"></script> <!--Wichtig-->
+  <script src="../script/login.js"></script>
+  <script src="../script/templates.js"></script>
+  <script src="../script/main.js"></script>
+  <script src="../script/add_task.js"></script>
+  <script src="../script/contacts.js"></script>
+  
+  
+  
+</html>

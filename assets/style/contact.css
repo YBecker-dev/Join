@@ -1,44 +1,48 @@
 .myMain {
     display: flex;
-    position: absolute;
+    /* position: absolute; */
     top: 6rem;
     left: 14.8rem;
 }
 
 .main-content {
     display: flex;
-    overflow: hidden;
 }
 
 /* Contact List side */
 .contactList {
     overflow-y: scroll;
-    width: 456px;
+    width: 40rem;
     height: 100%;
     background-color: #ffffff;
     padding: 0px 12px 32px 24px;
     box-shadow: 4px 0px 6px 0px #00000014;
-    position: relative;
+    /* position: relative; */
 }
 
-.add-new-contact-button {
-    height: 52px;
-    max-width: 352px;
-    width: 100%;
-    transition: transform 0.2s;
-}
-
-.add-new-contact-button:hover {
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 8px 8px -2px;
-    transform: translateY(-1px);
+.newContactBtn  {
+    position: sticky;
+    height: 52px;  
 }
 
 .btn {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    font-size: 21px;
+    margin-left: 2rem;
+    margin-right: 2rem;
+   
+}
+
+.addContactBtn-mobile,
+.editContactBtn-mobile,
+.contact-headline-mobile,
+.closeMobile  {
+   display: none;
+}
+
+.editMobile {
+    width: 120px;
+    height: 120px;
+    border-color: #404447;
 }
 
 .newContact {
@@ -68,8 +72,8 @@
     justify-content: start;
     border-radius: 10px;
     align-items: center;
-    gap: 35px;
-    max-width: 352px;
+    gap: 20px;
+    /* max-width: 352px; */
     width: 100%;
 }
 
@@ -83,19 +87,17 @@
     color: #ffffff;
 }
 
-.person-details {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
-    gap: 5px;
-    text-align: start;
+.person:active {
+    background-color: #293647;
+    color: #ffffff;
 }
 
 .initial {
-    width: 42px;
-    height: 42px;
-    border-radius: 45px;
+    margin-right: 4rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    align-content: center;
+    border-radius: 10rem;
     color: white;
     font-size: 12px;
     display: flex;
@@ -145,6 +147,7 @@ h2 {
     font-weight: bolder;
 }
 
+
 .separating-line {
     width: 2px;
     height: 4rem;
@@ -182,7 +185,7 @@ h2 {
     width: 120px;
     height: 120px;
     align-content: center;
-    border-radius: 70px;
+    border-radius: 10rem;
     color: white;
     font-size: 47px;
     border: 3px solid #FFFFFF;
@@ -198,6 +201,7 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: start;
+    margin-top: 12px;
     gap: 24px;
 }
 
@@ -212,26 +216,26 @@ h2 {
     padding: 101px 24px 0 24px;
 }
 
-.edit {
+.editOverlay {
+    padding: 0;
     display: flex;
-}
-
-#editOverlay,
-#deleteOverlay {
-    display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 8px;
+    background-color:#F5F5F5;
     cursor: pointer;
 }
 
 .editIcon {
-    height: 1.5rem;
-    cursor: pointer;
+    /* height: 1.5rem; */
+    margin-right: 8px;
+    /* cursor: pointer; */
 }
 
 .editText {
     color: #2A3647;
+}
+
+.editText:hover {
+    font-size: 20px;
 }
 
 .infoBlock {
@@ -248,11 +252,17 @@ h2 {
 }
 
 .info {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 h4 {
     text-align: start;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.phone {
+    color: #000000;
 }
 
 /* edit, and add new Contact Overlay */
@@ -307,7 +317,10 @@ h4 {
     color: #ffffff;
 }
 
-.add-headline {
+.addHeadline {
+    font-size: 56px;
+    font-weight: bold;
+    color: #FFFFFF;
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -332,7 +345,7 @@ h4 {
     border-bottom-right-radius: 1.2rem;
     border-top-right-radius: 1.2rem;
     background-color: #ffffff;
-    display: flex;
+    /* display: flex; */
 }
 
 .profile-img {
@@ -344,28 +357,41 @@ h4 {
 .closeDiv {
     display: flex;
     justify-content: end;
-    margin: 56px 0;
+    margin-right: 24px;
+    margin-top: 24px;
 }
 
 .close {
-    height: 24px;
-    width: 24px;
+    height: 36px;
+    width: 36px;
     cursor: pointer;
 }
 
 .profilDiv {
+    margin-top: 80px;
+    margin-bottom: 20px;
     display: flex;
-    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
+
+.profileImg,
 .profileInitials {
     display: flex;
-    padding: 0 83px 0 72px;
-    position: relative;
-    bottom: 32px;
+    align-items: center;
+    justify-content: center;
+    width: 6rem;
+    height: 6rem;
+    border-radius: 5rem;
+    margin-left: 4rem;
+    margin-right: 2rem;
+    color: #f6f7f8;
+    font-size: 40px;
 }
 
 .addNewContactDiv {
+    margin-top: 24px;
     padding: 0px 21px;
     border: solid;
     border-width: 0.06rem;
@@ -395,12 +421,7 @@ h4 {
     font-size: 20px;
 }
 
-.addNewContact:focus {
-    outline: 2px solid #29abe2;
-    border-color: #29abe2;
-}
-
-.addNewContactDiv:focus-within {
+.addNewContact:hover {
     border-color: #29abe2;
 }
 
@@ -432,17 +453,26 @@ h4 {
     align-items: center;
 }
 
+.clear-button {
+    background-color: #ffffff;
+    color: #293647;
+    border: solid 1px #293647;
+}
+
+.clear-button,
 .create-button {
-    font-weight: 700;
-    font-size: 21px;
-    transition: box-shadow 0.1s, background-color 0.1s, transform 0.1s;
+    display: flex;
+    justify-content: center;
 }
 
 .accept {
     display: flex;
-    justify-content: start;
-    gap: 24px;
-    margin-top: 48px;
+    justify-content: flex-start;
+    margin-left: 12rem;
+}
+
+.accept > .create-button {
+    margin-left: 1rem;
 }
 
 .save-close {
@@ -450,108 +480,157 @@ h4 {
     height: 1.5rem;
 }
 
-.agenda {
-    display: flex;
-    flex-direction: column;
-    font-size: 20px;
-}
+@media (max-width: 1440px) {
+    .contactList {
+        width: 60%;
+        height: 100%;
+    }
 
-.agenda-category {
-    text-align: start;
-    padding: 17px 36px;
-}
+    .addContactBtn-mobile,
+    .editContactBtn-mobile{
+        display: block;
+        background-color: #293647;
+        position: fixed;
+        height: 60px;
+        width: 60px;
+        border-radius: 10rem;
+        bottom: 120px;
+        right: 12px;
+    }
 
-.agenda-line {
-    max-width: 352px;
-    width: 100%;
-    border: 1px solid #D1D1D1;
-    margin: 8px 0;
-}
+    .contact-headline-mobile {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin-top: 50px;
+        margin-left: 20px;
+    }
 
-.edit-contact-overlay-section,
-.add-new-contact-section {
-    background-color: #00000059;
-    position: absolute;
-    z-index: 10;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-}
+    .contact-headline {
+        display: none;
+    }
 
-.profileImg {
-    height: 120px;
-    width: 120px;
-}
+    h2 {
+        margin-bottom: 1rem;
+    }
 
-#contactDetails {
-    transition: all 0.3s ease-in-out;
-    opacity: 0;
-    transform: translateX(100vw);
-}
+    .separating-line-mobile {
+        width: 7rem;
+        height: 3px;
+        margin-top: 1rem;
+        margin-bottom: 3rem;
+        background-color: #29abe2;
+    }
 
-#contactDetails.show {
-    opacity: 1;
-    transform: translateX(0);
-}
+    .showArrowMobile {
+        display: block;
+        position: fixed;
+        right: 24px;
+    }
 
-#contactDetails.hide {
-    transition: none;
-    transform: translateX(100vw);
-}
+    .newContact-mobile {
+        margin: auto;
+        height: 28px;
+    }
 
-#editOverlay:hover .editIcon,
-#editOverlay:hover .editText,
-#deleteOverlay:hover .editIcon,
-#deleteOverlay:hover .editText {
-    color: #2AABE2;
-    font-weight: 700;
-    scale: 1.03;
-}
+    .dotted {
+        background-color: #ffffff;
+        width: 6px;
+        height: 6px;
+        border-radius: 2rem;
+        margin: 3px;
+        margin-right: auto;
+        margin-left: auto;
+    }
 
-#editOverlay:hover .editIcon,
-#deleteOverlay:hover .editIcon {
-    filter: brightness(0) saturate(100%) invert(48%) sepia(83%) saturate(416%) hue-rotate(152deg) brightness(102%) contrast(97%);
-}
+    .editMobile {
+        position: fixed;
+        display: block;
+        width: 120px;
+        height: 110px;
+        box-shadow: 1px 1px 2px -6px rgba(0,0,0,0.51);
+        -webkit-box-shadow: 1px 1px 26px -6px rgba(0,0,0,0.51);
+        -moz-box-shadow: 2px 29px 26px -6px rgba(192, 133, 133, 0.51);
+        bottom: 120px;
+        right: 120px;
+        border-top-left-radius: 1.2rem;
+        border-top-right-radius: 1.2rem;
+        border-bottom-left-radius: 1.2rem;
+    }
 
-@keyframes slideInFromRight {
-    from {
-        opacity: 0;
-        transform: translateX(100px);
+     .editDivMobile {
+        margin-top: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .newContactOverlay,
+    .editContactOverlay {
+        height: 50rem;
+        /* width: 100%; */
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .headDiv {
+        margin-top: 0;
+        display: flex;
+        justify-content: start;
+        border-top-left-radius: 1.2rem;
+        border-top-right-radius: 1.2rem;
+        border-bottom-left-radius: 0;
+    }
+
+    .closeMobile {
+        width: 16px;
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 100px;
+    }
+
+    .close,
+    .contactLogo {
+        display: none;
+        margin: 0;
+    }
+
+    .editDiv {
+        width: 29rem;
+        /* margin-left: auto;
+        margin-right: auto; */
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 1.2rem;
+        border-bottom-left-radius: 1.2rem;
+        background-color: aquamarine;
+    }
+
+    
+    .profilDiv {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0;
+    }
+
+    .profileInitials,
+    .profileImg {
+        position: relative;
+        top: -32px;
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .addNewContactDiv{
+        margin-bottom: 8px;
     }
 
     to {
         opacity: 1;
         transform: translateX(0);
     }
-}
-
-.shake {
-    animation: shake 0.3s;
-}
-
-@keyframes shake {
-    0% {
-        transform: translateX(0);
-    }
-
-    25% {
-        transform: translateX(-5px);
-    }
-
-    50% {
-        transform: translateX(5px);
-    }
-
-    75% {
-        transform: translateX(-5px);
-    }
-
-    100% {
-        transform: translateX(0);
-    }
-}
-
-.input-error {
-    border: 2px solid #e74c3c;
 }

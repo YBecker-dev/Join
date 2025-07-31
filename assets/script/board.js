@@ -243,11 +243,11 @@ function sortTasksBySequence(tasksArray) {
 function showPriorityImg(task) {
   let priorityImg = '';
   if (task.priority === 'Urgent') {
-    priorityImg = '<img src="/assets/img/icon/priority/urgent.png" alt="Urgent" class="priority-img">';
+    priorityImg = '<img src="../img/icon/priority/urgent.png" alt="Urgent" class="priority-img">';
   } else if (task.priority === 'Medium') {
-    priorityImg = '<img src="/assets/img/icon/priority/medium.png" alt="Medium" class="priority-img">';
+    priorityImg = '<img src="../img/icon/priority/medium.png" alt="Medium" class="priority-img">';
   } else if (task.priority === 'Low') {
-    priorityImg = '<img src="/assets/img/icon/priority/low.png" alt="Low" class="priority-img">';
+    priorityImg = '<img src="../img/icon/priority/low.png" alt="Low" class="priority-img">';
   }
   return priorityImg;
 }
@@ -508,7 +508,7 @@ async function toggleSubtaskDone(taskId, subtaskIndex) {
 async function openCreateTask() {
   selectedContacts = [];
   if (window.innerWidth <= 1233) {
-    window.location.href = '/assets/html/add_task.html';
+    window.location.href = 'add_task.html';
     return;
   }
   let response = await fetch('../html/add_task_board.html');
