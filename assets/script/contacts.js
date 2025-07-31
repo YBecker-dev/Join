@@ -190,6 +190,10 @@ async function updateContact(index) {
     return;
   }
 
+    if (!userPhone) {
+    userPhone = '-';
+  }
+
   let updatedContact = {
     name: userName,
     email: userEmail,

@@ -78,15 +78,19 @@
         </div>
       </div>
       <div class="sidebar-legal-stuff">
-        <a
-          class="siderbar-legal-stuff-links privacy-legal"
-          id="sidebar-privacy-policy"
-          href="/assets/html/privacy-policy_internal.html"
-          >Privacy Policy</a
-        >
-        <a class="siderbar-legal-stuff-links" id="sidebar-legal-notice" href="/assets/html/legal-notice_internal.html"
-          >Legal Notice</a
-        >
+        <div class="sidebar-legal-stuff-container">
+          <a
+            class="sidebar-legal-stuff-links"
+            id="sidebar-privacy-policy"
+            href="/assets/html/privacy-policy_internal.html"
+            >Privacy Policy</a
+          >
+        </div>
+        <div class="sidebar-legal-stuff-container">
+          <a class="sidebar-legal-stuff-links" id="sidebar-legal-notice" href="/assets/html/legal-notice_internal.html"
+            >Legal Notice</a
+          >
+        </div>
       </div>
     </div>
 
@@ -107,7 +111,7 @@
         <form id="add-task-form" onsubmit="return validateAddTaskForm();" onkeydown="return preventEnterSubmit(event);">
           <div class="create-clear-buttons">
             <button type="button" class="clear-button" onclick="clearAllTaskFields();">
-              Clear <img src="/assets/img/icon/add_task_icon/buttons/clear_all.png" />
+              Clear <img class="clear-icon" src="/assets/img/icon/add_task_icon/buttons/clear_all.png" />
             </button>
             <button disabled type="submit" class="create-button" id="create-task-button">
               Create Task <img src="/assets/img/icon/add_task_icon/buttons/create_task.png" />

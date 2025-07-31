@@ -89,7 +89,7 @@ header {
 }
 
 .sidebar-links,
-.siderbar-legal-stuff-links {
+.sidebar-legal-stuff-links {
     display: flex;
     gap: 8px;
     align-items: center;
@@ -98,8 +98,8 @@ header {
     transition: transform 0.2s;
 }
 
-.siderbar-legal-stuff-links:hover {
-    transform: scale(1.02);
+.sidebar-legal-stuff-links:hover {
+    transform: translateX(2px);
     font-weight: 700;
 }
 
@@ -199,12 +199,12 @@ header {
 }
 
 .sidebar-links.active,
-.siderbar-legal-stuff-links.active {
+.sidebar-legal-stuff-container.active {
     background-color: #091931;
     color: #fff;
 }
 
-.siderbar-legal-stuff-links {
+.sidebar-legal-stuff-links {
     padding-left: 56px;
 }
 

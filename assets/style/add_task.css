@@ -123,11 +123,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-size: 1.25rem;
 }
 
-.add-task-button {
-    display: flex;
-    justify-content: space-between;
-}
-
 .priority button {
     color: black;
     background-color: white;
@@ -147,6 +142,7 @@ label {
 
 .add-task-button {
     display: flex;
+    justify-content: space-between;
     width: 136px;
     height: 56px;
     align-items: center;
@@ -166,6 +162,7 @@ label {
 #medium,
 #low {
     box-shadow: 0px 0px 4px 0px #0000001A;
+    transition: all 0.1s;
 
 }
 
@@ -245,7 +242,6 @@ input[type="text"] {
     border-radius: 8px;
     border: 1px solid #D1D1D1;
     background: #fff;
-    box-sizing: border-box;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -294,8 +290,10 @@ input[type="text"] {
 #category-dropdown-options.expanded {
     max-height: 305px;
     overflow-y: auto;
-    scrollbar-width: thin; /* For Firefox */
-    scrollbar-color: rgba(100, 100, 100, 0.5) #f0f0f0; /* For Firefox */
+    scrollbar-width: thin;
+    /* For Firefox */
+    scrollbar-color: rgba(100, 100, 100, 0.5) #f0f0f0;
+    /* For Firefox */
 }
 
 #assigned-to-dropdown-options.expanded::-webkit-scrollbar {
@@ -356,6 +354,12 @@ input[type="text"] {
     width: 183px;
     height: 56px;
     justify-content: space-between;
+    transition: all 0.1s;
+}
+
+.clear-button:hover .clear-icon {
+    filter: brightness(0) saturate(100%) invert(48%) sepia(83%) saturate(416%) hue-rotate(152deg) brightness(102%) contrast(97%);
+    transition: filter 0.1s;
 }
 
 .ok-button,
@@ -467,7 +471,11 @@ input[type="text"] {
 }
 
 #assigned-to-dropdown-selected:hover,
-#category-dropdown-selected:hover {
+#category-dropdown-selected:hover,
+#title:hover,
+#description:hover,
+#date:hover,
+#add-task-input4:hover {
     border: 1px solid #a89a9a;
 }
 

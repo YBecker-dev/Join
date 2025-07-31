@@ -25,7 +25,12 @@
     height: 52px;
     max-width: 352px;
     width: 100%;
+    transition: transform 0.2s;
+}
 
+.add-new-contact-button:hover {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 8px 8px -2px;
+    transform: translateY(-1px);
 }
 
 .btn {
@@ -108,8 +113,21 @@
     color: black;
 }
 
+.mail:hover,
+.phonenumber:hover {
+    font-weight: 400;
+}
+
+.mail:hover {
+    color: #007CEE;
+}
+
 .details {
     background-color: #f6f7f8;
+}
+
+.phonenumber:hover {
+    color: unset !important;
 }
 
 .contact-headline {
@@ -396,12 +414,12 @@ h4 {
     color: #293647;
     border: solid 1px #293647;
     font-weight: 400;
+    transition: border 0.1s, color 0.1s, transform 0.1s;
 }
 
-.clear-button:hover {
-    border: solid 1px #29abe2;
-    background-color: white;
-    color: #29abe2;
+.clear-button:hover .save-close {
+    filter: brightness(0) saturate(100%) invert(48%) sepia(83%) saturate(416%) hue-rotate(152deg) brightness(102%) contrast(97%);
+    transition: filter 0.1s;
 }
 
 .create-button,
@@ -417,8 +435,8 @@ h4 {
 .create-button {
     font-weight: 700;
     font-size: 21px;
+    transition: box-shadow 0.1s, background-color 0.1s, transform 0.1s;
 }
-
 
 .accept {
     display: flex;
@@ -480,6 +498,20 @@ h4 {
 #contactDetails.hide {
     transition: none;
     transform: translateX(100vw);
+}
+
+#editOverlay:hover .editIcon,
+#editOverlay:hover .editText,
+#deleteOverlay:hover .editIcon,
+#deleteOverlay:hover .editText {
+    color: #2AABE2;
+    font-weight: 700;
+    scale: 1.03;
+}
+
+#editOverlay:hover .editIcon,
+#deleteOverlay:hover .editIcon {
+    filter: brightness(0) saturate(100%) invert(48%) sepia(83%) saturate(416%) hue-rotate(152deg) brightness(102%) contrast(97%);
 }
 
 @keyframes slideInFromRight {
